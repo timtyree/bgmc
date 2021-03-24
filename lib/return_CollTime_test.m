@@ -1,4 +1,4 @@
-function CollRate = return_CollTime_test(r,D,reflect)
+function return_CollTime_test(r,D,reflect)
 % Monte Carlo parallel simulation for first reaction rate of N Brownian particles diffusion in
 % scaled 2-D domain [0,1]^2 where reactions are determined through a minimum allowable distance pariwise 
 % between particles. Once particles are withing a certain distance of each
