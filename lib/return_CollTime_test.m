@@ -279,15 +279,5 @@ end
 %     end
 % end
 
-%% TODO
-% TODO: compute variance in collision times
-% DONE: compute print inputs
-% DONE: print results
-% DONE: allow for external arguments. consider allowing for a good few
-% arguements
-% TODO: compile to binary executable
-% TODO: test run ^that binary
-% TODO: generate run_test.dat in python
-% TODO: generate run_1.dat in python
-% TODO: to the osg!
+
 % end

@@ -1,7 +1,7 @@
-double rrate(double r, double kap, double Param){
+double rrate(double r, double kap, double param){
   // Reaction rate based on base rate kap and interaction distance r between two particles.
   double kappa;
-  if(Param > r){
+  if(param > r){
     kappa = kap;
   }
   else{
