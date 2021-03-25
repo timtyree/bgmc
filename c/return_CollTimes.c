@@ -1,81 +1,95 @@
 /* Program to compute using Monte Carlo methods */
+// the variable number of diffusing particles is handled by still_running
 #include "CommonDefines.h"
 
 // // using namespace std;
 int main(int argc, char* argv[])
 {
-   double r,D,L,refl,nite;
-   /* parse inputs */
-   printf("\nEnter the minimum radius: ");
+   /* parse exteral inputs */
+   double r,D,L,refl,nite,kap;
+   printf("Enter the minimum radius (cm): ");
    scanf("%le",&r);printf("r=%le",r);
-   printf("\nEnter the diffusion coefficient: ");
+   printf("\nEnter the diffusion coefficient (cm^2/s): ");
    scanf("%le",&D);printf("D=%le",D);
-   printf("\nEnter the domain width/height: ");
+   printf("\nEnter the domain width/height (cm): ");
    scanf("%le",&L);printf("L=%le",L);
-   printf("\nUse reflecting boundary conditions? ");
-   scanf("%le",&refl);
-   int reflect=(int)refl;printf("reflect=%d",reflect);
+   printf("\nEnter the reaction rate (Hz): ");
+   scanf("%le",&kap);printf("kap=%le",kap);
+   // printf("\nUse reflecting boundary conditions (1/0)? ");
+   // scanf("%le",&refl);
+   // int reflect=(int)refl;printf("reflect=%d",reflect);
    printf("\nEnter the number of trials: ");
    scanf("%le",&nite);
-   int Nmax=15;
    int niter=(int)nite;printf("niter=%d\n",niter);
-   int i,j;double x[Nmax];double y[Nmax];
-
-   /* TODOing: transcribe pm's code to c */
-   /* initialize random numbers to a fixed value */
-   // TODOlater: randomize seed?
+   int Nmax=70; int Nmin=11;
+   double dt=1e-5;             // Time step size.
+   int i,j;double x[Nmax];double y[Nmax];double T[Nmax];
+   bool still_running[Nmax];
+   double stepscale=sqrt(2*D*dt);
+   double distmat[Nmax][Nmax];double dist; bool in_range;
+   // TODO: randomize seed.  via the latin square/hypercube?
    // srand(RAND_MAX);
-   // TODO: /* initialize uniform random points in the unit square n*/
 
+   /* initialize uniform random points in the unit square n*/
+   double t=0.;
    for (j = 0; j < Nmax; j++ ) {
      x[j] = L*uniformRandom();
-   }
-   for (j = 0; j < Nmax; j++ ) {
      y[j] = L*uniformRandom();
+     T[j] = -9999.;
+     still_running[j]=true;
    }
-   printf("\nPrinting all current locations...\n");
-   for (j = 0; j < Nmax; j++ ) {
-      printf("p%d = (%.3le,%.3le)\n", j, x[j],y[j] );
-   }
-   // the number of diffusing particles
 
-   // TODO: compute the distance between the first two particles
    // TODO: compute the matrix of all distances between particles
-   // TODO: select which of the first n=11,12,13,...,Nmax moving particles are within range of eachother
-   // int n[60];// = 11:70;
+
+   for (i = 0; i < Nmax; i++ ) {
+     for (j = i; j < Nmax; j++ ) {
+       dist=dist_pbc(x[i],y[i],x[j],y[j],L);
+       distmat[i][j]=dist;
+       in_range=dist<r;
+       // if two particles are in range
+       if(in_range){
+         // determine whether those two particles react
+         // % Probabilities of reaction happening in interval dt based on particle
+         // % distance and rate.
+         // probs = triu(rrate(Dist,kap,minDistance),1)*dt;
+         //
+         // TestProb = rand(Numb,Numb);         % Generate N^2 uniformly dist random
+         //                                     % numbers to compare to the
+         //                                     % probabilities of an event occuring
+         //                                     % based on pairwise interactions.
+         // TestAns = logical(TestProb < probs);
+         // if sum(TestAns,'all') > 0
+         //     flag = 1;
+         // end
+       }
+     }
+   }
+
+   printf("\nPrinting some distances...\n");
+   for (j = 0; j < 3; j++ ) {
+      printf("d%d = %.3le cm\n", j, distmat[j][j+2]);
+   }
 
 
-   /* TODO: initialize queue of N particle position movements */
-   /* TODO: take one normal step, then print particle positions  */
+
+
+
+
+   /* take one normal step for each particle, enforcing periodic boundary conditions */
+   for (j = 0; j < Nmax; j++ ) {
+     // take step
+     x[j]=pbc(x[j]+stepscale*normalRandom(),L);
+     y[j]=pbc(y[j]+stepscale*normalRandom(),L);
+   }
+   t=t+dt;
 
 
 
 
 
-
-   /* TODO: initialize queue of N particle positions */
-
-
-
-
-
-
-
-   // /* print each array element's value */
-   // for (j = 0; j < Nmax; j++ ) {
-   //   n[j] = normalRandom();
-   //    printf("Normal Element[%d] = %le\n", j, n[j] );
-   // }
-
+   printf("\nPrinting some final locations...\n");
+   for (j = 0; j < 3; j++ ) {
+      printf("p%d = (%.3le,%.3le) cm\n", j, x[j],y[j] );
+   }
     return 0;
-   // /* this old stuff */
-   // count=0;
-   // for ( i=0; i<niter; i++) {
-   //    x = (double)rand()/RAND_MAX;
-   //    y = (double)rand()/RAND_MAX;
-   //    z = x*x+y*y;
-   //    if (z<=1) count++;
-   //    }
-   // pi=(double)count/niter*4;
-   // printf("\n# of trials= %d , estimate of pi is %g \n",niter,pi);
 }
