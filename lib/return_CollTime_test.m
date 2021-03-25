@@ -1,4 +1,5 @@
-function return_CollTime_test(r,D,reflect)
+function CollRate=return_CollTime_test(r,D,reflect)
+%#codegen
 % Monte Carlo parallel simulation for first reaction rate of N Brownian particles diffusion in
 % scaled 2-D domain [0,1]^2 where reactions are determined through a minimum allowable distance pariwise 
 % between particles. Once particles are withing a certain distance of each
@@ -7,13 +8,13 @@ function return_CollTime_test(r,D,reflect)
 % with a different method of checking probabilities of reaction based on
 % heaviside function.
 
-clear;%clc;
+% clear;%clc;
 %tic % Used to calculate computer run time.
 %% Parameters
 % r = 0.2;             % Unscaled interaction range for the particles. 
 % D = 1.56;              % Diffusion coefficient cm^2/s
 % reflect = 0;         % Set to 1 if reflecting boundary, 0 if periodic.
-
+rng('shuffle')
 
 SAVE_DATA = false;  % CBoolean variable for saving final data
 use_instantaneous=false; % 0 is false
@@ -30,9 +31,9 @@ numtrials=1e2;     % The number of monte carlo trials. Again, want it
 %fast test case
 l = sqrt([20.25]);      %COMMENT_HERE
 dt=1e-4;                %COMMENT_HERE
-tend=10000;             %COMMENT_HERE
-numtrials=1e1;          %COMMENT_HERE
-r=1.;                   %COMMENT_HERE                
+tend=1000;             %COMMENT_HERE
+numtrials=1e0;          %COMMENT_HERE
+% r=1.;                   %COMMENT_HERE                
 SAVE_DATA = false;      %COMMENT_HERE     
 
 %allocate virtual memory
@@ -48,7 +49,7 @@ minAllowableDistance=r;
 Nruns = numel(FirstCollTime);
 p = 1;
 
-fprintf('running %d runs of the simulation...',Nruns)
+% fprintf('running %d runs of the simulation...',Nruns)
 % parfor makes a parallel loop that runs over all possible parameter combinations. 
 % parfor trial=1:Nruns
 for trial=1:Nruns
@@ -59,30 +60,30 @@ for trial=1:Nruns
         Numb = N(trial);
         Len = L(trial);
         minDistance = r;%/Len;
-        Dif = D;%/Len^2; % unScaled diffusion coefficient
+        %         Dif = D;%/Len^2; % unScaled diffusion coefficient
         
         % Initialize particle locations uniformly.
         keeperX = rand(1,Numb)*Len;
         keeperY = rand(1,Numb)*Len;
-        % Set last particle to be within minDistance of one other particle (if desired).
-        Theta = rand*2*pi;
-        Rad = rand*minDistance;
-        lastX = keeperX(end-1)+Rad*cos(Theta);
-        lastY = keeperY(end-1)+Rad*sin(Theta);
-        if lastX < 0
-            keeperX(end) = 1+lastX;
-        elseif lastX > 1
-            keeperX(end) = lastX-1;
-        else
-            keeperX(end) = lastX;
-        end
-        if lastY < 0
-            keeperY(end) = 1+lastY;
-        elseif lastY > 1
-            keeperY(end) = lastY-1;
-        else
-            keeperY(end) = lastY;
-        end
+%         % Set last particle to be within minDistance of one other particle (if desired).
+%         Theta = rand*2*pi;
+%         Rad = rand*minDistance;
+%         lastX = keeperX(end-1)+Rad*cos(Theta);
+%         lastY = keeperY(end-1)+Rad*sin(Theta);
+%         if lastX < 0
+%             keeperX(end) = 1+lastX;
+%         elseif lastX > 1
+%             keeperX(end) = lastX-1;
+%         else
+%             keeperX(end) = lastX;
+%         end
+%         if lastY < 0
+%             keeperY(end) = 1+lastY;
+%         elseif lastY > 1
+%             keeperY(end) = lastY-1;
+%         else
+%             keeperY(end) = lastY;
+%         end
     flag = 0; % Flag for when to stop the trial run.
     t = 0;
     W = [keeperX',keeperY']; % Set initial position
@@ -91,7 +92,8 @@ for trial=1:Nruns
     while t < tend
         t = t+dt; % Update master time
         
-        dW=sqrt(2*Dif*dt)*randn(Numb,2); % Generate next step in diffusion process.
+%         dW=sqrt(2*D*dt).*randn(Numb,2); % Generate next step in diffusion process.
+        dW=sqrt(2*D*dt)*randn(Numb,2); % Generate next step in diffusion process.
         Wtemp = W + dW;
         
         Check0 = logical(Wtemp < 0);
@@ -163,37 +165,36 @@ CollRate = squeeze(sum(FirstCollTime~=0,1)./sum(FirstCollTime,1)/1000);
 
 % Count number of successful trials for reference.
 NumSuccTrials = squeeze(sum(FirstCollTime~=0,1));
-
-%% Printing Results
-fprintf('\n=============')
-fprintf(datestr(now,'yyyy-mmm-dd_HH-MM-SS'))
-fprintf('=============\n')
-fprintf('\nPrinting Inputs: ')
-C = { 'r', 'D', 'reflect';
-    r,   D,    reflect};
-str = sprintf('%s_%d, ',C{:});
-fprintf(str)
-fprintf('\nPrinting Outputs:')
-n_values=N(1,:,1)';
-C = { 'N_min', 'N_max';
-    min(n_values),   max(n_values)};
-str = sprintf('%s_%d, ',C{:});
-fprintf(str)
-fprintf('\nCollRate:\n');%%1.0f', CollRate);
-disp(CollRate')
-% fprintf('\nCollRate:\n')
-% str = sprintf(CollRate);
+% 
+% %% Printing Results
+% % fprintf('\n=============')
+% % fprintf(datestr(now,'yyyy-mmm-dd_HH-MM-SS'))
+% fprintf('=============\n')
+% fprintf('\nPrinting Inputs: ')
+% C = { 'r', 'D', 'reflect';
+%     r,   D,    reflect};
+% str = sprintf('%s_%d, ',C{:});
 % fprintf(str)
-% disp(CollRate)
+% fprintf('\nPrinting Outputs:')
+% n_values=N(1,:,1)';
+% C = { 'Nmin', 'Nmax', 'Nruns';
+%     min(n_values),   max(n_values), Nruns};
+% str = sprintf('%s_%d, ',C{:});
+% fprintf(str)
+% fprintf('\nCollRate:\n');%%1.0f', CollRate);
+% disp(CollRate')
+% % fprintf('\nCollRate:\n')
+% % str = sprintf(CollRate);
+% % fprintf(str)
+% % disp(CollRate)
 
 
 %% saving data
-% This saves the data with an appropriate filename.
-
-if SAVE_DATA
-  filename=['../data/results_CollTime_',datestr(now,'yyyy-mmm-dd_HH-MM-SS')];
-  save(filename);
-end
+% This saves the data with an appropriate filename. 
+% if SAVE_DATA
+%   filename=['../data/results_CollTime_',datestr(now,'yyyy-mmm-dd_HH-MM-SS')];
+%   save(filename);
+% end
 
 end
 
@@ -280,12 +281,12 @@ end
 
 %% TODO
 % TODO: compute variance in collision times
-% TODO: compute print inputs
-% TODO: print results
-% TODO: allow for external arguments. consider allowing for a good few
+% DONE: compute print inputs
+% DONE: print results
+% DONE: allow for external arguments. consider allowing for a good few
 % arguements
-% TODO: compile to binary from command line
-% TODO: test run the binary
+% TODO: compile to binary executable
+% TODO: test run ^that binary
 % TODO: generate run_test.dat in python
 % TODO: generate run_1.dat in python
 % TODO: to the osg!
