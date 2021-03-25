@@ -1,7 +1,7 @@
 function CollRate=return_CollTime_test(r,D,reflect)
 %#codegen
 % Monte Carlo parallel simulation for first reaction rate of N Brownian particles diffusion in
-% scaled 2-D domain [0,1]^2 where reactions are determined through a minimum allowable distance pariwise 
+% scaled 2-D domain [0,1]^2 where reactions are determined through a minimum allowable distance pariwise
 % between particles. Once particles are withing a certain distance of each
 % other, a particle can disappear at a rate proportional to the number of
 % particles within the allowed distance. Similar to DistReactionSimPar.m but
@@ -11,14 +11,14 @@ function CollRate=return_CollTime_test(r,D,reflect)
 % clear;%clc;
 %tic % Used to calculate computer run time.
 %% Parameters
-% r = 0.2;             % Unscaled interaction range for the particles. 
+% r = 0.2;             % Unscaled interaction range for the particles.
 % D = 1.56;              % Diffusion coefficient cm^2/s
 % reflect = 0;         % Set to 1 if reflecting boundary, 0 if periodic.
 rng('shuffle')
 
 SAVE_DATA = false;  % CBoolean variable for saving final data
 use_instantaneous=false; % 0 is false
-n = 11:70;           % Number of diffusing particles
+n = 11:70;           % Number of diffusing particles 
 l = sqrt([20.25, 25, 39, 50, 66]);       % Length of side of square.
 kap = 10;            % Base reaction rate when particles are close.
 dt=1e-5;            % Time step size.
@@ -26,15 +26,15 @@ tend=50000;         % Ending time. Want it to be as large as possible,
                     % while still making the code finish in a reasonable amount of time.
 numtrials=1e2;     % The number of monte carlo trials. Again, want it
                     % to be as large as possible, while still making the code finish
-                    % in a reasonable amount of time.                
-                   
+                    % in a reasonable amount of time.
+
 %fast test case
 l = sqrt([20.25]);      %COMMENT_HERE
 dt=1e-4;                %COMMENT_HERE
 tend=1000;             %COMMENT_HERE
 numtrials=1e0;          %COMMENT_HERE
-% r=1.;                   %COMMENT_HERE                
-SAVE_DATA = false;      %COMMENT_HERE     
+% r=1.;                   %COMMENT_HERE
+SAVE_DATA = false;      %COMMENT_HERE
 
 %allocate virtual memory
 FirstCollTime = zeros(numtrials,length(n),length(l),length(r),length(kap)); % Preallocates first collision times.
@@ -50,18 +50,18 @@ Nruns = numel(FirstCollTime);
 p = 1;
 
 % fprintf('running %d runs of the simulation...',Nruns)
-% parfor makes a parallel loop that runs over all possible parameter combinations. 
+% parfor makes a parallel loop that runs over all possible parameter combinations.
 % parfor trial=1:Nruns
 for trial=1:Nruns
-    % Each time through this loop is an independent Monte Carlo trial.    
-    
+    % Each time through this loop is an independent Monte Carlo trial.
+
     % Initialize
         % Set parameters for a particular trial
         Numb = N(trial);
         Len = L(trial);
         minDistance = r;%/Len;
         %         Dif = D;%/Len^2; % unScaled diffusion coefficient
-        
+
         % Initialize particle locations uniformly.
         keeperX = rand(1,Numb)*Len;
         keeperY = rand(1,Numb)*Len;
@@ -87,18 +87,18 @@ for trial=1:Nruns
     flag = 0; % Flag for when to stop the trial run.
     t = 0;
     W = [keeperX',keeperY']; % Set initial position
-    
+
     % Simulate
     while t < tend
         t = t+dt; % Update master time
-        
+
 %         dW=sqrt(2*D*dt).*randn(Numb,2); % Generate next step in diffusion process.
         dW=sqrt(2*D*dt)*randn(Numb,2); % Generate next step in diffusion process.
         Wtemp = W + dW;
-        
+
         Check0 = logical(Wtemp < 0);
         Check1 = logical(Wtemp > 1);
-        
+
         if reflect ==1
             % Reflection condition if particle reaches boundary.
 
@@ -110,7 +110,7 @@ for trial=1:Nruns
             Wtemp = Wtemp+Len*Check0;
             Wtemp = Wtemp-Len*Check1;
         end
-        
+
         % Check number of particles pairwise that are within min distance.
         if reflect == 1
             Dist = triu(pdist2(Wtemp,Wtemp),1); %Euclidean Distance
@@ -121,22 +121,22 @@ for trial=1:Nruns
             Dy = triu(min(Disty,1-Disty),1);
             Dist = sqrt(Dx.^2+Dy.^2);
         end
-        
+
         if use_instantaneous==1
             %React the particles instantly
             % Check if any pair of particles reached min distance.
             Dist = pdist2(Wtemp,Wtemp);
             Ind = eye(size(Dist));
             DistCheck = min(Dist(~Ind),[],'all');
-            if DistCheck <= minAllowableDistance 
+            if DistCheck <= minAllowableDistance
                 flag = 1;
             end
         else
             % Probabilities of reaction happening in interval dt based on particle
             % distance and rate.
-            probs = triu(rrate(Dist,kap,minDistance),1)*dt; 
+            probs = triu(rrate(Dist,kap,minDistance),1)*dt;
 
-            TestProb = rand(Numb,Numb);         % Generate N^2 uniformly dist random 
+            TestProb = rand(Numb,Numb);         % Generate N^2 uniformly dist random
                                                 % numbers to compare to the
                                                 % probabilities of an event occuring
                                                 % based on pairwise interactions.
@@ -145,7 +145,7 @@ for trial=1:Nruns
                 flag = 1;
             end
         end
-        
+
         % Update state and consider terminating simulation
         W = Wtemp;
         if flag == 1
@@ -165,7 +165,7 @@ CollRate = squeeze(sum(FirstCollTime~=0,1)./sum(FirstCollTime,1)/1000);
 
 % Count number of successful trials for reference.
 NumSuccTrials = squeeze(sum(FirstCollTime~=0,1));
-% 
+%
 % %% Printing Results
 % % fprintf('\n=============')
 % % fprintf(datestr(now,'yyyy-mmm-dd_HH-MM-SS'))
@@ -190,7 +190,7 @@ NumSuccTrials = squeeze(sum(FirstCollTime~=0,1));
 
 
 %% saving data
-% This saves the data with an appropriate filename. 
+% This saves the data with an appropriate filename.
 % if SAVE_DATA
 %   filename=['../data/results_CollTime_',datestr(now,'yyyy-mmm-dd_HH-MM-SS')];
 %   save(filename);
@@ -201,14 +201,14 @@ end
 
 %%
 % %% Plotting and Scaling Law Check
-% 
+%
 % sc = 1./repmat(l.^2,length(n),1);
-% Density = repmat(n',1,length(l)).*sc; 
+% Density = repmat(n',1,length(l)).*sc;
 % ScaledRates = CollRate.*sc;
-% 
+%
 % hold on
 % for ii = 1:length(l)
-%    plot(Density(:,ii),ScaledRates(:,ii),'*') 
+%    plot(Density(:,ii),ScaledRates(:,ii),'*')
 % end
 % hold off
 % ll = legend('Reaction Rate $L^2 = 20.25$',...
@@ -221,7 +221,7 @@ end
 % set(ll,'Interpreter','Latex');
 % set(xl,'Interpreter','Latex');
 % set(yl,'Interpreter','Latex');
-% 
+%
 % figure()
 % hold on
 % for ii = 1:length(l)
@@ -241,7 +241,7 @@ end
 
 
 %% Calculate polynomial fit
-% 
+%
 % % Power fit f(N) = a*N^b.
 % % Set storage.
 % sz1 = size(CollRate,2);
@@ -252,13 +252,13 @@ end
 % for kk = 1:numel(fitfun)
 % fitfun{kk} = ratePfit(n,CollRate(:,kk));
 % end
-% 
+%
 % % Quadratic fit a*N*(N-1).
 % fitfun2 = squeeze(cell(sz1,sz2,sz3));
 % for kk = 1:numel(fitfun2)
 % fitfun2{kk} = ratePfit2(n,CollRate(:,kk));
 % end
-% 
+%
 % % Power fit a*q^b for scaled rates.
 % fitfunS = ratePfitScaled(Density(:),ScaledRates(:));
 
@@ -270,7 +270,7 @@ end
 %     waitbar(p/Nruns, h);
 %     p = p + 1;
 % end
-% 
+%
 % function y = heaviside(x)
 %     if x >= 0
 %         y= 1;
