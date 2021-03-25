@@ -17,44 +17,55 @@ int main(int argc, char* argv[])
    int reflect=(int)refl;printf("reflect=%d",reflect);
    printf("\nEnter the number of trials: ");
    scanf("%le",&nite);
+   int Nmax=15;
    int niter=(int)nite;printf("niter=%d\n",niter);
-   /* initialize random numbers */
-   srand(RAND_MAX);
+   int i,j;double x[Nmax];double y[Nmax];
 
-   double x,y;
-   int i,j;
-   int count=0; /* # of points in the 1st quadrant of unit circle */
-   double z;
-   double pi;
+   /* TODOing: transcribe pm's code to c */
+   /* initialize random numbers to a fixed value */
+   // TODOlater: randomize seed?
+   // srand(RAND_MAX);
+   // TODO: /* initialize uniform random points in the unit square n*/
+
+   for (j = 0; j < Nmax; j++ ) {
+     x[j] = L*uniformRandom();
+   }
+   for (j = 0; j < Nmax; j++ ) {
+     y[j] = L*uniformRandom();
+   }
+   printf("\nPrinting all current locations...\n");
+   for (j = 0; j < Nmax; j++ ) {
+      printf("p%d = (%.3le,%.3le)\n", j, x[j],y[j] );
+   }
+   // the number of diffusing particles
+
+   // TODO: compute the distance between the first two particles
+   // TODO: compute the matrix of all distances between particles
+   // TODO: select which of the first n=11,12,13,...,Nmax moving particles are within range of eachother
+   // int n[60];// = 11:70;
 
 
-   /* TODO: transcribe pm's code to c */
-   // /* initialize random elements of array n*/
+   /* TODO: initialize queue of N particle position movements */
+   /* TODO: take one normal step, then print particle positions  */
+
+
+
+
+
 
    /* TODO: initialize queue of N particle positions */
 
-   /* TODO: initialize queue of N particle positions */
 
 
 
 
 
 
-   int Nmax = 15;
-   // double n[Nmax] = randu(Nmax);
-
-   double u[Nmax];// = randu(Nmax);
-   /* print each array element's value */
-   for (j = 0; j < Nmax; j++ ) {
-     u[j] = uniformRandom();
-      printf("Uniform Element[%d] = %le\n", j, u[j] );
-   }
-   double n[Nmax];// = randn(Nmax);
-   /* print each array element's value */
-   for (j = 0; j < Nmax; j++ ) {
-     n[j] = normalRandom();
-      printf("Normal Element[%d] = %le\n", j, n[j] );
-   }
+   // /* print each array element's value */
+   // for (j = 0; j < Nmax; j++ ) {
+   //   n[j] = normalRandom();
+   //    printf("Normal Element[%d] = %le\n", j, n[j] );
+   // }
 
     return 0;
    // /* this old stuff */
