@@ -2,9 +2,9 @@ Universe = vanilla
 Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
 
 executable = xrun.sh
-arguments = $(r) $(D) $(L) $(kappa) $(niter)
+arguments = $(r) $(D) $(L) $(kappa) $(niter) $(Process)
 
-transfer_input_files = post_process.sh
+transfer_input_files = return_CollTimes.x
 
 output = Log/job.out.$(Cluster).$(Process)
 error = Log/job.error.$(Cluster).$(Process)
