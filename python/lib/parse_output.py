@@ -1,5 +1,6 @@
 import pandas as pd, os
 def parse_output_log(input_fn,include_inputs=True, printing=False):
+    n_input=-9999
     with open(input_fn) as f:
         trgt1='Printing Inputs...\n'
         trgt2='Printing Outputs...\n'
@@ -12,7 +13,9 @@ def parse_output_log(input_fn,include_inputs=True, printing=False):
                 if printing:
                     print(f'found outputs starting after line {n}')
                 n_output=n
-
+    if n_input==-9999:
+        print(f"Warning: n_input not found for input_fn={input_fn}.\nreturning None...")
+        return None
     with open(input_fn) as f:
         inputs=f.readlines()[n_input+1:n_output-1]
     col_name_lst=[]
@@ -22,11 +25,15 @@ def parse_output_log(input_fn,include_inputs=True, printing=False):
         eid=string.find('=')
         if eid!=-1:
             col_name=string[:eid]
-            col_value=eval(string[eid+1:-2])
+            # try:
+            col_value=eval(string[eid+1:-1])
+            # except Exception as e:
+            #     print (string)
+            #     col_value=string[eid+1:-1]
             col_name_lst.append(col_name)
             col_value_lst.append(col_value)
     df=pd.read_csv(input_fn,header=n_output-2)
-    #drop that 'Unammed: {Nmax}' column 
+    #drop that 'Unammed: {Nmax}' column
     df.drop(columns=[df.columns[-1]], inplace=True)
     if include_inputs:
         if printing:

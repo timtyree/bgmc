@@ -1,12 +1,12 @@
 # logdown.py
 ssh TimtheTyrant@login05.osgconnect.net '
-rm bgmc/Log.tar.gz;
-cd bgmc;
+rm bgmc/c/Log.tar.gz;
+cd bgmc/c;
 ./post_process.sh
 '
 cd ../data
 cd osg_output
-scp TimtheTyrant@login05.osgconnect.net:bgmc/Log.tar.gz Log.tar.gz
+scp TimtheTyrant@login05.osgconnect.net:bgmc/c/Log.tar.gz Log.tar.gz
 tar -xzf Log.tar.gz
 
 # SAVEFN='run_1.csv'
