@@ -6,98 +6,139 @@
 int main(int argc, char* argv[])
 {
    /* parse exteral inputs */
-   double r,D,L,nite,kap;
+   double r,D,L,kap,nite,see;
    printf("Enter the minimum radius (cm): ");
-   scanf("%le",&r);printf("r=%le",r);
+   scanf("%lg",&r);printf("r=%g",r);
    printf("\nEnter the diffusion coefficient (cm^2/s): ");
-   scanf("%le",&D);printf("D=%le",D);
+   scanf("%lg",&D);printf("D=%g",D);
    printf("\nEnter the domain width/height (cm): ");
-   scanf("%le",&L);printf("L=%le",L);
+   scanf("%lg",&L);printf("L=%g",L);
    printf("\nEnter the reaction rate (Hz): ");
-   scanf("%le",&kap);printf("kap=%le",kap);
+   scanf("%lg",&kap);printf("kap=%g",kap);
+   printf("\nEnter the number of trials: ");
+   scanf("%lg",&nite);
+   int niter=(int)nite;printf("niter=%d\n",niter);
+   printf("Enter the randomization seed: ");
+   scanf("%lg",&see);
+   int seed=(int)see;printf("seed=%d\n",seed);
    // double refl;
    // printf("\nUse reflecting boundary conditions (1/0)? ");
-   // scanf("%le",&refl);
+   // scanf("%g",&refl);
    // int reflect=(int)refl;printf("reflect=%d",reflect);
-   printf("\nEnter the number of trials: ");
-   scanf("%le",&nite);
-   int niter=(int)nite;printf("niter=%d\n",niter);
    int Nmax=70; int Nmin=11;
    double dt=1e-5;             // Time step size.
-   int i,j,k;double x[Nmax];double y[Nmax];double T[Nmax];
-   bool still_running[Nmax]; bool any_running=true;
+   int i,j,k,q;double x[Nmax];double y[Nmax];double T[Nmax];
+   bool still_running[Nmax]; bool any_running;
    double stepscale=sqrt(2*D*dt);
    double probreact=kap*dt;
    double distmat[Nmax][Nmax];double dist; bool in_range; bool reacts;
-   // TODO: randomize seed.  via the latin square/hypercube?
-   // srand(RAND_MAX);
+   double T_lst[niter][Nmax];
+   // randomize seed.  TODO(later): randomize seed via the latin square/hypercube
+   srand(seed);   
 
-   // double tmax=1000.; // UNCOMMENT_HERE
-   double tmax=.1; // COMMENT_HERE
+   double tmax=1000.; // UNCOMMENT_HERE
+   // double tmax=.1; // COMMENT_HERE 
 
-   /* initialize uniform random points in the unit square n*/
-   double t=0.;
-   for (j = 0; j < Nmax; j++ ) {
+  printf("\nrunning simulation...\n");
+  for (q = 0; q < niter; q++){
+    /* initialize uniform random points in the unit square n*/
+    double t=0.;
+    any_running=true;
+    for (j = 0; j < Nmax; j++ ) {
      x[j] = L*uniformRandom();
      y[j] = L*uniformRandom();
      T[j] = -9999.;
      still_running[j]=true;
-   }
+     // TODO: check if any particles are within the minimum allowable distance
+     // TODO: reseed any particles that are within the minimum allowable distance
+    }
 
-  printf("\nrunning simulation...\n");
-  while(any_running){
-   // kernel_measure
-   for (i = 0; i < Nmax-1; i++ ) {
-     if(still_running[i]){
-       for (j = i+1; j < Nmax; j++ ) {
-         if(still_running[j]){
-           // compute distance between particles still running
-           dist=dist_pbc(x[i],y[i],x[j],y[j],L);
-           distmat[i][j]=dist;
-           in_range=dist<r;
-            // if two particles are in range
-           if(in_range){
-             // determine whether those two particles react
-             reacts=probreact>uniformRandom();
-             if(reacts){
-               T[j]=t;
-               still_running[j]=false;
-               for(k=j+1; k<Nmax; k++){
-                 if(still_running[k]){
-                   T[k]=t;
-                   still_running[k]=false;
-  }}}}}}}}
+    while(any_running){
+     // kernel_measure
+      for (i = 0; i < Nmax-1; i++ ) {
+        if(still_running[i]){
+          for (j = i+1; j < Nmax; j++ ) {
+            if(still_running[j]){
+              // compute distance between particles still running
+              dist=dist_pbc(x[i],y[i],x[j],y[j],L);
+              distmat[i][j]=dist;
+              in_range=dist<r;
+              // if two particles are in range
+              if(in_range){
+                // determine whether those two particles react
+                reacts=probreact>uniformRandom();
+                // TODO(later): try reacting at a rate proportional to suprise (-log(distance))
+                if(reacts){
+                  T[j]=t;
+                  still_running[j]=false;
+                  for(k=j+1; k<Nmax; k++){
+                    if((still_running[k]) ^ (t>tmax)){
+                      T[k]=t;
+                      still_running[k]=false;
+    }}}}}}}}
 
-   // kernel_onestep
-   t=t+dt;
-   for (j = 0; j < Nmax; j++ ) {
-     if(still_running[j]){
-     /* take one normal step for each particle, enforcing periodic boundary conditions */
-     x[j]=pbc(x[j]+stepscale*normalRandom(),L);
-     y[j]=pbc(y[j]+stepscale*normalRandom(),L);
-   }}
- }
+    // kernel_onestep
+    t=t+dt;
+    for (j = 0; j < Nmax; j++ ) {
+      if(still_running[j]){
+        /* take one normal step for each particle, enforcing periodic boundary conditions */
+        x[j]=pbc(x[j]+stepscale*normalRandom(),L);
+        y[j]=pbc(y[j]+stepscale*normalRandom(),L);
+    }}
+
+    //check if any are running...
+    any_running=false;
+    for (j = Nmin; j < Nmax; j++ ) {
+      if(still_running[j]){
+        any_running=true;
+    }}
+  }
+  //record trial
+  for (j = 0; j<Nmax; j++){
+    T_lst[q][j]=T[j];
+  }}
+printf("simulation complete!\n");
 
 // Print results
 printf("\nPrinting Inputs...\n");
-printf("r=%le",r);
-printf("D=%le",D);
-printf("L=%le",L);
-printf("kappa=%le\n",kap);
-printf("dt=%le\n",dt);
-// printf("niter=%d",niter)
+printf("r=%g\n",r);
+printf("D=%g\n",D);
+printf("L=%g\n",L);
+printf("kappa=%g\n",kap);
+printf("dt=%g\n",dt);
 
-// char names[][] = {"r","D","L","niter","kap","\0"};
-// double values[] = {r,D,L,niter,kap};
-// printf("names={%s}\n",names[:])
-// printf("values={%s}\n",values[:])
-
+// print dense output of T_lst to stdout
 printf("\nPrinting Outputs...\n");
-printf("stopping times in seconds were:\n{");
-for (j = 0; j < Nmax; j++ ) {
-  printf("%le, ",T[j]);
+// TODO: convert .json output to summary statistics?
+for(i = 0; i < Nmax;i++){
+  printf ("%d,",i);
 }
-printf("}");
+printf ("\n");
+/* print*/
+for (q = 0; q < niter; q++){
+  for(i = 0; i < Nmax;i++){
+    printf ("%.7lg,",T_lst[q][i]);
+  }
+  printf ("\n");
+}
+
+// // save dense output of T_lst to file
+// FILE * fp;
+// /* open the file for writing*/
+// fp = fopen ("out.csv","w");
+// for(i = 0; i < Nmax;i++){
+//   fprintf (fp, "%d,",i);
+// }
+// fprintf (fp, "\n");
+// //  write into the file stream
+// for (q = 0; q < niter; q++){
+//   for(i = 0; i < Nmax;i++){
+//     fprintf (fp, "%.5le,",T_lst[q][i]);
+//   }
+//   fprintf (fp, "\n");
+// }
+// /* close the file*/  
+// fclose (fp);
 
 return 0;
 }

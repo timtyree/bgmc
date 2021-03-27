@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
-#define SEED 35791246
-#include "random.h"
-#include "pbc.h"
-#include "rrate.h"
+// #define SEED 35791246
+#include "lib/random.h"
+#include "lib/pbc.h"
+#include "lib/rrate.h"
 // #include <cstdlib>
 // #include <cmath>
 // #include <ctime>
