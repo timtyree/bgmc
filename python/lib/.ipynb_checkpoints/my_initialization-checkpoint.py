@@ -19,7 +19,7 @@ if darkmode:
 	# For darkmode plots
 	from jupyterthemes import jtplot
 	jtplot.style(theme='monokai', context='notebook', ticks=True, grid=False)
-
-gpumode=False
+    
+gpumode=True
 if gpumode:
     import cudf
