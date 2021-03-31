@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
    // printf("\nUse reflecting boundary conditions (1/0)? ");
    // scanf("%g",&refl);
    // int reflect=(int)refl;printf("reflect=%d",reflect);
-   int Nmax=70; int Nmin=11;
+   int Nmax=70; int Nmin=5;//11;
    double dt=1e-5;             // Time step size.
    int i,j,k,q;double x[Nmax];double y[Nmax];double T[Nmax];
    bool still_running[Nmax]; bool any_running;
@@ -34,10 +34,10 @@ int main(int argc, char* argv[])
    double distmat[Nmax][Nmax];double dist; bool in_range; bool reacts;
    double T_lst[niter][Nmax];
    // randomize seed.  TODO(later): randomize seed via the latin square/hypercube
-   srand(seed);   
+   srand(seed);
 
    double tmax=1000.; // UNCOMMENT_HERE
-   // double tmax=.1; // COMMENT_HERE 
+   // double tmax=.1; // COMMENT_HERE
 
   printf("\nrunning simulation...\n");
   for (q = 0; q < niter; q++){
@@ -137,7 +137,7 @@ for (q = 0; q < niter; q++){
 //   }
 //   fprintf (fp, "\n");
 // }
-// /* close the file*/  
+// /* close the file*/
 // fclose (fp);
 
 return 0;

@@ -10,6 +10,7 @@ output = Log/job.out.$(Cluster).$(Process)
 error = Log/job.error.$(Cluster).$(Process)
 log = Log/job.log.$(Cluster).$(Process)
 
+max_idle = 3000
 request_cpus = 1
 request_memory = 10 MB
 request_disk = 50 MB
