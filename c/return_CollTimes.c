@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
    // printf("\nUse reflecting boundary conditions (1/0)? ");
    // scanf("%g",&refl);
    // int reflect=(int)refl;printf("reflect=%d",reflect);
-   int Nmax=70; int Nmin=5;//11;
+   int Nmax=700; int Nmin=5;//11;
    double dt=1e-5;             // Time step size.
    int i,j,k,q;double x[Nmax];double y[Nmax];double T[Nmax];
    bool still_running[Nmax]; bool any_running;

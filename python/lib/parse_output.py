@@ -14,7 +14,8 @@ def parse_output_log(input_fn,include_inputs=True, printing=False):
                     print(f'found outputs starting after line {n}')
                 n_output=n
     if n_input==-9999:
-        print(f"Warning: n_input not found for input_fn={input_fn}.\nreturning None...")
+        if printing:
+            print(f"Warning: n_input not found for input_fn={input_fn}.\nreturning None...")
         return None
     with open(input_fn) as f:
         inputs=f.readlines()[n_input+1:n_output-1]
