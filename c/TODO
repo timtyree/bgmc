@@ -1,3 +1,4 @@
+TODO(brainwarmer): write dask-parser that iterates over all log files and computes the net cpu time used
 TODO: write dask-parser that iterates over all log files where reflect=0 and set_second=0 and merges to a single .csv
 
 
@@ -12,6 +13,3 @@ if all trials are not -9999:
 	print mean
 else:
 	print -9999
-
-
-
