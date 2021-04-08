@@ -33,3 +33,4 @@ docs/site/
 Manifest.toml
 *.csv
 *.log
+c/gen/tmp.txt
