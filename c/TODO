@@ -1,13 +1,13 @@
-TODO(brainwarmer): write dask-parser that iterates over all log files and computes the net cpu time used
+TODO(brainwarmer): write dask-parser that iterates over all log files and computes the net cpu time used in units of years
 TODO: write dask-parser that iterates over all log files where reflect=0 and set_second=0 and merges to a single .csv
 
-
+TODO(later): fix test case where reflect=1 and set_second=1... it returned nan values... not -9999....
 TODO(later): write header file that iteratively retries positions for particles s.t. particles always start outside the reaction range, r.  Note this will make Nmax a variable quantity...
 
 
 DON'T(slow run, fast code... how big is file? 250TB): write c or python-dask functions that (i) bootstraps error bars and (ii) computes mean for fixed input parameters and for fixed N
 
-DONE(fast run, slow code... how big is file? 0.1TB): compute mean T before outputing (
+DONE(fast run, slow code... how big is file? ~200GB): compute mean T before outputing (
 if all trials are not -9999:
 	compute mean
 	print mean
