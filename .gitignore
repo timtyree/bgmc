@@ -35,3 +35,4 @@ Manifest.toml
 *.log
 c/gen/tmp.txt
 c/gen/runs/run_4.dat
+*.pyc

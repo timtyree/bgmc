@@ -1,12 +1,12 @@
 # logdown.py
 ssh TimtheTyrant@login05.osgconnect.net '
-rm bgmc/c/Log.tar.gz;
-cd bgmc/c;
+cd bgmc/c/gen;
+rm Log.tar.gz;
 ./post_process.sh
 '
 cd ../data
 cd osg_output
-scp TimtheTyrant@login05.osgconnect.net:bgmc/c/Log.tar.gz Log.tar.gz
+scp TimtheTyrant@login05.osgconnect.net:bgmc/c/gen/Log.tar.gz Log.tar.gz
 tar -xzf Log.tar.gz
 
 # SAVEFN='run_1.csv'
@@ -14,3 +14,5 @@ tar -xzf Log.tar.gz
 # python3 consolidate-osg-output.py $SAVEFN
 #move result to care
 # mv /home/timothytyree/Documents/GitHub/care_worker/python/osg_output/$(SAVEFN).csv /home/timothytyree/Documents/GitHub/care_worker/python/osg_output/longest_traj_by_area_fk_pbc.csv
+cd ../../lib
+./utils/compute_runtime.py
