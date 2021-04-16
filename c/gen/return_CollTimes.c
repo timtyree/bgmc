@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
    double distmat[Nmax][Nmax];double dist; bool in_range; bool reacts;
    double T_lst[niter][Nmax]; double net_T; double T_value;
    // randomize seed.  TODO(later): randomize seed via the latin square/hypercube
-   srand(seed);
+   srand(seed); double Rad; double Theta;
 
    double tmax=1000.; // UNCOMMENT_HERE
    // double tmax=.1; // COMMENT_HERE
@@ -60,11 +60,13 @@ int main(int argc, char* argv[])
     }
     // set_second particle to be within distance r of the first particle
     if (set_second==1){
-      double Rad = r*uniformRandom();
-      double Theta = 2.*3.141592653589793*uniformRandom();
+      Rad = r*uniformRandom();
+      Theta = 2.*3.141592653589793*uniformRandom();
+      x[1]=x[0]+Rad*cos(Theta);
+      y[1]=y[0]+Rad*sin(Theta);
       if (reflect==0){
-        x[1]=pbc(x[0]+Rad*cos(Theta),L);
-        y[1]=pbc(y[0]+Rad*sin(Theta),L);
+        x[1]=pbc(x[1],L);
+        y[1]=pbc(y[1],L);
       }else{
         //enforce RBC for x coordinate
         if (x[1]>L){
@@ -158,6 +160,10 @@ printf("reflect=%d\n",reflect);
 printf("set_second=%d\n",set_second);
 printf("niter=%d\n",niter);
 printf("dt=%g\n",dt);
+
+if (set_second==1){
+  printf("Rad=%g\n",Rad);
+}
 
 // print mean output of T_lst to stdout
 printf("\nPrinting Outputs...\n");

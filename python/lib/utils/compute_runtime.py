@@ -36,7 +36,7 @@ def compute_runtime_for_folder(folder):
             return parse_runtime(input_fn)
         except Exception as e:
             return 0.
-    b = db.from_sequence(input_fn_lst, npartitions=9).map(routine)
+    b = db.from_sequence(input_fn_lst, npartitions=11).map(routine)
     start = time.time()
     runtime_lst = list(b)
     print(f"the run time for computing runtimes was: {time.time()-start:.2f} seconds.")
