@@ -97,8 +97,6 @@ if __name__=='__main__':
     # df.to_csv(save_dir,index=False)
     print(f"the total number of trials matching query was {len(retval_lst)}")
     # print(f"final DataFrame stored in {save_dir}")
-
-    folder=f"{nb_dir}/data/osg_output/run_5_all"
     retval=merge_folder(folder=save_folder, return_df=False)
     beep = lambda x: os.system("echo -n '\\a';sleep 1.2;" * x)
     beep(3)

@@ -47,6 +47,33 @@ def filter_folder(folder,qfoo,save_folder):
     print(f"the run time for filtering files was {time.time()-start:.2f} seconds.")
     return retval_lst
 
+def merge_folder(folder,trgt='.out.',return_df=False):
+    '''merge all files in folder matching trgt.
+    runtime was ~10 seconds for ~3000 files.'''
+    #get all files in folder
+    assert(os.path.exists(folder))
+    input_fn_lst=get_files_in_folder(folder,trgt)
+    print(f"merging {len(input_fn_lst)} files...")
+    #merge all files in folder as df
+    df=pd.concat([pd.read_csv(fn) for fn in input_fn_lst])
+    #groupby col_names minus CollRate
+    param_names=sorted(set(df.columns.values).difference({'CollTime','Rad'}))[::-1]
+    #compute mean value
+    dfm=df.groupby(param_names).mean()
+    dfm.reset_index(inplace=True)
+    #compute CollRate and drop CollTime
+    dfm['CollRate']=1./dfm['CollTime'] #Hz
+    dfm.drop(columns=['CollTime'],inplace=True)
+    #save as csv
+    save_fn=os.path.basename(folder)+'.csv'
+    os.chdir(os.path.dirname(folder))
+    dfm.to_csv(save_fn,index=False)
+    print(f'mean Collision rates saved in\n{os.path.abspath(save_fn)}')
+    if return_df:
+        return dfm
+    else:
+        return True
+
 if __name__=='__main__':
     #input qfoo
     # TODO(later): prompt user for input_query_function=lambda df: foo(df)
@@ -66,7 +93,9 @@ if __name__=='__main__':
     # df=pd.concat(df_lst).reset_index(drop=True)
     # df.to_csv(save_dir,index=False)
     print(f"the total number of trials matching query was {len(retval_lst)}")
-    # print(f"final DataFrame stored in {save_dir}")
     beep = lambda x: os.system("echo -n '\\a';sleep 1.2;" * x)
     beep(3)
-    print("Nota Bene: the output is currently not performing the average over logs (6x compression advisable...)")
+    yn = input(f"Do you want to merge the query? (Enter y/n)")
+    if yn=='y':
+        # print(f"final DataFrame stored in {save_dir}")
+        retval=merge_folder(folder=save_folder, return_df=False)
