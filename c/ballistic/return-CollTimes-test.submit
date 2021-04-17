@@ -2,7 +2,7 @@ Universe = vanilla
 Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
 
 executable = xrun.sh
-arguments = $(r) $(D) $(L) $(kappa) $(beta) $(niter) $(Process) $(reflect) $(set_second)
+arguments = $(r) $(D) $(L) $(kappa) $(Dt) $(niter) $(Process) $(reflect) $(set_second)
 
 transfer_input_files = return_CollTimes.x
 
@@ -14,5 +14,5 @@ request_cpus = 1
 request_memory = 10 MB
 request_disk = 50 MB
 
-PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa beta niter reflect set_second from runs/run_test.dat
+# PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
+queue r D L kappa Dt niter reflect set_second from runs/run_test.dat
