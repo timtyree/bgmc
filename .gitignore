@@ -36,3 +36,4 @@ Manifest.toml
 c/gen/tmp.txt
 c/gen/runs/run_4.dat
 *.pyc
+c/ballistic/runs/run_6.dat

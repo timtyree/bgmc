@@ -16,4 +16,4 @@ request_memory = 10 MB
 request_disk = 50 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa Dt niter reflect set_second from runs/run_5.dat
+queue r D L kappa Dt niter reflect set_second from runs/run_6.dat
