@@ -1,0 +1,3 @@
+TODO: plot many different values for B for each trial, considering (i) only  the smallest particle densities 0.02>q>0.1 and only (ii) 0.2>q>0.4 and only (iii) only 0.8>q>1.0 
+
+TODO: estimate the turning points using RMSE versus q_min,q_max for i and ii... 
