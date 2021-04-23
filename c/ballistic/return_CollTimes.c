@@ -1,4 +1,4 @@
-/* Program to compute using Monte Carlo methods */
+/* Program that returns collision times using a Monte Carlo method */
 // the variable number of diffusing particles is handled by still_running
 #include "CommonDefines.h"
 
@@ -53,7 +53,6 @@ int main(int argc, char* argv[])
    double tmax=1000.; // UNCOMMENT_HERE
    // double tmax=.1; // COMMENT_HERE
    int iter_per_movestep = round(Dt/dt);
-   double twoL=2.*L;
 
   printf("\nrunning simulation...\n");
   /* for each trial... */

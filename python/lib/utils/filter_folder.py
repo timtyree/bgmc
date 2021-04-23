@@ -75,6 +75,14 @@ def merge_folder(folder,trgt='.out.',return_df=False):
         return True
 
 if __name__=='__main__':
+    # #TODO: set -y command flag to merge automatically
+    # import sys
+    # def yn_choice(message, default='y'):
+    #     choices = 'Y/n' if default.lower() in ('y', 'yes') else 'y/N'
+    #     choice = input("%s (%s) " % (message, choices))
+    #     values = ('y', 'yes', '') if choices == 'Y/n' else ('y', 'yes')
+    #     return choice.strip().lower() in values
+
     #input qfoo
     # TODO(later): prompt user for input_query_function=lambda df: foo(df)
     #get folder
@@ -95,7 +103,8 @@ if __name__=='__main__':
     print(f"the total number of trials matching query was {len(retval_lst)}")
     beep = lambda x: os.system("echo -n '\\a';sleep 1.2;" * x)
     beep(3)
-    yn = input(f"Do you want to merge the query? (Enter y/n)")
+    # yn = input(f"Do you want to merge the query? (Enter y/n)")
+    yn='y'
     if yn=='y':
         # print(f"final DataFrame stored in {save_dir}")
         retval=merge_folder(folder=save_folder, return_df=False)
