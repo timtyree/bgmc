@@ -14,6 +14,8 @@ M_values=np.array([5.572315674840435,16.73559858353835])
 num_trials_per_setting=6
 
 Dratio_values=np.array([1,10,100,1000])
+energy_gap_values=np.array(sorted([0.,-10,10,0.5,1,2,-1]))
+temperature_energy_values=np.array([1.])
 
 def comp_M_tilde(m):
     '''non-quadratic trend is guessed to make bounds'''
@@ -46,9 +48,11 @@ for set_second in set_second_values:
                             kappa_values=np.array(sorted(set([kappa_mn_mx[0],(kappa_mn_mx[0]+kappa_mn_mx[1])/2.,kappa_mn_mx[1]])))
                             for kappa in kappa_values:
                                 for Dratio in Dratio_values:
-                                    num_trials=0
-                                    while num_trials<num_trials_per_setting:
-                                        num_trials+=1
-                                        count=count+1
-                                        print(f"{r} {D} {L} {Dt} {niter} {reflect} {set_second} {temperature_energy} {energy_gap} {Dratio}")
+                                    for temperature_energy in temperature_energy_values:
+                                        for energy_gap in energy_gap_values:
+                                            num_trials=0
+                                            while num_trials<num_trials_per_setting:
+                                                num_trials+=1
+                                                count=count+1
+                                                print(f"{r} {D} {L} {Dt} {niter} {reflect} {set_second} {temperature_energy} {energy_gap} {Dratio}")
 # print(count)
