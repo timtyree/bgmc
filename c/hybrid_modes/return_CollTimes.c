@@ -29,8 +29,10 @@ int main(int argc, char* argv[])
    int reflect=(int)refl;printf("reflect=%d\n",reflect);
    printf("Set second particle within reaction range of first? (Enter 1/0): ");
    scanf("%lg",&set_sec);
-   printf("\nEnter the number of trials: ");
-   scanf("%lg",&nite);
+   int set_second=(int)set_sec;printf("set_second=%d\n",set_second);
+
+   // printf("\nEnter the number of trials: ");
+   // scanf("%lg",&nite);
 
    // Three new parameters...
    double temperature_energy;
@@ -55,13 +57,12 @@ int main(int argc, char* argv[])
 
 
 
-   int set_second=(int)set_sec;printf("set_second=%d\n",set_second);
 
 
 
 
    int Nmax=700; int Nmin=11;//11;
-   double dt=1e-5;             // reaction time step size.
+   double dt=1e-7;             // reaction time step size.
    int i,j,k,q,s;
    double x[Nmax];double y[Nmax];
    double X[Nmax];double Y[Nmax];
@@ -140,7 +141,7 @@ int main(int argc, char* argv[])
 
             // multiply step size by Dratio
             step_size=stepscale;
-            if (popen){
+            if (popen>uniformRandom()){
               step_size=step_size*sqrtDratio;
             }
 
@@ -260,7 +261,7 @@ for(i = 0; i < Nmax;i++){
   }
   // if all are still valid, print mean T
   if(all_valid){
-    printf ("%.7lg,",net_T/niter);
+    printf ("%.9lg,",net_T/niter);
   }else{
     //otherwise, print -9999
     printf ("%d,",-9999);
