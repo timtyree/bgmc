@@ -1,7 +1,6 @@
 /* Program that returns collision times using a Monte Carlo method */
 // the variable number of diffusing particles is handled by still_running
 #include "CommonDefines.h"
-
 // // using namespace std;
 int main(int argc, char* argv[])
 {
@@ -30,7 +29,36 @@ int main(int argc, char* argv[])
    int reflect=(int)refl;printf("reflect=%d\n",reflect);
    printf("Set second particle within reaction range of first? (Enter 1/0): ");
    scanf("%lg",&set_sec);
+   printf("\nEnter the number of trials: ");
+   scanf("%lg",&nite);
+
+   // Three new parameters...
+   double temperature_energy;
+   double energy_gap;
+   double Dratio; //Dratio = D2/D1 by definition
+
+   printf("\nEnter the temperature_energy: ");
+   scanf("%lg",&temperature_energy);
+   printf("\nEnter the energy_gap: ");
+   scanf("%lg",&energy_gap);
+   printf("\nEnter the ratio of diffusion coefficients: ");
+   scanf("%lg",&Dratio);
+   // double next_time_to_switch_modes[Nmax];
+   // fuck ^that
+   // use the Ising model...
+   double popen = exp(-energy_gap/temperature_energy)/(1.0+exp(-energy_gap/temperature_energy));
+   double step_size;
+   double sqrtDratio=sqrt(Dratio);
+
+   // Constrained to the scale of the model
+   // TODO(later): translate comp_kappa into header file
+
+
+
    int set_second=(int)set_sec;printf("set_second=%d\n",set_second);
+
+
+
 
    int Nmax=700; int Nmin=11;//11;
    double dt=1e-5;             // reaction time step size.
@@ -69,6 +97,8 @@ int main(int argc, char* argv[])
      // TODO(later?): check if any particles are within the minimum allowable distance
      // TODO(later?): reseed any particles that are within the minimum allowable distance
     }
+
+
     // set_second particle to be within distance r of the first particle
     if (set_second==1){
       Rad = r*uniformRandom();
@@ -107,9 +137,16 @@ int main(int argc, char* argv[])
             // copy X_new,Y_new to X_old,Y_old
             X_old[j]=X_new[j];
             Y_old[j]=Y_new[j];
+
+            // multiply step size by Dratio
+            step_size=stepscale;
+            if (popen){
+              step_size=step_size*sqrtDratio;
+            }
+
             // take a step in the unbounded real plane
-            X_new[j]=X_old[j]+stepscale*normalRandom();
-            Y_new[j]=Y_old[j]+stepscale*normalRandom();
+            X_new[j]=X_old[j]+step_size*normalRandom();
+            Y_new[j]=Y_old[j]+step_size*normalRandom();
       }}
 
       // collisions at short timescale, dt
@@ -196,6 +233,9 @@ printf("set_second=%d\n",set_second);
 printf("niter=%d\n",niter);
 printf("dt=%g\n",dt);
 printf("Dt=%g\n",Dt);
+printf("temperature_energy=%g\n",temperature_energy);
+printf("energy_gap=%g\n",energy_gap);
+printf("Dratio=%g\n",Dratio);
 
 // if (set_second==1){
 //   printf("Rad=%g\n",Rad);

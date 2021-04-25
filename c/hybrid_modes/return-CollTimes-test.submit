@@ -2,7 +2,7 @@ Universe = vanilla
 Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
 
 executable = xrun.sh
-arguments = $(r) $(D) $(L) $(kappa) $(Dt) $(niter) $(Process) $(reflect) $(set_second)
+arguments = $(r) $(D) $(L) $(kappa) $(Dt) $(niter) $(Process) $(reflect) $(set_second) $(temperature_energy) $(energy_gap) $(Dratio)
 
 transfer_input_files = return_CollTimes.x
 
@@ -10,9 +10,10 @@ output = Log/job.out.$(Cluster).$(Process)
 error = Log/job.error.$(Cluster).$(Process)
 log = Log/job.log.$(Cluster).$(Process)
 
+max_idle = 3000
 request_cpus = 1
 request_memory = 10 MB
 request_disk = 50 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa Dt niter reflect set_second from runs/run_test.dat
+queue r D L Dt niter reflect set_second temperature_energy energy_gap Dratio from runs/run_test.dat
