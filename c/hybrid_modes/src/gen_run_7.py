@@ -1,8 +1,8 @@
 import numpy as np
 niter=250 #trials per worker
-r_values=np.array([0.1,0.5,1.,1.5,2.,2.5,5.,10.])#cm
+r_values=np.array([0.5,0.1,1.,1.5,2.,2.5,5.,10.])#cm
 # r_values=np.array([0.1,0.5,1.,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.,2.5,5.,10.,20.])#cm
-D_values=np.array([0.2,1.0,1.5,2.0,5.,10,20])#cm^2/s
+D_values=np.array([1.,0.2,1.5,2.0,5.,10,20])#cm^2/s
 A_values=np.array([20.25,25,50,100,156.25,250])[::-1]#cm^2
 # A_values=np.array([20.25,25,39,50,56.25,100,156.25,189,250])[::-1]#cm^2
 L_values=np.sqrt(A_values)#cm
