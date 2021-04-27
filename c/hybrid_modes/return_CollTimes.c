@@ -40,11 +40,11 @@ int main(int argc, char* argv[])
    double Dratio; //Dratio = D2/D1 by definition
 
    printf("\nEnter the temperature_energy: ");
-   scanf("%lg",&temperature_energy);
+   scanf("%lg",&temperature_energy);printf("temperature_energy=%g",temperature_energy);
    printf("\nEnter the energy_gap: ");
-   scanf("%lg",&energy_gap);
+   scanf("%lg",&energy_gap);printf("energy_gap=%g",energy_gap);
    printf("\nEnter the ratio of diffusion coefficients: ");
-   scanf("%lg",&Dratio);
+   scanf("%lg",&Dratio);printf("Dratio=%g",Dratio);
    // double next_time_to_switch_modes[Nmax];
    // fuck ^that
    // use the Ising model...

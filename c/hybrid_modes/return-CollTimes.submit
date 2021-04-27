@@ -13,7 +13,7 @@ log = Log/job.log.$(Cluster).$(Process)
 max_idle = 3000
 request_cpus = 1
 request_memory = 10 MB
-request_disk = 50 MB
+request_disk = 10 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa Dt niter reflect set_second temperature_energy energy_gap Dratio from runs/run_7.dat 
+queue r D L kappa Dt niter reflect set_second temperature_energy energy_gap Dratio from runs/run_7.dat

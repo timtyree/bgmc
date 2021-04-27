@@ -16,7 +16,7 @@ M_values=np.array([5.572315674840435,16.73559858353835])
 num_trials_per_setting=6
 
 Dratio_values=np.array([1,10,100,1000])
-energy_gap_values=np.array(sorted([0.,-10,10,0.5,1,2,-1]))
+energy_gap_values=np.array(sorted([-10,10,0.,0.5,1,2,-1]))
 temperature_energy_values=np.array([1.])
 
 def comp_M_tilde(m):
@@ -57,5 +57,5 @@ for set_second in set_second_values:
                                         while num_trials<num_trials_per_setting:
                                             num_trials+=1
                                             count=count+1
-                                            print(f"{r} {D} {L:.5f} {kappa:.5f} {Dt} {niter} {reflect} {set_second} {temperature_energy} {energy_gap} {Dratio}")
+                                            print(f"{r} {D} {L:.5f} {kappa:.5f} {Dt} {niter} {reflect} {set_second} {temperature_energy:.0f} {energy_gap:.0f} {Dratio:.0f}")
 # print(count)
