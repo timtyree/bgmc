@@ -57,5 +57,6 @@ for set_second in set_second_values:
                                         while num_trials<num_trials_per_setting:
                                             num_trials+=1
                                             count=count+1
-                                            print(f"{r} {D} {L:.5f} {kappa:.5f} {Dt} {niter} {reflect} {set_second} {temperature_energy:.0f} {energy_gap:.0f} {Dratio:.0f}")
+                                            print(f"{r} {D} {L} {kappa} {Dt} {niter} {reflect} {set_second} {temperature_energy} {energy_gap} {Dratio}")
+                                            # print(f"{r} {D} {L:.5f} {kappa:.5f} {Dt} {niter} {reflect} {set_second} {temperature_energy:.0f} {energy_gap:.0f} {Dratio:.0f}")
 # print(count)
