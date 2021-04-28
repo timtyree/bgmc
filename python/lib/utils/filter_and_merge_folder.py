@@ -18,7 +18,7 @@ def get_files_in_folder(folder,trgt):
             ifl.append(fn)
     return ifl
 
-def filter_log(input_fn,save_folder,qfoo=None):
+def filter_log(input_fn,save_folder,qfoo=None,save_fn=None):
     cwd=os.getcwd()
     if qfoo==None:
         qfoo_pbc=lambda dict_inputs:dict_inputs['reflect']==0 #periodic bc
@@ -29,7 +29,8 @@ def filter_log(input_fn,save_folder,qfoo=None):
     if df is None:
         return None
     os.chdir(save_folder)
-    save_fn=os.path.basename(input_fn)
+    if save_fn is None:
+        save_fn=os.path.basename(input_fn)
     df.to_csv(save_fn,index=False)
     os.chdir(cwd)
     return save_fn
