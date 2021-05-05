@@ -42,7 +42,7 @@ def print_fit_power_law(x,y):
     M, Delta_M= comp_power_scale(B,Delta_B,m,Delta_m)
 
     print(f"m={m:.3f}+-{Delta_m:.3f}; B={B:.3f}+-{Delta_B:.3f}")
-    print(f"M=B**m={M:.2f}+-{Delta_M:.2f} Hz*cm^{{2(m-1)}}")
+    print(f"M= {M:.2f}+-{Delta_M:.2f} Hz*cm^{{2(m-1)}}")
     print(f"RMSE={rmse:.4f} Hz/cm^2")
     print(f"R^2={Rsq:.3f}")
 #     return True
