@@ -1,0 +1,16 @@
+TODO: update return_CollTimes.c body
+TODO: update return_CollTimes.c input/output
+TODO: design new data gener_run.py
+TODO: update .submit file
+
+input stencil
+r,D,L,kappa,beta,shape,niter,reflect,set_second,seed
+
+notes for gev simulation:
+-DONE: set r=location fit for reaction range
+-DONE: set kappa=500 //Hz
+
+- make sure all variables are passed correctly...
+
+
+- TODO(later): make that colored curvature video
