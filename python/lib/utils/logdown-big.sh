@@ -1,12 +1,14 @@
 # logdown.py
-ssh TimtheTyrant@login05.osgconnect.net '
-cd bgmc/c/gev;
-rm Log.tar.gz;
-./post_process.sh
-'
-cd ../data
+#suppose preprocessed already (solves timeout with broken pipe)
+# ssh TimtheTyrant@login05.osgconnect.net '
+# cd bgmc/c/gev;
+# rm Log.tar.gz;
+# ./post_process.sh
+# '
+cd ../../data
 cd osg_output
-scp TimtheTyrant@login05.osgconnect.net:bgmc/c/gev/Log.tar.gz Log.tar.gz
+scp TimtheTyrant@login05.osgconnect.net:bgmc/c/hybrid_modes/Log.tar.gz Log.tar.gz
+# scp TimtheTyrant@login05.osgconnect.net:bgmc/c/gev/Log.tar.gz Log.tar.gz
 tar -xzf Log.tar.gz
 
 # SAVEFN='run_1.csv'
