@@ -4,7 +4,7 @@ The manuscript associated with this repository is under construction.
 
 ## Tasks that need be done
 
-### TODO TT: 
+### __Task List for TT:__
 - DONE: generate the file of grid search arguments
 - DONE: get simulation running as a command line executable
 - DONE: test compute cluster
@@ -13,6 +13,6 @@ The manuscript associated with this repository is under construction.
 - DONE: visualize results 
 - TODO: fit to WJ's results
 
-### TODO PM:
+### __Task List for PM:__
 - TODO: update lib/return_CollTime_test.m to compute expected CollTime and bootstrap delta_CollTime (see lines 161-162)
 - TODO: upload notes to overleaf and share with TT 
