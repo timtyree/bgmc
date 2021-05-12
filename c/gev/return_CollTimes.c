@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
    int seed=(int)see;printf("seed=%d\n",seed);
 
    int Nmax=700; int Nmin=11;//11;
-   double dt=1e-5;             // Time step size.
+   double dt=1e-6;             // Time step size.
    int i,j,k,q;double x[Nmax];double y[Nmax];double T[Nmax];
    bool still_running[Nmax]; bool any_running; bool all_valid;
    double stepscale=sqrt(2*D*dt);
