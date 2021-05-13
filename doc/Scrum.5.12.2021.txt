@@ -1,0 +1,16 @@
+#####################################
+TODO(overall goal): implement a noisy spring.  implement this flavor of pbc particle monte carlo in c
+#####################################
+TODO: copy c/ou/lib from a naive merge all sweet features 
+TODO: debug ^that
+TODO: simplify existing c method to a compute_Phi c method, which measures the map from X to x
+TODO: make a one_step_elastic method that maps x to x
+TODO: simplify existing c method to a compute_arcPhi c method, which measures the map from x to X
+ 
+DONE: search Numerical Recipes and Ch. 4 of Arova's stat mech notes for OU processes.
+DONE: hash out a numerical method for an ou monte carlo on my iPad
+
+(later)
+TODO(later): setup a pyenv and install invoke, so I can call c functions from python
+TODO(later): load my c/ou/lib into python
+TODO(later): functional test based development of c functions from a jupyter notebook
