@@ -1,3 +1,4 @@
+#!/bin/bash
 # logdown.py
 ssh TimtheTyrant@login05.osgconnect.net '
 cd bgmc/c/gev;
@@ -6,8 +7,11 @@ rm Log.tar.gz;
 '
 cd ../data
 cd osg_output
+rm Log.tar.gz;
+rm -r Log
 scp TimtheTyrant@login05.osgconnect.net:bgmc/c/gev/Log.tar.gz Log.tar.gz
-tar -xzf Log.tar.gz
+mkdir Log
+tar -xzf Log.tar.gz  -o Log
 
 # SAVEFN='run_1.csv'
 # SAVEFN='longest_traj_by_area_pbc.csv'
