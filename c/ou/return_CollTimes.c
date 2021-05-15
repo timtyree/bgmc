@@ -79,10 +79,12 @@ int main(int argc, char* argv[])
    bool still_running[Nmax]; bool any_running; bool all_valid;
    double stepscale=sqrt(2*D*Dt);
    double probreact=kap*dt; //double sig;
-   double dist_old[Nmax][Nmax];
-   double min_dist_old[Nmax];
+   // double dist_old[Nmax][Nmax];
+   double min_dist_old[Nmax];int count_net[Nmax];
    double dist; bool in_range; bool reacts;int ineigh;
-   double T_lst[niter][Nmax]; double net_T; double T_value; double Rad; double Theta;
+   double T_net[Nmax];
+   // double T_lst[niter][Nmax];
+   double net_T; double T_value; double Rad; double Theta;
    srand(seed); // randomize seed.
    double tmax=500.; // UNCOMMENT_HERE
    // double tmax=.1; // COMMENT_HERE
@@ -131,10 +133,11 @@ int main(int argc, char* argv[])
         }else if(y[1]<0){
           y[1]=-1.*y[1];
     }}}
-    // copy x,y to X_new,Y_new
+    // copy x,y to X_new,Y_new, initialize net_T to zero
     for (j = 0; j < niter; j++){
       X_new[j]=x[j];
       Y_new[j]=y[j];
+    net_T=0.;
     }
     /*                                   |
     |   run simulation for given trial   |
@@ -173,9 +176,9 @@ int main(int argc, char* argv[])
               }else{
                 dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
               }
-              // update the symmetric distance matrix
-              dist_old[i][j]=dist;
-              dist_old[j][i]=dist;
+              // // update the symmetric distance matrix
+              // dist_old[i][j]=dist;
+              // dist_old[j][i]=dist;
               // update nearest neighbor distance and i_neighbor
               if (dist<min_dist_old[i]){
                 min_dist_old[i]=dist;
@@ -299,8 +302,12 @@ int main(int argc, char* argv[])
     }
     //record trial
     for (j = 0; j<Nmax; j++){
-      T_lst[q][j]=T[j];
-    }
+      // T_lst[q][j]=T[j];
+      T_value=T[j];
+      if (T_value!=-9999.){
+        T_net[j]=T_net[j]+T_value;
+        count_net[j]=count_net[j]+1;
+    }}
   }
   printf("simulation complete!\n");
 
@@ -329,20 +336,14 @@ int main(int argc, char* argv[])
     printf ("%d,",i+1);
   }
   printf ("\n");
-  /* compute mean*/
+  /* TODO: compute mean*/
   for(i = 0; i < Nmax;i++){
-    all_valid=true;
-    net_T=0.;
-    for (q = 0; q < niter; q++){
-      T_value=T_lst[q][i];
-      if (T_value==-9999.){
-        all_valid=false;
-      }
-      net_T=net_T+T_value;
-    }
+    net_T=T_net[i];
+    T_value=net_T/count_net[i];
     // if all are still valid, print mean T
+    all_valid=T_value>0.;
     if(all_valid){
-      printf ("%.7lg,",net_T/niter);
+      printf ("%.7lg,",T_value);
     }else{
       //otherwise, print -9999
       printf ("%d,",-9999);
