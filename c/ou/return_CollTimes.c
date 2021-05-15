@@ -1,12 +1,22 @@
 /* Program that returns collision times using a Monte Carlo method */
-// the variable number of diffusing particles is handled by still_running
-#include "CommonDefines.h"
+// the variable number of diffusing particles is handled by
 
+//TODO: implement simplest explicit nearest neighbor spring force in the Langevin Equation in the inviscid limit (solved by a Generalized Onstein-Uhlenbeck Process)
+//TODO: implement no_attraction and no_repulsion
+//TODO(later): consider whether I might see any new behaviour returned/effect on collision times, if I
+// - consider exponential solution in computing motion... with dt=1e-6... probably not...
+// - consider other SDE discretizations to solve the motion
+#include "CommonDefines.h"
 // // using namespace std;
 int main(int argc, char* argv[])
 {
    /* parse exteral inputs */
-   double r,D,L,kap,nite,see,refl,set_sec,Dt;//,beta;
+   /*                                |
+   |  Parse Model Key Word Arguments |
+   |                                */
+   double r,D,L,kap,Dt,dt,varkappa,x0,nite,refl,set_sec,see;
+   // double dt=1e-5;             // reaction time step size.
+   double no_rep,no_att;
    printf("Enter the reaction range (cm): ");
    scanf("%lg",&r);printf("r=%g",r);
    printf("\nEnter the diffusion coefficient (cm^2/s): ");
@@ -15,10 +25,21 @@ int main(int argc, char* argv[])
    scanf("%lg",&L);printf("L=%g",L);
    printf("\nEnter the reaction rate (Hz): ");
    scanf("%lg",&kap);printf("kappa=%g",kap);
-   // printf("\nEnter the reaction scale (cm): ");
-   // scanf("%lg",&beta);printf("beta=%g",beta);
+   //DONE: handle io for each new parameter listed here:
+   //varkappa // spring constant / scale of motion
+   //x0        // preferred distance between particles
+   printf("\nEnter the spring rate (Hz): ");
+   scanf("%lg",&varkappa);printf("varkappa=%g",varkappa);
+   printf("\nEnter the preferred distance (cm): ");
+   scanf("%lg",&x0);printf("x0=%g",x0);
    printf("\nEnter the timescale of random motion: ");
    scanf("%lg",&Dt);printf("Dt=%g",Dt);
+   printf("\nEnter the timescale of random reaction: ");
+   scanf("%lg",&dt);printf("dt=%g",dt);
+
+   /*                                      |
+   |  Parse Simulation Key Word Arguments  |
+   |                                      */
    printf("\nEnter the number of trials: ");
    scanf("%lg",&nite);
    int niter=(int)nite;printf("niter=%d\n",niter);
@@ -31,35 +52,44 @@ int main(int argc, char* argv[])
    printf("Set second particle within reaction range of first? (Enter 1/0): ");
    scanf("%lg",&set_sec);
    int set_second=(int)set_sec;printf("set_second=%d\n",set_second);
+   printf("Do not allow repulsive forces? (Enter 1/0): ");
+   scanf("%lg",&no_rep);
+   int no_repulsion=(int)no_rep;printf("no_repulsion=%d\n",no_repulsion);
+   printf("Do not allow attractive forces? (Enter 1/0): ");
+   scanf("%lg",&no_att);
+   int no_attraction=(int)no_att;printf("no_attraction=%d\n",no_attraction);
 
-   //TODO: handle io for each new parameter listed here:
-   //varkappa // spring constant / scale of motion
-   //R        // preferred distance between particles
-   //gamma    // mass to damping factor ratio... absorb into varkappa
-   int Nmax=700; int Nmin=11;//11;
-   double dt=1e-5;             // reaction time step size.
+   int Nmax=700; int Nmin=50;//11;
    int i,j,k,q,s;
    double x[Nmax];double y[Nmax];
    double X[Nmax];double Y[Nmax];
    double X_old[Nmax];double Y_old[Nmax];
    double X_new[Nmax];double Y_new[Nmax];
-   double[Nmax] x_old;double[Nmax] y_old;
-   double[Nmax] x_new;double[Nmax] y_new;
+   double x_old[Nmax];double y_old[Nmax];
+   double x_new[Nmax];double y_new[Nmax];
    double Time; double t;  // time of motion and reaction, respectivly
    double frac; // temporal fraction for interpolation
    double cfrac; //1-frac
    double T[Nmax];
+   double dx,dy,dxt,dyt,dxW,dyW;
    bool still_running[Nmax]; bool any_running; bool all_valid;
    double stepscale=sqrt(2*D*Dt);
    double probreact=kap*dt; //double sig;
-   //double distmat[Nmax][Nmax];
-   double dist; bool in_range; bool reacts;
+   double dist_old[Nmax][Nmax];
+   double min_dist_old[Nmax];
+   double dist; bool in_range; bool reacts;int ineigh;
    double T_lst[niter][Nmax]; double net_T; double T_value; double Rad; double Theta;
    srand(seed); // randomize seed.
-   double tmax=1000.; // UNCOMMENT_HERE
+   double tmax=500.; // UNCOMMENT_HERE
    // double tmax=.1; // COMMENT_HERE
    int iter_per_movestep = round(Dt/dt);
+   int i_neighbor[Nmax];
+   double impulse_prefactor=-1.*varkappa*Dt;
+   double impulse_factor;
 
+   /*                              |
+   |  N Iterations of Monte Carlo  |
+   |                              */
   printf("\nrunning simulation...\n");
   /* for each trial... */
   for (q = 0; q < niter; q++){
@@ -72,8 +102,8 @@ int main(int argc, char* argv[])
      y[j] = L*uniformRandom();
      T[j] = -9999.; //initialize stopping times to -9999
      still_running[j]=true;
-     // TODO(later?): check if any particles are within the minimum allowable distance
-     // TODO(later?): reseed any particles that are within the minimum allowable distance
+     // todo(later?): check if any particles are within the minimum allowable distance
+     // todo(later?): reseed any particles that are within the minimum allowable distance
     }
     // set_second particle to be within distance r of the first particle
     if (set_second==1){
@@ -102,54 +132,116 @@ int main(int argc, char* argv[])
       X_new[j]=x[j];
       Y_new[j]=y[j];
     }
-
-    /* run simulation for given trial */
+    /*                                   |
+    |   run simulation for given trial   |
+    |                                   */
     while(any_running){
-
-
+      //reinitialize_kernel, which copies X,Y_new to X,Y_old
+      for (i = 0; i < Nmax-1; i++ ){
+        if(still_running[i]){
+          //reinitialize minimum distance value
+          min_dist_old[j]=2*L;
+          // copy old coordinate values to new
+          X_old[i]=X_new[i];
+          Y_old[i]=Y_new[i];
+          //enforce boundary conditions
+          if (reflect==0){
+            //enforce PBC
+            x_old[i]=periodic(X_old[i],L);
+            y_old[i]=periodic(Y_old[i],L);
+          }else{
+            //enforce RBC
+            x_old[i]=reflection(X_old[i],L);
+            y_old[i]=reflection(Y_old[i],L);
+          }
+      }}
       t=Time;
       Time=Time+Dt;
-      // one_step_wiener_kernel at long timescale, Dt
-      for (j = 0; j < Nmax; j++ ) {
+      // kernel_map_Phi from X,Y_old to x,y_old and compute the nearest neighbor
+      for (i = 0; i < Nmax-1; i++ ) {
+        if(still_running[i]){
+          // each i,j pair is reached once per call to kernel_measure
+          for (j = i+1; j < Nmax; j++ ) {
+            if(still_running[j]){
+              // compute distance between particles that are still running
+              if (reflect==0){
+                dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
+              }else{
+                dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
+              }
+              // update the symmetric distance matrix
+              dist_old[i][j]=dist;
+              dist_old[j][i]=dist;
+              // update nearest neighbor distance and i_neighbor
+              if (dist<min_dist_old[i]){
+                min_dist_old[i]=dist;
+                i_neighbor[i]=j;
+                //this choice implies symplectic deterministic forces
+                min_dist_old[j]=dist;
+                i_neighbor[j]=i;
+          }}}}}
+      // one_step_ou_kernel at long timescale, Dt
+      // TODO: debug one_step_ou_kernel... it's causing a segmentation fault
+      for (j = i+1; j < Nmax; j++ ) {
         if(still_running[j]){
-            // copy X_new,Y_new to X_old,Y_old
-            X_old[j]=X_new[j];
-            Y_old[j]=Y_new[j];
-            // take a step in the unbounded real plane
-            X_new[j]=X_old[j]+stepscale*normalRandom();
-            Y_new[j]=Y_old[j]+stepscale*normalRandom();
-      }}
+            // boundary conditions are already enforced
+            ineigh=i_neighbor[j];// extract x,y_old of other tip
+            // compute displacement due to spring force with nearest neighbor
+            if (reflect==0){
+              dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
+              dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
+              dist = sqrt(dx*dx+dy*dy);
+            }
+            else{
+              dx = x_old[ineigh]-x_old[j];
+              dy = y_old[ineigh]-y_old[j];
+              dist = sqrt(dx*dx+dy*dy);
+            }
+            //compute displacement due to drift
+            impulse_factor=impulse_prefactor*(dist-x0)/dist;
+            // set impulse_factor to zero if it is explicitly forbidden by the user input
+            if (no_attraction && (impulse_factor>0)){
+              impulse_factor=0.;
+            }
+            if (no_repulsion && (impulse_factor<0)){
+              impulse_factor=0.;
+            }
 
-      //TODO: map X_new,Y_new onto bounded real square, x_old,y_old
+            dxt=dx*impulse_factor;
+            dyt=dy*impulse_factor;
 
-      //TODO: for each particle, find the nearest neighbor
-      //TODO: compute the phenomonological (elastic) force between the nearest neighbor and the particle
-      //TODO: compute the naïve new world coordinates, x_new,y_old
-      //TODO: enforce the boundary conditions on x_new,y_old
-
-      //TODO: map_coordinates from unbounded material coordinates, X,Y to bounded world coordinates, x,y for _old,_new
-      //input:  X,Y,x,y for _old,_new ,x,y for _old
-      //output:
-      // double[Nmax] x_old;double[Nmax] y_old;
-      // double[Nmax] x_new;double[Nmax] y_new;
-
-      //TODO: one_step_elastic_kernel at long timescale, Dt
-
-
-      //TODO: arcmap_coordinates from
-
-      // collisios_kernel at short timescale, dt
+            // compute displacement due to gaussian white noise
+            dxW=stepscale*normalRandom();
+            dyW=stepscale*normalRandom();
+            // next spatial position, time integrating by a duration, Dt.
+            X_new[j]=X_old[j]+dxt+dxW;
+            Y_new[j]=Y_old[j]+dyt+dyW;
+            // impose boundary conditions for x,y_new
+            if (reflect==0){
+              //enforce PBC
+              x_new[j]=periodic(X_new[j],L);
+              y_new[j]=periodic(Y_new[j],L);
+            }else{
+              //enforce RBC
+              x_new[j]=reflection(X_new[j],L);
+              y_new[j]=reflection(Y_new[j],L);
+            }
+        }}
+      //TODO(later): simplify to one xy coordinate system instead of keeping track of x and X separately...
+      // collision_kernel at short timescale, dt
+      // t=t-dt;//for an insignificant edge case
       for (s=0; s<iter_per_movestep; s++){
         // compute local time
         t=t+dt;
         frac=(Time-t)/Dt;
         cfrac=1.-frac;
-        // kernel_interpolate
+        // kernel_interpolate, which enforces b.c.'s
         for (i = 0; i < Nmax; i++ ) {
           if(still_running[i]){
             // linear interpolation
             X[i]=frac*X_old[i]+cfrac*X_new[i];
             Y[i]=frac*Y_old[i]+cfrac*Y_new[i];
+            // map to world coordinates
             // impose boundary conditions
                 if (reflect==0){
                   //enforce PBC
@@ -159,100 +251,101 @@ int main(int argc, char* argv[])
                   //enforce RBC
                   x[i]=reflection(X[i],L);
                   y[i]=reflection(Y[i],L);
-            }}}
-
-          // kernel_measure
-          for (i = 0; i < Nmax-1; i++ ) {
-            if(still_running[i]){
-              // each i,j pair is reached once per call to kernel_measure
-              for (j = i+1; j < Nmax; j++ ) {
-                if(still_running[j]){
-                  // compute distance between particles that are still running
-                  if (reflect==0){
-                    dist=dist_pbc(x[i],y[i],x[j],y[j],L);
-                  }else{
-                    dist=dist_eucl(x[i],y[i],x[j],y[j]);
-                  }
-              in_range=dist<r;
-              // in_range=true;//uncomment for smeared method
-              // if two particles are in range
-              if(in_range){
-                // determine whether those two particles react via the simple method
-                reacts=probreact>uniformRandom();
-                // determine whether those two particles react via the smeared method
-                // sig=sigmoid(dist, r, beta);
-                // reacts=probreact*sig>uniformRandom();
-                if(reacts){
-                  T[j]=t;
-                  still_running[j]=false;
-                  for(k=j+1; k<Nmax; k++){
-                    if(still_running[k]){
-                      T[k]=t;
-                      still_running[k]=false;
-    }}}}}}}}
-  }
-
-    //check if any are still running...
-    any_running=false;
-    for (j = Nmin; j < Nmax; j++ ) {
-      if(still_running[j]){
-        any_running=true;
-    }}
-    //shut simulation down if it's taking too long...
-    if (t>tmax){
+        }}}
+        // reaction_kernel
+        for (i = 0; i < Nmax-1; i++ ) {
+          if(still_running[i]){
+            // each i,j pair is reached once per call to kernel_measure
+            for (j = i+1; j < Nmax; j++ ) {
+              if(still_running[j]){
+                // compute distance between particles that are still running
+                if (reflect==0){
+                  dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
+                }else{
+                  dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
+                }
+                in_range=dist<r;
+                // in_range=true;//uncomment for smeared method
+                // if two particles are in range
+                if(in_range){
+                  // determine whether those two particles react via the simple method
+                  reacts=probreact>uniformRandom();
+                  // determine whether those two particles react via the smeared method
+                  // sig=sigmoid(dist, r, beta);
+                  // reacts=probreact*sig>uniformRandom();
+                  if(reacts){
+                    T[j]=t;
+                    still_running[j]=false;
+                    for(k=j+1; k<Nmax; k++){
+                      if(still_running[k]){
+                        T[k]=t;
+                        still_running[k]=false;
+          }}}}}}}}
+        }
+      //check if any are still running...
       any_running=false;
+      for (j = Nmin; j < Nmax; j++ ) {
+        if(still_running[j]){
+          any_running=true;
+      }}
+      //shut simulation down if it's taking too long...
+      if (t>tmax){
+        any_running=false;
+      }
+    }
+    //record trial
+    for (j = 0; j<Nmax; j++){
+      T_lst[q][j]=T[j];
     }
   }
+  printf("simulation complete!\n");
 
-  //record trial
-  for (j = 0; j<Nmax; j++){
-    T_lst[q][j]=T[j];
-  }}
-printf("simulation complete!\n");
-
-// Print results
-printf("\nPrinting Inputs...\n");
-printf("r=%g\n",r);
-printf("D=%g\n",D);
-printf("L=%g\n",L);
-printf("kappa=%g\n",kap);
-// printf("beta=%g\n",beta);
-printf("reflect=%d\n",reflect);
-printf("set_second=%d\n",set_second);
-printf("niter=%d\n",niter);
-printf("dt=%g\n",dt);
-printf("Dt=%g\n",Dt);
-
-// if (set_second==1){
-//   printf("Rad=%g\n",Rad);
-// }
-
-// print mean output of T_lst to stdout
-printf("\nPrinting Outputs...\n");
-for(i = 0; i < Nmax;i++){
-  printf ("%d,",i+1);
-}
-printf ("\n");
-/* compute mean*/
-for(i = 0; i < Nmax;i++){
-  all_valid=true;
-  net_T=0.;
-  for (q = 0; q < niter; q++){
-    T_value=T_lst[q][i];
-    if (T_value==-9999.){
-      all_valid=false;
-    }
-    net_T=net_T+T_value;
+  // Print results
+  printf("\nPrinting Inputs...\n");
+  printf("r=%g\n",r);
+  printf("D=%g\n",D);
+  printf("L=%g\n",L);
+  printf("kappa=%g\n",kap);
+  printf("varkappa=%g\n",varkappa);
+  printf("x0=%g\n",x0);
+  printf("dt=%g\n",dt);
+  printf("Dt=%g\n",Dt);
+  printf("niter=%d\n",niter);
+  // printf("seed=%d\n",seed);
+  printf("reflect=%d\n",reflect);
+  printf("set_second=%d\n",set_second);
+  printf("no_repulsion=%d\n",no_repulsion);
+  printf("no_attraction=%d\n",no_attraction);
+  /*                              |
+  |  Record Mean Collision Times  |
+  |                              */
+  // print mean output of T_lst to stdout
+  printf("\nPrinting Outputs...\n");
+  for(i = 0; i < Nmax;i++){
+    printf ("%d,",i+1);
   }
-  // if all are still valid, print mean T
-  if(all_valid){
-    printf ("%.7lg,",net_T/niter);
-  }else{
-    //otherwise, print -9999
-    printf ("%d,",-9999);
+  printf ("\n");
+  /* compute mean*/
+  for(i = 0; i < Nmax;i++){
+    all_valid=true;
+    net_T=0.;
+    for (q = 0; q < niter; q++){
+      T_value=T_lst[q][i];
+      if (T_value==-9999.){
+        all_valid=false;
+      }
+      net_T=net_T+T_value;
+    }
+    // if all are still valid, print mean T
+    if(all_valid){
+      printf ("%.7lg,",net_T/niter);
+    }else{
+      //otherwise, print -9999
+      printf ("%d,",-9999);
   }}
   printf ("\n");
-
+  return 0;
+}
 
 // print dense output of T_lst to stdout
 // printf("\nPrinting Outputs...\n");
@@ -285,6 +378,3 @@ for(i = 0; i < Nmax;i++){
 // }
 // /* close the file*/
 // fclose (fp);
-
-return 0;
-}
