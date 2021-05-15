@@ -1,4 +1,5 @@
 # Local files
+cuda/
 c/archived/
 python/data/osg_output/
 python/lib/__pycache__/

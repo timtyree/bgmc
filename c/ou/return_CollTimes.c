@@ -36,6 +36,10 @@ int main(int argc, char* argv[])
    scanf("%lg",&Dt);printf("Dt=%g",Dt);
    printf("\nEnter the timescale of random reaction: ");
    scanf("%lg",&dt);printf("dt=%g",dt);
+   printf("\nEnter the minimum number of tips to observe:");int Nmin;
+   scanf("%d",&Nmin);printf("Nmin=%d",Nmin);
+   printf("\nEnter the minimum number of tips to observe:");int Nmax;
+   scanf("%d",&Nmax);printf("Nmax=%d",Nmax);
 
    /*                                      |
    |  Parse Simulation Key Word Arguments  |
@@ -59,7 +63,7 @@ int main(int argc, char* argv[])
    scanf("%lg",&no_att);
    int no_attraction=(int)no_att;printf("no_attraction=%d\n",no_attraction);
 
-   int Nmax=700; int Nmin=50;//11;
+   // int Nmax=700; int Nmin=50;//11;
    int i,j,k,q,s;
    double x[Nmax];double y[Nmax];
    double X[Nmax];double Y[Nmax];
