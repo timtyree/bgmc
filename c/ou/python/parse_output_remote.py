@@ -136,15 +136,29 @@ def parse_output_log(input_fn,include_inputs=True, printing=False):
     return df
 
 if __name__=='__main__':
+    
     # input_folder=f"../data"
     # os.chdir(input_folder)
-    input_fn='example-output.txt'
+    input_fn='../Log/example-output.txt'
     assert (os.path.exists(input_fn))
-
-
-    df=parse_output_log(input_fn, include_inputs=False, printing=True)
+    n_input,n_output=parse_iolines(input_fn, printing=False)
+    df=parse_outputs(input_fn, n_output)
+    df.set_index('N',inplace=True,drop=True)
+    # df=parse_output_log(input_fn, include_inputs=False, printing=True)
     # print(f"is this a pandas.Dataframe? {type(df)}") Yes
     print(df.head())
+
+    #TODO: argument parse for seed   
+    seed  =1234
+    sum_fn="Log/"+seed+".csv"
+
+    #save initial sum/summary
+    count=0
+    if count==0:
+        df.to_csv(sum_fn)
+
+    print(df.head())
+
     # # Test compute_runtime_for_folder
     # nb_dir='/home/timothytyree/Documents/GitHub/bgmc/python/'
     # data_dir=f"{nb_dir}/data/osg_output/Log"
