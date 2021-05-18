@@ -40,10 +40,11 @@ if __name__=='__main__':
       'V_v'      : 0.04
       }
 
-  #define an dummy example scalar field of initial conditions
+  #define a dummy example scalar field of initial conditions
   width = 200; height = 200;
   Vin  = np.array([256*x*(y+1) for x in range(width) for y in range(height)]).reshape((width,height))
   field = Vin.copy()
+  #record a couple attributes of ^that dummy
   height,width = field.shape
   kwargs.update({'width':width,'height':height})
   print(kwargs)

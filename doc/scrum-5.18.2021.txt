@@ -1,0 +1,11 @@
+TODO: write out (then dev function) that scales domain size to the unit square
+TODO: verify results unchanged when scaling down to L=1.
+D_new = D/L**2 = 0.02 Hz
+L_new = L/L  # = 1
+r_new = r/L = .1cm/10cm  = 0.01-0.1
+x0_new= x0/L = 1cm/10cm = 0.01-0.1
+beta_new = beta/L = etc.
+TODO: make L=1 rescaling functional in python and call it at the print statement nested in gen_run_9.py
+
+How must dt be adjusted? 
+Let's just stay in units of 
