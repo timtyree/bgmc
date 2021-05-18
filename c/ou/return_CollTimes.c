@@ -1,6 +1,8 @@
 /* Program that returns collision times using a Monte Carlo method */
 // the variable number of diffusing particles is handled by
 
+//TODO: test that all variables are being properly initialized
+
 //TODO: implement simplest explicit nearest neighbor spring force in the Langevin Equation in the inviscid limit (solved by a Generalized Onstein-Uhlenbeck Process)
 //TODO: implement no_attraction and no_repulsion
 //TODO(later): consider whether I might see any new behaviour returned/effect on collision times, if I
