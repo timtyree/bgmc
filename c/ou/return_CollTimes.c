@@ -36,14 +36,14 @@ int main(int argc, char* argv[])
    scanf("%lg",&Dt);printf("Dt=%g",Dt);
    printf("\nEnter the timescale of random reaction: ");
    scanf("%lg",&dt);printf("dt=%g",dt);
-   printf("\nEnter the minimum number of tips to observe:");int Nmin;
-   scanf("%d",&Nmin);printf("Nmin=%d",Nmin);
-   printf("\nEnter the minimum number of tips to observe:");int Nmax;
-   scanf("%d",&Nmax);printf("Nmax=%d",Nmax);
 
    /*                                      |
    |  Parse Simulation Key Word Arguments  |
    |                                      */
+   printf("\nEnter the minimum number of tips to observe:");int Nmin;
+   scanf("%d",&Nmin);printf("Nmin=%d",Nmin);
+   printf("\nEnter the minimum number of tips to observe:");int Nmax;
+   scanf("%d",&Nmax);printf("Nmax=%d",Nmax);
    printf("\nEnter the number of trials: ");
    scanf("%lg",&nite);
    int niter=(int)nite;printf("niter=%d\n",niter);
@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
    int i_neighbor[Nmax];
    double impulse_prefactor=-1.*varkappa*Dt;
    double impulse_factor;
-
+   int exit_code=1;
    /*                              |
    |  N Iterations of Monte Carlo  |
    |                              */
@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
           y[1]=-1.*y[1];
     }}}
     // copy x,y to X_new,Y_new, initialize net_T to zero
-    for (j = 0; j < niter; j++){
+    for (j = 0; j < Nmax; j++){
       X_new[j]=x[j];
       Y_new[j]=y[j];
     net_T=0.;
@@ -298,6 +298,7 @@ int main(int argc, char* argv[])
       //shut simulation down if it's taking too long...
       if (t>tmax){
         any_running=false;
+        exit_code=-99;
       }
     }
     //record trial
@@ -327,6 +328,7 @@ int main(int argc, char* argv[])
   printf("set_second=%d\n",set_second);
   printf("no_repulsion=%d\n",no_repulsion);
   printf("no_attraction=%d\n",no_attraction);
+  printf("exit_code=%d\n",exit_code);
   /*                              |
   |  Record Mean Collision Times  |
   |                              */
