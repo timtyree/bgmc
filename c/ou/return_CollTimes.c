@@ -340,7 +340,7 @@ int main(int argc, char* argv[])
     printf ("%d,",i+1);
   }
   printf ("\n");
-  /* TODO: compute mean*/
+  /* compute mean*/
   for(i = 0; i < Nmax;i++){
     net_T=T_net[i];
     T_value=net_T/count_net[i];

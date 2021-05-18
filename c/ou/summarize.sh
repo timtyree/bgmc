@@ -1,4 +1,7 @@
 #!/bin/bash
+# module load py-numpy
+# module load py-pandas
+
 sum=0
 count=0
 # TODO: parse input passed to x_run.sh
