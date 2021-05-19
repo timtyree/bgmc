@@ -1,4 +1,4 @@
-Sun May 16 16:44:11 PDT 2021
+sSun May 16 16:44:11 PDT 2021
 Enter the reaction range (cm): r=0.01
 Enter the diffusion coefficient (cm^2/s): D=0.02
 Enter the domain width/height (cm): L=1
