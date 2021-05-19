@@ -93,6 +93,7 @@ int main(int argc, char* argv[])
    int iter_per_movestep = round(Dt/dt);
    int i_neighbor[Nmax];
    double impulse_prefactor=-1.*varkappa*Dt;
+   // double impulse_prefactor=-1.*varkappa*Dt;
    double impulse_factor;
    int exit_code=1;
    /*                              |
@@ -209,10 +210,10 @@ int main(int argc, char* argv[])
             //compute displacement due to drift
             impulse_factor=impulse_prefactor*(dist-x0)/dist;
             // set impulse_factor to zero if it is explicitly forbidden by the user input
-            if (no_attraction && (impulse_factor>0)){
+            if ((no_attraction==1) && (impulse_factor>0)){
               impulse_factor=0.;
             }
-            if (no_repulsion && (impulse_factor<0)){
+            if ((no_repulsion==1) && (impulse_factor<0)){
               impulse_factor=0.;
             }
 
