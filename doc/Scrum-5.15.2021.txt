@@ -1,1 +1,25 @@
 TODO: measure the runtimes of return_CollTimes.x...  Is it fitting in the L1 cache again?
+
+TODO: engineer a run that can use a time resolution of Dt,dt=1e-6 seconds for a trial of niter=1500 
+
+**lowering Dt,dt equally for one trial**
+runtime for one trial at 1e-4: ~1  min
+runtime for one trial at 1e-5: ~12 min
+runtime for one trial at 1e-6: ~2  hrs
+
+**lowering Dt=1e-4, dt=1e-6**
+runtime for one trial: ??
+
+############
+# Run Design
+############
+#Suppose 
+Dt=1e-5
+dt=1e-5
+#Then,
+n_jobs_per_trial=30
+#Then suppose 
+niter=50
+#^this makes me expect 10 hours per job.
+
+#a 1 cpu test for 8 hours could do niter=40...

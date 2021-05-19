@@ -13,8 +13,8 @@ Process=$12
 let niter_batchsize=10
 let Process_batch=Process
 numberof_batches=$niter/$niter_batchsize
-SUM_FN=Log/sum.csv
-OUT_FN=Log/out.txt
+SUM_FN='Log/sum.csv'
+OUT_FN='Log/out.txt'
 # echo $SUM_FN
 # echo $OUT_FN
 # Nmin=11
@@ -24,7 +24,8 @@ OUT_FN=Log/out.txt
 let niter_net=0
 while (($niter_net<$niter))
 do
-  Process_batch=($Process_batch * $Process_batch)
+  Process_batch=$((Process_batch*Process_batch))
+  # Process_batch=($Process_batch * $Process_batch)
   echo $niter_batchsize
   echo $Process_batch
   ./xrun.sh $(1) $(2) $(3) $(4) $(5) $(6) $(7) $(8) $(9) $(10) $niter_batchsize $Process_batch $(13) $(14) $(15) $(16) > $OUT_FN

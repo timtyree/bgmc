@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
    |                              */
   printf("\nrunning simulation...\n");
   /* for each trial... */
-  for (q = 0; q < niter; q++){
+  for (q = 0; q < niter; q++) {
     t=0.;
     Time=0.;
     any_running=true;
@@ -303,7 +303,7 @@ int main(int argc, char* argv[])
         exit_code=-99;
       }
     }
-    //record trial
+    //record this trial
     for (j = 0; j<Nmax; j++){
       // T_lst[q][j]=T[j];
       T_value=T[j];
