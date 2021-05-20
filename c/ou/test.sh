@@ -1,7 +1,7 @@
-FN='test-6.input'
+FN='test-1.input'
 clear
 date
-gcc return_CollTimes.c -o return_CollTimes.x -lm
+gcc return_CollTime.c -o return_CollTime.x -lm
 echo $FN
-./return_CollTimes.x < $FN
+./return_CollTime.x < $FN
 date

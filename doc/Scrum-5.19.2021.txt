@@ -1,0 +1,1 @@
+TODO: run with Nmax=50, and no attraction/repulsion

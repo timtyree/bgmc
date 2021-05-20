@@ -1,10 +1,8 @@
 /* Program that returns collision times using a Monte Carlo method */
 // the variable number of diffusing particles is handled by
 
-//Scrum 5.19.2021: implementing particle-particle model to return_CollTime.c
-
-//Ye Olde Scrum
 //TODO: test that all variables are being properly initialized
+
 //TODO: implement simplest explicit nearest neighbor spring force in the Langevin Equation in the inviscid limit (solved by a Generalized Onstein-Uhlenbeck Process)
 //TODO: implement no_attraction and no_repulsion
 //TODO(later): consider whether I might see any new behaviour returned/effect on collision times, if I
@@ -193,7 +191,7 @@ int main(int argc, char* argv[])
                 i_neighbor[j]=i;
           }}}}}
       // one_step_ou_kernel at long timescale, Dt
-      for (j = 0; j < Nmax; j++ ) {
+      for (j = i+1; j < Nmax; j++ ) {
         if(still_running[j]){
             // boundary conditions are already enforced
             ineigh=i_neighbor[j];// extract x,y_old of other tip
