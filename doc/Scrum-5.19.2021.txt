@@ -1,1 +1,9 @@
-TODO: run with Nmax=50, and no attraction/repulsion
+DONE: run with Nmax=50, and no attraction/repulsion
+DONE: get a simulation that returns a reasonably slow Tavg (HINT: try N=6)
+DONE: get observable effect of forces to appear Tavg for one N
+
+TODO: make a quick test suite that shows/verifies the general effect of (i) only attractive forces, (ii) only repulsive forces with comparison to (iii) no forces!
+
+TODO: integrate method with current pipeline
+
+TODO: show effect of forces on exponent

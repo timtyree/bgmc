@@ -87,18 +87,16 @@ int main(int argc, char* argv[])
   bool still_running; bool all_valid;
   double stepscale=sqrt(2*D*Dt);
   double probreact=kap*dt; //double sig;
-  // double dist_old[Nmax][Nmax];
-  double min_dist_old[Nmax];int count_net;
+  double min_dist_old[Nmax];
   double dist; bool in_range; bool reacts;int ineigh;
-  double T_net;
-  // double T_lst[niter][Nmax];
-  double net_T; double T_value; double Rad; double Theta;
+  double T_net=0.;int count_net=0;
+  double T_value; double Rad; double Theta;
   srand(seed); // randomize seed.
   double tmax=500.; // UNCOMMENT_HERE
   // double tmax=.1; // COMMENT_HERE
   int iter_per_movestep = round(Dt/dt);
   int i_neighbor[Nmax];
-  double impulse_prefactor=-1. * varkappa * Dt;
+  double impulse_prefactor= varkappa * Dt;
   // double impulse_prefactor=-1.*varkappa*Dt;
   double impulse_factor;
   int exit_code;
@@ -108,7 +106,6 @@ int main(int argc, char* argv[])
   printf("\nrunning simulation...\n");
   /* for each trial... */
   for (q = 0; q < niter; q++) {
-    // printf("HERETIM");
     t=0.;
     Time=0.;
     still_running=true;
@@ -145,21 +142,20 @@ int main(int argc, char* argv[])
         }
       }
     }//end set_second kernel
-
-    // copy x,y to X_new,Y_new, initialize net_T to zero
+    // copy x,y to X_new,Y_new
     for (j = 0; j < Nmax; j++){
       X_new[j]=x[j];
       Y_new[j]=y[j];
-      net_T=0.;
     }
     /*                                   |
     |   run simulation for given trial   |
     |                                   */
     while(still_running){
       //reinitialize_kernel, which copies X,Y_new to X,Y_old
-      for (i = 0; i < Nmax-1; i++ ){
+      for (i = 0; i < Nmax; i++ ){
         //reinitialize minimum distance value
-        min_dist_old[j]=2*L;
+        min_dist_old[i]=9999999;
+        i_neighbor[i]=-1;
         // copy old coordinate values to new
         X_old[i]=X_new[i];
         Y_old[i]=Y_new[i];
@@ -174,38 +170,41 @@ int main(int argc, char* argv[])
           y_old[i]=reflection(Y_old[i],L);
         }
       }
-      t=Time;
+      t=Time-dt;//for an insignificant edge case
       Time=Time+Dt;
-      // kernel_map_Phi from X,Y_old to x,y_old and compute the nearest neighbor
+      // kernel_compute_nearest_neighbor
       for (i = 0; i < Nmax-1; i++ ) {
           // each i,j pair is reached once per call to kernel_measure
           for (j = i+1; j < Nmax; j++ ) {
-              // compute distance between particles that are still running
-              if (reflect==0){
-                dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
-              }else{
-                dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
-              }
-              // // update the symmetric distance matrix
-              // dist_old[i][j]=dist;
-              // dist_old[j][i]=dist;
-              // update nearest neighbor distance and i_neighbor
-              if (dist<min_dist_old[i]){
-                min_dist_old[i]=dist;
-                i_neighbor[i]=j;
-                //this choice implies symplectic deterministic forces
-                min_dist_old[j]=dist;
-                i_neighbor[j]=i;
-              }
+            // compute distance between particles that are still running
+            if (reflect==0){
+              dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
+            }else{
+              dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
+            }
+            // // update the symmetric distance matrix
+            // dist_old[i][j]=dist;
+            // dist_old[j][i]=dist;
+
+            // update nearest neighbor distance and i_neighbor
+            if (dist<min_dist_old[i]){
+              min_dist_old[i]=dist;
+              i_neighbor[i]=j;
+            }
+            if (dist<min_dist_old[j]){
+              //this choice implies symplectic deterministic forces
+              min_dist_old[j]=dist;
+              i_neighbor[j]=i;
+            }
           }
         }
-      }
       // one_step_ou_kernel at long timescale, Dt
       for (j = 0; j < Nmax; j++ ) {
-        if(still_running){
+            // // Spring forces between nearest neighbors
             // boundary conditions are already enforced
             ineigh=i_neighbor[j];// extract x,y_old of other tip
-            // compute displacement due to spring force with nearest neighbor
+
+            // // compute displacement due to spring force with nearest neighbor
             if (reflect==0){
               dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
               dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
@@ -233,44 +232,18 @@ int main(int argc, char* argv[])
             dxW=stepscale*normalRandom();
             dyW=stepscale*normalRandom();
             // next spatial position, time integrating by a duration, Dt.
-            X_new[j]=X_old[j]+dxt+dxW;
-            Y_new[j]=Y_old[j]+dyt+dyW;
-            //TODO: impose boundary conditions
-            x[1]=x[0]+Rad*cos(Theta);
-            y[1]=y[0]+Rad*sin(Theta);
+            X_new[j]=X_old[j]+dxW+dxt;
+            Y_new[j]=Y_old[j]+dyW+dyt;
             if (reflect==0){
-              x[1]=pbc(x[1],L);
-              y[1]=pbc(y[1],L);
+              //enforce PBC
+              x_new[j]=periodic(X_new[j],L);
+              y_new[j]=periodic(Y_new[j],L);
             }else{
-              //enforce RBC for x coordinate
-              if (x[1]>L){
-                x[1]=2.*L-x[1];
-              }else if (x[1]<0){
-                x[1]=-1.*x[1];
-              }
-              //enforce RBC for y coordinate
-              if (y[1]>L){
-                y[1]=2.*L-y[1];
-              }else if(y[1]<0){
-                y[1]=-1.*y[1];
-            }}
-            // if (reflect==0){
-            //   //TODO: change periodic to pbc, reflection to rbc, where possible
-            //   //TODO: run with Nmax=50
-            //   //enforce PBC
-            //   x_new[j]=periodic(X_new[j],L);
-            //   y_new[j]=periodic(Y_new[j],L);
-            // }else{
-            //   //enforce RBC
-            //   x_new[j]=reflection(X_new[j],L);
-            //   y_new[j]=reflection(Y_new[j],L);
-            // }
-        }}
-        // printf("HERETIM");
-      //TODO(later): simplify to one xy coordinate system instead of keeping track of x and X separately...
-      // t=t-dt;//for an insignificant edge case
-
-
+              //enforce RBC
+              x_new[j]=reflection(X_new[j],L);
+              y_new[j]=reflection(Y_new[j],L);
+            }
+          }
       // collision_kernel at short timescale, dt
       for (s=0; s<iter_per_movestep; s++){
         // compute local time
@@ -293,7 +266,8 @@ int main(int argc, char* argv[])
               x[i]=reflection(X[i],L);
               y[i]=reflection(Y[i],L);
             }
-      }}
+          }
+        }
         // reaction_kernel
         for (i = 0; i < Nmax-1; i++ ) {
           if(still_running){
@@ -324,12 +298,13 @@ int main(int argc, char* argv[])
             }
           }
         }
-      }
+      }//end collision kernel
     //shut simulation down if it's taking too long...
     if (t>tmax){
         still_running=false;
         exit_code=-99;
       }
+    }//end while running
     //record this trial
     if (exit_code>0){
       T_net=T_net+T;
@@ -370,7 +345,6 @@ int main(int argc, char* argv[])
   // printf ("\n");
   /* print sum and count*/
   // for(i = 0; i < Nmax;i++){
-    // net_T=T_net;
     // if all are still valid, print mean T
     // all_valid=T_value>0.;
     // if(all_valid){
