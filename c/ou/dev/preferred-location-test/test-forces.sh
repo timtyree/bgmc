@@ -1,6 +1,6 @@
 clear
 date
-echo "/* Testing Effect of Strong/Weak Forces with (un)preferred distance, x0=0. */\n"
+echo "/* Testing Effect of Attractive/Repulsive Force On Mean Collision Time */\n"
 echo "Printing the mean time to first reaction (seconds) before/after turning on a large attractive force..."
 FN='4-control.input'
 ./../../return_CollTime.x < $FN | grep "Tavg"
