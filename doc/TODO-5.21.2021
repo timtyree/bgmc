@@ -1,0 +1,6 @@
+TODO(prereq): dev add-results.pl. keep it simple, stupid!
+TODO: dev return_CollTimes.sh using return_CollTime.c
+DONE: run preferred-location-test.sh
+./test-preferred-location.sh > output-pl-varkappa_1.5.txt
+./test-preferred-location.sh > output-pl-varkappa_0.2.txt
+TODO: analyze output-pl

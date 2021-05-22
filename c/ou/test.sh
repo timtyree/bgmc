@@ -1,4 +1,4 @@
-FN='test-1.input'
+FN='1-test.input'
 clear
 date
 gcc return_CollTime.c -o return_CollTime.x -lm

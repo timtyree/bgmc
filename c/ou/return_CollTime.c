@@ -323,22 +323,24 @@ int main(int argc, char* argv[])
   printf("x0=%g\n",x0);
   printf("dt=%g\n",dt);
   printf("Dt=%g\n",Dt);
-  printf("niter=%d\n",niter);
+  // printf("niter=%d\n",niter);
   // printf("seed=%d\n",seed);
   printf("reflect=%d\n",reflect);
   printf("set_second=%d\n",set_second);
   printf("no_repulsion=%d\n",no_repulsion);
   printf("no_attraction=%d\n",no_attraction);
-  printf("exit_code=%d\n",exit_code);
-  printf("Tsum=%g\n",T_net);
-  printf("Tcount=%d\n",count_net);
-  // T_value=T_net/count_net;
-  printf("Tavg=%g\n",T_net/count_net);
+
   /*                              |
   |  Record Mean Collision Times  |
   |                              */
   // print mean output of T_lst to stdout
-  // printf("\nPrinting Outputs...\n");
+  printf("\nPrinting Outputs...\n");
+  printf("exit_code=%d\n",exit_code);
+  printf("ntips=%d\n",Nmax);
+  printf("Tcount=%d\n",count_net);
+  printf("Tsum=%g\n",T_net);
+  printf("Tavg=%g\n",T_net/count_net);
+  // T_value=T_net/count_net;
   // for(i = 0; i < Nmax;i++){
   //   printf ("%d,",i+1);
   // }

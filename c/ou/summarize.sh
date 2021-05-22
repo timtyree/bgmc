@@ -37,7 +37,7 @@ do
   # TODO: add ^this output line to the sum, which is listed in the only line of sum.out
   # TODO: redirect ^that output in a meaningful way
   # TODO(goal): if exit_code_lineno gives exit_code that is not -99, then record the trial!
-  # cd python
+  # cd python 
   # TODO: integrate ^that with the following:
   python3 python/parse_output_remote.py $OUT_FN $SUM_FN
   niter_net=$niter_net+$niter_batchsize

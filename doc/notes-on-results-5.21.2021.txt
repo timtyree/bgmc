@@ -1,0 +1,15 @@
+Results:
+
+- there is not much of an effect at higher densities, N=16.
+- there is more of an effect at smaller densities, N=8.
+- it is easier to see the small density effects with larger varkappa
+- changing x0 relative to reaction range has a large effect at low densities.
+- perhaps a good idea is to fit high densities using the simple model for the noninteracting
+- how is the scaling effected at low densities?
+- I SHOULD use large varkappa<=-1.5
+- THEN I expect increasing x0 from 0 to 1 cm (for r = 0.1 cm) SHOULD result in increasing CollRate
+- The increase in CollRate should be more at lower densities
+  - THEREFORE, I expect some x0 to reproduce the exponent of ~1.5 of the LR model
+
+DONT: use [0.5,1,2] multiples of varkappa consistent with the fluctuation-dissipation theorem
+TODO: fine grid search by brute force, varying new parameters, x0 and varkappa
