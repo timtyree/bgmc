@@ -26,6 +26,6 @@ do
     echo "$1" >> params.input
     shift
 done
-# gcc return_CollTimes.c -o return_CollTimes.x -lm
-./return_CollTimes.x < params.input
+# gcc return_CollTime.c -o return_CollTime.x -lm
+./return_CollTime.x < params.input
 date

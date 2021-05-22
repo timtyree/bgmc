@@ -1,3 +1,11 @@
+TODO(grep): dev regular expression that is preceded by 'Tavg=' and selects any signed double that follows
+HINT: google the "lookahead" operator, =>
+TODO: get return_CollTimes.sh running
+TODO: get return_CollTimes.sh working
+TODO: design next run 9
+TODO: make pipeline work with next run 9
+
+
 TODO(prereq): dev add-results.pl. keep it simple, stupid!
 TODO: dev return_CollTimes.sh using return_CollTime.c
 DONE: run preferred-location-test.sh
