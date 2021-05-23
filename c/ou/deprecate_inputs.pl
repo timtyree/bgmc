@@ -6,6 +6,7 @@ foreach $i (0..$#input) {
     print "$val\n";
   }
   else{
+    # print "$input[$i]";
     print "" . $input[$i];
   }
 

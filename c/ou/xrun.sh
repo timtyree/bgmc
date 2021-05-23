@@ -23,7 +23,8 @@ touch params.input
 
 while (( $# > 0 ))    # or [ $# -gt 0 ]
 do
-    echo "$1" >> params.input
+  echo "$1" >> params.input
+    # printf "%\n" $1 >> params.input
     shift
 done
 # gcc return_CollTime.c -o return_CollTime.x -lm
