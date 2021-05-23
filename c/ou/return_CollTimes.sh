@@ -1,11 +1,20 @@
 #!/bin/bash
 # module load py-numpy
 # module load py-pandas
-clear
-date
+# clear
+# date
 FN_IN='params.input'
 TMP_IN='tmp.input'
-perl deprecate_inputs.pl < 1-control.input > $TMP_IN
+perl deprecate_inputs.pl < $1 > $TMP_IN
+
+
+#TODO(simpler): just pick Nmax and hold it fixed...
+#TODO(?): parse input passed to x_run.sh
+Nmin=6
+Nmax=80
+echo "Nmin is $Nmin and Nmax is $Nmax"
+
+# perl deprecate_inputs.pl < 1-control.input > $TMP_IN
 #TODO: shift outputs to be on the same line and comma separated
 #TODO: dev run.sh, which takes 1 line of arguments, saves them to params.input
 #TODO: print results of original params.input up until 'Printing Outputs...'
@@ -14,10 +23,7 @@ perl deprecate_inputs.pl < 1-control.input > $TMP_IN
 #TODO: print N_values on one csv line
 #TODO: print Tavg_values on one csv line
 
-# parse input passed to x_run.sh
-Nmin=6
-Nmax=80
-echo "Nmin=$Nmin, Nmax=$Nmax"
+
 # niter=$10
 # Process=$11
 # $(r) $(D) $(L) $(kappa) $(Dt) $(ntips) $(Process) $(reflect) $(set_second)
@@ -65,11 +71,10 @@ do
   cp $FN_IN $TMP_IN
   export Tavg=$(./return_CollTime.x < $FN_IN | grep 'Tavg=' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?')
   printf "%s," $Tavg
-  # printf "%s,"
   # shift
 done
 printf "\n"
-date
+# date
 
   #TODO: modify the nth entry of an array in perl
   #TODO: echo parameters to FN_IN in the N field

@@ -6,7 +6,7 @@ Enter the spring rate (Hz): varkappa=0
 Enter the preferred distance (cm): x0=0
 Enter the timescale of random motion: Dt=1e-05
 Enter the timescale of random reaction: dt=1e-05
-Enter the number of tips to observe:N=75
+Enter the number of tips to observe:N=16
 Enter the number of trials: niter=100
 Enter the randomization seed: seed=1234
 Use reflecting boundary conditions? (Enter 1/0): reflect=0
@@ -33,8 +33,8 @@ no_attraction=0
 
 Printing Outputs...
 exit_code=1
-ntips=75
+ntips=16
 Tcount=100
-Tsum=0.06675
-Tavg=0.0006675
+Tsum=2.52695
+Tavg=0.0252695
 

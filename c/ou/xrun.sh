@@ -27,5 +27,5 @@ do
     shift
 done
 # gcc return_CollTime.c -o return_CollTime.x -lm
-./return_CollTime.x < params.input
+./return_CollTimes.sh < params.input
 date
