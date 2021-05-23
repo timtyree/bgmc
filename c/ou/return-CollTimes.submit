@@ -4,7 +4,7 @@ Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_
 executable = xrun.sh
 arguments = $(r) $(D) $(L) $(kappa) $(varkappa) $(x0) $(Dt) $(dt) $(Nmax) $(niter) $(Process) $(reflect) $(set_second) $(no_repulsion) $(no_attraction)
 
-transfer_input_files = return_CollTimes.sh deprecate_inputs.pl return_CollTime.x prepare_CollTimes.pl
+transfer_input_files = return_CollTimes.sh,deprecate_inputs.pl,return_CollTime.x,prepare-CollTimes.pl
 
 output = Log/job.out.$(Cluster).$(Process)
 error = Log/job.error.$(Cluster).$(Process)
