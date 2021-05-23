@@ -3,10 +3,9 @@
 # module load py-pandas
 # clear
 # date
-FN_IN='params.input'
+FN_IN=$1
 TMP_IN='tmp.input'
-perl deprecate_inputs.pl < $1 > $TMP_IN
-
+perl deprecate_inputs.pl < $FN_IN > $TMP_IN
 
 #TODO(simpler): just pick Nmax and hold it fixed...
 #TODO(?): parse input passed to x_run.sh
@@ -28,7 +27,6 @@ echo "Nmin is $Nmin and Nmax is $Nmax"
 # Process=$11
 # $(r) $(D) $(L) $(kappa) $(Dt) $(ntips) $(Process) $(reflect) $(set_second)
 # $(1) $(2) $(3) $(4) $(5) $(ntips_batchsize) $(Process_batch) $(8) $(9)
-
 
 OUT_FN='out.txt'
 ./return_CollTime.x < $FN_IN > $OUT_FN
@@ -71,6 +69,7 @@ do
   cp $FN_IN $TMP_IN
   export Tavg=$(./return_CollTime.x < $FN_IN | grep 'Tavg=' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?')
   printf "%f," $Tavg
+  # printf "$Tavg"
   # shift
 done
 printf "\n"
