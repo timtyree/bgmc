@@ -1,7 +1,7 @@
 #!/bin/bash
 # logdown.py
 ssh TimtheTyrant@login05.osgconnect.net '
-cd bgmc/c/gev;
+cd bgmc/c/ou;
 rm Log.tar.gz;
 ./post_process.sh
 '
@@ -9,7 +9,7 @@ cd ../data
 cd osg_output
 rm Log.tar.gz;
 rm -r Log
-scp TimtheTyrant@login05.osgconnect.net:bgmc/c/gev/Log.tar.gz Log.tar.gz
+scp TimtheTyrant@login05.osgconnect.net:bgmc/c/ou/Log.tar.gz Log.tar.gz
 mkdir Log
 tar -xzf Log.tar.gz  -o Log
 
