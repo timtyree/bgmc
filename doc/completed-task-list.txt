@@ -1,0 +1,8 @@
+DONE(later, on iPad): simplest model for unitary connections between phases explaining some parameter for varkappa conditioned on a characteristic interaction lengthscale/preferred length, x0.
+DONE: implement only attractive boolean nullifiers
+DONE: plot local results for
+- (i) varkappa<0 and x0=0
+- (ii) varkappa>0 and x0=0
+- (iii) varkappa>0 and x0>0
+- (iii) varkappa<0 and x0>0
+- (iv, maybe?) only attracting and/or only repulsing
