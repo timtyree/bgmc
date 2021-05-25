@@ -311,7 +311,8 @@ int main(int argc, char* argv[])
     for (j = 0; j<Nmax; j++){
       // T_lst[q][j]=T[j];
       T_value=T[j];
-      if (T_value!=-9999.){
+      // if (T_value!=-9999.){
+      if (T_value>0.){
         T_net[j]=T_net[j]+T_value;
         count_net[j]=count_net[j]+1;
     }}
