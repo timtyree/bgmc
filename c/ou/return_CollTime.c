@@ -307,8 +307,10 @@ int main(int argc, char* argv[])
     }//end while running
     //record this trial
     if (exit_code>0){
-      T_net=T_net+T;
-      count_net=count_net+1;
+      if (T>0){
+        T_net=T_net+T;
+        count_net=count_net+1;
+      }
     }
   }//end for each trial
   printf("simulation complete!\n");
