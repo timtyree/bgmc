@@ -1,11 +1,11 @@
 import numpy as np
 niter=1500 #trials per worker
-r_values=np.array([0.1,0.2])#,0.2,0.3,0.4,0.5,.6,.7,.8,.9,1.,2.])#cm
+r_values=np.array([0.1,0.2,0.3,0.4])#,0.2,0.3,0.4,0.5,.6,.7,.8,.9,1.,2.])#cm
 D_values=np.array([2.,20.])#0.2,1.0,1.5,2.0,3.,4.,5.])#cm^2/s
 # A_values=np.array([25.])#20.25,25,39,50,56.25,100,156.25,189,250])[::-1]#cm^2
 # L_values=np.sqrt(A_values)#cm
 L_values=[10]
-kappa_values=np.array([500,1500])#5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,250,500])#1/s
+kappa_values=np.array([100,500,1500])#5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,250,500])#1/s
 varkappa_values=np.array([-20.,-10.,-5,0,5,10,20])#1/s
 x0_values=np.array([0.,0.5,1.0,1.5,2.0,3.0,4.0,5.0])#cm
 Dt_values=np.array([1e-5])#,1e-2])#10**-i for i in range(6)])
@@ -14,7 +14,7 @@ Nmax=100
 num_trials_per_setting=1
 reflect_values=np.array([0])
 set_second_values=np.array([0])
-no_repulsion_values=np.array([0,1])
+no_repulsion_values=np.array([1])#1 means no repulsion is true
 no_attraction_values=np.array([0,1])
 #iterate over settings, scheduling the longest jobs first
 count=0
