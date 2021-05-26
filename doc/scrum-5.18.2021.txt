@@ -1,3 +1,14 @@
+TODO(DONE?): dev two-step spiral tip detection method
+(i) 2ms lag to determine presence of spiral tips
+(ii) instantaneous method to determine location of spiral tips
+TODO: show whether new spiral tips move apart at birth at fine timescale dt=0.001 ms
+
+
+TODO: use piecewise constant interpolation of the data to compute the apparent reaction rate
+TODO: use piecewise constant interpolation of the data to compute the apparent force
+
+
+
 TODO: write out (then dev function) that scales domain size to the unit square
 TODO: verify results unchanged when scaling down to L=1.
 D_new = D/L**2 = 0.02 Hz

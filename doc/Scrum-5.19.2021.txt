@@ -3,10 +3,10 @@ DONE: get a simulation that returns a reasonably slow Tavg (HINT: try N=6)
 DONE: get observable effect of forces to appear Tavg for one N
 DONE: make a quick test suite that shows/verifies the general effect of (i) only attractive forces, (ii) only repulsive forces with comparison to (iii) no forces!
 
-TODO: use ^that to determine the qualitative effect of x_0>0 for attractive/repulsive only forces AND for positive/negative potential energy barrier.
+DONE: use ^that to determine the qualitative effect of x_0>0 for attractive/repulsive only forces AND for positive/negative potential energy barrier.
 
-TODO: test runtimes at (i) weak forces and (ii) at strong forces
+DONE: test runtimes at (i) weak forces and (ii) at strong forces
 
-TODO: integrate method with current pipeline
+DONE: integrate method with current pipeline
 
-TODO: show effect of forces on exponent
+DONE: show effect of forces on exponent

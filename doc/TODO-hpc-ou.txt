@@ -1,4 +1,4 @@
-TODO: consider niter = 10 for ~1 second runtimes of ./return_CollTimes
-TODO: support ^this by reducing with Pegasus (or ht condor?)
+DONE: consider niter = 10 for ~1 second runtimes of ./return_CollTimes
+DONT: support ^this by reducing with Pegasus (or ht condor?)
 
-TODO: run ./return_CollTimes.x with niter=250 and really fast running other parameters
+DONE: run ./return_CollTimes.x with niter=250 and really fast running other parameters
