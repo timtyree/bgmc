@@ -1,5 +1,0 @@
-DONE: make a pdf showing the null results of c/ou
-TODO: gen/test/run run_10
-
-*TODO: see iPad for the most urgent task for the next step.
-*TODO: implement finite-viscosity particle motion in c/inviscid
