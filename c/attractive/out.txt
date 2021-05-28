@@ -1,0 +1,40 @@
+Enter the reaction range (cm): r=0.1
+Enter the diffusion coefficient (cm^2/s): D=2
+Enter the domain width/height (cm): L=5
+Enter the reaction rate (Hz): kappa=500
+Enter the spring rate (Hz): varkappa=-1.5
+Enter the preferred distance (cm): x0=0.3
+Enter the timescale of random motion: Dt=1e-05
+Enter the timescale of random reaction: dt=1e-05
+Enter the number of tips to observe:N=100
+Enter the number of trials: niter=100
+Enter the randomization seed: seed=1234
+Use reflecting boundary conditions? (Enter 1/0): reflect=0
+Set second particle within reaction range of first? (Enter 1/0): set_second=0
+Do not allow repulsive forces? (Enter 1/0): no_repulsion=0
+Do not allow attractive forces? (Enter 1/0): no_attraction=0
+
+running simulation...
+simulation complete!
+
+Printing Inputs...
+r=0.1
+D=2
+L=5
+kappa=500
+varkappa=-1.5
+x0=0.3
+dt=1e-05
+Dt=1e-05
+reflect=0
+set_second=0
+no_repulsion=0
+no_attraction=0
+
+Printing Outputs...
+exit_code=1
+ntips=100
+Tcount=100
+Tsum=0.03342
+Tavg=0.0003342
+
