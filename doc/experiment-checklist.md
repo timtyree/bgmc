@@ -12,10 +12,16 @@
 1. (if not already downloaded, download any preexisting data and process/store it.
 
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
-1. rm whole repository folder on the open science grid.
-1. git clone fresh repo on the open science grid.
+1. rm -r ~/bgmc #remove the whole repository folder on the open science grid.  
+TODO(later): can I make the 'y' input automatic?
+1. git clone fresh repo on the open science grid. 
+HINT: 
+git clone http://github.com/timtyree/bgmc.git
 
 ### Job Submission
 1. cd current simulation folder
-1. submit the unit test cloud
+cd ~/bgmc/c/ou
+1. ./gcc.sh; 
+submit the unit test cloud
+condor_submit return_CollTimes-test.submit
 1. if the entire unit test cloud is reasonably fast and returns reasonable results, submit the main cloud...
