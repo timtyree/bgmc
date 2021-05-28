@@ -3,7 +3,7 @@
 ### Designing a data run (TODO: implement perl methods and append to gen_run_next.sh)
 1. design run_next.py from the previous run_prev.py
 1. use ./gen_run_next.sh to generate run_next.dat
-1. (implement in perl, append to gen_run_next.sh) grab the final 1-4 lines of run_next.dat and put them in run_test.dat
+1. (implemented into ^that) grab the final 1-4 lines of run_next.dat and put them in run_test.dat
 1. (implement in perl, append to gen_run_next.sh) update non-test submit file to take run_next.dat
 1. manually make run_test.dat fast (perhaps set niter to small)
 1. update github repo
