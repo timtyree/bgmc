@@ -69,8 +69,16 @@ int main(int argc, char* argv[])
   printf("Do not allow attractive forces? (Enter 1/0): ");
   scanf("%lg",&no_att);
   int no_attraction=(int)no_att;printf("no_attraction=%d\n",no_attraction);
-
+  printf("Only allow nearest neighbor forces? (Enter 1/0): ");
+  int neighbor=int;scanf("%d",&neighbor);printf("neighbor=%d\n",neighbor);
+  // double neigh; scanf("%lg",&neigh);
+  // int neighbor=(int)neigh;printf("neighbor=%d\n",neighbor);
   // int Nmax=700; int Nmin=50;//11;
+
+  //TODO: generalize to a set of forces of interest
+  //TODO: clean up unnecessary input variables by using
+  //TODO: printf( all input parameters such that I can redirect ^this to a text file )
+
   int i,j,k,q,s;
   int Nmax=N;
   double x[Nmax];double y[Nmax];
@@ -79,6 +87,7 @@ int main(int argc, char* argv[])
   double X_new[Nmax];double Y_new[Nmax];
   double x_old[Nmax];double y_old[Nmax];
   double x_new[Nmax];double y_new[Nmax];
+  double Fx_net[Nmax];double Fy_net[Nmax];
   double Time; double t;  // time of motion and reaction, respectivly
   double frac; // temporal fraction for interpolation
   double cfrac; //1-frac
@@ -172,51 +181,111 @@ int main(int argc, char* argv[])
       }
       t=Time-dt;//for an insignificant edge case
       Time=Time+Dt;
-      // kernel_compute_nearest_neighbor
-      for (i = 0; i < Nmax-1; i++ ) {
-          // each i,j pair is reached once per call to kernel_measure
-          for (j = i+1; j < Nmax; j++ ) {
-            // compute distance between particles that are still running
-            if (reflect==0){
-              dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
-            }else{
-              dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
-            }
-            // // update the symmetric distance matrix
-            // dist_old[i][j]=dist;
-            // dist_old[j][i]=dist;
+      if (neighbor){
+        // kernel_compute_nearest_neighbor
+        for (i = 0; i < Nmax-1; i++ ) {
+            // each i,j pair is reached once per call to kernel_measure
+            for (j = i+1; j < Nmax; j++ ) {
+              // compute distance between particles that are still running
+              if (reflect==0){
+                dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
+              }else{
+                dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
+              }
+              // // update the symmetric distance matrix
+              // dist_old[i][j]=dist;
+              // dist_old[j][i]=dist;
 
-            // update nearest neighbor distance and i_neighbor
-            if (dist<min_dist_old[i]){
-              min_dist_old[i]=dist;
-              i_neighbor[i]=j;
-            }
-            if (dist<min_dist_old[j]){
-              //this choice implies symplectic deterministic forces
-              min_dist_old[j]=dist;
-              i_neighbor[j]=i;
+              // update nearest neighbor distance and i_neighbor
+              if (dist<min_dist_old[i]){
+                min_dist_old[i]=dist;
+                i_neighbor[i]=j;
+              }
+              if (dist<min_dist_old[j]){
+                //this choice implies symplectic deterministic forces
+                min_dist_old[j]=dist;
+                i_neighbor[j]=i;
             }
           }
         }
-      // one_step_ou_kernel at long timescale, Dt
-      for (j = 0; j < Nmax; j++ ) {
-            // // Spring forces between nearest neighbors
-            // boundary conditions are already enforced
-            ineigh=i_neighbor[j];// extract x,y_old of other tip
+        // nearest neighbor one_step_ou_kernel at long timescale, Dt
+        for (j = 0; j < Nmax; j++ ) {
+          // // Spring forces between nearest neighbors
+          // boundary conditions are already enforced
+          ineigh=i_neighbor[j];// extract x,y_old of other tip
 
+          // // compute displacement due to spring force with nearest neighbor
+          if (reflect==0){
+            dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
+            dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
+            dist = sqrt(dx*dx+dy*dy);
+          }
+          else{
+            dx = x_old[ineigh]-x_old[j];
+            dy = y_old[ineigh]-y_old[j];
+            dist = sqrt(dx*dx+dy*dy);
+          }
+          //FORCES_HERE
+          //compute displacement due to drift
+          impulse_factor=impulse_prefactor*(dist-x0)/dist;
+
+
+          // set impulse_factor to zero if it is explicitly forbidden by the user input
+          if ((no_attraction==1) && (impulse_factor>0)){
+            impulse_factor=0.;
+          }
+          if ((no_repulsion==1) && (impulse_factor<0)){
+            impulse_factor=0.;
+          }
+
+          dxt=dx*impulse_factor;
+          dyt=dy*impulse_factor;
+
+          // compute displacement due to gaussian white noise
+          dxW=stepscale*normalRandom();
+          dyW=stepscale*normalRandom();
+          // next spatial position, time integrating by a duration, Dt.
+          X_new[j]=X_old[j]+dxW+dxt;
+          Y_new[j]=Y_old[j]+dyW+dyt;
+          if (reflect==0){
+            //enforce PBC
+            x_new[j]=periodic(X_new[j],L);
+            y_new[j]=periodic(Y_new[j],L);
+          }else{
+            //enforce RBC
+            x_new[j]=reflection(X_new[j],L);
+            y_new[j]=reflection(Y_new[j],L);
+          }
+        }//end nearest neighbor one_step_ou_kernel
+      }
+      else{
+        //reset the net forces here
+        for (i = 0; i < Nmax; i++ ) {
+          Fx_net[i]=0.;
+          Fy_net[i]=0.;
+        }
+        //sum_each_force_kernel as first part of one_step_ou_kernel at long timescale, Dt
+        for (i = 0; i < Nmax-1; i++ ) {
+          for (j = i+1; j < Nmax; j++ ) {
+            // boundary conditions are already enforced
             // // compute displacement due to spring force with nearest neighbor
             if (reflect==0){
-              dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
-              dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
+              dx = subtract_pbc_1d(x_old[j],x_old[i],L);
+              dy = subtract_pbc_1d(y_old[j],y_old[i],L);
               dist = sqrt(dx*dx+dy*dy);
             }
             else{
-              dx = x_old[ineigh]-x_old[j];
-              dy = y_old[ineigh]-y_old[j];
+              dx = x_old[j]-x_old[i];
+              dy = y_old[j]-y_old[i];
               dist = sqrt(dx*dx+dy*dy);
             }
+
+            //FORCES_HERE
+            // // Spring forces between nearest neighbors
             //compute displacement due to drift
             impulse_factor=impulse_prefactor*(dist-x0)/dist;
+
+
             // set impulse_factor to zero if it is explicitly forbidden by the user input
             if ((no_attraction==1) && (impulse_factor>0)){
               impulse_factor=0.;
@@ -225,25 +294,35 @@ int main(int argc, char* argv[])
               impulse_factor=0.;
             }
 
-            dxt=dx*impulse_factor;
-            dyt=dy*impulse_factor;
-
-            // compute displacement due to gaussian white noise
-            dxW=stepscale*normalRandom();
-            dyW=stepscale*normalRandom();
-            // next spatial position, time integrating by a duration, Dt.
-            X_new[j]=X_old[j]+dxW+dxt;
-            Y_new[j]=Y_old[j]+dyW+dyt;
-            if (reflect==0){
-              //enforce PBC
-              x_new[j]=periodic(X_new[j],L);
-              y_new[j]=periodic(Y_new[j],L);
-            }else{
-              //enforce RBC
-              x_new[j]=reflection(X_new[j],L);
-              y_new[j]=reflection(Y_new[j],L);
-            }
+            //sum Fx_net, Fy_net
+            Fx_net[i]=Fx_net[i]+dx*impulse_factor;
+            Fy_net[i]=Fy_net[i]+dy*impulse_factor;
+            Fx_net[j]=Fx_net[j]-dx*impulse_factor;
+            Fy_net[j]=Fy_net[j]-dy*impulse_factor;
           }
+        }
+        //compute the one_step given the net force, F_net
+        for (i = 0; i < Nmax; i++ ) {
+          dxt=Fx_net[i];
+          dyt=Fy_net[i];
+          // compute displacement due to gaussian white noise
+          dxW=stepscale*normalRandom();
+          dyW=stepscale*normalRandom();
+          // next spatial position, time integrating by a duration, Dt.
+          X_new[i]=X_old[i]+dxW+dxt;
+          Y_new[i]=Y_old[i]+dyW+dyt;
+          if (reflect==0){
+            //enforce PBC
+            x_new[i]=periodic(X_new[i],L);
+            y_new[i]=periodic(Y_new[i],L);
+          }else{
+            //enforce RBC
+            x_new[i]=reflection(X_new[i],L);
+            y_new[i]=reflection(Y_new[i],L);
+          }
+        }//end each force onestep kernel
+      }//end switch clause for onestep kernels
+
       // collision_kernel at short timescale, dt
       for (s=0; s<iter_per_movestep; s++){
         // compute local time
