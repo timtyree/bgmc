@@ -23,9 +23,7 @@ int main(int argc, char* argv[])
   /*                                |
   |  Parse Model Key Word Arguments |
   |                                */
-  double r,D,L,kap,Dt,dt,varkappa,x0,nite,refl,set_sec,see;
-  // double dt=1e-5;             // reaction time step size.
-  double no_rep,no_att;
+  double r,D,L,kappa,Dt,dt,varkappa,x0;
   printf("Enter the reaction range (cm): ");
   scanf("%lg",&r);printf("r=%g",r);
   printf("\nEnter the diffusion coefficient (cm^2/s): ");
@@ -33,10 +31,7 @@ int main(int argc, char* argv[])
   printf("\nEnter the domain width/height (cm): ");
   scanf("%lg",&L);printf("L=%g",L);
   printf("\nEnter the reaction rate (Hz): ");
-  scanf("%lg",&kap);printf("kappa=%g",kap);
-  //DONE: handle io for each new parameter listed here:
-  //varkappa // spring constant / scale of motion
-  //x0        // preferred distance between particles
+  scanf("%lg",&kappa);printf("kappa=%g",kappa);
   printf("\nEnter the spring rate (Hz): ");
   scanf("%lg",&varkappa);printf("varkappa=%g",varkappa);
   printf("\nEnter the preferred distance (cm): ");
@@ -49,35 +44,31 @@ int main(int argc, char* argv[])
   /*                                      |
   |  Parse Simulation Key Word Arguments  |
   |                                      */
+  // double no_rep,no_att,nite,refl,set_sec,see;
   printf("\nEnter the number of tips to observe:");int N;
   scanf("%d",&N);printf("N=%d",N);
   printf("\nEnter the number of trials: ");
-  scanf("%lg",&nite);
-  int niter=(int)nite;printf("niter=%d\n",niter);
+  int niter;scanf("%d",&niter);printf("niter=%d\n",niter);
   printf("Enter the randomization seed: ");
-  scanf("%lg",&see);
-  int seed=(int)see;printf("seed=%d\n",seed);
+  int seed;scanf("%d",&seed);printf("seed=%d\n",seed);
   printf("Use reflecting boundary conditions? (Enter 1/0): ");
-  scanf("%lg",&refl);
-  int reflect=(int)refl;printf("reflect=%d\n",reflect);
+  int reflect;scanf("%d",&reflect);printf("reflect=%d\n",reflect);
   printf("Set second particle within reaction range of first? (Enter 1/0): ");
-  scanf("%lg",&set_sec);
-  int set_second=(int)set_sec;printf("set_second=%d\n",set_second);
+  int set_second;scanf("%d",&set_second);printf("set_second=%d\n",set_second);
   printf("Do not allow repulsive forces? (Enter 1/0): ");
-  scanf("%lg",&no_rep);
-  int no_repulsion=(int)no_rep;printf("no_repulsion=%d\n",no_repulsion);
+  int no_repulsion;scanf("%d",&no_repulsion);printf("no_repulsion=%d\n",no_repulsion);
   printf("Do not allow attractive forces? (Enter 1/0): ");
-  scanf("%lg",&no_att);
-  int no_attraction=(int)no_att;printf("no_attraction=%d\n",no_attraction);
+  int no_attraction;scanf("%d",&no_attraction);printf("no_attraction=%d\n",no_attraction);
   printf("Only allow nearest neighbor forces? (Enter 1/0): ");
-  int neighbor=int;scanf("%d",&neighbor);printf("neighbor=%d\n",neighbor);
-  // double neigh; scanf("%lg",&neigh);
-  // int neighbor=(int)neigh;printf("neighbor=%d\n",neighbor);
-  // int Nmax=700; int Nmin=50;//11;
+  int neighbor;scanf("%d",&neighbor);printf("neighbor=%d\n",neighbor);
+  printf("Which force model should be used?\n(Enter 0:spring, 1:QED2, 2:QED3): ");
+  int force_code;scanf("%d",&force_code);printf("force_code=%d\n",force_code);
 
+  //DONE: clean up unnecessary input variables by using
+  //DONE: printf( all input parameters such that I can redirect ^this to a text file )
+  printf("the repeatable inputs are:\n");
+  printf("%lg %lg %lg %lg %lg %lg %lg %lg %d %d %d %d %d %d %d %d %d\n",r,D,L,kappa,varkappa,x0,Dt,dt,N,niter,seed,reflect,set_second,no_repulsion,no_attraction,neighbor,force_code);
   //TODO: generalize to a set of forces of interest
-  //TODO: clean up unnecessary input variables by using
-  //TODO: printf( all input parameters such that I can redirect ^this to a text file )
 
   int i,j,k,q,s;
   int Nmax=N;
@@ -95,7 +86,7 @@ int main(int argc, char* argv[])
   double dx,dy,dxt,dyt,dxW,dyW;
   bool still_running; bool all_valid;
   double stepscale=sqrt(2*D*Dt);
-  double probreact=kap*dt; //double sig;
+  double probreact=kappa*dt; //double sig;
   double min_dist_old[Nmax];
   double dist; bool in_range; bool reacts;int ineigh;
   double T_net=0.;int count_net=0;
@@ -399,7 +390,7 @@ int main(int argc, char* argv[])
   printf("r=%g\n",r);
   printf("D=%g\n",D);
   printf("L=%g\n",L);
-  printf("kappa=%g\n",kap);
+  printf("kappa=%g\n",kappa);
   printf("varkappa=%g\n",varkappa);
   printf("x0=%g\n",x0);
   printf("dt=%g\n",dt);
