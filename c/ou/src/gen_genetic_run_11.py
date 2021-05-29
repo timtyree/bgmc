@@ -4,7 +4,7 @@ import numpy as np
 #     1. take random linear combinations of ^those parents, run them on the OSG, and then take the k best fits
 #     1. repeat until desired convergence is met
 #     1. repeat for various k, and visualize any (in)dependence of k
-/
+
 niter=1500 #trials per worker
 r_values=np.array([0.1])#,0.2,0.3,0.4,0.5,.6,.7,.8,.9,1.,2.])#cm
 # D_values=np.array([2.,20.])#0.2,1.0,1.5,2.0,3.,4.,5.])#cm^2/s
