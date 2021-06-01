@@ -1,0 +1,48 @@
+[H[2JFri May 28 21:35:06 PDT 2021
+1-test.input
+Enter the reaction range (cm): r=0.1
+Enter the diffusion coefficient (cm^2/s): D=2
+Enter the domain width/height (cm): L=10
+Enter the reaction rate (Hz): kappa=1500
+Enter the spring rate (Hz): varkappa=-20
+Enter the preferred distance (cm): x0=1
+Enter the timescale of random motion: Dt=1e-05
+Enter the timescale of random reaction: dt=1e-05
+Enter the number of tips to observe:N=20
+Enter the number of trials: niter=1
+Enter the randomization seed: seed=1234
+Use reflecting boundary conditions? (Enter 1/0): reflect=0
+Set second particle within reaction range of first? (Enter 1/0): set_second=1
+Do not allow repulsive forces? (Enter 1/0): no_repulsion=1
+Do not allow attractive forces? (Enter 1/0): no_attraction=0
+Only allow nearest neighbor forces? (Enter 1/0): neighbor=0
+Which force model should be used?
+(Enter 1:spring, 2:QED2, 3:QED3, else:no force): force_code=0
+the repeatable inputs are:
+0.1 2 10 1500 -20 1 1e-05 1e-05 20 1 1234 0 1 1 0 0 0
+
+running simulation...
+simulation complete!
+
+Printing Inputs...
+r=0.1
+D=2
+L=10
+kappa=1500
+varkappa=-20
+x0=1
+dt=1e-05
+Dt=1e-05
+reflect=0
+set_second=1
+no_repulsion=1
+no_attraction=0
+
+Printing Outputs...
+exit_code=1
+ntips=20
+Tcount=1
+Tsum=0.00093
+Tavg=0.00093
+
+Fri May 28 21:35:06 PDT 2021

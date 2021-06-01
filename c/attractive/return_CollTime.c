@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
   int no_attraction;scanf("%d",&no_attraction);printf("no_attraction=%d\n",no_attraction);
   printf("Only allow nearest neighbor forces? (Enter 1/0): ");
   int neighbor;scanf("%d",&neighbor);printf("neighbor=%d\n",neighbor);
-  printf("Which force model should be used?\n(Enter 0:spring, 1:QED2, 2:QED3): ");
+  printf("Which force model should be used?\n(Enter 1:spring, 2:QED2, 3:QED3, else:no force): ");
   int force_code;scanf("%d",&force_code);printf("force_code=%d\n",force_code);
 
   //DONE: clean up unnecessary input variables by using
@@ -88,12 +88,13 @@ int main(int argc, char* argv[])
   double stepscale=sqrt(2*D*Dt);
   double probreact=kappa*dt; //double sig;
   double min_dist_old[Nmax];
-  double dist; bool in_range; bool reacts;int ineigh;
+  double dist; double dist2; bool in_range; bool reacts;int ineigh;
   double T_net=0.;int count_net=0;
   double T_value; double Rad; double Theta;
   srand(seed); // randomize seed.
   double tmax=500.; // UNCOMMENT_HERE
   // double tmax=.1; // COMMENT_HERE
+  double dist_cutoff=1e-2;
   int iter_per_movestep = round(Dt/dt);
   int i_neighbor[Nmax];
   double impulse_prefactor= varkappa * Dt;
@@ -209,17 +210,36 @@ int main(int argc, char* argv[])
           if (reflect==0){
             dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
             dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
-            dist = sqrt(dx*dx+dy*dy);
           }
           else{
             dx = x_old[ineigh]-x_old[j];
             dy = y_old[ineigh]-y_old[j];
-            dist = sqrt(dx*dx+dy*dy);
           }
+          dist2=dx*dx+dy*dy;
+          if (dist2>1.e-7){
+            dist2=1.e-7;
+          }
+          dist = sqrt(dist2);
+
           //FORCES_HERE
           //compute displacement due to drift
-          impulse_factor=impulse_prefactor*(dist-x0)/dist;
-
+          impulse_factor=0.;
+          if (force_code==1){
+            //spring
+            impulse_factor=impulse_prefactor*(dist-x0)/dist;
+          }
+          if (force_code==2){
+            //QED2: force ~ inverse power law
+            if (dist_cutoff<dist){
+              impulse_factor=impulse_prefactor/dist2;
+            }
+          }
+          if (force_code==3){
+            //QED3: force ~ inverse square power law
+            if (dist_cutoff<dist){
+              impulse_factor=impulse_prefactor/dist2/dist;
+            }
+          }
 
           // set impulse_factor to zero if it is explicitly forbidden by the user input
           if ((no_attraction==1) && (impulse_factor>0)){
@@ -263,19 +283,32 @@ int main(int argc, char* argv[])
             if (reflect==0){
               dx = subtract_pbc_1d(x_old[j],x_old[i],L);
               dy = subtract_pbc_1d(y_old[j],y_old[i],L);
-              dist = sqrt(dx*dx+dy*dy);
             }
             else{
               dx = x_old[j]-x_old[i];
               dy = y_old[j]-y_old[i];
-              dist = sqrt(dx*dx+dy*dy);
             }
+            dist2=dx*dx+dy*dy;
+            if (dist2>1.e-7){
+              dist2=1.e-7;
+            }
+            dist = sqrt(dist2);
 
             //FORCES_HERE
-            // // Spring forces between nearest neighbors
             //compute displacement due to drift
-            impulse_factor=impulse_prefactor*(dist-x0)/dist;
-
+            impulse_factor=0.;
+            if (force_code==1){
+              //spring
+              impulse_factor=impulse_prefactor*(dist-x0)/dist;
+            }
+            if (force_code==2){
+              //QED2: force ~ inverse power law
+              impulse_factor=impulse_prefactor/dist2;
+            }
+            if (force_code==3){
+              //QED3: force ~ inverse square power law
+              impulse_factor=impulse_prefactor/dist2/dist;
+            }
 
             // set impulse_factor to zero if it is explicitly forbidden by the user input
             if ((no_attraction==1) && (impulse_factor>0)){
@@ -395,12 +428,15 @@ int main(int argc, char* argv[])
   printf("x0=%g\n",x0);
   printf("dt=%g\n",dt);
   printf("Dt=%g\n",Dt);
-  // printf("niter=%d\n",niter);
+  // printf("N=%d\n",N);
+  printf("niter=%d\n",niter);
   // printf("seed=%d\n",seed);
   printf("reflect=%d\n",reflect);
   printf("set_second=%d\n",set_second);
   printf("no_repulsion=%d\n",no_repulsion);
   printf("no_attraction=%d\n",no_attraction);
+  printf("neighbor=%d\n",neighbor);
+  printf("force_code=%d\n",force_code);
 
   /*                              |
   |  Record Mean Collision Times  |
