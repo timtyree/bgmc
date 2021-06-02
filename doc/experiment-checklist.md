@@ -3,7 +3,8 @@
 ### Designing a data run (TODO: implement perl methods and append to gen_run_next.sh)
 1. design run_next.py from the previous run_prev.py
 1. use ./gen_run_next.sh to generate run_next.dat
-<--* DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat *-->
+*/ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
+
 1. update non-test submit file to take run_next.dat...
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
@@ -15,14 +16,14 @@ TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
 1. rm -r ~/bgmc #remove the whole repository folder on the open science grid.  
 TODO(later): can I make the 'y' input automatic?
-1. git clone fresh repo on the open science grid. 
-HINT: 
+1. git clone fresh repo on the open science grid.
+HINT:
 git clone http://github.com/timtyree/bgmc.git
 
 ### Job Submission
 1. cd current simulation folder
 cd ~/bgmc/c/ou
-1. ./gcc.sh; 
+1. ./gcc.sh;
 submit the unit test cloud
 condor_submit return_CollTimes-test.submit
 1. if the entire unit test cloud is reasonably fast and returns reasonable results, submit the main cloud...
