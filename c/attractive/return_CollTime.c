@@ -174,9 +174,11 @@ int main(int argc, char* argv[])
       t=Time-dt;//for an insignificant edge case
       Time=Time+Dt;
       if (neighbor){
+        //heretim
+        //TODO: debug one_step when neighbor==1
         // kernel_compute_nearest_neighbor
         for (i = 0; i < Nmax-1; i++ ) {
-            // each i,j pair is reached once per call to kernel_measure
+            // each i,j pair is reached once per kernel launch
             for (j = i+1; j < Nmax; j++ ) {
               // compute distance between particles that are still running
               if (reflect==0){
@@ -194,7 +196,7 @@ int main(int argc, char* argv[])
                 i_neighbor[i]=j;
               }
               if (dist<min_dist_old[j]){
-                //this choice implies symplectic deterministic forces
+                //this choice does not imply symplectic deterministic forces
                 min_dist_old[j]=dist;
                 i_neighbor[j]=i;
             }
@@ -216,8 +218,8 @@ int main(int argc, char* argv[])
             dy = y_old[ineigh]-y_old[j];
           }
           dist2=dx*dx+dy*dy;
-          if (dist2>1.e-7){
-            dist2=1.e-7;
+          if (dist2<1.e-8){
+            dist2=1.e-8;
           }
           dist = sqrt(dist2);
 
@@ -230,15 +232,11 @@ int main(int argc, char* argv[])
           }
           if (force_code==2){
             //QED2: force ~ inverse power law
-            if (dist_cutoff<dist){
-              impulse_factor=impulse_prefactor/dist2;
-            }
+            impulse_factor=impulse_prefactor/dist2;
           }
           if (force_code==3){
             //QED3: force ~ inverse square power law
-            if (dist_cutoff<dist){
-              impulse_factor=impulse_prefactor/dist2/dist;
-            }
+            impulse_factor=impulse_prefactor/dist2/dist;
           }
 
           // set impulse_factor to zero if it is explicitly forbidden by the user input
@@ -268,8 +266,8 @@ int main(int argc, char* argv[])
             y_new[j]=reflection(Y_new[j],L);
           }
         }//end nearest neighbor one_step_ou_kernel
-      }
-      else{
+      }//end neighbor is 1
+      else{//neighbor is 0, don't use nearest neighbors
         //reset the net forces here
         for (i = 0; i < Nmax; i++ ) {
           Fx_net[i]=0.;
@@ -289,8 +287,8 @@ int main(int argc, char* argv[])
               dy = y_old[j]-y_old[i];
             }
             dist2=dx*dx+dy*dy;
-            if (dist2>1.e-7){
-              dist2=1.e-7;
+            if (dist2<1.e-8){
+              dist2=1.e-8;
             }
             dist = sqrt(dist2);
 

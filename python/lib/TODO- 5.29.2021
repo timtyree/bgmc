@@ -5,3 +5,6 @@ TODO: implement a 1 parameter, long-ranged attractive force in c/attractive, suc
 Note: for ^that the dimension of varkappa is dX ~ varkappa/(X-mu)(hat{X})dt ~ varkappa / X^2 * X * dt. Thus varkappa ~ T/L^2
 TODO: integrate ^that in c/attractive
 TODO: dev run_12 in c/attractive
+
+
+TODO: test return_CollTime.x using a dev/test

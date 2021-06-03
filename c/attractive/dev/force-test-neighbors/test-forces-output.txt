@@ -1,0 +1,22 @@
+[3J[H[2JThu May 20 13:45:49 PDT 2021
+/* Testing Effect of Attractive/Repulsive Force On Mean Collision Time */
+
+Printing the mean time to first reaction (seconds) before/after turning on a large attractive force...
+Tavg=0.00950384
+Tavg=0.00754853
+If Tavg got smaller, then the rate of collision was increased by a large attractive force.
+
+Testing the effect of turning on large repulsive force...
+Tavg=0.00950384
+Tavg=0.0225335
+If Tavg got larger, then the rate of collision was decreased by a large repulsive force.
+Printing the mean time to first reaction (seconds) before/after turning on a small attractive force...
+Tavg=0.00950384
+Tavg=0.00992838
+If Tavg got smaller, then the rate of collision was increased by a small attractive force.
+
+Testing the effect of turning on small repulsive forces...
+Tavg=0.00950384
+Tavg=0.0101387
+If Tavg got larger, then the rate of collision was decreased by a small repulsive force.
+Thu May 20 13:47:55 PDT 2021
