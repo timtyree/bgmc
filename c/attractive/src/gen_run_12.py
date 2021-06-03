@@ -45,8 +45,8 @@ for Dt in Dt_values:
 force_code=1
 no_attraction_values=np.array([0])
 neighbor_values=np.array([0,1])
-set_second_values=np.array([0])
-varkappa_values=np.array([-20.,-10.,-5])#1/s
+set_second_values=np.array([1,0])
+varkappa_values=np.array([-20.,-10.,-5,0])#1/s
 x0_values=np.array([0.,1.0,5.0])#cm
 #DONE:print control trials
 for Dt in Dt_values:
@@ -72,8 +72,8 @@ for Dt in Dt_values:
 force_code_values=np.array([2,3])
 no_attraction_values=np.array([0])
 neighbor_values=np.array([0,1])
-set_second_values=np.array([0])
-varkappa_values=np.array([0.1,1.,5.,10.,20.,50.])#1/s
+set_second_values=np.array([1,0])
+varkappa_values=np.array([0.,0.1,1.,5.,10.,20.,50.])#1/s
 x0_values=np.array([0.])#,1.0,5.0])#cm #x0 does nothing for QED2,3
 #DONE:print control trials
 for Dt in Dt_values:
@@ -93,5 +93,5 @@ for Dt in Dt_values:
                                                     while num_trials<num_trials_per_setting:
                                                         num_trials+=1
                                                         count=count+1
-                                                        print(f"{r} {D} {L} {kappa} {varkappa} {x0} {Dt} {dt} {Nmax} {niter} {reflect} {set_second} {no_repulsion} {no_attraction} {neighbor} {force_code}")
+                                                    print(f"{r} {D} {L} {kappa} {varkappa} {x0} {Dt} {dt} {Nmax} {niter} {reflect} {set_second} {no_repulsion} {no_attraction} {neighbor} {force_code}")
 # print(count)
