@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
     t=0.;
     Time=0.;
     still_running=true;
-    exit_code=1;
+    exit_code=-1;
     T = -9999.; //initialize stopping times to -9999
     /* initialize uniform random points in the unit square n*/
     for (j = 0; j < Nmax; j++ ) {
@@ -393,11 +393,12 @@ int main(int argc, char* argv[])
                   if(reacts){
                     T=t;
                     still_running=false;
+                    exit_code=1;
                   }
                 }
               }
             }
-          }
+          }//end if still_running
         }
       }//end collision kernel
     //shut simulation down if it's taking too long...
@@ -408,7 +409,7 @@ int main(int argc, char* argv[])
     }//end while running
     //record this trial
     if (exit_code>0){
-      if (T>0){
+      if (T>0.){
         T_net=T_net+T;
         count_net=count_net+1;
       }
