@@ -173,9 +173,7 @@ int main(int argc, char* argv[])
       }
       t=Time-dt;//for an insignificant edge case
       Time=Time+Dt;
-      if (neighbor){
-        //heretim
-        //TODO: debug one_step when neighbor==1
+      if (neighbor==1){
         // kernel_compute_nearest_neighbor
         for (i = 0; i < Nmax-1; i++ ) {
             // each i,j pair is reached once per kernel launch
