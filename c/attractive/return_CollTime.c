@@ -266,7 +266,7 @@ int main(int argc, char* argv[])
         }//end nearest neighbor one_step_ou_kernel
       }//end neighbor is 1
       else{//neighbor is 0, don't use nearest neighbors
-        //reset the net forces here
+        //reset the net forces
         for (i = 0; i < Nmax; i++ ) {
           Fx_net[i]=0.;
           Fy_net[i]=0.;
