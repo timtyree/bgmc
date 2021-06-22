@@ -1,17 +1,19 @@
 /* Program that returns collision times using a Monte Carlo method */
 // the variable number of diffusing particles is handled by
 
-//Scrum 5.19.2021: implementing particle-particle model to return_CollTime.c
-//TODO: find map from iPad kernels (A,B,C) to here-kernels.
-// TODO: map still_running to scalar
-// TODO: map T to scalar
-//TODO: impose boundary conditions
+//Scrum 6.22.2021: implementing (I) starting outside a particular distance and (II) additional choices of force_code
+// I (Option A)
+// alter set_second to choose each particle to be outside of each previous particle.
+// if a certain number of attempts doesn't work, then give up and rename Nmax... that's complicated...
+//TODO: I (Option B)
+// write python function that saves M*MM locations to /public/TimtheTyrant/ic-2d/
+// load a set of example initial positions from /public/TimtheTyrant/ic-2d/ using Process mod some value
+// set N (or Nmax) to the number of particles
 
+//TODO: II (Option A) just code the new forces inline and copy to the second locations
+// II (Option B) move the force computation to a separate file and call it.
 
 //Ye Olde Scrum
-//TODO: test that all variables are being properly initialized
-//TODO: implement simplest explicit nearest neighbor spring force in the Langevin Equation in the inviscid limit (solved by a Generalized Onstein-Uhlenbeck Process)
-//TODO: implement no_attraction and no_repulsion
 //TODO(later): consider whether I might see any new behaviour returned/effect on collision times, if I
 // - consider exponential solution in computing motion... with dt=1e-6... probably not...
 // - consider other SDE discretizations to solve the motion
