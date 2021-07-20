@@ -19,7 +19,7 @@ def uniformRandom():
 normalRandom(),uniformRandom()
 
 # @njit
-def format_particles(frameno,t,x_values,y_values,round_t_to_n_decimals=5,tscale=1000):
+def format_particles(frameno,t,x_values,y_values,pid_values,round_t_to_n_decimals=5,tscale=1000):
     '''tscale scales from seconds to milliseconds.'''
     n_tips = x_values.shape[0]
     dict_out = {
@@ -27,7 +27,8 @@ def format_particles(frameno,t,x_values,y_values,round_t_to_n_decimals=5,tscale=
         't': np.around(t,round_t_to_n_decimals)*tscale,
         'n': n_tips,
         'x': x_values,
-        'y': y_values}
+        'y': y_values,
+        'pid_explicit':pid_values}
     return dict_out
 
 ##########################
@@ -107,6 +108,7 @@ def get_routine_gener_logs(
         #uniform random ic
         x_values=rs.uniform(size=N)*L
         y_values=rs.uniform(size=N)*L
+        pid_values=np.array(range(N)) #fixed for explicit particle tracking purposes
         if explicitly_uniform_ic:
             #explicitely uniform ic
             uvals=np.linspace(0,L,int(np.sqrt(N))+1)
@@ -254,6 +256,7 @@ def get_routine_gener_logs(
             if step % save_every == 0:
                 x_plot = x_new[still_running]
                 y_plot = y_new[still_running]
+                pid_plot = pid_values[still_running]
                 #         if recording_snapshots:
                 #             #save result as png
                 #             SaveScatterPlotSnapshot(x_plot,y_plot,t,width=L,height=L,
@@ -261,7 +264,7 @@ def get_routine_gener_logs(
                 #                             annotating=annotating,message=message)
                 if (recording_locations) & (x_plot.shape[0] > 0):
                     #append particle locations to log, dict_out_lst
-                    dict_out = format_particles(frameno, t, x_plot, y_plot)
+                    dict_out = format_particles(frameno, t, x_plot, y_plot, pid_plot)
                     dict_out_lst.append(dict_out)
 
                 frameno += 1
