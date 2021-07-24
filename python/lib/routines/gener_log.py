@@ -20,7 +20,9 @@ normalRandom(),uniformRandom()
 
 # @njit
 def format_particles(frameno,t,x_values,y_values,pid_values,round_t_to_n_decimals=5,tscale=1000):
-    '''tscale scales from seconds to milliseconds.'''
+    '''tscale scales from seconds to milliseconds.
+    round_t_to_n_decimals=5 corrects arithmatic error, minimizes output memory requirements, and matches Dt=dt=1e-5 seconds
+    '''
     n_tips = x_values.shape[0]
     dict_out = {
         'frame':frameno,
@@ -51,9 +53,13 @@ def get_routine_gener_logs(
         x0=5,
         no_repulsion=1,
         no_attraction=0,
+        use_neighbors=0,
         explicitly_uniform_ic=False,
         **kwargs):
-    '''defines model parameters baked into simulation
+    '''
+    TODO: implement use_neighbors kwarg. integrate it's manipulation from the cooresponding .ipynb
+
+    defines model parameters baked into simulation
     Example Usage:
     results_folder=f"{nb_dir}/data/local_results"
     routine_gener_logs=get_routine_gener_logs(results_folder,tmax=10)
@@ -75,9 +81,6 @@ def get_routine_gener_logs(
         rs = RandomState(MT19937(SeedSequence(seed)))
         #random number stream B
         # rs = RandomState(MT19937(SeedSequence(987654321)))
-
-        #get distance metric
-        distance_L2_pbc = get_distance_L2_pbc(width=1, height=1)
         np.random.seed(seed)
 
         ###############################
