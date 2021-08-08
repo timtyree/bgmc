@@ -36,18 +36,18 @@ int main(int argc, char* argv[])
   scanf("%lg",&kappa);printf("kappa=%g",kappa);
   printf("\nEnter the spring rate (Hz): ");
   scanf("%lg",&varkappa);printf("varkappa=%g",varkappa);
-  printf("\nEnter the preferred distance (cm): ");
+  printf("\nEnter the unpreferred distance (cm): ");
   scanf("%lg",&x0);printf("x0=%g",x0);
-  printf("\nEnter the timescale of random motion: ");
+  printf("\nEnter the timestep of motion: ");
   scanf("%lg",&Dt);printf("Dt=%g",Dt);
-  printf("\nEnter the timescale of random reaction: ");
+  printf("\nEnter the timestep of reaction: ");
   scanf("%lg",&dt);printf("dt=%g",dt);
 
   /*                                      |
   |  Parse Simulation Key Word Arguments  |
   |                                      */
   // double no_rep,no_att,nite,refl,set_sec,see;
-  printf("\nEnter the number of tips to observe:");int N;
+  printf("\nEnter the number of tips to observe: ");int N;
   scanf("%d",&N);printf("N=%d",N);
   printf("\nEnter the number of trials: ");
   int niter;scanf("%d",&niter);printf("niter=%d\n",niter);
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
   int no_attraction;scanf("%d",&no_attraction);printf("no_attraction=%d\n",no_attraction);
   printf("Only allow nearest neighbor forces? (Enter 1/0): ");
   int neighbor;scanf("%d",&neighbor);printf("neighbor=%d\n",neighbor);
-  printf("Which force model should be used?\n(Enter 1:spring, 2:QED2, 3:QED3, else:no force): ");
+  printf("Which force model should be used?\n(Enter 1:spring, 2:QED2, 3:QED3, 4:QED2 + const. repulsion, 5:QED3 + const. repulsion, else:no force): ");
   int force_code;scanf("%d",&force_code);printf("force_code=%d\n",force_code);
 
   //DONE: clean up unnecessary input variables by using
@@ -100,7 +100,7 @@ int main(int argc, char* argv[])
   int iter_per_movestep = round(Dt/dt);
   int i_neighbor[Nmax];
   double impulse_prefactor= varkappa * Dt;
-  // double impulse_prefactor=-1.*varkappa*Dt;
+  double impulse_constant = -1. * impulse_prefactor / x0;
   double impulse_factor;
   int exit_code;
   /*                              |
@@ -238,6 +238,14 @@ int main(int argc, char* argv[])
             //QED3: force ~ inverse square power law
             impulse_factor=impulse_prefactor/dist2/dist;
           }
+          if (force_code==4){
+            //QED3: force ~ inverse square power law + small repulsive force
+            impulse_factor=impulse_prefactor/dist2 + impulse_constant;
+          }
+          if (force_code==5){
+            //QED3: force ~ inverse square power law + small repulsive force
+            impulse_factor=impulse_prefactor/dist2/dist + impulse_constant / x0;
+          }
 
           // set impulse_factor to zero if it is explicitly forbidden by the user input
           if ((no_attraction==1) && (impulse_factor>0)){
@@ -306,6 +314,14 @@ int main(int argc, char* argv[])
             if (force_code==3){
               //QED3: force ~ inverse square power law
               impulse_factor=impulse_prefactor/dist2/dist;
+            }
+            if (force_code==4){
+              //QED3: force ~ inverse square power law + small repulsive force
+              impulse_factor=impulse_prefactor/dist2 + impulse_constant;
+            }
+            if (force_code==5){
+              //QED3: force ~ inverse square power law + small repulsive force
+              impulse_factor=impulse_prefactor/dist2/dist + impulse_constant / x0;
             }
 
             // set impulse_factor to zero if it is explicitly forbidden by the user input
