@@ -1,4 +1,4 @@
-[3J[H[2JSun Aug  8 18:06:10 PDT 2021
+Sun Aug  8 18:06:10 PDT 2021
 /* Testing Effect of Adding a 1cm Basin of Attraction between (i) nearest neighbors and (ii) vector summed forces. */
 
 Key Results made repeatable here:
