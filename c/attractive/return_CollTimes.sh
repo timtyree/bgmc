@@ -9,8 +9,8 @@ perl deprecate_inputs.pl < $FN_IN > $TMP_IN
 
 #TODO(simpler): just pick Nmax and hold it fixed...
 #TODO(?): parse input passed to x_run.sh
-Nmin=6
-Nmax=100
+Nmin=5  #6
+Nmax=50 #100
 echo "Nmin is $Nmin and Nmax is $Nmax"
 
 # perl deprecate_inputs.pl < 1-control.input > $TMP_IN
@@ -67,7 +67,7 @@ do
   ntips=$[$ntips-1]
   perl deprecate_inputs.pl < $TMP_IN > $FN_IN
   cp $FN_IN $TMP_IN
-  export Tavg=$(./return_CollTime.x < $FN_IN | grep 'Tavg=' | grep -Eo '[+-]?[0-9]+([.][0-9]+)?')
+  export Tavg=$(./return_CollTime.x < $FN_IN | grep 'Tavg=' | grep -Eo "[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?.")
   printf "%f," $Tavg
   # printf "$Tavg"
   # shift

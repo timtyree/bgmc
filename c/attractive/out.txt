@@ -1,40 +1,48 @@
-Enter the reaction range (cm): r=0.1
-Enter the diffusion coefficient (cm^2/s): D=2
+Enter the reaction range (cm): r=0.5
+Enter the diffusion coefficient (cm^2/s): D=5
 Enter the domain width/height (cm): L=5
-Enter the reaction rate (Hz): kappa=500
-Enter the spring rate (Hz): varkappa=-1.5
-Enter the preferred distance (cm): x0=0.3
-Enter the timescale of random motion: Dt=1e-05
-Enter the timescale of random reaction: dt=1e-05
-Enter the number of tips to observe:N=100
-Enter the number of trials: niter=100
+Enter the reaction rate (Hz): kappa=2027
+Enter the spring rate (Hz): varkappa=50
+Enter the unpreferred distance (cm): x0=1.5
+Enter the timestep of motion: Dt=1e-05
+Enter the timestep of reaction: dt=1e-05
+Enter the number of tips to observe: N=100
+Enter the number of trials: niter=10
 Enter the randomization seed: seed=1234
 Use reflecting boundary conditions? (Enter 1/0): reflect=0
 Set second particle within reaction range of first? (Enter 1/0): set_second=0
 Do not allow repulsive forces? (Enter 1/0): no_repulsion=0
 Do not allow attractive forces? (Enter 1/0): no_attraction=0
+Only allow nearest neighbor forces? (Enter 1/0): neighbor=1
+Which force model should be used?
+(Enter 1:spring, 2:QED2, 3:QED3, 4:QED2 + const. repulsion, 5:QED3 + const. repulsion, else:no force): force_code=4
+the repeatable inputs are:
+0.5 5 5 2027 50 1.5 1e-05 1e-05 100 10 1234 0 0 0 0 1 4
 
 running simulation...
 simulation complete!
 
 Printing Inputs...
-r=0.1
-D=2
+r=0.5
+D=5
 L=5
-kappa=500
-varkappa=-1.5
-x0=0.3
+kappa=2027
+varkappa=50
+x0=1.5
 dt=1e-05
 Dt=1e-05
+niter=10
 reflect=0
 set_second=0
 no_repulsion=0
 no_attraction=0
+neighbor=1
+force_code=4
 
 Printing Outputs...
 exit_code=1
 ntips=100
-Tcount=100
-Tsum=0.03342
-Tavg=0.0003342
+Tcount=0
+Tsum=0
+Tavg=nan
 
