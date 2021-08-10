@@ -5,13 +5,14 @@
 1. use ./gen_run_next.sh to generate run_next.dat
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
 
-1. update non-test submit file to take run_next.dat...
+1. update return-CollTimes.submit to take run_next.dat...
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 1. update github repo
 
 ### Post-processing any previous data
 1. (if not already downloaded, download any preexisting data and process/store it.
+HINT: try something like ./bgmc/python/lib/logdown.sh
 
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
 1. rm -r ~/bgmc #remove the whole repository folder on the open science grid.  
@@ -26,4 +27,6 @@ cd ~/bgmc/c/ou
 1. ./gcc.sh;
 submit the unit test cloud
 condor_submit return_CollTimes-test.submit
-1. if the entire unit test cloud is reasonably fast and returns reasonable results, submit the main cloud...
+1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
+./post_process.sh
+1. if so, run ./clean-log.sh and condor_submit return-CollTimes.submit
