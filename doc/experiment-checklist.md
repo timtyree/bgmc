@@ -1,7 +1,7 @@
 ## This is a checklist for updating next run with no changes to pipeline
 
 ### Designing a data run (TODO: implement perl methods and append to gen_run_next.sh)
-1. design run_next.py from the previous run_prev.py
+1. design run_next.py using the previous run_prev.py in the 'dev run design.ipynb'
 1. use ./gen_run_next.sh to generate run_next.dat
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
 
