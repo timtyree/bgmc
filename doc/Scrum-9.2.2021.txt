@@ -1,0 +1,7 @@
+
+#TODO: copy care/notebooks/lib to bgmc/python/lib_care and then import the custom level-set & intersection functions
+#TODO: add level sets to the a versus r graphs for (blue) the FK model and (orange) the LR model
+#TODO: plot those level sets on a log-log plot.  Do they follow a powerlaw behavior?
+#TODO: plot those level sets on a lin-log plot.  Do they follow a logarithmic behavior?
+#TODO: if so, how does the level set value, nu0 (or M0) vary the function a=a(r;nu0)=a0*r**alpha?
+#TODO: if so, how does a0 and/or alpha depend on kappa=250 Hz or kappa=500 Hz?
