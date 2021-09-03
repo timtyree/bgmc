@@ -195,7 +195,7 @@ def gener_df_powerlaw_fits(input_fn,printing=True,testing=True,npartitions=None,
 
     df=pd.DataFrame(dict_out_lst)
     return df
-
+ 
 def gener_df_powerlaw_fits_and_to_csv(input_fn,save_folder=None,save_fn=None,printing=True,**kwargs):
     '''
     Example Usage:
