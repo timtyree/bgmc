@@ -11,9 +11,11 @@ TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 1. update github repo
 
-### Post-processing any previous data
-1. (if not already downloaded, download any preexisting data and process/store it.
-HINT: try something like ./bgmc/python/lib/logdown.sh
+### Downloading and Processing any data from the previous run
+1. (if not already downloaded, be sure to download any preexisting data and process/store it.
+cd ../../../python/lib
+<!-- cd ~/Documents/GitHub/bgmc/python/lib -->
+./logdown_and_process_and_rename.sh
 
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
 1. rm -r ~/bgmc #remove the whole repository folder on the open science grid.  
@@ -34,3 +36,7 @@ condor_submit return-CollTimes-test.submit
 ./clean-log.sh
 and then run
 condor_submit return-CollTimes.submit
+
+### Downloading and Processing any data from the previous run
+cd ~/Documents/GitHub/bgmc/python/lib
+./logdown_and_process_and_rename.sh
