@@ -34,7 +34,7 @@ def filter_log(input_fn,save_folder,qfoo=None):
 def filter_folder(folder,qfoo,save_folder):
     '''filters Log and returns a merged pandas.Dataframe as *.csv
     returns the total runtime in years for all output files in folder.'''
-    input_fn_lst=get_files_in_folder(folder,trgt='.out.')
+    input_fn_lst=get_files_in_folder(folder,trgt='out')
     print(f"searching {len(input_fn_lst)} files...")
     def routine(input_fn):
         try:

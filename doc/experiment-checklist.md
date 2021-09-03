@@ -6,6 +6,7 @@
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
 
 1. update return-CollTimes.submit to take run_next.dat...
+nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 1. update github repo
@@ -29,7 +30,7 @@ submit the unit test cloud
 condor_submit return-CollTimes-test.submit
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
 ./post_process.sh
-1. if so, run 
-./clean-log.sh 
-and then run 
+1. if so, run
+./clean-log.sh
+and then run
 condor_submit return-CollTimes.submit

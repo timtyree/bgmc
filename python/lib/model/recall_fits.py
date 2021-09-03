@@ -16,4 +16,12 @@ def recall_powerlaw_fits_to_full_models():
     # Luo-Rudy(PBC)
     m, Delta_m, M, Delta_M = 1.6375562704001745, 0.017190912126700632, 16.73559858353835, 0.8465090320196467
     wjr['lr_pbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
+
+    #extra results
+    # Fenton-Karma(NCBC)
+    m, Delta_m, M, Delta_M = 1.854156794480594, 0.02503190538288011, 7.135532649256895, 0.4548432215549294
+    wjr['fk_ncbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
+    # Luo-Rudy(NCBC)
+    m, Delta_m, M, Delta_M = 1.6611400039209043, 0.02740424198712116, 16.75061667963681, 1.3110747548319708
+    wjr['lr_ncbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
     return wjr

@@ -1,6 +1,7 @@
 # Local files
 cuda/
 c/archived/
+python/data/local_results/
 python/data/osg_output/
 python/lib/__pycache__/
 python/.ipynb_checkpoints/

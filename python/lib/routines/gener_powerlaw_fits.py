@@ -4,6 +4,7 @@
 import scipy,numpy as np,pandas as pd, os
 from ..utils import *
 from ..measure import *
+from ..model.recall_fits import recall_powerlaw_fits_to_full_models
 
 def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=False,**kwargs):
     '''for runs 12-15 (and probably later),
@@ -25,7 +26,11 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
             print("all results from trials have nonnegative collision rates.")
 
     #derived values
-    df['CollRate']=1./df['CollTime']
+    CollRate_missing=len(list(set(df.columns).intersection({'CollRate'})))==0
+    if CollRate_missing:
+        df['CollRate']=1./df['CollTime']
+        df.replace([np.inf, -np.inf], np.nan, inplace=True)
+        df.dropna(subset=['CollRate'], how="all",inplace=True)
     df['A']=df['L']**2
     df['q']=df['N']/df['A'] #number of tips per square centimeter
     df['w']=df['CollRate']/df['A'] #[mHz?]/cm^2
@@ -195,7 +200,7 @@ def gener_df_powerlaw_fits(input_fn,printing=True,testing=True,npartitions=None,
 
     df=pd.DataFrame(dict_out_lst)
     return df
- 
+
 def gener_df_powerlaw_fits_and_to_csv(input_fn,save_folder=None,save_fn=None,printing=True,**kwargs):
     '''
     Example Usage:
@@ -209,11 +214,11 @@ def gener_df_powerlaw_fits_and_to_csv(input_fn,save_folder=None,save_fn=None,pri
     if printing:
         print(f"parsing absolute directory of input_fn={input_fn}...")
     input_folder=os.path.dirname(input_fn)
-    trial_folder_name=os.path.dirname(os.path.dirname(input_folder))
+    trial_folder_name=os.path.dirname(input_folder)
     if save_folder is None:
         save_folder=trial_folder_name
     if save_fn is None:
-        save_fn = 'powerlaw_fits_'+os.path.basename(input_folder)+'.csv'
+        save_fn = os.path.basename(input_folder)+'_powerlaw_fits.csv'
     #save df as .csv
     os.chdir(save_folder)
     df.to_csv(save_fn,index=False)
