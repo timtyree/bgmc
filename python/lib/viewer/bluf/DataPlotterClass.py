@@ -14,7 +14,7 @@ class DataPlotter(object):
     then a new page is started.
     """
 
-    def __init__(self, pdfpath, rows, cols, bbox_inches='tight', save_tight=False):
+    def __init__(self, pdfpath, rows, cols, bbox_inches='tight', save_tight=False,**kwargs):
         self.pdfpath = pdfpath
         self.pdf = None
         self.rows = rows
@@ -34,7 +34,11 @@ class DataPlotter(object):
             # Start a new pdf page
             if self.fig is not None:
                 if self.save_tight: plt.tight_layout()
-                self.pdf.savefig(self.fig, bbox_inches=self.bbox_inches)
+                if save_tight:
+                    # self.pdf.savefig(self.fig, bbox_inches='tight')
+                    self.pdf.savefig(self.fig, bbox_inches=self.bbox_inches)
+                else:
+                    self.pdf.savefig(self.fig)
                 self.fig = None
             newfig = True
             self.pidx = 0

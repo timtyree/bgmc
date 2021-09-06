@@ -47,7 +47,9 @@ def gener_bluf(task_lst,
     pdf.close()
     return True
 
-
+###################################################
+# Example Usage
+###################################################
 if __name__=='__main__':
     # settings
     nb_dir=os.path.dirname(os.path.dirname(os.getcwd()))

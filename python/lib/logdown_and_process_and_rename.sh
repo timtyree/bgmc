@@ -18,9 +18,11 @@ esac
 ./logdown_and_process.sh
 cd ../data/osg_output
 #TOOD: add support for string parsing, X=14-->$RUN_NUMBER
+
+#TODO: make sure DST is where run_X_all is renamed to and DST is not the folder which run_X_all is moved into...
 DST=run_${run_number}_all
 DST_FN=run_${run_number}_all.csv
-mv run_X_all $DST
+mv run_X_all ${DST}
 mv run_X_all.csv $DST_FN
 # mv run_X_all run_16_all
 # mv run_X_all.csv run_16_all.csv
