@@ -33,8 +33,8 @@ class DataPlotter(object):
         if self.pidx == 0 or self.pidx == self.rows * self.cols:
             # Start a new pdf page
             if self.fig is not None:
-                if self.save_tight: plt.tight_layout()
-                if save_tight:
+                if self.save_tight:
+                    plt.tight_layout()
                     # self.pdf.savefig(self.fig, bbox_inches='tight')
                     self.pdf.savefig(self.fig, bbox_inches=self.bbox_inches)
                 else:

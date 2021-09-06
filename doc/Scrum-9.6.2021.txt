@@ -1,0 +1,35 @@
+GOAL: send an email to WJ and PM titled, "I have crystallized some results I would call successful"
+#OTDO: finalize results_run_15.pdf to 1-2 pages
+#OTDO: make results_run_16.pdf
+Rough draft:
+Hi Patrick and Wouter,
+I have crystallized some results that support the annihilation rates of the full models using observations from the particle model that uses inverse powerlaw attractive forces (see results_run_16.pdf attached).
+I identified these results
+reasonably similar in value to those of the full models (see)
+
+Some of the interpolated critical points presented annihilation rates within 30 Hertz of the power law fit to the full models (RMSE of w times 25cm^2 computational domain).
+We independently the power law fits to the full models observed in Fig. X(=2?).
+
+
+Hey Wouter, what percent_uncertainty do you think is reasonable for your previous observations of the annihilation rates from the full models?
+
+
+__Goal:__ get a minimal viable product ready for submission to a journal (journal of biophysics? its impact factor is ~4...)
+
+- TODO: put together a final Figure for the mean termination times of
+  - (i) the M,nu full models versus either FK or LR, and then
+  - (ii) the
+
+- TODO: put together figures & figure captions for the main text
+- TODO(later): put together figures & figure captions for supplementary material
+- TODO: sample text from notes in doc/ et alii.
+- TODO:
+
+
+The particle model fit naturally supports the critical mass hypothesis, which asserts an exponential asymptotic relationship between the area of the computational domain, A, and the mean termination time of the AFib event, $\bar{\tau}$ as tau_bar.
+This fit has qualitative agreement with the full model under the rescaling $N\rightarrow q=N/A$ versus $W_{-w}\rightarrow w = W_{-w}/A$.
+A caveat to ^this statement is that we observed some relatively complex A dependence involving the value of some shift along the explanatory $q$ axis.  This became the most visually apparent comparable trials of variable A that exhibited a distinctive piecewise exponential mean annihilation rate, $W_{-2}=w A$, as a function of q.  This suggests a more appropriate mapping $N\rightarrow N A^{\mu.-1}=q A^\mu$ for the particle model.  But in order to measure observables comparable to previous measurements (CITE: WJ's chaos paper on AF event rates)
+ piecewise exponential
+
+
+p.s. 'full_model_results.pdf' is generated using one python function

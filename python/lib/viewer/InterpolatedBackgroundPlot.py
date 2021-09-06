@@ -1,6 +1,6 @@
 #import matplotlib.pyplot as plt
 #import numpy as np
-
+#TODO: add support for using my DataPlotterClass-associated colorbar method, using def plot_sidebar(hts, dash_xy, dash_wh, pl) from DataPlotterClass.py
 def PlotInterpolatedBackground(fig,ax,x1_values,x2_values,y_values,vmin,vmax,clabel,cmap,fontsize=16,show_cbar=True,**kwargs):
     output_col=clabel
     pcm=ax.pcolormesh(x1_values, x2_values, y_values, vmin=vmin, vmax=vmax, cmap=cmap,**kwargs)

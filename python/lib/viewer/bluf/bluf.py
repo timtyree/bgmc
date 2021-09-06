@@ -28,7 +28,14 @@ def gener_bluf(task_lst,
                rows=3,
                cols=2,
                bbox_inches='tight',
-               save_tight=True):
+               save_tight=True,
+               left_margin=0.4,
+                right_margin=0.4,
+                top_margin=0.4,
+                bottom_margin=0.2,
+                wspace=0.3,
+                hspace=0.5,
+               **kwargs):
     '''generates the bottom line up front, saving as a pdf to the absolute file path, bluf_dir, which is a string instance'''
     pdf = DataPlotter(pdfpath=bluf_dir,
                       rows=rows,
@@ -42,6 +49,8 @@ def gener_bluf(task_lst,
         set_size(w, h, ax)
         #plot the next data
         plotter(ax, plotter_function, arg)
+        if save_tight:
+            plt.subplots_adjust(left=left_margin, bottom=bottom_margin, right=1-right_margin, top=1-top_margin, wspace=wspace, hspace=hspace)
         plt.close()
     #saves pdf
     pdf.close()

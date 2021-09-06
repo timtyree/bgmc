@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt, numpy as np, pandas as pd,os
 from ..model import recall_powerlaw_fits_to_full_models
 from .. import compute_power_rmse
 from .bluf import *
+from ..measure.powerlaw import *
 
 # model_name,m,M=compute_nearest_powerlaw_fit(x_values,y_values)
 #TODO: push plot_horizontal to lib and define locally
@@ -16,7 +17,7 @@ def plot_horizontal(ax,xlim,Delta_thresh=1.,use_Delta_thresh=False):
     return True
 
 
-def PlotFullModels(ax,xlim=[0.1,1.0],c1='C1',c2='C2',zorder=0,lw=4):
+def PlotFullModels(ax,xlim=[0.1,1.0],c1='C0',c2='C1',zorder=0,lw=4):
     #fk_pbc
     m_fk=1.8772341309722325
     Delta_m_fk=0.02498750277237229
@@ -38,11 +39,34 @@ def PlotFullModels(ax,xlim=[0.1,1.0],c1='C1',c2='C2',zorder=0,lw=4):
     return True
 
 #define an example plotter_function
-def PlotTrial(ax, x_values,y_values,title,title_fontsize,label="particle model",alpha=0.5,markersize=50,c='C3',**kwargs):
-    '''a plotter_function that plots q vs w'''
+def PlotTrial(ax, x_values,y_values,title,title_fontsize,label="particle model",alpha=0.3,markersize=50,c='C3',**kwargs):
+    '''a plotter function that plots q vs w'''
     ax.scatter(x_values,y_values,label=label,alpha=alpha,s=markersize,c=c,**kwargs)#,cmap='bwr')
     ax.set_title(title,fontsize=title_fontsize)
     return True
+
+#define an example plotter_function
+def PlotErrorBarScatter(ax, x_values,y_values,yerr_values,title,title_fontsize,label="particle model",alpha=0.3,c='C3',markersize=6,#50,
+    elinewidth=4,
+    capsize=3,
+    **kwargs):
+    '''a plotter function that plots q vs w.  yerr_values is the error bar radius plotted'''
+    # TODO:ax.scatter(x_values,y_values,label=label,alpha=alpha,s=markersize,c=c,**kwargs)#,cmap='bwr')
+    ax.errorbar(x=x_values,
+                y=y_values,
+                yerr=yerr_values,
+                c=c,
+                alpha=alpha,
+                fmt='o',
+                markersize=markersize,
+                ecolor=c,
+                elinewidth=elinewidth,
+                errorevery=1,
+                capsize=capsize,**kwargs)
+    ax.set_title(title,fontsize=title_fontsize)
+    return True
+
+
 
 def compute_nearest_powerlaw_fit(x_values,y_values):
     #TODO: dev plotter functions of residuals to closest model (smallest rmse)
@@ -89,17 +113,19 @@ def q_vs_w_plotter_function(ax,data):#=input_fn
     #TODO: list all of the kwargs
     #TODO: abstract/collect all of the kwargs into kwargs
     npartitions=os.cpu_count()
-    fontsize=22
+    fontsize=16
     printing=False
     alpha=0.5
     markersize=50#5
     xlabel=r'q (cm$^{-2}$)'
     ylabel=r'w (Hz cm$^{-2}$)'
     c='C3'
-    xlim=[-0.05,1.05]
-    ylim=[1e-1,15]#[1e-5,1e4]
+    xlim=[.1,1.05]
+    ylim=[0.,20]
+    # xlim=[-0.05,1.05]
+    # ylim=[1e-1,20]#[1e-5,1e4]
     legend_fontsize=fontsize-6
-    title_fontsize=fontsize-4
+    title_fontsize=fontsize-8
 
     #import / process data (functionally?)
     df=pd.read_csv(input_fn)
@@ -148,26 +174,25 @@ def q_vs_w_plotter_function(ax,data):#=input_fn
 
     #TDOO: compute xy values
 
-    #compute title= string
+    #compute title=
 #     title=r"$\nu$="+f"{m:.3f}, "+f"M={M:.3f}"+r" cm$^2$/s\n"
 # additional parameters optional/uncommentable...
     title=f"force_code={int(force_code_values[0])}, neighbors={int(neighbor_values[0])}, reflect={int(reflect_values[0])}\n"
-    title=title+r'$r=$'+f'{r_values[0]:.2f} cm, '
+    title=title+r'$r=$'+f'{r_values[0]:.5f} cm, '
     title=title+r'$\kappa=$'+f'{kappa_values[0]:.2f} Hz\n'
     title=title+r'$D=$'+f'{D_values[0]:.2f} cm'+r'$^2$/s, '
-    title=title+r'$a=$'+f'{varkappa_values[0]:.2f} cm'+r'$^2$/s, '
+    title=title+r'$a=$'+f'{varkappa_values[0]:.5f} cm'+r'$^2$/s, '
     title=title+r'$x_0=$'+f'{x0_values[0]:.0f} cm\n'
 
     #DONE: plot the data
     PlotFullModels(ax,xlim=[0.1,1])
+    FormatAxes(ax,xlim,ylim,xlabel,ylabel,title,fontsize=fontsize,use_loglog=False)#,**kwargs)
     PlotTrial(ax, x_values,y_values,title,title_fontsize)
     ax.legend(fontsize=legend_fontsize,ncol=1,loc='upper left')
-    FormatAxes(ax,xlim,ylim,xlabel,ylabel,title,fontsize=16,use_loglog=False)#,**kwargs)
     return True
 
 #TODO: incorporate ^that oneliner into functionally plotting q versus Delta_w
 def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
-    Delta_thresh=0.1
     #     TODO: figure out support for ,**kwargs):
     # #define an example plotter_function
     # def q_vs_w_plotter_function(ax, data):
@@ -189,16 +214,20 @@ def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
     #TODO: list all of the kwargs
     #TODO: abstract/collect all of the kwargs into kwargs
     npartitions=os.cpu_count()
-    fontsize=22
+    fontsize=16
     use_Delta_thresh=True
+    use_error_bars=True
+    percent_uncertainty=1.
     printing=False
     alpha=0.5
     markersize=50#5
     xlabel=r'q (cm$^{-2}$)'
     ylabel=r'w (Hz cm$^{-2}$)'
     c='C3'
-    xlim=[-0.05,1.05]
-    ylim=[-1,1]#[1e-5,1e4]
+    xlim=[.1,1.05]
+    ylim=[-1,1]
+    # xlim=[-0.05,1.05]
+    # ylim=[-1,1]#[1e-5,1e4]
     legend_fontsize=fontsize-6
     title_fontsize=fontsize-8
 
@@ -216,12 +245,29 @@ def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
 
     x_values=df.q.values
     y_values=df.w.values
+    if use_error_bars:
+        yerr_values=percent_uncertainty/100*y_values
 
     #compute the error
     model_name,m,M=compute_nearest_powerlaw_fit(x_values,y_values)
     yhat_values=M*x_values**m
     Delta_y_values=y_values-yhat_values
     y_values=Delta_y_values
+
+    # TODO: compute rmse between
+    # the particle model and the full model
+    rmse_particle_vs_full=np.sqrt(np.mean(Delta_y_values**2))
+    Delta_thresh=rmse_particle_vs_full
+
+    #TODO: compute the apparent powerlaw fit of the particle model
+    x_values=df.q.values
+    y_values=df.w.values
+    B,Delta_B,m,Delta_m,Rsq=fit_power_law(x_values,y_values)
+    rmse_particle_vs_powerlawfit=compute_power_rmse(x_values,y_values, m, B)
+    M, Delta_M= comp_power_scale(B,Delta_B,m,Delta_m)
+    Delta_y_values=y_values-yhat_values
+    y_values=Delta_y_values
+
 
     #extract column values
     r_values=np.array(sorted(set(df.r.values)))#cm
@@ -253,8 +299,12 @@ def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
         print(f"neighbor~{neighbor_values}")
         print(f"force_code~{force_code_values}")
 
+#TODO: compute the powerlaw fit for the x and y values and set them equal to m,M,Delta_m,Delta_M
+#TODO: modify title to take m,M,Delta_m,Delta_M
     #compute title= string
-    title=r"$\nu$="+f"{m:.3f}, "+f"M={M:.3f}"+r" cm$^2$/s"+f"\n"
+    title=r"$\nu$="+f"{m:.3f}"+r"$\pm$"+f"{Delta_m:.3f}"
+    title=title+f", M={M:.3f}"+r"$\pm$"+f"{Delta_M:.3f} "+r"cm$^{2(\nu-1)}$/s"
+    title=title+f"\n"+r"RMSE$_{particle\;vs\;full}=$"+f"{rmse_particle_vs_full:.3f} Hz/cm"+r"^2"+f"\n"
     #additional parameters optional/uncommentable...
     #     title=f"force_code={int(force_code_values[0])}, neighbors={int(neighbor_values[0])}, reflect={int(reflect_values[0])}\n"
     #     title=title+r'$r=$'+f'{r_values[0]:.2f} cm, '
@@ -265,8 +315,11 @@ def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
 
     # plot_horizontal solid & dashed
     plot_horizontal(ax,xlim,Delta_thresh=Delta_thresh,use_Delta_thresh=use_Delta_thresh)
+    FormatAxes(ax,xlim,ylim,xlabel,ylabel,title,fontsize=fontsize,use_loglog=False)#,**kwargs)
     #plot the data
-    PlotTrial(ax, x_values,y_values,title,title_fontsize)
+    if not use_error_bars:
+        PlotTrial(ax, x_values,y_values,title,title_fontsize)
+    else:
+        PlotErrorBarScatter(ax, x_values,y_values,yerr_values,title,title_fontsize)
 #     ax.legend(fontsize=legend_fontsize,ncol=1,loc='upper left')
-    FormatAxes(ax,xlim,ylim,xlabel,ylabel,title,fontsize=16,use_loglog=False)#,**kwargs)
     return True

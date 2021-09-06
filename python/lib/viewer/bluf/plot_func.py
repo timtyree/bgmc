@@ -3,6 +3,20 @@ import matplotlib.pyplot as plt, numpy as np, pandas as pd
 # Tim Tyree
 # 7.23.2021
 
+def PlotTextBox(ax,text,text_width=150.,xcenter=0.5,ycenter=0.5,fontsize=20, family='serif', style='italic',horizontalalignment='center',
+     verticalalignment='center', color='black',use_turnoff_axis=True,**kwargs):
+    txt=ax.text(xcenter,ycenter,text,horizontalalignment=horizontalalignment,
+         verticalalignment=verticalalignment, transform = ax.transAxes, fontsize=fontsize, color='black', wrap=True,**kwargs)
+    txt._get_wrap_line_width = lambda : text_width
+    if use_turnoff_axis:
+        ax.axis('off')
+
+def text_plotter_function(ax,data):
+    text=data
+#     ax.text(0.5, 0.5, text, family='serif', style='italic', ha='right', wrap=True)
+    PlotTextBox(ax,text,fontsize=10)
+    return True
+
 def format_plot_general(**kwargs):
     return format_plot(**kwargs)
 
