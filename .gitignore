@@ -6,6 +6,7 @@ python/data/osg_output/
 python/lib/__pycache__/
 python/.ipynb_checkpoints/
 *.png
+.DS_Store
 fig/*.png
 python/fig/
 python/data/vidmar_rappel
