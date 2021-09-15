@@ -3,6 +3,11 @@
 ### Designing a data run (TODO: implement perl methods and append to gen_run_next.sh)
 1. design run_next.py using the previous run_prev.py dev'd in the 'dev run design.ipynb'
 1. use ./gen_run_next.sh to generate run_next.dat
+HINT:
+cd c/attractive/src
+chmod +x gen_run_18.sh
+./gen_run_18.sh
+
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
 
 1. update return-CollTimes.submit to take run_next.dat...

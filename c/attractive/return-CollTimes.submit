@@ -16,4 +16,4 @@ request_memory = 50 MB
 request_disk = 30 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa varkappa x0 Dt dt Nmax niter reflect set_second no_repulsion no_attraction neighbor force_code from runs/run_17.dat
+queue r D L kappa varkappa x0 Dt dt Nmax niter reflect set_second no_repulsion no_attraction neighbor force_code from runs/run_18.dat
