@@ -5,7 +5,7 @@ import scipy,numpy as np,pandas as pd, os
 from ..utils import *
 from ..measure import *
 from ..model.recall_fits import recall_powerlaw_fits_to_full_models
-
+from ..viewer.gener_q_vs_w_for_result_folder import compute_nearest_powerlaw_fit
 def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=False,**kwargs):
     '''for runs 12-15 (and probably later),
     q_min is set to 0.1 particles per square centimeter, and
@@ -118,6 +118,13 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
         print(f"RMSE={rmse:.4f} Hz/cm^2")
         print(f"R^2={Rsq:.4f}")
 
+    #compute rmse between the particle model and the nearest full model
+    model_name_full,m_full,M_full=compute_nearest_powerlaw_fit(x,y)#recalls from wjr
+    yhat_values=M_full*x**m_full
+    Delta_y_values=y-yhat_values
+    rmse_particle_vs_full=np.sqrt(np.mean(Delta_y_values**2))
+    rmse_full=rmse_particle_vs_full
+
     #record input parameters and output measures
     dict_out={
         'm':m,
@@ -126,6 +133,8 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
         'Delta_M':Delta_M,
         'Rsq':Rsq,
         'rmse':rmse,
+        'rmse_full':rmse_full,
+        'model_name_full':model_name_full,
         'q_min':q_min,
         'q_max':q_max,
         'r':r,

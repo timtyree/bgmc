@@ -12,11 +12,9 @@ def comp_power_scale(B,Delta_B,m,Delta_m):
     #max bound
     max_bound=(B+Delta_B)**(m+Delta_m)
     # print(max_bound-B**m)
-    Delta_M=np.max((max_bound-B**m,B**m-min_bound))
+    Delta_M=np.max((np.abs(max_bound-B**m),np.abs(B**m-min_bound)))
     M=B**m
     return M,Delta_M
-
-
 
 def fit_power_law(x,y):
     dict_loglog=compute_95CI_ols(np.log(x),np.log(y))

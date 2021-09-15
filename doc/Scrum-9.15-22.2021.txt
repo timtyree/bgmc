@@ -1,0 +1,13 @@
+
+__GOAL: move functions to lib and test that they still work__
+
+__GOAL: get final results for PRL paper__
+- TODO: put a,D measurements from full models into a table with uncertainty
+- TODO: find some plots with low rmse_full and comparable a,D values
+- TODO: interpolate from a,D to get some value for r
+- TODO: interpolate from a,D to get some value for kappa
+- TODO: look at upper and lower bounds for r,kappa using the boundaries of the 95% CI for a,D
+- TODO: put these parameter values in a table
+- TODO: plot the results for those parameter values
+
+__GOAL: captioned list of figures for PRL paper__

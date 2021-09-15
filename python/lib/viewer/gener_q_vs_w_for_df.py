@@ -3,116 +3,11 @@ from ..model import recall_powerlaw_fits_to_full_models
 from .. import compute_power_rmse
 from .bluf import *
 from ..measure.powerlaw import *
+from .gener_q_vs_w_for_result_folder import *
 
-# model_name,m,M=compute_nearest_powerlaw_fit(x_values,y_values)
-#TODO: push plot_horizontal to lib and define locally
-def plot_horizontal(ax,xlim,Delta_thresh=1.,use_Delta_thresh=False):
-    #plot the solid y=0 line
-    x=np.linspace(xlim[0],xlim[1],10)
-    ax.plot(x,0*x,'k-')
-    if use_Delta_thresh:
-        #plot the dotted +-Delta_thresh lines
-        ax.plot(x,0*x+Delta_thresh,'k--',alpha=0.7)
-        ax.plot(x,0*x-Delta_thresh,'k--',alpha=0.7)
-    return True
+def q_vs_w_plotter_function_from_df(ax,df):
 
-
-def PlotFullModels(ax,xlim=[0.1,1.0],c1='C0',c2='C1',zorder=0,lw=4):
-    #fk_pbc
-    m_fk=1.8772341309722325
-    Delta_m_fk=0.02498750277237229
-    M_fk=5.572315674840435
-    Delta_M_fk=0.3053120355191732
-
-    #lr_pbc
-    m_lr=1.6375562704001745
-    Delta_m_lr=0.017190912126700632
-    M_lr=16.73559858353835
-    Delta_M_lr=0.8465090320196467
-
-    xv=np.arange(xlim[0],xlim[1],.05)
-    yv_fk=M_fk*(xv)**m_fk
-    yv_lr=M_lr*(xv)**m_lr
-
-    ax.plot(xv,yv_fk,label='Fenton-Karma model',c=c1,zorder=zorder,lw=lw)
-    ax.plot(xv,yv_lr,label='Luo-Rudy model',c=c2,zorder=zorder,lw=lw)
-    return True
-
-#define an example plotter_function
-def PlotTrial(ax, x_values,y_values,title,title_fontsize,label="particle model",alpha=0.3,markersize=50,c='C3',**kwargs):
-    '''a plotter function that plots q vs w'''
-    ax.scatter(x_values,y_values,label=label,alpha=alpha,s=markersize,c=c,**kwargs)#,cmap='bwr')
-    ax.set_title(title,fontsize=title_fontsize)
-    return True
-
-#define an example plotter_function
-def PlotErrorBarScatter(ax, x_values,y_values,yerr_values,title,title_fontsize,label="particle model",alpha=0.3,c='C3',markersize=6,#50,
-    elinewidth=4,
-    capsize=3,
-    **kwargs):
-    '''a plotter function that plots q vs w.  yerr_values is the error bar radius plotted'''
-    # TODO:ax.scatter(x_values,y_values,label=label,alpha=alpha,s=markersize,c=c,**kwargs)#,cmap='bwr')
-    ax.errorbar(x=x_values,
-                y=y_values,
-                yerr=yerr_values,
-                c=c,
-                alpha=alpha,
-                fmt='o',
-                markersize=markersize,
-                ecolor=c,
-                elinewidth=elinewidth,
-                errorevery=1,
-                capsize=capsize,**kwargs)
-    ax.set_title(title,fontsize=title_fontsize)
-    return True
-
-
-
-def compute_nearest_powerlaw_fit(x_values,y_values):
-    #TODO: dev plotter functions of residuals to closest model (smallest rmse)
-    #TODO: verify whether B is M or B is B...
-    #recall full model fits
-    wjr=recall_powerlaw_fits_to_full_models()
-    rmse_min=[9e9]
-    tuple_out=None
-    for key in wjr:
-        dict_fit=wjr[key]
-        m=dict_fit['m']
-        M=dict_fit['M']
-        B=dict_fit['M']**(1./m)
-        #TODO: consider modifying compute_power_rmse with a mode='M' that says take M:=dict_fit['M']#!!!!
-        #compare rmse against either of the full models and select the smallest rmse
-        rmse=compute_power_rmse(x_values, y_values, m, B)
-        if rmse<rmse_min:
-            rmse_min=rmse
-            #save results
-            tuple_out=(key,m,M)
-        assert      (tuple_out)
-
-    return tuple_out
-
-def q_vs_w_plotter_function(ax,data):#=input_fn
-    #     TODO: figure out support for ,**kwargs):
-    # #define an example plotter_function
-    # def q_vs_w_plotter_function(ax, data):
-    #     '''a plotter_function that plots q vs w'''
-    input_fn=data
-
-    #define kwargs
-    kwargs={}
-    #     'npartitions':os.cpu_count(),
-    #     'fontsize':22,
-    #
-    # }
-    #
-    # #populate the local namespace with kwargs
-    # loc=locals()
-    # for key in kwargs:
-    #     loc[key]=kwargs[key]
-
-    #TODO: list all of the kwargs
-    #TODO: abstract/collect all of the kwargs into kwargs
-    npartitions=os.cpu_count()
+#     npartitions=os.cpu_count()
     fontsize=16
     printing=False
     alpha=0.5
@@ -126,18 +21,6 @@ def q_vs_w_plotter_function(ax,data):#=input_fn
     # ylim=[1e-1,20]#[1e-5,1e4]
     legend_fontsize=fontsize-6
     title_fontsize=fontsize-8
-
-    #import / process data (functionally?)
-    df=pd.read_csv(input_fn)
-    #derived values
-    CollRate_missing=len(list(set(df.columns).intersection({'CollRate'})))==0
-    if CollRate_missing:
-        df['CollRate']=1./df['CollTime']
-        df.replace([np.inf, -np.inf], np.nan, inplace=True)
-        df.dropna(subset=['CollRate'], how="all",inplace=True)
-    df['A']=df['L']**2
-    df['q']=df['N']/df['A'] #number of tips per square centimeter
-    df['w']=df['CollRate']/df['A'] #[mHz?]/cm^2
 
     x_values=df.q.values
     y_values=df.w.values
@@ -191,29 +74,7 @@ def q_vs_w_plotter_function(ax,data):#=input_fn
     ax.legend(fontsize=legend_fontsize,ncol=1,loc='upper left')
     return True
 
-#TODO: incorporate ^that oneliner into functionally plotting q versus Delta_w
-def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
-    #     TODO: figure out support for ,**kwargs):
-    # #define an example plotter_function
-    # def q_vs_w_plotter_function(ax, data):
-    #     '''a plotter_function that plots q vs w'''
-    input_fn=data
-
-    #define kwargs
-    kwargs={}
-    #     'npartitions':os.cpu_count(),
-    #     'fontsize':22,
-    # }
-    #
-    # #populate the local namespace with kwargs
-    # loc=locals()
-    # for key in kwargs:
-    #     loc[key]=kwargs[key]
-
-
-    #TODO: list all of the kwargs
-    #TODO: abstract/collect all of the kwargs into kwargs
-    npartitions=os.cpu_count()
+def q_vs_Delta_w_plotter_function_from_df(ax,df):
     fontsize=16
     use_Delta_thresh=True
     use_error_bars=True
@@ -226,22 +87,10 @@ def q_vs_Delta_w_plotter_function(ax,data):#=input_fn
     c='C3'
     xlim=[.1,1.05]
     ylim=[-1,1]
-    # xlim=[-0.05,1.05]
-    # ylim=[-1,1]#[1e-5,1e4]
     legend_fontsize=fontsize-6
     title_fontsize=fontsize-8
-
-    #import / process data (functionally?)
-    df=pd.read_csv(input_fn)
-    #derived values
-    CollRate_missing=len(list(set(df.columns).intersection({'CollRate'})))==0
-    if CollRate_missing:
-        df['CollRate']=1./df['CollTime']
-        df.replace([np.inf, -np.inf], np.nan, inplace=True)
-        df.dropna(subset=['CollRate'], how="all",inplace=True)
-    df['A']=df['L']**2
-    df['q']=df['N']/df['A'] #number of tips per square centimeter
-    df['w']=df['CollRate']/df['A'] #[mHz?]/cm^2
+    use_error_bars=True
+    percent_uncertainty=1.
 
     x_values=df.q.values
     y_values=df.w.values

@@ -34,6 +34,7 @@ git clone http://github.com/timtyree/bgmc.git
 cd ~/bgmc/c/attractive
 ./gcc.sh
 1. submit the unit test cloud
+condor_submit return-CollTimes-test.submit
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
 ./post_process.sh
 1. if so, run

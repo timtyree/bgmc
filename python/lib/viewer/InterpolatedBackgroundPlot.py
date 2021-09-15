@@ -11,3 +11,12 @@ def PlotInterpolatedBackground(fig,ax,x1_values,x2_values,y_values,vmin,vmax,cla
         cbar.ax.tick_params(labelsize=fontsize)
         cbar.set_label(output_col, fontsize=fontsize)
     return True
+
+def howdo_colorbar():
+    print("""import matplotlib as mpl
+norm = mpl.colors.Normalize(vmin=0, vmax=.25)
+cmap = plt.cm.bone
+cax = fig.add_axes([0.95, 0.2, 0.02, 0.6])
+cb = mpl.colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, spacing='proportional')
+cb.set_label(r'RMSE$_{particle\;vs\;full}$')
+""")

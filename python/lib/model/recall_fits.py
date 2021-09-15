@@ -3,25 +3,135 @@ def recall_powerlaw_fits_to_full_models():
     here, w=M*q**m, and Delta_X is the maximum disagreement one could expect to observe with 95% confidence.
     here, we observe Delta_X concerns disagreements between statistically independent measurements of X.
 
+    fits considered all values available
+
     Example Usage:
     wjr=recall_powerlaw_fits_to_full_models()
     print(*wjr)
     """
     # Recall powerlaw fits to full models
     # Fenton-Karma(PBC)
-    m, Delta_m, M, Delta_M = 1.8772341309722325, 0.02498750277237229, 5.572315674840435, 0.3053120355191732
-    wjr={
-        'fk_pbc':{'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
-    }
     # Luo-Rudy(PBC)
-    m, Delta_m, M, Delta_M = 1.6375562704001745, 0.017190912126700632, 16.73559858353835, 0.8465090320196467
-    wjr['lr_pbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
 
-    #extra results
+    #extra results for non conducting boundary conditions
     # Fenton-Karma(NCBC)
-    m, Delta_m, M, Delta_M = 1.854156794480594, 0.02503190538288011, 7.135532649256895, 0.4548432215549294
-    wjr['fk_ncbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
     # Luo-Rudy(NCBC)
-    m, Delta_m, M, Delta_M = 1.6611400039209043, 0.02740424198712116, 16.75061667963681, 1.3110747548319708
-    wjr['lr_ncbc']={'m':m, 'Delta_m':Delta_m, 'M':M, 'Delta_M':Delta_M}
+
+    wjr = {
+        'fk_pbc': {
+            'm': 1.8772341309722325,
+            'Delta_m': 0.02498750277237229,
+            'M': 5.572315674840435,
+            'Delta_M': 0.3053120355191732,
+            'b': 1.665608066257863,
+            'Delta_b': 0.029341409948945123
+        },
+        'lr_pbc': {
+            'm': 1.6375562704001745,
+            'Delta_m': 0.017190912126700632,
+            'M': 16.73559858353835,
+            'Delta_M': 0.8465090320196467,
+            'b': 2.86877101880514,
+            'Delta_b': 0.0311865277365552
+        },
+        'fk_ncbc': {
+            'm': 1.854156794480594,
+            'Delta_m': 0.024531267275222507,
+            'b': 1.9249840368187936,
+            'Delta_b': 0.033016842409840354,
+            'Rsquared': 0.9960514654423748,
+            'M': 7.135532649256891,
+            'Delta_M': 0.4454472504725109
+        },
+        'lr_ncbc': {
+            'm': 1.6611400039209039,
+            'Delta_m': 0.026856157147378743,
+            'b': 2.8636688985503183,
+            'Delta_b': 0.055411463888674725,
+            'Rsquared': 0.9873700703980065,
+            'M': 16.75061667963681,
+            'Delta_M': 1.2837944679833377
+        }
+    }
     return wjr
+
+def recall_ncbc_powerlaw_fits():
+    '''recall computation of birth rates for periodic boundary conditions
+    compute w_lr and w_fk using a linear regression of a log-log plot
+    Example Usage:
+    ncbc=recall_ncbc_powerlaw_fits()
+    '''
+    ncbc = {
+    'vidmar_rappel_fk_ncbc_w_-1': {
+        'm': 0.9340032462691172,
+        'Delta_m': 0.015405370185614163,
+        'b': 0.5850078242378686,
+        'Delta_b': 0.02380452732524641,
+        'Rsquared': 0.9941565646923121,
+        'M': 1.9098118080372346,
+        'Delta_M': 0.07539284586139772
+    },
+    'vidmar_rappel_fk_ncbc_w_-2': {
+        'm': 1.854156794480594,
+        'Delta_m': 0.024531267275222507,
+        'b': 1.9249840368187936,
+        'Delta_b': 0.033016842409840354,
+        'Rsquared': 0.9960514654423748,
+        'M': 7.135532649256891,
+        'Delta_M': 0.4454472504725109
+    },
+    'vidmar_rappel_fk_ncbc_w_1': {
+        'm': 0.5537402145281756,
+        'Delta_m': 0.025024289053941558,
+        'b': -0.3447396643290329,
+        'Delta_b': 0.04154280193734214,
+        'Rsquared': 0.9646163261938806,
+        'M': 0.7125880348532382,
+        'Delta_M': 0.01571958815921015
+    },
+    'vidmar_rappel_fk_ncbc_w_2': {
+        'm': 0.3660928979356132,
+        'Delta_m': 0.00978377356513277,
+        'b': 0.018131862295372836,
+        'Delta_b': 0.015514091551474226,
+        'Rsquared': 0.9848034263677132,
+        'M': 1.0253626214778782,
+        'Delta_M': 0.0200678350403789
+    },
+    'vidmar_rappel_lr_ncbc_w_-1': {
+        'm': 1.0114623421424107,
+        'Delta_m': 0.012683393484321563,
+        'b': 1.9441221699252598,
+        'Delta_b': 0.02874450593918872,
+        'Rsquared': 0.9924845526364886,
+        'M': 7.265560880659328,
+        'Delta_M': 0.37047457235692693
+    },
+    'vidmar_rappel_lr_ncbc_w_-2': {
+        'm': 1.6611400039209039,
+        'Delta_m': 0.026856157147378743,
+        'b': 2.8636688985503183,
+        'Delta_b': 0.055411463888674725,
+        'Rsquared': 0.9873700703980065,
+        'M': 16.75061667963681,
+        'Delta_M': 1.2837944679833377
+    },
+    'vidmar_rappel_lr_ncbc_w_1': {
+        'm': 0.7706123216022909,
+        'Delta_m': 0.03230010260685688,
+        'b': 0.18915951129694153,
+        'Delta_b': 0.07390920800200297,
+        'Rsquared': 0.9334083117011656,
+        'M': 1.1929319438876482,
+        'Delta_M': 0.06997149338088682
+    },
+    'vidmar_rappel_lr_ncbc_w_2': {
+        'm': 0.752730079269041,
+        'Delta_m': 0.010445660898945816,
+        'b': 1.1435455614126926,
+        'Delta_b': 0.023860003093298793,
+        'Rsquared': 0.9907623058081242,
+        'M': 2.9883550824886997,
+        'Delta_M': 0.10873027967246784
+    }}
+    return ncbc

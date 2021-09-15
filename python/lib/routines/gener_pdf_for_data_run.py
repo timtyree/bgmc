@@ -3,7 +3,7 @@ from .. import *
 # from . import *
 # import random,scipy
 
-def gener_bluf_q_vs_w_for_csv_folder(input_fn):
+def gener_bluf_q_vs_w_for_csv_folder(input_fn,max_num_trials=None,bluf_dir=None,**kwargs):
     text_left =("(left column) the mean annihilation rate, $w$, versus the particle number density, $q$, for (blue) the Fenton-Karma model, (orange) the Luo-Rudy model, and (red) the particle model.  The parameters of the particle models were selected as the critical points found in the $(r,a)$ plane with $D$ and $\kappa$ fixed.")
     text_right=("(right column) the disagreement of the mean annihilation rate of the particle model with that of the full model.  Error bars represent the 95% confidence intervals for the particle model, supposing there is zero uncertainty from the full model.")
     wjr=recall_powerlaw_fits_to_full_models()
@@ -11,7 +11,8 @@ def gener_bluf_q_vs_w_for_csv_folder(input_fn):
     modname=os.path.basename(os.path.dirname(input_fn))
     save_folder=os.path.dirname(os.path.dirname(input_fn))
     # save_folder=f"{nb_dir}/../fig"
-    bluf_dir = save_folder+f"/{modname}_plotted.pdf"
+    if bluf_dir is None:
+        bluf_dir = save_folder+f"/{modname}_plotted.pdf"
     # bluf_dir = f"{nb_dir}/Figures/{modname}_plotted.pdf"
 
     # settings from lib
@@ -21,6 +22,12 @@ def gener_bluf_q_vs_w_for_csv_folder(input_fn):
     input_fn_lst=os.listdir(os.path.dirname(input_fn))
     # input_fn_lst=os.listdir(os.path.dirname(input_fn))
     os.chdir(os.path.dirname(input_fn))
+
+    #limit to the maximum number of trials
+    if max_num_trials is not None:
+        if len(input_fn_lst)>int(max_num_trials):
+            input_fn_lst=input_fn_lst[:max_num_trials]
+
     #define the lists of plotter tasks
     task_lst = [
         (text_plotter_function,text_left),
