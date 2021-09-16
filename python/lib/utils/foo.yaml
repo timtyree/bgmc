@@ -1,0 +1,84 @@
+--- #This is document number 1
+# This is a full line comment
+items:
+  - name: This is document number 2
+  - things:
+      thing1: huey
+      things2: dewey
+      thing3: louie
+  - other things:
+      key: value
+foo:
+     # this is a comment, too
+     pleh: help
+     stuff:
+       foo: bar
+       bar: foo
+     int:
+       foo: 12345   # decimal int
+       bar: 0x12d4  # hexidecimal int
+       plop: 023332 # octal int
+     float:
+       foo: 1230.15 # decimal float
+       bar:  12.3015e+05 #scientific float
+     etc:
+        foo: .inf
+        bar: -.Inf
+        plop: .NAN
+     none:
+       foo: ~
+       bar: null
+
+     bool:    #2 equivelalent reps
+        foo: True
+        bar: False
+        light: On
+        TV: Off
+     arrays:  #2 equivelalent reps
+       items: [ 1, 2, 3, 4, 5 ]
+       names: [ "one", "two", "three", "four" ]
+       items:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+       names:
+        - "one"
+        - "two"
+        - "three"
+        - "four"
+     dict:
+       foo: { thing1: huey, thing2: louie, thing3: dewey }
+...
+--- #This is document number 2
+foo: This is document number 2
+bar: "this is not a normal string\n"
+bar: > #interpreted as a 1 line string
+  this is not a normal string it
+  spans more than
+  one line
+  see?
+bar: | #interpreted as a multiline string
+  this is not a normal string it
+  spans more than
+  one line
+  see?
+# Comments are for humans. YAML processors will discard them.
+# Values in YAML's key-value pairs are scalar. They act like the scalar types in languages like Perl, Javascript, and Python. It's usually good enough to enclose strings in quotes, leave numbers unquoted, and let the parser figure it out. But that's only the tip of the iceberg. YAML is capable of a great deal more...
+---
+###########
+# Adv. Ops.
+###########
+# Multiline values may end with whitespace, and depending on how you want the document to be processed you might not want to preserve it. YAML has the strip chomp and preserve chomp operators. To save the last character, add a plus to the fold or block operators.
+adv_topics:
+  chomp_modifiers:
+    preserve: >+
+      preserve codifiers
+      strip
+      the last character
+    strip: |-
+      strip modifiers
+      strip
+      the last character
+...
