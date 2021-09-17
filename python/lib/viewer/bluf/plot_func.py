@@ -35,10 +35,13 @@ def format_plot(ax,xlabel,ylabel,fontsize=20,use_loglog=False,**kwargs):
     ax.tick_params(axis='both', which='minor', labelsize=0,**kwargs)
     return True
 
-def FormatAxes(ax,x1lim,x2lim,x1label,x2label,title,fontsize=16,use_loglog=False,**kwargs):
-    ax.set_xlim(x1lim)
-    ax.set_ylim(x2lim)
-    ax.set_title(title,fontsize=fontsize)
+def FormatAxes(ax,x1label,x2label,title=None,x1lim=None,x2lim=None,fontsize=16,use_loglog=False,**kwargs):
+    if x1lim is not None:
+        ax.set_xlim(x1lim)
+    if x2lim is not None:
+        ax.set_ylim(x2lim)
+    if title is not None:
+        ax.set_title(title,fontsize=fontsize)
     format_plot(ax, x1label, x2label, fontsize=fontsize, use_loglog=use_loglog,**kwargs)
     return True
 
