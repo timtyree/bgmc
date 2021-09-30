@@ -21,7 +21,7 @@ def comp_coordinate_values_from_X(X,nsamples=1000):
     x2_values=XI_lst[1]
     return x1_values, x2_values
 
-def interp_txt_from_scatter(X,y,nsamples=1000,mode ='spline',**kwargs):
+def interp_txt_from_scatter(X,y,nsamples=1000,mode ='spline',**kwargs): 
     '''input: X,y,nsamples=1000:
         - (N,2) numpy array as X, (N,1) numpy array as y
         - mode='spline' uses CloughTocher2DInterpolator, which recieves kwargs
