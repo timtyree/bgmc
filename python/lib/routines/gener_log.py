@@ -57,7 +57,8 @@ def get_routine_gener_logs(
         explicitly_uniform_ic=False,
         **kwargs):
     '''
-    TODO: implement use_neighbors kwarg. integrate it's manipulation from the cooresponding .ipynb
+    TODO: implement use_neighbors kwarg.
+    TODO: integrate use_neighbors kwarg from the cooresponding .ipynb
 
     defines model parameters baked into simulation
     Example Usage:
@@ -66,7 +67,7 @@ def get_routine_gener_logs(
     routine_gener_logs(seed=123)
     '''
     #prepare folders for csv output
-    data_folder = f"{results_folder}/euic_{str(explicitly_uniform_ic)}_fc_{force_code}_r_{r}_D_{D}_L_{L}_kappa_{kappa}_varkappa_{varkappa}"
+    data_folder = f"{results_folder}/neighbors_{use_neighbors}_uniformic_{int(explicitly_uniform_ic)}_fc_{force_code}_r_{r}_D_{D}_L_{L}_kappa_{kappa}_varkappa_{varkappa}"
     if not os.path.exists(data_folder):
         os.mkdir(data_folder)
     data_folder = data_folder + "/Log"
@@ -162,44 +163,128 @@ def get_routine_gener_logs(
             Fx_net = zeros.copy()
             Fy_net = zeros.copy()
 
-            #sum_each_force_kernel
-            for i in range(N):
-                if (still_running[i]):
-                    for j in range(i + 1, N - 1):
-                        if (still_running[j]):
-                            #compute displacement vector with pbc
-                            dx = subtract_pbc_1d(x_old[j], x_old[i], L)
-                            dy = subtract_pbc_1d(y_old[j], y_old[i], L)
+            if use_neighbors==1:
+                # // kernel_compute_nearest_neighbor
+                for i in range(N-1):
+                    # // each i,j pair is reached once per kernel launch
+                    for j in range(i+1,N):#(j = i+1; j < Nmax; j++ ) {
+                        # // compute distance between particles that are still running
+                        # if (reflect==0){
+                        dist=dist_pbc(x_old[i],y_old[i],x_old[j],y_old[j],L);
+                        # }else{
+                        # dist=dist_eucl(x_old[i],y_old[i],x_old[j],y_old[j]);
+                        # // // update the symmetric distance matrix
+                        # // dist_old[i][j]=dist;
+                        # // dist_old[j][i]=dist;
 
-                            dist2 = dx * dx + dy * dy
-                            if (dist2 < 1e-8):
-                                dist2 = float(1e-8)
-                            dist = np.sqrt(dist2)
+                        # // update nearest neighbor distance and i_neighbor
+                        if (dist<min_dist_old[i]):
+                            min_dist_old[i]=dist;
+                            i_neighbor[i]=j;
+                        if (dist<min_dist_old[j]):
+                            # //this choice does not imply symplectic deterministic forces
+                            min_dist_old[j]=dist;
+                            i_neighbor[j]=i;
 
-                            #compute displacement due to drift
-                            impulse_factor = 0.
-                            if (force_code == 1):
-                                #spring
-                                impulse_factor = impulse_prefactor * (
-                                    dist - x0) / dist
-                            if (force_code == 2):
-                                #QED2: force ~ inverse power law
-                                impulse_factor = impulse_prefactor / dist2
-                            if (force_code == 3):
-                                #QED3: force ~ inverse square power law
-                                impulse_factor = impulse_prefactor / dist2 / dist
+                # // nearest neighbor one_step_ou_kernel at long timescale, Dt
+                for j in range(N):#(j = 0; j < Nmax; j++ ) {
+                    # // // Spring forces between nearest neighbors
+                    # // boundary conditions are already enforced
+                    ineigh=i_neighbor[j];#// extract x,y_old of other tip
 
-                            #set impulse_factor to zero if it is explicitly forbidden by the user input
-                            if ((no_attraction == 1) & (impulse_factor > 0)):
+                    # // // compute displacement due to spring force with nearest neighbor
+                    # if reflect==0:
+                    dx = subtract_pbc_1d(x_old[ineigh],x_old[j],L);
+                    dy = subtract_pbc_1d(y_old[ineigh],y_old[j],L);
+                    # else:
+                    #     dx = x_old[ineigh]-x_old[j];
+                    #     dy = y_old[ineigh]-y_old[j];
+                    dist2=dx*dx+dy*dy;
+                    if (dist2<1.e-8):
+                        dist2=1.e-8;
+                    dist = np.sqrt(dist2);
+
+                    # //FORCES_HERE
+                    # //compute displacement due to drift
+                    impulse_factor=0.;
+                    if (force_code==1):# //spring
+                        impulse_factor=impulse_prefactor*(dist-x0)/dist;
+                    if (force_code==2):# //QED2: force ~ inverse power law
+                        impulse_factor=impulse_prefactor/dist2;
+                    if (force_code==3):# //QED3: force ~ inverse square power law
+                        impulse_factor=impulse_prefactor/dist2/dist;
+                    if (force_code==4):# //QED3: force ~ inverse square power law + small repulsive force
+                        impulse_factor=impulse_prefactor/dist2 + impulse_constant;
+                    if (force_code==5):# //QED3: force ~ inverse square power law + small repulsive force
+                        impulse_factor=impulse_prefactor/dist2/dist + impulse_constant / x0;
+
+                    # // set impulse_factor to zero if it is explicitly forbidden by the user input
+                    if ((no_attraction==1) & (impulse_factor>0)):
+                        impulse_factor=0.;
+                    if ((no_repulsion==1) & (impulse_factor<0)):
+                        impulse_factor=0.;
+
+                    dxt=dx*impulse_factor;
+                    dyt=dy*impulse_factor;
+
+                    # // compute displacement due to gaussian white noise
+                    dxW=stepscale*normalRandom();
+                    dyW=stepscale*normalRandom();
+                    # // next spatial position, time integrating by a duration, Dt.
+                    X_new[j]=X_old[j]+dxW+dxt;
+                    Y_new[j]=Y_old[j]+dyW+dyt;
+                    # if (reflect==0):
+                    #   # //enforce PBC
+                    x_new[j]=periodic(X_new[j],L);
+                    y_new[j]=periodic(Y_new[j],L);
+                    # else:
+                    #     # //enforce RBC
+                    #     x_new[j]=reflection(X_new[j],L);
+                    #     y_new[j]=reflection(Y_new[j],L);
+                    # }#//end neighbor is 1
+            else: #neighbor is 0
+                #sum_each_force_kernel
+                for i in range(N):
+                    if (still_running[i]):
+                        for j in range(i + 1, N - 1):
+                            if (still_running[j]):
+                                #compute displacement vector with pbc
+                                dx = subtract_pbc_1d(x_old[j], x_old[i], L)
+                                dy = subtract_pbc_1d(y_old[j], y_old[i], L)
+
+                                dist2 = dx * dx + dy * dy
+                                if (dist2 < 1e-8):
+                                    dist2 = float(1e-8)
+                                dist = np.sqrt(dist2)
+
+                                #compute displacement due to drift
                                 impulse_factor = 0.
-                            if ((no_repulsion == 1) & (impulse_factor < 0)):
-                                impulse_factor = 0.
+                                if (force_code == 1):
+                                    #spring
+                                    impulse_factor = impulse_prefactor * (dist - x0) / dist
+                                if (force_code == 2):
+                                    #QED2: force ~ inverse power law
+                                    impulse_factor = impulse_prefactor / dist2
+                                if (force_code == 3):
+                                    #QED3: force ~ inverse square power law
+                                    impulse_factor = impulse_prefactor / dist2 / dist
+                                if (force_code==4):# //QED3: force ~ inverse square power law + small repulsive force
+                                    impulse_factor=impulse_prefactor/dist2 + impulse_constant;
+                                if (force_code==5):# //QED3: force ~ inverse square power law + small repulsive force
+                                    impulse_factor=impulse_prefactor/dist2/dist + impulse_constant / x0;
 
-                            #sum Fx_net, Fy_net according to a symplectic (momentum conserving) integrator
-                            Fx_net[i] = Fx_net[i] + dx * impulse_factor
-                            Fy_net[i] = Fy_net[i] + dy * impulse_factor
-                            Fx_net[j] = Fx_net[j] - dx * impulse_factor
-                            Fy_net[j] = Fy_net[j] - dy * impulse_factor
+
+                                #set impulse_factor to zero if it is explicitly forbidden by the user input
+                                if ((no_attraction == 1) & (impulse_factor > 0)):
+                                    impulse_factor = 0.
+                                if ((no_repulsion == 1) & (impulse_factor < 0)):
+                                    impulse_factor = 0.
+
+                                #sum Fx_net, Fy_net according to a symplectic (momentum conserving) integrator
+                                Fx_net[i] = Fx_net[i] + dx * impulse_factor
+                                Fy_net[i] = Fy_net[i] + dy * impulse_factor
+                                Fx_net[j] = Fx_net[j] - dx * impulse_factor
+                                Fy_net[j] = Fy_net[j] - dy * impulse_factor
 
             #compute the one_step given the net force, F_net
             for i in range(N):
