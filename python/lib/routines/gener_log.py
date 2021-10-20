@@ -67,7 +67,7 @@ def get_routine_gener_logs(
     routine_gener_logs(seed=123)
     '''
     #prepare folders for csv output
-    data_folder = f"{results_folder}/neighbors_{use_neighbors}_uniformic_{int(explicitly_uniform_ic)}_fc_{force_code}_r_{r}_D_{D}_L_{L}_kappa_{kappa}_varkappa_{varkappa}"
+    data_folder = f"{results_folder}/neighbors_{use_neighbors}_uniformic_{int(explicitly_uniform_ic)}_fc_{force_code}_r_{r}_D_{D}_L_{L}_kappa_{kappa}_varkappa_{varkappa}_N_{N}"
     if not os.path.exists(data_folder):
         os.mkdir(data_folder)
     data_folder = data_folder + "/Log"
