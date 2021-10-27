@@ -94,8 +94,10 @@ def compute_self_consistent_astar_rstar(contour_m_values,contour_M_values):
     '''
     #compute the intersection point as rstar,astar
     x1star_values, x2star_values=compute_intersections(contour_m_values,contour_M_values)
-    assert (x1star_values.shape[0]==1)
-    assert (x2star_values.shape[0]==1)
+    assert (x1star_values.shape[0]>0)
+    assert (x2star_values.shape[0]>0)
+    if x1star_values.shape[0]>1:
+        print(f'Warning: number of intersections is {x1star_values.shape[0]}')
     rstar=x1star_values[0]
     astar=x2star_values[0]
     return rstar,astar
