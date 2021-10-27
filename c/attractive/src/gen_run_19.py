@@ -1,4 +1,4 @@
-#run_17.py - locating ar_star settings with neighbors=0
+#run_19.py - locating ar_star settings with neighbors=1 
 import numpy as np
 niter=1500 #trials per worker
 num_trials_per_setting=1
@@ -27,7 +27,7 @@ set_second_values=np.array([0])
 reflect_values=np.array([0])
 no_repulsion_values=np.array([0])#1 means no repulsion is true
 no_attraction_values=np.array([0])
-neighbor_values=np.array([0])
+neighbor_values=np.array([1])
 
 #iterate over settings, scheduling the longest jobs first
 count=0
