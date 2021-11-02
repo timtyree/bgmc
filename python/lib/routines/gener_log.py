@@ -55,6 +55,7 @@ def get_routine_gener_logs(
         no_attraction=0,
         use_neighbors=0,
         explicitly_uniform_ic=False,
+        set_pair_ic=False,
         **kwargs):
     '''
     TODO: implement use_neighbors kwarg.
@@ -119,6 +120,10 @@ def get_routine_gener_logs(
             x_values,y_values=np.meshgrid(uvals,uvals)
             x_values=x_values.flatten()
             y_values=y_values.flatten()
+        if set_pair_ic:
+            x_values=np.array([0,0.5])
+            y_values=np.array([0,0.5])
+
         #initialize times
         t = 0
         frameno = 1
