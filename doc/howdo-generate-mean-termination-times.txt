@@ -1,0 +1,37 @@
+howdo: generating mean annihilation times with the particle model
+- from here in bgmc/doc
+cd ../c/attractive; ./gcc.sh; ./return_Colltimes.sh
+,./xrun.sh $(r) $(D=2) $(L=10) $(kappa=500) $(varkappa) $(x0=0) $(Dt=1e-5) $(dt=1e-5) $(Nmax=100) $(niter=1500) $(Process=1234) $(reflect=0) $(set_second=0) $(no_repulsion=0) $(no_attraction=0) $(neighbor=1) $(force_code=2)
+```
+#./xrun.sh 1.0 1.56 20.25 10 0.1 1.0 1e-5 1e-5 11 200 1 19992 0 0 0 0
+the parameters are
+```
+executable = xrun.sh
+arguments = $(r) $(D) $(L) $(kappa) $(varkappa) $(x0) $(Dt) $(dt) $(Nmax) $(niter) $(Process) $(reflect) $(set_second) $(no_repulsion) $(no_attraction) $(neighbor) $(force_code)
+```
+, respectively.
+NOTA BENE: not much memory is needed for this at all, I believe... no more than 10-30MB...
+
+#################
+# Example Usage:
+#################
+./xrun.sh $(rstar) $(D=2) $(L=10) $(kappa) $(varkappa=astar) $(x0=0) $(Dt=1e-5) $(dt=1e-5) $(Nmax=100) $(niter=1500) $(Process=1234) $(reflect=0) $(set_second=0) $(no_repulsion=0) $(no_attraction=0) $(neighbor=1) $(force_code=2)
+
+#D=2 tests
+date; ./xrun.sh 0.063556 2 10 500 1.876525 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.0
+date; ./xrun.sh 0.100085 2 10 250 1.893811  0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.1
+date; ./xrun.sh 0.110488 2 10 500 9.067212 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.2
+date; ./xrun.sh 0.178586 2 10 250 10.242642 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.3
+with output files structured according to:
+model_name     rstar      astar  kappa  D
+0     fk_pbc  0.063556   1.876525    500  2
+1     fk_pbc  0.100085   1.893811    250  2
+2     lr_pbc  0.110488   9.067212    500  2
+3     lr_pbc  0.178586  10.242642    250  2
+
+
+#D=0.7 tests
+date; ./xrun.sh 0.179397 0.700000 10 250 10.172637 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.55
+date; ./xrun.sh 0.111954 0.700000 10 500 9.138214 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.54
+date; ./xrun.sh 0.182402 0.800000 10 250 10.294786 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.53
+date; ./xrun.sh 0.112880 0.800000 10 500 9.018353 0 1e-5 1e-5 100 1500 1234 0 0 0 0 1 2 > Log/out.52
