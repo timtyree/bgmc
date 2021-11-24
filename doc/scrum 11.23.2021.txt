@@ -1,0 +1,103 @@
+__GOAL: get results for WJ!__
+token observed values
+input:
+LR:
+  - a_hat: 8.595 +/- 0.3771 (short timescale)
+  - D: 0.586055	+/- 0.087553 (long timescale)
+FK:
+  - a_hat: 7.3923	+/- 0.6018 (short timescale)
+  - D: 0.365238	0.004171 (long timescale)
+
+output:
+- MSR versus tdeath from 2 particle sim
+- annihilation rate from interpolating function
+
+GOAL: compare the resulting MSR to the MSR observed for the full model.
+DONE: plug the apparent a,D values from the full models into the 2-particle model
+DONE: plot MSR versus tdeath that results from ^that 2-particle simulation
+DONE: find (or plot overlay) MSR versus tdeath that results from full models
+DONE: quantify how bad the disagreement is when we put in ahat: Put the effect on the annihilation rates into a table where we put in a=ahat
+
+DONE: make minimalist ipynb to interpolate and plot annihilation rates using 'generation of table of powerfits.ipynb'
+DONE: make annihilation rate figs from token apparent obs using powerlaw fit
+DONE: make annihilation rate figs from token apparent obs using powerlaw fit
+
+
+DONE: fill in table of particle properties with uncertainties
+DONE: copy M,nu,a_emergent values into table from Slides
+DONE: copy D_apparent values into table from Slides
+DONE: find reasonable estimates for the apparent a,D values. add to table
+
+DONE: use D_apparent to estimate a_sr_corrected
+HINT: for trend, see Control-attraction-coefficient-with-diffusion.pdf
+HINT: using the time averaging method: at short lags, D_FK=1.4 cm^2/s.  at long lags, D_FK=0.6
+HINT: using the ensemble averaging method: D_FK=0.36
+
+DONE: make a slide summarizing what i did today.  share with WJ and PM. consider including a token table?
+
+TODO(test for screening): Compare the density squared to the max distance in the attraction coefficient measurement.  This gives us reason whether or not to suspect screening
+
+
+TODO: perform sensitivity check by plotting annihilation rates from the particle model that result from apparent values of the attraction coefficient
+TODO: determine whether M,nu values that result from the apparent a,D are reasonable by plotting m,M on an x,y scatterplot for (blue) the FK model and (orange) the LR model.
+
+TODO: estimate the conduction velocity of a plane wave for LR,FK with DVmem=0.001,0.0005
+TODO: measure a for the FK model with D_Vmem=0.001 & 0.0005. put in excel table
+
+TODO(uncertainty estimation): sensitivity analysis of r and kappa intersection method.   M+- Delta_M, nu+-Delta_nu
+
+
+
+TODO: plot apparent a,D from full models with a sliding time window
+
+***11.17.2021***
+TODO: copy M,nu,a_emergent values into table
+TODO: find reasonable estimates for the apparent a,D values. add to table
+TODO: plug the apparent a,D values from the full models into the 2-particle model, and compare the resulting MSR to the MSR observed for the full model.
+
+
+***11.4.2021***
+---
+DONE: plot MSR versus tf-t for the full models
+TODO: for LR model, measure ahat, D=0.7, and compare to the a=8.5 that emerged from the particle model.  Is ahat observed?
+TODO: compute RMSE of the annihilation rates from plugging a_hat into the particle model.  See how bad other values of a give in the return_CollTimes.x
+
+Q:Can we not really conclude that the attractive force is 1/R?
+A:Yes. This is supported by all reasonable  bootstrapped observations of dR/dt vs. 1/R
+TODO: test ^that with the following:
+Repeat simulation with particles further appart.
+Stop the particles when they are further appart.
+We are looking for the scaling here.
+Try using a larger time step.
+Repeat for larger distances.
+
+
+***8.25.2021***
+TODO: make a figure for the expected particle properties for the full models.
+Fig. X the Fenton-Karma model (blue) and the Luo-Rudy model (orange) on the same plot for (A) the curve yielding a:=varkappa and (B) the curve yielding D.  The t-score for the hypothesis that spiral tip parameters, a and D, are the same for the two models, is ?? and ??, respectively
+
+
+***10.13.2021***
+TODO(test for screening): Compare the density squared to the max distance in the attraction coefficient measurement.  This gives us reason whether or not to suspect screening
+
+***10.27.2021***
+TODO: investigate the optimal time averaging windows conditioned on the value of D.
+---
+TODO: find solution for the Mean First Passage time problem for the mean range versus time until collision R(t).
+
+Does there exist a critical range where increasing D has no effect on the MFPT?
+Perhaps beyond this range more D-> smaller MFPT. Perhaps at closer ranges, more D-> bigger MFPT.
+
+
+__GOAL: get final results for PRL paper__
+DONE: design/init an attraction coefficient / particle properties table
+particle_properties:
+- D_apparent: slope of the MSD of the full model trajectories
+- a_emergent: resulted from full model annihilation rates being plugged into the particle model
+- a_sr: from R^2 versus t from the full model.  may involve smoothing durations, tavg1 and tavg2
+- a_emergent_sr: from R^2 versus t with the 2 particle simulation with a_emergent and D_apparent as inputs
+
+annihilation_powerlaw_fits:
+- M: overall magnitude
+- nu: powerlaw exponent
+...
