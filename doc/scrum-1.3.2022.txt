@@ -1,0 +1,23 @@
+TODO: put together an MVP of figure 1 (exemplar annihilation event from Luo-Rudy model)
+(i) What is spiral tip pair annihilation?
+
+TODO: put together an MVP of figure 2 (log-log plot of annihilation rates + fits)
+(i) Does our particle model reproduce our previous annihilation rates?
+
+TODO: put together an MVP of figure 3 (a 6 panel figure...)
+(i) How did we fit the particle model to the annihilation rates?
+
+TODO: copy and paste Figure 1-3 for the Spiral Tip Particle Model manuscript manuscript_SPM
+
+TODO(for ideas on what to do): refer to 'meeting with WJ and PM 12.8.2021.txt' and 'meeting with WJ and PM 12.1.2021.txt' and  consider relevance to 
+
+TODO: email WJ & PM & ask if Fig. 4 should answer the questions I  list here or if I should try something else:
+Fig. 4.A(MSR plots of the LR model to the 1/R particle model and the oscillatory model (inset) box-and-whisker plots of particle lifetimes from the full model)
+(i) How do these 1/R forces can be estimated using the oscillatory model?
+(ii) How we relate these 1/R forces to the oscillatory model, knowing what we know about the particle lifetimes?
+
+Fig. 4.B(??)
+(iii) How do these measurements effect the expected duration of spiral defect chaos?
+
+Fig. 4.C(??)
+(iv) How do we control the apparent magnitude of these forces in the full models?
