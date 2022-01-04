@@ -1,3 +1,6 @@
+###################################
+# full models involved only
+###################################
 def recall_powerlaw_fits_to_full_models():
     """fits may be recomputed by evaluating the .ipynb associated with fitting powerlaws to the full models.
     here, w=M*q**m, and Delta_X is the maximum disagreement one could expect to observe with 95% confidence.
@@ -135,3 +138,40 @@ def recall_ncbc_powerlaw_fits():
         'Delta_M': 0.10873027967246784
     }}
     return ncbc
+
+
+###################################
+# particle model involved
+###################################
+def recall_particle_parameter_fits(mode):
+    '''modes are supported for mode in {'luorudy','fentonkarma'}.
+
+    Example Usage:
+    a,D,r,kappa,rmse=recall_particle_parameter_fits('luorudy')
+    '''
+    if mode=='luorudy':
+        a=8.595; D=0.586055; r=0.10413888309470609; kappa=559.500160485693; rmse=0.028075538795257697
+    elif mode=='fentonkarma':
+        a=1.604153; D=0.365238; r=0.06045948522530842; kappa=495.2658318951493; rmse=0.006797222653889483
+    return a,D,r,kappa,rmse
+
+def recall_particle_parameter_measurements():
+    """returns a tuple of measurements I made from the kinematics of the full models using ordinairy least squares. see main manuscript for details.
+
+    Example Usage:
+    a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long=recall_particle_parameter_measurements()
+    """
+    #apparent measurements
+    # #FK (a_hat short timescale, D_hat long timescale)
+    a_hat_FK=7.3923;
+    D_hat_FK=0.365238#;num_pairs=25;tavg_step=5;tavg1_max=15;tavg2_max=15
+
+    a_hat_FK_long = 1.509282#+/-0.178827 cm^2/s, tmax=90
+    a_hat_FK_vlong = 1.604153#+/-0.040173 cm^2/s
+    # tavg2=14 ms, num_samples=19087, tmin=0, tmax=300 ms
+
+    #LR (a_hat short timescale, D_hat long timescale)
+    a_hat_LR=8.595
+    D_hat_LR=0.586055#;num_pairs=25;tavg_step=5;tavg1_max=15;tavg2_max=15
+    a_hat_LR_long = 3.535902#+/-0.312245 cm^2/s, tmax=60
+    return a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long

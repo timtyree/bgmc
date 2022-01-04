@@ -3,3 +3,4 @@ from .compute_sliding_slope import *
 from .powerlaw import *
 from .boltzman_weights import *
 from .interpolate_nd import *
+from .mean_squared_error import *
