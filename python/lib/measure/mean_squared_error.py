@@ -15,7 +15,10 @@ def comp_rmse_via_interp(x, *args):
     return rmse_full
 
 def comp_mse_via_interp(x, *args):
-    '''find a best r,kappa pair for a given a,D pair for a given full model'''
+    '''find a best r,kappa pair for a given a,D pair for a given full model
+x=r,kappa
+args=a,D,q_values,w_values,interp
+    '''
     a,D,q_values,w_values,interp=args
     r,kappa=x
     #interpolate nu and M using interp
