@@ -1,4 +1,3 @@
-
 TODO: put together an MVP of figure 2 (log-log plot of annihilation rates + fits)
 (i) Does our particle model reproduce our previous annihilation rates?
 
