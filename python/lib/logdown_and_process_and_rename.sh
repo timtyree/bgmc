@@ -1,4 +1,4 @@
-run_number=19
+run_number=20
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
 case ${answer:0:1} in

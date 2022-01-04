@@ -14,6 +14,7 @@ chmod +x gen_run_18.sh
 nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
+nano ../runs/run_test.dat
 1. update github repo
 
 ### Downloading and Processing any data from the previous run
