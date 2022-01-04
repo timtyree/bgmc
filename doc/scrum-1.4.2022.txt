@@ -1,0 +1,4 @@
+TODO: Fig. 2A: see if a=2D is supported 
+- by MSR measurements of the particle model???
+- by at least one fit of the particle model to the annihilation rates of the full models
+TODO: update fig. 2B with the partially finished run 20.
