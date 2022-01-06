@@ -33,7 +33,7 @@ def gener_positions_oscillatory_reversed(
     mode='oscillatory',
     use_early_stopping=True,
     seed=42,
-    use_testing=False,
+    dont_include_passing_through_zero=False,#broken?
     **kwargs
     ):
     '''
@@ -41,7 +41,6 @@ def gener_positions_oscillatory_reversed(
     dict_out,positions_out=gener_positions_oscillatory_reversed(a=a,D=D,initial_phase_orientation=0.,printing=True)
     '''
     np.random.seed(seed)
-    dont_break=not use_testing
     #initialize particles locations as being at the same locations
     t=0
     x1=0
@@ -73,13 +72,14 @@ def gener_positions_oscillatory_reversed(
     dy_values=(y2_values-y1_values)
     Rsq_values=dx_values*dx_values+dy_values*dy_values
     omega=((1e-3*period_of_oscillation/(2*np.pi))**-1)
-    ##enforces the alignment boundary condition. smart, but might be messing up the oscillations
+    ##enforces the alignment boundary condition. smart, but might be messing up the oscillation phase
     time_constant=initial_phase_orientation/omega
     #time_constant=0.
     if printing:
         print(f"running simulation for {num_steps} steps...")
     start=time.time()
     step_num=0
+    dont_break=True #pseudo loop invariant
     while dont_break and (step_num < num_steps):
         t=step_num*Dt + time_constant
         #compute the attractive step between all pairs
@@ -160,7 +160,11 @@ def gener_positions_oscillatory_reversed(
     #         dy_values=(y2_values-y1_values)
     #         Rsq_values=dx_values*dx_values+dy_values*dy_values
         R_values=np.sqrt(Rsq_values)
-        boo_still_running=boo_still_running&(R_values<rend)
+        #include_recombinations=include_earliest
+        if dont_include_passing_through_zero:
+            boo_still_running=boo_still_running&(R_values<rend)
+        # else:
+        #     boo_still_running=boo_still_running&(t<tmax)
 
         step_num+=1
         if use_early_stopping and not boo_still_running.any():
