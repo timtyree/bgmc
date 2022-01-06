@@ -186,7 +186,7 @@ def recall_particle_model_interp_unattractive(
     if printing:
         print(f'number of training examples is {m:d}....')
 
-    interp = LinearNDInterpolator(X, y)
+    interp = LinearNDInterpolator(X, y, rescale=True)
     # interp = CloughTocher2DInterpolator(X, y) #leads to weird nonlinearities in sparse data
     if printing:
         print(f"training complete!")
