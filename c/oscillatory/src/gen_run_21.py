@@ -1,7 +1,7 @@
 #run_20.py - repeating last dense grid search with a=0 and more D resolution
 import numpy as np
-niter=1500 #trials per worker
-num_trials_per_setting=1
+niter=150 #trials per worker
+num_trials_per_setting=10
 
 L=10 #cm per domain
 force_code=2 #2 :: QED2, 4 :: QED2 + constant repulsion
@@ -43,8 +43,9 @@ for set_second in set_second_values:
                                 for D in D_values:
                                     for x0 in x0_values:
                                         num_trials=0
-                                        while num_trials<num_trials_per_setting:
-                                            num_trials+=1
-                                            count=count+1
-                                            print(f"{r:.5f} {D:.5f} {L} {kappa:.5f} {varkappa:.5f} {x0} {Dt} {dt} {Nmax} {niter} {reflect} {set_second} {no_repulsion} {no_attraction} {neighbor} {force_code}")
-# print(count)#2496
+                                        if (varkappa>2.)|(kappa>500):
+                                            while num_trials<num_trials_per_setting:
+                                                num_trials+=1
+                                                count=count+1
+                                                print(f"{r:.5f} {D:.5f} {L} {kappa:.5f} {varkappa:.5f} {x0} {Dt} {dt} {Nmax} {niter} {reflect} {set_second} {no_repulsion} {no_attraction} {neighbor} {force_code}")
+    # print(count)#24960

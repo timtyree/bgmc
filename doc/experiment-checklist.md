@@ -37,6 +37,7 @@ cd ~/bgmc/c/attractive
 condor_submit return-CollTimes-test.submit
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
 ./post_process.sh
+HINT: if not, compute what num_trials_per_setting should be so the slowest setting finishes within 10 hours per job
 1. if so, run
 ./clean-log.sh
 and then run
