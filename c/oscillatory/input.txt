@@ -1,0 +1,96 @@
+this is the schema for inputs intended for return-CollTimes.c
+r D L kappa varkappa x0 Dt dt Nmax niter seed reflect set_second no_repulsion no_attraction neighbor force_code
+
+src:
+arguments = $(r) $(D) $(L) $(kappa) $(varkappa) $(x0) $(Dt) $(dt) $(Nmax) $(niter) $(Process) $(reflect) $(set_second) $(no_repulsion) $(no_attraction) $(neighbor) $(force_code)
+
+Nota bene:
+Dt is mechanical
+dt is chemical
+both time steps were set to the same value, of 10^{-5}.
+
+Tavg=0.0245253  #was it effected by these spaces?
+Tavg=0.0245253 # negative.
+Tavg=0.0102803 #N=200 trials
+Tavg=0.0105462 #N=100 trials
+Tavg=0.0112139 #changed period to x0=123
+Tavg=0.0100888 #switched sign of varkappa
+Tavg=0.0100888 #changed nothing
+Tavg=0.0282458 #set varkappa to 5 cm^2/s
+
+To Results of the oscillatory particle model:
+There was a less than 5% effect from switching from 200 trials to 100 trials.
+
+GOAL: get mvp results asap... does any parameter space really need mapped?
+#DONE: check units of x0. x0 is in seconds.
+#DONE: plug in the parameters i put in the table in the .odg file
+r, kappa,
+#DONE: guessed the other parameters
+#DONE: verified positive varkappa means attractive at zero phase difference. verifed I'm using the same sign of varkappa as before when force_code==2
+what do i expect Tavg to be given WJ's annihilation rates? throwing 10 particles together to 8 remaining particles
+No2,rate,A
+5, 0.095638665, 25
+Tavg_expected_lr=1/0.095638665 #10 seconds? no... must be ms
+src: full_results/data_fig4_vidmar_lr_tt.csv
+#TODO: when do i get comparable resulting values at a given density? at a low density?
+Tavg=0.0332221 (num_particles=10, num_trials=100, L=5)
+#changed r to 0.3 from 0.1
+Tavg=0.0160042
+Tavg=0.0563868
+
+Tavg_expected_lr=0.0104560221538015 when N=10, L=5
+observed
+Tavg=0.0107756 when
+0.345 1.767951 5 500  3.535902  0.100 1e-05 1e-05 10    100   1234 0       0          0            0             0        2
+#r  D L kappa varkappa x0    Dt    dt    Nmax  niter seed reflect set_second no_repulsion no_attraction neighbor force_code
+Tavg=0.0106003 when using more trials
+0.345 1.767951 5 500  3.535902  0.100 1e-05 1e-05 10    500   1234 0       0          0            0             0        2
+#r  D L kappa varkappa x0    Dt    dt             Nmax  niter seed reflect set_second no_repulsion no_attraction neighbor force_code
+
+Tavg_expected_lr=0.005404999884333002 when N=16, L=5
+observed
+Tavg=0.0018262  #niter=100
+Tavg=0.00232153 #niter=500
+Tavg=0.00240484 #niter=1500
+Tavg=0.00219106 #niter=15000
+
+#DONE: try switching the signs of varkappa, fit for N=10, then see if it also works for N=16
+Tavg=0.0113832 #still reasonable for N=10
+Tavg=0.00200363  #still unreasonable for N=10
+Tavg is still >2X too fast at the higher density, where N=16...
+
+Tavg=0.0117275 #when x0=0.05 and N=10
+Tavg=0.00228168 #when x0=0.05 and N=16
+Tavg=0.00190272 #when x0=0.05 and N=16 and opposite varkappa
+
+
+Tavg_expected_lr=0.0104560221538015 when N=10, L=5
+Tavg_expected_lr=0.005404999884333002 when N=16, L=5
+#TODO: try with neighbors only with/without (i) opposite kappa and (ii) half period
+Tavg=0.151747 #Ntips=10 period = 0.05
+Tavg=0.026267 #Ntips=16 period = 0.05 niter=1500 #0.345 1.76795 5 500 -3.5359 0.05 1e-05 1e-05 10 1500 1234 0 0 0 0 1 2
+Tavg=0.168278 #Ntips=10 period = 0.10
+Tavg=0.178172 #Ntips=10 period = 0.10 positive varkappa
+Tavg=0.0282353#Ntips=16 period = 0.10 positive varkappa
+Tavg=0.0829816  #Ntips=10 period = 0.10 positive varkappa N=500
+Tavg=0.00743828 #Ntips=16 period = 0.10 positive varkappa N=500 #0.408 1.767951 5 500  3.535902  0.100  1e-05 1e-05  10    500   1234 0       0          0            0             1        2
+
+Tavg=0.101041   #Ntips=10 period = 0.10 positive varkappa N=500
+Tavg=0.00887835 #Ntips=16 period = 0.10 positive varkappa N=500
+#^this is plausible.  the corresponding values for neighbor = 0 is :
+Tavg=0.00668336 #Ntips=10 period = 0.10 positive varkappa N=500
+Tavg=0.00120477 #Ntips=16 period = 0.10 positive varkappa N=500
+
+NOTES FOR GRID SEARCH:
+- r\in[0.3,0.6), kappa>=400 Hz: r from 0.3 through 0.6 should suffice if i keep kappa greater than or equal to 500 Hz
+- a,D in those expected of the full models
+- L=5
+- neighbor=0,1
+- Nmax in increments of 4
+- niter=1500
+#TODO: dev a param sweep over ^those guessed parameters
+#TODO: failing ^that, consider interacting phases between neighbors-only
+
+#TODO(later): dev low level or python program that computes the magnitude and exponent using 2 executions of ./return_CollTime.x < 1,2-params.input
+#DONE: read christina koch's carefully email before submitting another grid search survey
+#DONE to a reasonable approximation: test runtime of slowest jobs before submitting

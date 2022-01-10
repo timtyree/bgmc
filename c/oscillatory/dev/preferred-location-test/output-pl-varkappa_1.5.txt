@@ -1,0 +1,40 @@
+[H[2J[3JFri May 21 05:17:53 PM PDT 2021
+/* Testing Effect of Location of (Anti)Hookean On Mean Collision Time */
+/* If Tavg got larger/smaller, then the rate of collision was decreased/increased. */\n
+/* | -------- | */ 
+/* | CONTROLS | */ 
+/* | -------- | */ 
+*Let spring constant be zero, varkappa=0.
+Printing the mean time to first reaction (in seconds) for nondeterministic forces only (control) for ntips=8 and ntips=16.
+Tavg=0.138964
+Tavg=0.0250833
+/* | -------- | */ 
+/* |  TESTS   | */ 
+/* | -------- | */ 
+*Let spring constant be positive, varkappa>0.
+**Let preferred distance equal zero, x0=0.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.10899
+Tavg=0.026025
+**Let preferred distance be positive, x0=0.2.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.102639
+Tavg=0.0251931
+**Let preferred distance be positive, x0=0.5.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.128361
+Tavg=0.0250385
+\nLet spring constant be negative, varkappa<0.
+**Let preferred distance equal zero, x0=0.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.188028
+Tavg=0.0291961
+**Let preferred distance be positive, x0=0.2.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.169572
+Tavg=0.0280575
+**Let preferred distance be positive, x0=0.5.
+Printing the mean time to first reaction (in seconds) with  for ntips=8 and ntips=16.
+Tavg=0.139525
+Tavg=0.0250385
+Fri May 21 05:30:31 PM PDT 2021
