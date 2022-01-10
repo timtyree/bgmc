@@ -10,7 +10,7 @@ perl deprecate_inputs.pl < $FN_IN > $TMP_IN
 #TODO(simpler): just pick Nmax and hold it fixed...
 #TODO(?): parse input passed to x_run.sh
 #ideal search parameters for L=10
-Nmin=10  #6
+Nmin=20 #10  #6
 Nmax=100
 echo "Nmin is $Nmin and Nmax is $Nmax"
 
@@ -56,8 +56,8 @@ do
   # Process_batch=($Process_batch * $Process_batch)
 
   printf "%d," $ntips
-  ntips=$[$ntips-4]
-  # ntips=$[$ntips-1]
+  #ntips=$[$ntips-4]
+  ntips=$[$ntips-1]
   # shift
 done
 printf "\n"
@@ -65,6 +65,7 @@ printf "\n"
 ntips=$Nmax
 while [ $ntips -ge $Nmin ]
 do
+  #ntips=$[$ntips-4]
   ntips=$[$ntips-1]
   perl deprecate_inputs.pl < $TMP_IN > $FN_IN
   cp $FN_IN $TMP_IN
