@@ -153,6 +153,7 @@ int main(int argc, char* argv[])
   double period = x0; // x0 is in seconds
   // float period = x0*0.001; // x0 is in milliseconds
   double omega0 = 2.*3.141592653589793 / period; // Hertz
+  double phase_concurrency_factor = Dt * omega0;
 
 
   /*                              |
@@ -285,12 +286,17 @@ int main(int argc, char* argv[])
           // // Spring forces between nearest neighbors
           // boundary conditions are already enforced
           ineigh=i_neighbor[j];// extract x,y_old of other tip
-          // interactionless phase_one_step method
-          for (j = 0; j < Nmax; j++ ) {
-            // time step phase by one step
-              phase[j]=phase[j]+omega[j]*Dt;
-            }
+          i=ineigh;
+          phase_difference=phase[ineigh]-phase[j];
+          // interacting phase_one_step method
+          phase[j]=phase[j]+phase_concurrency_factor*phase_difference;
+
           // TODO(later): try an interacting phase_one_step method
+          // bug spotted: i put a j forloop inside a j forloop redundantly.
+          // TODO(later): rerun run 20 interactionless case and see if the neighbors only is finishing
+          // // // interactionless phase_one_step method
+          // // time step phase by one step
+          // phase[j]=phase[j]+omega[j]*Dt;
 
           // // compute displacement due to spring force with nearest neighbor
           if (reflect==0){
@@ -337,12 +343,14 @@ int main(int argc, char* argv[])
           if ((no_repulsion==1) && (impulse_factor<0)){
             impulse_factor=0.;
           }
-          // DONE:  compute oscillatory forces
-          i=ineigh;
+          // // DONE:  compute oscillatory forces
+          // DONE: moved phase_difference computation before phase update, thus all parameters are using forward euler method.
+          // i=ineigh;
+          // phase_difference=phase[i]-phase[j];
           // CONFIRMED: I must put what I put ^here exactly in the following lines
           // DONE: time step phase by one step (if it has not already occurred? no... do this in a different forloop)
           // DONE:  compute phase differences between two particles just before where I compute their force interaction
-          phase_difference=phase[i]-phase[j];
+
           // DONE: multiply all particle-particle forces by a factor of cos(phase_differences)
           impulse_factor = impulse_factor *  cos(phase_difference);
           //impulse_factor = impulse_factor *  0.9;//cosf(1.5);//cos(1.);
@@ -369,11 +377,6 @@ int main(int argc, char* argv[])
         }//end nearest neighbor one_step_ou_kernel
       }//end neighbor is 1
       else{//neighbor is 0, don't use nearest neighbors
-      // phase_one_step method
-      for (j = 0; j < Nmax; j++ ) {
-        // time step phase by one step
-          phase[j]=phase[j]+omega[j]*Dt;
-        }
         //reset the net forces
         for (i = 0; i < Nmax; i++ ) {
           Fx_net[i]=0.;
@@ -433,7 +436,7 @@ int main(int argc, char* argv[])
             // DONE:  compute oscillatory forces
             // DONE: time step phase by one step (if it has not already occurred? no... do this in a different forloop)
             // DONE:  compute phase differences between two particles just before where I compute their force interaction
-            phase_difference=phase[i]-phase[j];
+            phase_difference=phase[j]-phase[i];
             // DONE: multiply all particle-particle forces by a factor of cos(phase_differences)
             impulse_factor = impulse_factor *  cos(phase_difference);
             //impulse_factor = impulse_factor *  0.9;//cosf(1.5);//cos(1.);
@@ -449,6 +452,11 @@ int main(int argc, char* argv[])
             Fx_net[j]=Fx_net[j]-dx*impulse_factor;
             Fy_net[j]=Fy_net[j]-dy*impulse_factor;
           }
+        }
+        // phase_one_step method
+        for (j = 0; j < Nmax; j++ ) {
+          // time step phase by one step
+          phase[j]=phase[j]+omega[j]*Dt;
         }
         //compute the one_step given the net force, F_net
         for (i = 0; i < Nmax; i++ ) {
