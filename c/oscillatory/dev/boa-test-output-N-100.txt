@@ -1,0 +1,70 @@
+[3J[H[2JSun Aug  8 16:23:42 PDT 2021
+/* Testing Effect of Adding a 1cm Basin of Attraction between (i) nearest neighbors and (ii) vector summed forces. */
+
+Key Results made repeatable here:
+  1. when using reflective boundary conditions, a small constant repulsive force decreased the annihilation rate independent of whether or not forces were only considered if they were between nearest neighbors.
+  2. if periodic boundary conditions were used, however, a small constant repulsive force _increased_ the annihilation rate if the forces were considered as a vector sum between all particles.
+
+This same result emerged independent of 1/r forces or 1/r^2 forces being used.
+
+
+/* * * turning on periodic boundary conditions and inverse power law forces * * */
+
+/***Case 1: nearest neighbor summed forces***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.00196778
+Tavg=0.0026371
+If Tavg got higher, then the rate of collision was decreased by a constant repulsive force.
+
+/***Case 2: vector summed forces***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.00242622
+Tavg=0.00193586
+If Tavg got lower, then the rate of collision was _increased_ by a constant repulsive force.
+
+
+/* * * turning on inverse squared power law forces * * */
+
+/***Case 3: nearest neighbor summed forces with inverse square powerlaw attraction***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.0022432
+Tavg=0.0034703
+If Tavg got higher, then the rate of collision was decreased by a constant repulsive force.
+
+/***Case 4: vector summed forces with inverse square powerlaw attraction***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.0028626
+Tavg=12.9622
+If Tavg got lower, then the rate of collision was _increased_ by a constant repulsive force.
+
+
+/* * * turning on reflecting boundary conditions and inverse power law forces * * */
+
+/***Case 5: nearest neighbor summed forces***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.0019612
+Tavg=0.00214434
+If Tavg got higher, then the rate of collision was decreased by a constant repulsive force.
+
+/***Case 6: vector summed forces***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.002218
+Tavg=0.839361
+If Tavg got lower, then the rate of collision was _increased_ by a constant repulsive force.
+
+
+/* * * turning on inverse squared power law forces * * */
+
+/***Case 7: nearest neighbor summed forces with inverse square powerlaw attraction***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.0022432
+Tavg=0.0034703
+If Tavg got higher, then the rate of collision was decreased by a constant repulsive force.
+
+/***Case 8: vector summed forces with inverse square powerlaw attraction***/
+Printing the mean time to first reaction (seconds) before/after adding a constant repulsive force for a 1cm basin of attraction...
+Tavg=0.0028626
+Tavg=12.9622
+If Tavg got lower, then the rate of collision was _increased_ by a constant repulsive force.
+
+Sun Aug  8 16:45:04 PDT 2021

@@ -1,0 +1,12 @@
+Suppose a=2D.
+
+0.41 1.767951 5 500  3.535902  0.100  1e-05 1e-05  10    1500   1234 0       0          0            0             0        2
+#r    D       L kappa varkappa  x0    Dt    dt    Nmax  niter seed reflect set_second no_repulsion no_attraction neighbor force_code
+#after 2 hours of runtime... do I have repulsive forces on?
+100,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,
+0.018456,0.026025,0.043210,0.077574,0.157227,0.415972,3.187530,
+
+
+#TODO: switch sign of varkappa and rerun with fewer trials...
+0.41 1.767951 5 500  -3.535902  0.100  1e-05 1e-05  10    500   1234 0       0          0            0             0        2
+#r    D       L kappa varkappa  x0    Dt    dt    Nmax  niter seed reflect set_second no_repulsion no_attraction neighbor force_code

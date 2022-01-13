@@ -1,0 +1,2 @@
+0.025  0.2      10  100   .4       0.1  1e-05 1e-05 20    1500   1234 0       0          0            0             1        2
+#r    D        L kappa  varkappa  x0   Dt    dt    Nmax  niter seed reflect set_second no_repulsion no_attraction neighbor force_code

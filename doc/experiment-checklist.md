@@ -7,7 +7,6 @@ HINT:
 cd c/attractive/src
 chmod +x gen_run_18.sh
 ./gen_run_18.sh
-
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
 
 1. update return-CollTimes.submit to take run_next.dat...
@@ -38,6 +37,7 @@ cd ~/bgmc/c/attractive
 condor_submit return-CollTimes-test.submit
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
 ./post_process.sh
+HINT: if not, compute what num_trials_per_setting should be so the slowest setting finishes within 10 hours per job
 1. if so, run
 ./clean-log.sh
 and then run

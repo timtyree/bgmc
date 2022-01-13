@@ -1,0 +1,25 @@
+Scrum 1.11.2022:
+DONE: implement the oscillatory model with exponential rate of concurrance of phase
+DONE: test that ^this gives reasonable estimates of the full models' pair-annihilation rates
+DONE: measure the pessimistic expected run time to be <10 hours
+DONE: dev Run 22
+TODO: launch Run 22
+HINT: see dev run .ipynb for notes
+
+
+
+run time for 100 trials (for smallest density N=20)
+03:29:53
+03:30:41
+
+N=1500 pessimistic runtime calculation
+07:50:20
+08:01:23
+11 minutes and 23 seconds
+100-20=80 iterations at least as fast as ^that yield
+runtime <= 80*(11+23/60) = 15.177777777777777 hours
+supposing linear CDF of runtimes yields the expected most-pessimistic runtime to be ~15/2 = 7
+thus, expected_runtime <= 7.5 hours < 10 hours
+so... if I play within the realm of faster than the pessimistic runtime of the slowest parameter setting, I should be good!
+
+--> use number of iterations my standard 1500, and the job should finish before the 10 hour mark (i.e. by morning!)

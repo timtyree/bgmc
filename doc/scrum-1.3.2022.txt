@@ -9,7 +9,7 @@ TODO: put together an MVP of figure 3 (a 6 panel figure...)
 
 TODO: copy and paste Figure 1-3 for the Spiral Tip Particle Model manuscript manuscript_SPM
 
-TODO(for ideas on what to do): refer to 'meeting with WJ and PM 12.8.2021.txt' and 'meeting with WJ and PM 12.1.2021.txt' and  consider relevance to 
+TODO(for ideas on what to do): refer to 'meeting with WJ and PM 12.8.2021.txt' and 'meeting with WJ and PM 12.1.2021.txt' and  consider relevance to
 
 TODO: email WJ & PM & ask if Fig. 4 should answer the questions I  list here or if I should try something else:
 Fig. 4.A(MSR plots of the LR model to the 1/R particle model and the oscillatory model (inset) box-and-whisker plots of particle lifetimes from the full model)
