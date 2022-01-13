@@ -7,7 +7,10 @@ from ..measure import *
 from ..model.recall_fits import recall_powerlaw_fits_to_full_models
 from ..viewer.gener_q_vs_w_for_result_folder import compute_nearest_powerlaw_fit
 def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=False,**kwargs):
-    '''for runs 12-15 (and probably later),
+    '''
+    if q_min is None, it is set to the minimum q value
+    if q_max is None, it is set to the maximum q value
+    for runs 12-15 (and probably later),
     q_min is set to 0.1 particles per square centimeter, and
     q_max is set to 1.0 particles per square centimeter.
 
@@ -154,7 +157,7 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
     return dict_out
 
 def gener_df_powerlaw_fits(input_fn,printing=True,testing=True,npartitions=None,return_warnings=False,**kwargs):
-    '''
+    '''kwargs are passed to gener_powerlaw_fit
     Example Usage:
     df=gener_df_powerlaw_fits(input_fn,printing=True,testing=True)
     '''
@@ -211,9 +214,10 @@ def gener_df_powerlaw_fits(input_fn,printing=True,testing=True,npartitions=None,
     return df
 
 def gener_df_powerlaw_fits_and_to_csv(input_fn,save_folder=None,save_fn=None,printing=True,**kwargs):
-    '''
+    '''kwargs are passed to gener_df_powerlaw_fits
+    if save_folder is None, the resulting .csv is is saved in the directory that holds the directory of input_fn
     Example Usage:
-    save_dir=gener_df_powerlaw_fits_and_to_csv(input_fn)
+    save_dir=gener_df_powerlaw_fits_and_to_csv(input_fn,**kwargs)
     '''
 
     df=gener_df_powerlaw_fits(input_fn,printing=printing,**kwargs)

@@ -1,4 +1,4 @@
-run_number=21
+run_number=22
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
 echo "notabene: the results are looked for in two places, both in :~/bgmc/c/oscillatory, or the folder indicated in logdown.sh"
