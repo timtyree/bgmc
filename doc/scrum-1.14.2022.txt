@@ -1,7 +1,11 @@
 TODO: show whether this oscillatory force function can explain the LR model.
-
 TODO: if so, we should should whether the oscillatory force can explain the FK model
 
 Failing ^that:
 -  Consider phases that agree powerlaw fast
 -  Consider phases that agree but only up to some constant phase, such as π/2.
+
+
+TODO: does making phi time evolve according to a second-order ODE solve this problem?
+TODO: does using second-order classical newtonian mechanics solve this problem?
+HINT: can i just solve these analytically instead of computing it directly?

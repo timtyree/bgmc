@@ -1,0 +1,7 @@
+TODO(CM): get an non offensive curve in for Fig. 2P
+TODO(WJ): respond to his email
+TODO(WJ): see if it the r=0.17... worked!
+HINT: check the test local run in python
+TODO(WJ,failing ^that): dev Run 23
+HINT: cp run 22 and run r>0.17...
+TODO(WJ,ibid): launch Run 23
