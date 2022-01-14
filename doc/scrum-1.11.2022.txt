@@ -3,7 +3,7 @@ DONE: implement the oscillatory model with exponential rate of concurrance of ph
 DONE: test that ^this gives reasonable estimates of the full models' pair-annihilation rates
 DONE: measure the pessimistic expected run time to be <10 hours
 DONE: dev Run 22
-TODO: launch Run 22
+DONE: launch Run 22
 HINT: see dev run .ipynb for notes
 
 

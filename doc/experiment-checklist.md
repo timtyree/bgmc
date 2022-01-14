@@ -31,6 +31,7 @@ git clone http://github.com/timtyree/bgmc.git
 
 ### Job Submission
 1. cd current simulation folder
+<!-- cd ~/bgmc/c/attractive -->
 cd ~/bgmc/c/attractive
 ./gcc.sh
 1. submit the unit test cloud
