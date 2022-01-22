@@ -17,7 +17,7 @@ annotation.slope_marker(origin=(x1, y1),
                         ax=ax)
     '''
     annotation.slope_marker(origin=(x1, y1),
-                            slope=3,#(3, 1),
+                            slope=slope,
                             text_kwargs={'color': 'black','fontsize':16, 'alpha':0.7},
                             poly_kwargs={'facecolor': (0.5, 0.5, 0.5), 'alpha':0.5},#TODO: replace with purple
                             ax=ax)
