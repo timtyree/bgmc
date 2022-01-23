@@ -1,0 +1,6 @@
+DONE: update thesis flyer with a .png included as a .fig in overleaf src
+TODO: try visualizing solutions, looking for a proof of concept for exponentially distributed lifetime averaged squared mean squared range until annihilation.
+TODO: write up FK model
+TODO: write up LR model
+
+
