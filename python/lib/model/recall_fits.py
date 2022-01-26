@@ -159,7 +159,7 @@ def recall_particle_parameter_measurements():
     """returns a tuple of measurements I made from the kinematics of the full models using ordinairy least squares. see main manuscript for details.
 
     Example Usage:
-    a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long=recall_particle_parameter_measurements()
+a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long=recall_particle_parameter_measurements()
     """
     #apparent measurements
     # #FK (a_hat short timescale, D_hat long timescale)
