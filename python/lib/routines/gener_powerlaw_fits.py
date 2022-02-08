@@ -19,6 +19,23 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
     m,Delta_m,M,Delta_M,Rsq,rmse=gener_powerlaw_fit(input_fn,**kwargs)
     '''
     df=pd.read_csv(input_fn)
+
+    #if a column is missing define it
+    #for compatability with older results that didn't have varkappa yet
+    varkappa_col_found=False
+    for col in df.columns:
+        if col=="varkappa":
+            varkappa_col_found=True
+    if not varkappa_col_found:
+        df['varkappa']=0
+        df['x0']=0
+        df['no_repulsion']=0
+        df['no_attraction']=0
+        df['neighbor']=0
+        df['force_code']=2
+    # set_second_values=np.array(sorted(set(df.set_second.values)))
+    # reflect_values=np.array(sorted(set(df.reflect.values)))
+
     # df.head()
     if printing:
         print(f"the columns present are:")
@@ -26,7 +43,7 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
     if testing:
         assert (not (df.CollRate<0).any())
         if printing:
-            print("all results from trials have nonnegative collision rates.")
+            print("any/all results from trials have nonnegative collision rates.")
 
     #derived values
     CollRate_missing=len(list(set(df.columns).intersection({'CollRate'})))==0
@@ -99,6 +116,14 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
     query&=df.x0==x0
     query&=(df.no_repulsion==no_repulsion)&(df.no_attraction==no_attraction)
     query&=(df.neighbor==neighbor)&(df.force_code==force_code)
+
+    #filter any observations that hit the rails
+    Dt=1e-5
+    query&=df['CollTime']>Dt
+    # #require time steps to be equal
+    # query&=df['Dt']==df['dt']
+    # query&=df['Dt']==Dt
+
     dg=df[query]
     dh=dg[dg.kappa==kappa]
     x_values=dh.q.values
@@ -153,7 +178,8 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
         'no_repulsion':no_repulsion,
         'no_attraction':no_attraction
     }
-
+    dict_out['dt']=np.array(sorted(set(df.dt.values)))[0]
+    dict_out['Dt']=np.array(sorted(set(df.Dt.values)))[0]
     return dict_out
 
 def gener_df_powerlaw_fits(input_fn,printing=True,testing=True,npartitions=None,return_warnings=False,**kwargs):

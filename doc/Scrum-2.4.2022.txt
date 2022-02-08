@@ -1,6 +1,6 @@
 For WJ:
 DONE(bgmc, on UB): plot CDF for lifetimes of spiral tips
-TODO: share with WJ and PM
+DONE: share with WJ and PM
 TODO(bgmc, on UB): estimate the values of ahat predicted from mslim and smslim
 
 TODO: test powerlaw fits of linear particle model for

@@ -39,7 +39,7 @@ args=q_values,w_values,interp
     q_values,w_values,interp=args
     r,kappa,D=x
     #interpolate nu and M using interp
-    X=np.array([[r,kappa,D]])
+    X=np.array([r,kappa,D])
     yhat = interp(X)
     nu=yhat[0,0]
     M=yhat[0,1]

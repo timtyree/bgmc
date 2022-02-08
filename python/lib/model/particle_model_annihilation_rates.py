@@ -66,9 +66,18 @@ def recall_particle_model_interp(
     # query&=df.r==r
     # query&=df.kappa==kappa
     # query&=df.D==D
+    if L is None:
+        L=np.array(sorted(set(df.L.values)))[0]#cm
     query&=df.L==L
     # query&=df.varkappa==varkappa
     dg=df[query]
+
+    # #filter any observations that hit the rails
+    # Dt=1e-5
+    # query&=df['CollTime']>Dt
+    # #require time steps to be equal
+    # query&=df['Dt']==df['dt']
+    # query&=df['Dt']==Dt
 
     #define parameters to be varied
     # input_cols=['r','D','varkappa']#~2 minute runtime?
@@ -156,6 +165,16 @@ def recall_particle_model_interp_unattractive(
 
     #load the powerlaw fits
     df=pd.read_csv(input_fn)
+
+    #if a column is missing define it
+    #for compatability with older results that didn't have varkappa yet
+    varkappa_col_found=False
+    for col in df.columns:
+        if col=="varkappa":
+            varkappa_col_found=True
+    if not varkappa_col_found:
+        df['varkappa']=0
+
     if printing:
         print(f"estimated runtime is ~{20+120*int(testing)} seconds for 17988 training samples...")
     #query the DataFrame by parameters to be fixed
@@ -165,8 +184,18 @@ def recall_particle_model_interp_unattractive(
     # query&=df.r==r
     # query&=df.kappa==kappa
     # query&=df.D==D
+    if L is None:
+        L=np.array(sorted(set(df.L.values)))[0]#cm
     query&=df.L==L
     query&=df.varkappa==0#unattractive
+
+    # #filter unequal time steps
+    Dt=1e-5
+    # query&=df['CollTime']>Dt
+    #require time steps to be equal
+    query&=df['Dt']==df['dt']
+    query&=df['Dt']==Dt
+
     dg=df[query]
 
     #define parameters to be varied

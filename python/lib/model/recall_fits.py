@@ -163,7 +163,7 @@ a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_
     """
     #apparent measurements
     # #FK (a_hat short timescale, D_hat long timescale)
-    a_hat_FK=7.3923;
+    a_hat_FK=1.65037#7.3923;
     D_hat_FK=0.365238#;num_pairs=25;tavg_step=5;tavg1_max=15;tavg2_max=15
 
     a_hat_FK_long = 1.509282#+/-0.178827 cm^2/s, tmax=90
@@ -171,7 +171,7 @@ a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_
     # tavg2=14 ms, num_samples=19087, tmin=0, tmax=300 ms
 
     #LR (a_hat short timescale, D_hat long timescale)
-    a_hat_LR=8.595
+    a_hat_LR=9.60637#8.595
     D_hat_LR=0.586055#;num_pairs=25;tavg_step=5;tavg1_max=15;tavg2_max=15
     a_hat_LR_long = 3.535902#+/-0.312245 cm^2/s, tmax=60
     return a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long
