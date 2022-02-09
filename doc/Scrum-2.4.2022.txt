@@ -1,9 +1,8 @@
 For WJ:
 DONE(bgmc, on UB): plot CDF for lifetimes of spiral tips
 DONE: share with WJ and PM
-TODO(bgmc, on UB): estimate the values of ahat predicted from mslim and smslim
-
-TODO: test powerlaw fits of linear particle model for
+DONE(bgmc, on UB): estimate the values of ahat predicted from mslim and smslim
+DONE: test powerlaw fits of linear particle model for
 SMS:
 -  LR: ahat=9.60637,7.28148
 -  FK: ahat=1.65037
