@@ -1,0 +1,21 @@
+TODO: limit manuscript to 6pages
+TODO: switch to PRL template
+TODO: remove sections after they are ordered reasonably
+TODO: remove SMS from Fig. 3C
+TODO: remove SMS everywhere by forking TyMuRa2022
+NOTA BENE: make writing broad and exciting
+- mention cardiac, though focus on general spiral tip dynamics, which have been observed in many systems, and applies to anything that has diffusion and drift in a many-body system of many particles.  Don't make it too technical.  Present the results in the most exciting way and some functional forms and underlaying equations at the beginning.  Put everything technical in the Supplementary Information.  THIS IS YE GOLDEN MINIMUM.  Include the MS analytical relation.  We have an analytical way to come to the SCALING LAWS from the data.  Why would these spiral tips attract?  Maybe plotting the curl of the voltage over a ~large spatial scale.  This might explain why in in-phase/out-of-phase explains annihilation occuring/not-occuring. This might kick the can down the road to the ion currents.
+
+TODO: plot the event averaged phase_difference/phase_average versus the time leading up to annihilation
+
+TODO: plot the curl of V(x,y,t1) for 1 snapshot. Zoom in on 1 annihilation event tau time before annihilation
+
+
+TODO: let PM know (by email after this week) when I have it presentable.
+
+TODO: send everyone a reminder email individually tomorrow morning at 4:30am saying I need to schedule
+
+
+TODO: aim for 4 2-column pages OR 6? pages for 1-column.  Lookup the PRL template.
+TODO: see lookup the PRL template and see.
+

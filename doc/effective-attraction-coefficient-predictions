@@ -1,0 +1,13 @@
+
+Effective attraction coefficients predicted by MSR consistent theories
+SMS:
+-  LR: ahat=9.60637,7.28148
+-  FK: ahat=1.65037
+MS:
+- LR: ahat=7.13454,4.99485
+- FK: ahat=1.8876
+Schema:
+- model: effective_attraction_coefficient=<value with G1>,<value with G2>
+
+where G1,G2 are the mean lifetimes of spiral tips measured with or without trivial trajectories considered, respectively.
+Including the trivial trajectories improved the goodness of fit to the annihilation rates.
