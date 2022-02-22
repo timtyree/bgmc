@@ -1,0 +1,49 @@
+TODO(Fig. 1):
+- label tips in colors based on clockwise/counter clockwise
+- remake with 1 panel before 1 panel after annihilation
+- switch to FK model
+- increase apparent resolution
+- remove 1 cm scale bar. Just state this in the caption
+- remove "Pow!" Before publishing. It is good for my candidacy exam.
+
+
+TOOD(Fig. 2-->3? Or 2?): 
+- (null --> A) show dRdt versus R to show an attractive force is reasonable(keep in Fig. 2, this is motivation for the attractive force).
+- switch panels (A,B,C) --> (B,C,A). 
+	- (B) a=0 doesn't work. (C) With an attractive force we can sweep through the slopes, and (A) it provides a good fit.
+
+
+TODO(Fig. 3-->2? Or 3?):
+
+
+---------------
+TODO: 
+Potential model for creation
+- pick a random point at least a certain distance from any other spiral tip
+- can we do this using time reversal of the annihilation rate method.
+
+Fig 4. Explanation for attractive force
+
+Include figure panel motivating the diffusive force.
+
+
+
+TODO: adjust manuscript to PRL format
+TODO: try to have a copy worth iterating on by this weekend
+
+TODO: give powerpoint tomorrow by 
+NOTE: there is an enormous risk of me going over time
+TODO: practice and time self before practice talk tomorrow at 1pm
+The panel will ask questions, I have less than 50 minutes
+
+
+
+
+
+
+
+
+
+
+
+
