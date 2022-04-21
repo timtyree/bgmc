@@ -1,18 +1,9 @@
-<h1>A Brownian Gas Monte Carlo in C</h1>
+<h1>Brownian Gas Monte Carlo (bgmc)</h1>
 
-The manuscript associated with this repository is under construction.
+I'm told that a dozen particles does not constitute a gas...  I beg to differ on a technical level.  If it brings you peace, imagine substituting "g" for "n" for n-bodies in a box.  The manuscript associated with this repository is nearing submission, and will be linked here.
 
-## Tasks that need be done
-
-### __Task List for TT:__
-- DONE: generate the file of grid search arguments
-- DONE: get simulation running as a command line executable
-- DONE: test compute cluster
-- DONE: grid search compute cluster
-- DONE: dev logdown.sh / logdown.py to aggregate results
-- DONE: visualize results 
-- TODO: fit to WJ's results
-
-### __Task List for PM:__
-- TODO: update lib/return_CollTime_test.m to compute expected CollTime and bootstrap delta_CollTime (see lines 161-162)
-- TODO: upload notes to overleaf and share with TT 
+### _What's inside this repository?_
+- cached results from large, brute force grid searches of the linear particle model
+- command line executables that can be used to generate the aforementioned cached results to machine precision
+- a lot of notebooks/*.ipynb documenting the twists and turns of investigating something novel
+- a library of python functions used to generate data and figures in the manuscript to machine precision
