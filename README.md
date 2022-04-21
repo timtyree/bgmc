@@ -1,6 +1,6 @@
 <h1>Brownian Gas Monte Carlo (bgmc)</h1>
 
-I'm told that a dozen particles does not constitute a gas...  I beg to differ on a technical level.  If it brings you peace, imagine substituting "g" for "n" for n-bodies in a box.  The manuscript associated with this repository is nearing submission, and will be linked here.
+I'm told that a dozen particles does not constitute a gas...  I beg to differ on a technical level.  If it brings you peace, imagine substituting "g" for "n" for n-bodies in a box.  The manuscript associated with this repository is nearing submission, and it will be linked here.
 
 ### _What's inside this repository?_
 - cached results from large, brute force grid searches of the linear particle model
