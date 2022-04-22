@@ -7,3 +7,5 @@ I'm told that a dozen particles does not constitute a gas...  I beg to differ on
 - command line executables that can be used to generate the aforementioned cached results to machine precision
 - a lot of notebooks/*.ipynb documenting the twists and turns of investigating something novel
 - a library of python functions used to generate data and figures in the manuscript to machine precision
+
+Something Missing?  If so, feel free to inquire by sending me an email at tyree at physics dot ucsd dot edu.
