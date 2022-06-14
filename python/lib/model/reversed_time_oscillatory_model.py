@@ -71,10 +71,15 @@ def gener_positions_oscillatory_reversed(
     dx_values=(x2_values-x1_values)
     dy_values=(y2_values-y1_values)
     Rsq_values=dx_values*dx_values+dy_values*dy_values
-    omega=((1e-3*period_of_oscillation/(2*np.pi))**-1)
-    ##enforces the alignment boundary condition. smart, but might be messing up the oscillation phase
-    time_constant=initial_phase_orientation/omega
-    #time_constant=0.
+    # if not np.isclose(period_of_oscillation,0.):
+    if not period_of_oscillation==0:
+        omega=((1e-3*period_of_oscillation/(2*np.pi))**-1)
+        #enforce the alignment boundary condition
+        time_constant=initial_phase_orientation/omega
+    else:
+        #let zero input period correspond to the linear particle model
+        omega=0.
+        time_constant=0.
     if printing:
         print(f"running simulation for {num_steps} steps...")
     start=time.time()
