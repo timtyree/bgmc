@@ -34,9 +34,12 @@ def gener_positions_oscillatory_reversed(
     use_early_stopping=True,
     seed=42,
     dont_include_passing_through_zero=False,#broken?
+    a0=0.,
     **kwargs
     ):
     '''
+    TODO: add optional argument a0 for the affine oscillatory attraction coefficient
+
     Example Usage:
     dict_out,positions_out=gener_positions_oscillatory_reversed(a=a,D=D,initial_phase_orientation=0.,printing=True)
     '''
@@ -56,6 +59,7 @@ def gener_positions_oscillatory_reversed(
 
     stepscale = np.sqrt(2 * D * Dt)
     impulse_prefactor = a * Dt
+    affine_term=np.around(a0/a,7)
 
     #tmax=1#10#0.1#1 #seconds
     num_steps=np.int64(np.around(tmax/Dt))
@@ -92,8 +96,8 @@ def gener_positions_oscillatory_reversed(
         F1x=f_values*dx_values
         F1y=f_values*dy_values
         if mode=='oscillatory':
-            F1x*=np.cos(omega*t)
-            F1y*=np.cos(omega*t)
+            F1x*=(np.cos(omega*t)+affine_term)
+            F1y*=(np.cos(omega*t)+affine_term)
 
         #compute the diffusive step between all pairs
         dxW1_values=stepscale*np.random.normal(size=num_pairs)
