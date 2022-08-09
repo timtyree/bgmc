@@ -1,0 +1,27 @@
+- Option 1: make run 24 with L=10
+  - Pros:
+    - backcompatable
+  - Cons:
+    - may necessitate scaling between domain sizes
+- Option 2: make run 24 with L=5
+  - Pros:
+    - no rescaling necessary, as the same domain is used 200x200
+    - i don't try to merge loose grid searches (which is a waste of time)
+    - higher quality product
+  - Cons:
+    - i'll need to do a couple back of envelope estimates re:
+    - DONE!
+      - DONT: fiddle with the number of iterations per job...
+
+
+TODO: dev run 24
+controlled by return_CollTimes.sh
+
+==> use L=5 for the one in the manuscript.
+
+
+
+TODO: Q: Can I write a quick .sh script that tests the scale invariances of powerlaws?
+- subtract the results of two data runs, Alice and Bob
+    - Alice:  parameter setting with L=5
+    - Bob: parameter setting with L=10 scaled to match ibid

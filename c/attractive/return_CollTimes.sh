@@ -9,9 +9,14 @@ perl deprecate_inputs.pl < $FN_IN > $TMP_IN
 
 #TODO(simpler): just pick Nmax and hold it fixed...
 #TODO(?): parse input passed to x_run.sh
-#ideal search parameters for L=10
-Nmin=10  #6
-Nmax=100 #100
+# #ideal search parameters for L=10
+# Nmin=10  #6
+# Nmax=100 #100
+
+#search parameters for L=5
+Nmin=6
+Nmax=100
+
 echo "Nmin is $Nmin and Nmax is $Nmax"
 
 # perl deprecate_inputs.pl < 1-control.input > $TMP_IN

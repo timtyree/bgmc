@@ -1,6 +1,7 @@
 import numpy as np, time,matplotlib.pyplot as plt, pandas as pd
 from scipy.signal import savgol_filter
-from ..lib_care.measure.bootstrap import bin_and_bootstrap_xy_values_parallel
+# from ..lib_care.measure.bootstrap import bin_and_bootstrap_xy_values_parallel
+from ..measure.bootstrap import bin_and_bootstrap_xy_values_parallel
 from ..measure.compute_slope import *
 # from ..viewer.bluf.plot_func import print_dict
 def print_dict(input_dict,*argv):
