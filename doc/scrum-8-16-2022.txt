@@ -1,0 +1,14 @@
+NOTE: if fitting to run 25/24 fails, then consider using old cache (which fit annihilation rates successfully) under
+- Q: does it make sense to take r,L=10 --> r/2,L=5?
+- NOTE: alinear,D are local scales
+- NOTE: alinear appears to be independent of domain size
+  - --> suggests domain size independence is threatened by alinear.
+  - the insensitivity of w(q) to D does not support D being capable of explaining the effect of scaling
+  - therefore, we expect the domain-size dependence to be completely explained by reaction range, r.
+    - Q: is there any (linear?/nonlinear?) scaling of reaction range r,L-->f(r,L),1 that must explain the effect of density?
+    - A?: we suspect the holding kappa and the reactable percent of the domain fixed should work
+      - --> fix kappa. 
+      - --> fix 3.14*N*r^2/L^2.  --> fix x=r/L.
+
+
+TODO: try to fit w(q) using the old data runs (with L=10) but with alinear,D scaled down by (10/5)^2=4

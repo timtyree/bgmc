@@ -1,5 +1,5 @@
 #!/bin/bash
-run_number=24
+run_number=25
 
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
@@ -26,9 +26,13 @@ cd ../data/osg_output
 #TODO: make sure DST is where run_X_all is renamed to and DST is not the folder which run_X_all is moved into...
 DST=run_${run_number}_all
 DST_FN=run_${run_number}_all.csv
+#clear any previous cache
+rm $DST_FN
+rm -r $DST
+rmdir $DST 
+#move results to cache
 mv run_X_all ${DST}
 mv run_X_all.csv $DST_FN
-# mv run_X_all run_16_all
-# mv run_X_all.csv run_16_all.csv
-#TODO: integrate m,M observation into process
-#output row maps all trial parameters to the apparent m,M with their summary statistics
+#then compute
+#inputs: all trial parameters
+#outputs: apparent m,M with their summary statistics
