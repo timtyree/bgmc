@@ -44,6 +44,11 @@ HINT: if not, compute what num_trials_per_setting should be so the slowest setti
 and then run
 condor_submit return-CollTimes.submit
 
+### Releasing held jobs
+1. cd ~
+1. source bash_aliases
+1. release
+
 ### Downloading and Processing any data from the previous run
 cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
