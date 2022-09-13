@@ -5,6 +5,7 @@
 1. use ./gen_run_next.sh to generate run_next.dat
 HINT:
 cd c/attractive/src
+
 chmod +x gen_run_18.sh
 ./gen_run_18.sh
 */ DONE(implemented into ^that in bash): grab the final 1-4 lines of run_next.dat and put them in run_test.dat /*
@@ -14,6 +15,7 @@ nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
+
 1. update github repo
 
 ### Downloading and Processing any data from the previous run
@@ -35,10 +37,14 @@ git clone http://github.com/timtyree/bgmc.git
 cd ~/bgmc/c/attractive
 ./gcc.sh
 
-<!-- if not done locally, gener run arguments remotely
+1. if not done locally, gener run arguments remotely
 cd src
-./gen_run_26.sh
+chmod +x gen_run_27.sh
+./gen_run_27.sh
 nano ../runs/run_test.dat
+1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
+nano ../runs/run_test.dat
+
  -->
 
 1. submit the unit test cloud

@@ -38,3 +38,14 @@ for rv in retval:
     if printing:
         print(f"run time for evaluating routine was {time.time()-start:.2f} seconds, yielding {len(retval)} values returned")
     return retval
+
+
+def get_client_dask(n_workers=4, threads_per_worker=1, **kwargs):
+    """
+    Example Usage:
+client = get_client_dask(n_workers=4, threads_per_worker=1), **kwargs)
+
+    """
+    from dask.distributed import Client, progress
+    client = Client(n_workers=n_workers, threads_per_worker=threads_per_worker, **kwargs)
+    return client
