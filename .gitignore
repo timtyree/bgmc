@@ -62,3 +62,5 @@ python/data/local_results/euic_False_fc_2_r_0.1_D_2_L_10_kappa_1500_varkappa_5/e
 *.npz
 *.npz
 c/attractive/runs/run_26.dat
+*.dirlock
+*.lock

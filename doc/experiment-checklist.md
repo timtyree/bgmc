@@ -34,6 +34,13 @@ git clone http://github.com/timtyree/bgmc.git
 <!-- cd ~/bgmc/c/attractive -->
 cd ~/bgmc/c/attractive
 ./gcc.sh
+
+<!-- if not done locally, gener run arguments remotely
+cd src
+./gen_run_26.sh
+nano ../runs/run_test.dat
+ -->
+
 1. submit the unit test cloud
 condor_submit return-CollTimes-test.submit
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results

@@ -1,5 +1,5 @@
 #!/bin/bash
-run_number=25
+run_number=26
 
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
@@ -29,7 +29,7 @@ DST_FN=run_${run_number}_all.csv
 #clear any previous cache
 rm $DST_FN
 rm -r $DST
-rmdir $DST 
+rmdir $DST
 #move results to cache
 mv run_X_all ${DST}
 mv run_X_all.csv $DST_FN

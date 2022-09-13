@@ -4,6 +4,7 @@
 #load modules
 from .measure import *
 from .utils import *
-from .viewer import *
 from .model import *
+from .viewer import *
+from .controller import *
 from .routines import *
