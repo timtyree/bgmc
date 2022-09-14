@@ -34,13 +34,40 @@ def compute_power_rmse(x_values,y_values,m,B):
     rmse=np.sqrt(np.mean((y_values-yv)**2))
     return rmse
 
-def print_fit_power_law(x,y):
+def print_fit_power_law(x,y,printing=True):
+    """print_fit_power_law prints fit to power law by ordinary least squares (ols).
+    Delta_... indicates the radial distance to the 95% CI resulting from ols.
+    print_fit_power_law returns a dictionary of floats with the following schema:
+
+    schema:
+        m: exponent
+        M: magnitude
+        B: y-intercept
+        rmse: root mean squared error
+        Rsq: R squared
+        num_obs: number of observations
+
+    Example Usage:
+dict_fit = print_fit_power_law(x,y)
+print_dict(dict_fit)
+    """
     B,Delta_B,m,Delta_m,Rsq=fit_power_law(x,y)
     rmse=compute_power_rmse(x,y,m,B)
     M, Delta_M= comp_power_scale(B,Delta_B,m,Delta_m)
-
-    print(f"m={m:.6f}+-{Delta_m:.6f}; B={B:.6f}+-{Delta_B:.6f}")
-    print(f"M= {M:.6f}+-{Delta_M:.6f} Hz*cm^{{2(m-1)}}")
-    print(f"RMSE={rmse:.4f} Hz/cm^2")
-    print(f"R^2={Rsq:.4f}")
-#     return True
+    num_obs = x.shape[0]
+    if printing:
+        print(f"m = {m:.6f} +/- {Delta_m:.6f}")
+        print(f"M = {M:.6f} +/- {Delta_M:.6f} Hz/cm^2; B={B:.6f} +/- {Delta_B:.6f}")
+        print(f"RMSE={rmse:.4f} Hz/cm^2; R^2={Rsq:.4f}; N={num_obs}")
+    dict_fit=dict(
+        rmse=rmse,
+        Rsq=Rsq,
+        num_obs=num_obs,
+        m=m,
+        Delta_m=Delta_m,
+        M=M,
+        Delta_M=Delta_M,
+        B=B,
+        Delta_B=Delta_B,
+    )
+    return dict_fit
