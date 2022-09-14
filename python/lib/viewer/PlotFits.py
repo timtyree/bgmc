@@ -4,8 +4,50 @@
 import matplotlib.pyplot as plt, numpy as np, pandas as pd
 from scipy.optimize import minimize
 from .. import comp_rmse_via_interp,comp_mse_via_interp
-from .bluf import format_plot
+# from .bluf import format_plot
+from .bluf.plot_func import FormatAxes,format_plot
+##########################
+# new simple method
+##########################
+def plot_death_rates_loglog_full(fk,lr,ax=None,
+                                x1lim = [8e-3, 11],  #[8e-2, 1.1],  #[1e-1, 1] # [5,10]
+                                x2lim = [1e-2, 250],  #[1e-2, 25], #[50,350]
+                                legend_alpha=1.,
+                                alpha=0.2,
+                                s=40,
+                                fontsize=18,
+                                use_loglog=True,
+                                frameon_legend=False,
+                                zorder=0,**kwargs):
+    """
+    Example Usage:
+ax = plot_death_rates_loglog_full(fk,lr,ax)
+    """
+    if ax is None:
+        ax = plt.gca()
+    #plot the full models
+    ax.scatter(fk['q'].values,fk['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
+    ax.scatter(lr['q'].values,lr['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
+    #format
+    FormatAxes(
+        ax=ax,
+        x1lim=x1lim,
+        x2lim=x2lim,
+        x1label=r'$N/A$ (1/cm$^{2}$)',  #q$ (1/cm$^{2}$)',#r'$q=N/A$ (1/cm$^{2}$)',
+        x2label=
+        r'$W_{-2}/A$ (Hz/cm$^{2}$)',  #w$ (Hz/cm$^{2}$)',#r'$w=W_{-2}/A$ (Hz/cm$^{2}$)',
+        title=None,
+        fontsize=fontsize,
+        use_loglog=use_loglog)
+    format_plot(ax=ax,xlabel=r'q (1/cm$^2$)',ylabel=r'w (Hz/cm$^2$)',fontsize=fontsize,use_loglog=use_loglog,**kwargs)
+    leg=ax.legend(loc='lower right',fontsize=fontsize,frameon=frameon_legend)
+    for lh in leg.legendHandles:
+        lh.set_alpha(legend_alpha)
+    return ax
 
+##########################
+# old complicated method
+##########################
 def PlotParticlModelAnnihilationRateFit(a,D,wjr,interp,ax=None,model_name='lr_pbc',c='C1',**kwargs):
     """
     Example Usage:

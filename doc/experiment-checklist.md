@@ -41,11 +41,8 @@ cd ~/bgmc/c/attractive
 cd src
 chmod +x gen_run_27.sh
 ./gen_run_27.sh
-nano ../runs/run_test.dat
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
-
- -->
 
 1. submit the unit test cloud
 condor_submit return-CollTimes-test.submit

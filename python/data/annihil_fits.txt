@@ -1,0 +1,283 @@
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7800, rmse_min=0.0906, log_likelihood=7.5257, count=44475
+
+best fit for Fenton-Karma: RMSE: 0.2106 Hz/cm^2, amax: 1.7800 cm^2/s, L: 5.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_26_all/job.out.23278799.226'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=3.2900, rmse_min=1.3838, log_likelihood=-11.1950, count=42761
+
+best fit for Luo-Rudy: RMSE: 1.4357 Hz/cm^2, amax: 1.7800 cm^2/s, L: 5.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_26_all/job.out.23278799.126717'
+
+parameter range supported in run #26:
+number of trials: 166229
+         r  kappa      D  varkappa  amax    L  neighbor
+min  0.005  200.0  0.050      0.30  1.78  5.0       0.0
+max  0.200  980.0  1.295      3.19  3.29  5.0       0.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7810, rmse_min=0.0911, log_likelihood=7.0307, count=4410
+
+best fit for Fenton-Karma: RMSE: 0.1402 Hz/cm^2, amax: 1.7810 cm^2/s, L: 5.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_25_all/job.out.22996017.672'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.1490, rmse_min=0.1695, log_likelihood=10.1045, count=4410
+
+best fit for Luo-Rudy: RMSE: 0.1942 Hz/cm^2, amax: 1.7810 cm^2/s, L: 5.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_25_all/job.out.22996017.3351'
+
+parameter range supported in run #25:
+number of trials: 17640
+        r  kappa      D  varkappa    amax    L  neighbor
+min  0.01  100.0  0.090     1.553   1.733  5.0       1.0
+max  0.49  990.0  0.114     9.969  10.197  5.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7330, rmse_min=0.0825, log_likelihood=7.2296, count=1058
+
+best fit for Fenton-Karma: RMSE: 0.2412 Hz/cm^2, amax: 1.7330 cm^2/s, L: 5.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_24_all/job.out.22994937.221'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.1490, rmse_min=0.1909, log_likelihood=9.3151, count=1059
+
+best fit for Luo-Rudy: RMSE: 0.2408 Hz/cm^2, amax: 1.7330 cm^2/s, L: 5.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_24_all/job.out.22994937.307'
+
+parameter range supported in run #24:
+number of trials: 4239
+       r  kappa      D  varkappa    amax    L  neighbor
+min  0.1   10.0  0.090     1.553   1.733  5.0       1.0
+max  1.7  595.0  0.114     9.969  10.197  5.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7680, rmse_min=0.4003, log_likelihood=10.0908, count=1080
+
+best fit for Fenton-Karma: RMSE: 0.9507 Hz/cm^2, amax: 1.7680 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_23_all/job.out.21392526.168'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=7.0720, rmse_min=0.6488, log_likelihood=0.8952, count=1079
+
+best fit for Luo-Rudy: RMSE: 1.2211 Hz/cm^2, amax: 1.7680 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_23_all/job.out.21392526.5760'
+
+parameter range supported in run #23:
+number of trials: 17277
+        r   kappa        D  varkappa   amax     L  neighbor
+min  0.15   100.0  0.20052   0.40104  0.802  10.0       1.0
+max  1.00  1500.0  1.76795   3.53590  7.072  10.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7680, rmse_min=0.3222, log_likelihood=4.3130, count=127
+
+best fit for Fenton-Karma: RMSE: 0.7127 Hz/cm^2, amax: 1.7680 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_22_all/job.out.21389603.3240'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=7.0720, rmse_min=1.5946, log_likelihood=-37.6141, count=300
+
+best fit for Luo-Rudy: RMSE: 1.5946 Hz/cm^2, amax: 1.7680 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_22_all/job.out.21389603.3776'
+
+parameter range supported in run #22:
+number of trials: 2891
+         r   kappa        D  varkappa   amax     L  neighbor
+min  0.025   100.0  0.20052   0.40104  0.802  10.0       1.0
+max  0.120  1500.0  1.76795   3.53590  7.072  10.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.8000, rmse_min=0.3837, log_likelihood=-61.7151, count=64
+
+best fit for Fenton-Karma: RMSE: 2.5527 Hz/cm^2, amax: 1.8000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_21_all/job.out.21377943.1368'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.2000, rmse_min=0.8002, log_likelihood=-4.6709, count=71
+
+best fit for Luo-Rudy: RMSE: 7.3034 Hz/cm^2, amax: 1.8000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_21_all/job.out.21377943.1650'
+
+parameter range supported in run #21:
+number of trials: 5350
+        r   kappa    D  varkappa  amax     L  neighbor
+min  0.03   250.0  0.1       0.0   0.2  10.0       1.0
+max  0.50  1500.0  8.0       0.0  16.0  10.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.4000, rmse_min=2.9675, log_likelihood=-104.6639, count=36
+
+best fit for Fenton-Karma: RMSE: 3.5439 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_20_all/job.out.21377943.4086'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.2000, rmse_min=0.8002, log_likelihood=-49.3499, count=54
+
+best fit for Luo-Rudy: RMSE: 2.1763 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_20_all/job.out.21377943.4930'
+
+parameter range supported in run #20:
+number of trials: 4017
+        r   kappa    D  varkappa  amax     L  neighbor
+min  0.05   250.0  0.1       0.0   0.2  10.0       1.0
+max  0.50  1500.0  8.0       0.0  16.0  10.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.2000, rmse_min=0.1010, log_likelihood=20.1877, count=77
+
+best fit for Fenton-Karma: RMSE: 0.1010 Hz/cm^2, amax: 1.2000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_19_all/job.out.19842066.2377'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=9.6000, rmse_min=0.0916, log_likelihood=78.2211, count=166
+
+best fit for Luo-Rudy: RMSE: 0.1568 Hz/cm^2, amax: 1.2000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_19_all/job.out.19842066.3747'
+
+parameter range supported in run #19:
+number of trials: 17916
+        r   kappa    D  varkappa   amax     L  neighbor
+min  0.05   100.0  0.0       1.0    1.0  10.0       1.0
+max  0.50  1500.0  0.8     110.0  111.6  10.0       1.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.7220, rmse_min=0.0671, log_likelihood=128.7981, count=2
+
+best fit for Fenton-Karma: RMSE: 0.0671 Hz/cm^2, amax: 1.7220 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_18_all/job.out.16106771.52'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.1480, rmse_min=0.0852, log_likelihood=74.1403, count=6
+
+best fit for Luo-Rudy: RMSE: 0.1285 Hz/cm^2, amax: 1.7220 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_18_all/job.out.16106771.5486'
+
+parameter range supported in run #18:
+number of trials: 17853
+           r   kappa    D  varkappa    amax     L  neighbor
+min  0.06065   100.0  0.0   1.60188   1.646  10.0       0.0
+max  0.30876  1000.0  0.8  28.58740  28.587  10.0       0.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.4000, rmse_min=0.1151, log_likelihood=16.6408, count=83
+
+best fit for Fenton-Karma: RMSE: 0.1574 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_17_all/job.out.15270959.7778'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=10.0000, rmse_min=0.0987, log_likelihood=67.5727, count=168
+
+best fit for Luo-Rudy: RMSE: 0.2240 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_17_all/job.out.15270959.1805'
+
+parameter range supported in run #17:
+number of trials: 17988
+        r   kappa    D  varkappa   amax     L  neighbor
+min  0.05   100.0  0.0       1.0    1.0  10.0       0.0
+max  0.50  1500.0  0.8     110.0  111.6  10.0       0.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=10.0000, rmse_min=0.0987, log_likelihood=67.5727, count=168
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=2.9750, rmse_min=2.9351, log_likelihood=-92.8035, count=1
+
+best fit for Luo-Rudy: RMSE: 2.9351 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_16_all/job.out.14688026.26'
+
+parameter range supported in run #16:
+number of trials: 56
+          r  kappa    D  varkappa    amax     L  neighbor
+min  0.0616  250.0  0.7   1.57493   2.975  10.0       0.0
+max  0.1824  500.0  2.0  10.44490  14.243  10.0       0.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.8000, rmse_min=0.3959, log_likelihood=-91.2383, count=27
+
+best fit for Fenton-Karma: RMSE: 2.7014 Hz/cm^2, amax: 1.8000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_15_all/job.out.13954413.2102'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=9.6000, rmse_min=0.1417, log_likelihood=55.8433, count=84
+
+best fit for Luo-Rudy: RMSE: 0.1703 Hz/cm^2, amax: 1.8000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_15_all/job.out.13954413.1163'
+
+parameter range supported in run #15:
+number of trials: 9790
+        r  kappa    D  varkappa   amax     L  neighbor
+min  0.05  250.0  0.7       0.0    1.4  10.0       0.0
+max  0.50  500.0  2.0     110.0  114.0  10.0       0.0
+
+**************************************
+* Fenton-Karma Model (best settings):
+**************************************
+amax=1.4000, rmse_min=0.2881, log_likelihood=-48.5642, count=37
+
+best fit for Fenton-Karma: RMSE: 0.2881 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_fk='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_14_all/job.out.13633671.110'
+
+**************************************
+* Luo-Rudy Model (best settings):
+**************************************
+amax=0.6000, rmse_min=0.3598, log_likelihood=-29.9020, count=37
+
+best fit for Luo-Rudy: RMSE: 0.8255 Hz/cm^2, amax: 1.4000 cm^2/s, L: 10.0 cm
+input_fn_lr='/home/timothytyree/Documents/GitHub/bgmc/python/data/osg_output/run_14_all/job.out.13633671.1296'
+
+parameter range supported in run #14:
+number of trials: 2253
+         r   kappa    D  varkappa   amax     L  neighbor
+min  0.025   500.0  0.3       0.0    0.6  10.0       0.0
+max  1.000  1500.0  0.7     150.0  151.4  10.0       1.0

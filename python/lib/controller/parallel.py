@@ -44,7 +44,7 @@ def get_client_dask(n_workers=4, threads_per_worker=1, **kwargs):
     """
     Example Usage:
 client = get_client_dask(n_workers=4, threads_per_worker=1), **kwargs)
-
+print(f"link to dask dashboard: {client.dashboard_link}")
     """
     from dask.distributed import Client, progress
     client = Client(n_workers=n_workers, threads_per_worker=threads_per_worker, **kwargs)

@@ -6,3 +6,4 @@ from .boltzman_weights import *
 from .interpolate_nd import *
 from .mean_squared_error import *
 from .bootstrap import *
+from .log_likelihood import *

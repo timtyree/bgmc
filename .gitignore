@@ -4,6 +4,8 @@ c/archived/
 python/data/local_results/
 python/data/osg_output/
 python/lib/__pycache__/
+python/lib/measure/build/
+python/lib/lib_care/measure/build/
 python/.ipynb_checkpoints/
 *.png
 *.npz
@@ -64,3 +66,7 @@ python/data/local_results/euic_False_fc_2_r_0.1_D_2_L_10_kappa_1500_varkappa_5/e
 c/attractive/runs/run_26.dat
 *.dirlock
 *.lock
+*.so
+python/lib/lib_care/measure/_find_contours_pbc_cy.c
+python/lib/lib_care/measure/_find_tips_kernel_cy.c
+python/lib/lib_care/measure/_find_tips_pbc_cy.c

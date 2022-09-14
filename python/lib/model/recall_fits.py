@@ -1,3 +1,5 @@
+import pandas as pd, numpy as np
+
 ###################################
 # full models involved only
 ###################################
@@ -175,3 +177,32 @@ a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_
     D_hat_LR=0.586055#;num_pairs=25;tavg_step=5;tavg1_max=15;tavg2_max=15
     a_hat_LR_long = 3.535902#+/-0.312245 cm^2/s, tmax=60
     return a_hat_FK, D_hat_FK, a_hat_FK_long, a_hat_FK_vlong, a_hat_LR, D_hat_LR, a_hat_LR_long
+
+
+def recall_death_rates_vidmar_rappel(data_fk_dir='/home/timothytyree/Documents/GitHub/bgmc/python/data/full_results/data_fig4_vidmar_fk_tt.csv',
+                                     data_lr_dir='/home/timothytyree/Documents/GitHub/bgmc/python/data/full_results/data_fig4_vidmar_lr_tt.csv',**kwargs):
+    """
+    Example Usage:
+dict_wjr = recall_death_rates_vidmar_rappel()
+print(*dict_wjr)
+model_str = 'fk_pbc'
+# model_str = 'lr_pbc'
+print_dict(dict_wjr['wjr'][model_str])
+    """
+    #recall powerlaw fits to full
+    wjr=recall_powerlaw_fits_to_full_models()
+    # #recall annihilation rate results from vidmar and rappel (2019)
+    fk=pd.read_csv(data_fk_dir)
+    fk['N']=fk['No2']*2
+    fk['q']=fk['N']/fk['A'] #number of tips per square centimeter
+    fk['w']=fk['rate']/fk['A']*10**3 #Hz/cm^2
+    lr=pd.read_csv(data_lr_dir)
+    lr['N']=lr['No2']*2
+    lr['q']=lr['N']/lr['A'] #number of tips per square centimeter
+    lr['w']=lr['rate']/lr['A']*10**3 #Hz/cm^2
+
+    #evaluate min/max particle density observed
+    qlim_fk =  [np.min(fk['q']),np.max(fk['q'])]
+    qlim_lr =  [np.min(lr['q']),np.max(lr['q'])]
+    dict_wjr=dict(wjr=wjr,fk=fk,lr=lr,qlim_fk=qlim_fk,qlim_lr=qlim_lr)
+    return dict_wjr
