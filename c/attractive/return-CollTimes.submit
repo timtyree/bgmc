@@ -12,8 +12,8 @@ log = Log/job.log.$(Cluster).$(Process)
 
 max_idle = 3000
 request_cpus = 1
-request_memory = 70 MB
+request_memory = 75 MB
 request_disk = 30 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa varkappa x0 Dt dt Nmax niter reflect set_second no_repulsion no_attraction neighbor force_code from runs/run_27.dat
+queue r D L kappa varkappa x0 Dt dt Nmax niter reflect set_second no_repulsion no_attraction neighbor force_code from runs/run_28.dat

@@ -1,12 +1,16 @@
 ## This is a checklist for updating next run with no changes to pipeline
 
-### Designing a data run (TODO: implement perl methods and append to gen_run_next.sh)
+### Downloading and Processing any data from the previous run
+cd ~/Documents/GitHub/bgmc/python/lib
+./logdown_and_process_and_rename.sh
+
+
+### Designing and prepping a data run
 1. design run_next.py using the previous run_prev.py dev'd in the 'dev run design.ipynb'
 HINT:
 cd c/attractive/src
 
 1. update github repo
-
 1. update return-CollTimes.submit to take run_next.dat...
 nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
@@ -61,6 +65,6 @@ condor_submit return-CollTimes.submit
 1. source bash_aliases
 1. release
 
-### Downloading and Processing any data from the previous run
+### Downloading and Processing any data
 cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
