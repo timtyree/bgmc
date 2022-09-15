@@ -1,6 +1,7 @@
 ## This is a checklist for updating next run with no changes to pipeline
 
 ### Downloading and Processing any data from the previous run
+1. (if not already downloaded, be sure to download any preexisting data and process/store it.
 cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
 
@@ -16,19 +17,14 @@ nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 
 1. ssh-osg and delete old  bgmc.  then pull bgmc
-
 1. use ./gen_run_next.sh to generate run_next.dat
-chmod +x gen_run_18.sh
-./gen_run_18.sh
+git clone https://github.com/timtyree/bgmc.git
+cd bgmc/c/attractive/src
+chmod +x gen_run_28.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
 
-### Downloading and Processing any data from the previous run
-1. (if not already downloaded, be sure to download any preexisting data and process/store it.
-cd ../../../python/lib
-<!-- cd ~/Documents/GitHub/bgmc/python/lib -->
-./logdown_and_process_and_rename.sh
 
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
 rm -r ~/bgmc
@@ -51,7 +47,9 @@ chmod +x gen_run_27.sh
 nano ../runs/run_test.dat
 
 1. submit the unit test cloud
+cd ~/bgmc/c/attractive
 condor_submit return-CollTimes-test.submit
+
 1. check whether the tests the entire unit test cloud is reasonably fast and returns reasonable results
 ./post_process.sh
 HINT: if not, compute what num_trials_per_setting should be so the slowest setting finishes within 10 hours per job
@@ -62,6 +60,7 @@ condor_submit return-CollTimes.submit
 
 ### Releasing held jobs
 1. cd ~
+1. condor_q --held
 1. source bash_aliases
 1. release
 

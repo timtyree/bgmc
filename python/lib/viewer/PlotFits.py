@@ -18,6 +18,8 @@ def plot_death_rates_loglog_full(fk,lr,ax=None,
                                 fontsize=18,
                                 use_loglog=True,
                                 frameon_legend=False,
+                                show_fk=True,
+                                show_lr=True,
                                 zorder=0,**kwargs):
     """
     Example Usage:
@@ -26,8 +28,10 @@ ax = plot_death_rates_loglog_full(fk,lr,ax)
     if ax is None:
         ax = plt.gca()
     #plot the full models
-    ax.scatter(fk['q'].values,fk['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
-    ax.scatter(lr['q'].values,lr['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
+    if show_fk:
+        ax.scatter(fk['q'].values,fk['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
+    if show_lr:
+        ax.scatter(lr['q'].values,lr['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
     #format
     FormatAxes(
         ax=ax,
