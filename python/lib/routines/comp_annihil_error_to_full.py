@@ -54,7 +54,7 @@ dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full)
     return dict_defects
 
 
-def routine_measure_annihilation_defect(input_fn,**kwargs):
+def routine_measure_annihilation_defect(input_fn,min_num_particles=8,**kwargs):
     """returns tuple of the pandas.DataFrameinstance read from input_fn
     along with associated dictionary, dict_linear.
     dict_linear contains the error of linear/powerlaw fit to full pair-annihilation rates
@@ -65,6 +65,7 @@ def routine_measure_annihilation_defect(input_fn,**kwargs):
 df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**kwargs)
     """
     df=pd.read_csv(input_fn)
+
     #parse input_fn for unique identifier
     lst = input_fn.split('.')
     cluster_index=eval(lst[-2])
@@ -72,6 +73,8 @@ df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**
     #compute w,q and add as fields to df
     df['q']=df['N']/(df['L']**2)
     df['w']=(df['CollTime']**-1)/(df['L']**2)
+    df_all=df.copy()
+    df = df[df['N']>=min_num_particles].copy()
     #drop any rows that had infinite apparent mean collision rate
     boo_inf = np.isinf(df['w'].values)
     df = df[~boo_inf].copy()
@@ -101,7 +104,7 @@ df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**
             return df,None
         else:
             dict_linear[f"dict_defects_{model_str}"]=dict(dict_defects)
-    return df,dict_linear
+    return df_all,dict_linear
 
 def parse_dict_linear_to_row(dic):
     """
