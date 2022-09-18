@@ -1,0 +1,22 @@
+GOAL: dev run 30 w/ 1st order mle estimates
+along the string of constant amax
+for L=5 and L=10
+for amax=1.78,10.147 from the FK,LR models with diffCoeff=0.0005,0.001,respectively
+
+#TODO: get 1st order MLE fits to the most recent data runs.
+#HINT: adapt the existing pipeline to this new setting
+#for each of the full models:
+# for each 0th order mle estimate:
+#    select a,D,neighbor,L to get scatter plot of r,kappa
+#    estimate linear interpolating function of r,kappa
+#    compute the r,kappa of the maximum likelihood estimate / least squares estimate
+#    record
+
+#TODO: use ^that record to generate run 30
+
+# Q: Does L=5 --> L=10 lead to kappa*pi*r**2 becoming approximately doubled (2X)?
+# A: For LR, yes. For FK, no, though it might at larger domain sizes.
+annihil_fits_dir='/home/timothytyree/Documents/GitHub/bgmc/python/data/annihil_fits.25.18.csv'
+df = pd.read_csv(annihil_fits_dir)
+df['delta']=np.pi*df['r']**2*df['kappa']
+df[['model','L','delta','D','varkappa']]

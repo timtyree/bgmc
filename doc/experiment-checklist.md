@@ -21,6 +21,7 @@ TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 git clone https://github.com/timtyree/bgmc.git
 cd bgmc/c/attractive/src
 chmod +x gen_run_28.sh
+./gen_run_28.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
