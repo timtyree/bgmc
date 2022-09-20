@@ -3,7 +3,6 @@ import numpy as np
 from .compute_slope import compute_95CI_ols
 # from .compute_sliding_slope import *
 
-
 def comp_power_scale(B,Delta_B,m,Delta_m):
     '''compute pessemistic 95% CI of annihilation rate scale, M_fk=B_fk**m_fk'''
     #min bound
