@@ -54,7 +54,10 @@ dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full)
     return dict_defects
 
 
-def routine_measure_annihilation_defect(input_fn,min_num_particles=8,**kwargs):
+def routine_measure_annihilation_defect(input_fn,min_num_particles=8,
+        model_lst=['fk','lr'],
+        rmse_lst=[0.0530, 0.0684], #Hz/cm^2
+        **kwargs):
     """returns tuple of the pandas.DataFrameinstance read from input_fn
     along with associated dictionary, dict_linear.
     dict_linear contains the error of linear/powerlaw fit to full pair-annihilation rates
@@ -65,7 +68,6 @@ def routine_measure_annihilation_defect(input_fn,min_num_particles=8,**kwargs):
 df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**kwargs)
     """
     df=pd.read_csv(input_fn)
-
     #parse input_fn for unique identifier
     lst = input_fn.split('.')
     cluster_index=eval(lst[-2])
@@ -95,11 +97,12 @@ df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**
             dict_max = dict(df.max()),
     )
     #compute defects for either of the full models
-    for model_str in ['fk','lr']:
+    # for model_str in ['fk','lr']:
+    for model_str,rmse in zip(model_lst,rmse_lst):
         qlim_full = dict_wjr[f'qlim_{model_str}']
         fit_full = dict_wjr['wjr'][f"{model_str}_pbc"]
         #compute defect
-        dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full,**kwargs)
+        dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full,s=rmse,**kwargs)
         if dict_defects is None:
             return df,None
         else:
