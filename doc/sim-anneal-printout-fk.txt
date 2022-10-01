@@ -1,0 +1,71 @@
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/150x150/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 79 termination events
+df.shape=(343078, 9)
+ - o - mean lifetime: 105.5460 +/- 6.0179 ms (N=3220, p_normal: 0.1894) from 79 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.5097 +/- 0.0113 ms (N=3220, p_normal: 0.1020) from 79 termination events
+tdeath ranges from 0.0 to 2180.0 ms
+R^2 ranges from 6.249999999999291e-06 to 7.003156250000001 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/150x150/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=300.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/150x150/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=1.4912, a1=1.3371, period=111.4241, phase=-0.8361 --> rmse=0.0252 cm^2
+	attraction coefficient: a0=1.4912, a1=1.3371, z=5.9517, phase=-0.8361 --> alinear=1.6779 cm^2/s
+>>> alinear=1.6779381667419067
+
+num. epochs: 100000
+simulated annealing fit: a0=1.4914, a1=1.3363, period=111.4522, phase=-0.8349 --> rmse=0.0252 cm^2
+	attraction coefficient: a0=1.4914, a1=1.3363, z=5.9502, phase=-0.8349 --> alinear=1.6779 cm^2/s
+>>> alinear=1.677883876240744
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/200x200/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 80 termination events
+df.shape=(3846532, 9)
+ - o - mean lifetime: 105.3196 +/- 1.5973 ms (N=36179, p_normal: 0.5813) from 80 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.5263 +/- 0.0035 ms (N=36179, p_normal: 0.9526) from 80 termination events
+tdeath ranges from 0.0 to 2710.0 ms
+R^2 ranges from 6.249999999999291e-06 to 12.387906250000002 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/200x200/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=300.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/200x200/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=1.6362, a1=1.2822, period=115.9413, phase=-0.5415 --> rmse=0.0284 cm^2
+	attraction coefficient: a0=1.6362, a1=1.2822, z=5.7076, phase=-0.5415 --> alinear=1.7812 cm^2/s
+>>> alinear=1.7812325245076142
+
+num. epochs: 100000
+simulated annealing fit: a0=1.6362, a1=1.2823, period=115.9535, phase=-0.5407 --> rmse=0.0284 cm^2
+	attraction coefficient: a0=1.6362, a1=1.2823, z=5.7070, phase=-0.5407 --> alinear=1.7811 cm^2/s
+>>> alinear=1.7811283375808102
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/250x250/tippos_per_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 29 termination events
+df.shape=(17439817, 9)
+ - o - mean lifetime: 91.2055 +/- 0.6615 ms (N=189141, p_normal: 0.0360) from 29 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.4914 +/- 0.0016 ms (N=189141, p_normal: 0.8206) from 29 termination events
+tdeath ranges from 0.0 to 2619.0 ms
+R^2 ranges from 6.249999999999291e-06 to 19.45320625 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/250x250/tippos_per_001_annihilation_msr.csv'
+max_tdeath=300.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_fk/250x250/tippos_per_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=1.6811, a1=1.3946, period=119.0635, phase=-0.3620 --> rmse=0.0399 cm^2
+	attraction coefficient: a0=1.6811, a1=1.3946, z=4.8131, phase=-0.3620 --> alinear=1.8334 cm^2/s
+>>> alinear=1.833395732267146
+
+num. epochs: 100000
+simulated annealing fit: a0=1.6806, a1=1.3954, period=119.0325, phase=-0.3650 --> rmse=0.0399 cm^2
+	attraction coefficient: a0=1.6806, a1=1.3954, z=4.8143, phase=-0.3650 --> alinear=1.8337 cm^2/s
+>>> alinear=1.8336577119823105
+
+*************** end data set ********************

@@ -1,0 +1,119 @@
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/200x200/tippos_per_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 595 termination events
+df.shape=(524869, 9)
+ - o - mean lifetime: 33.3659 +/- 0.7244 ms (N=15273, p_normal: 0.9505) from 595 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.6635 +/- 0.0072 ms (N=15273, p_normal: 0.5725) from 595 termination events
+tdeath ranges from 0.0 to 476.0 ms
+R^2 ranges from 6.249999999999291e-06 to 12.450062500000005 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/200x200/tippos_per_001_annihilation_msr.csv'
+max_tdeath=100.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/200x200/tippos_per_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=5.0191, a1=12.1798, period=97.3593, phase=-1.1655 --> rmse=0.0642 cm^2
+	attraction coefficient: a0=5.0191, a1=12.1798, z=2.1533, phase=-1.1655 --> alinear=10.1470 cm^2/s
+>>> alinear=10.146975509029975
+
+num. epochs: 100000
+simulated annealing fit: a0=5.0189, a1=12.1878, period=97.3443, phase=-1.1653 --> rmse=0.0642 cm^2
+	attraction coefficient: a0=5.0189, a1=12.1878, z=2.1536, phase=-1.1653 --> alinear=10.1496 cm^2/s
+>>> alinear=10.149576669317444
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/250x250/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 384 termination events
+df.shape=(1040588, 9)
+ - o - mean lifetime: 40.4644 +/- 0.5961 ms (N=25096, p_normal: 0.7247) from 384 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.7687 +/- 0.0060 ms (N=25096, p_normal: 0.1772) from 384 termination events
+tdeath ranges from 0.0 to 883.0 ms
+R^2 ranges from 6.249999999999291e-06 to 19.437625 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/250x250/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=100.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/250x250/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=6.1086, a1=12.3710, period=99.3697, phase=-1.2931 --> rmse=0.0480 cm^2
+	attraction coefficient: a0=6.1086, a1=12.3710, z=2.5586, phase=-1.2931 --> alinear=10.5917 cm^2/s
+>>> alinear=10.591729720560696
+
+num. epochs: 100000
+simulated annealing fit: a0=6.1164, a1=12.4124, period=98.9516, phase=-1.3035 --> rmse=0.0480 cm^2
+	attraction coefficient: a0=6.1164, a1=12.4124, z=2.5694, phase=-1.3035 --> alinear=10.5941 cm^2/s
+>>> alinear=10.594100498992578
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/300x300/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 383 termination events
+df.shape=(3201333, 9)
+ - o - mean lifetime: 40.3444 +/- 0.3490 ms (N=77431, p_normal: 0.1429) from 383 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.7804 +/- 0.0036 ms (N=77431, p_normal: 0.3700) from 383 termination events
+tdeath ranges from 0.0 to 582.0 ms
+R^2 ranges from 6.249999999995737e-06 to 27.863425000000014 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/300x300/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=100.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/300x300/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=7.1719, a1=12.0954, period=98.4915, phase=-1.4241 --> rmse=0.0336 cm^2
+	attraction coefficient: a0=7.1719, a1=12.0954, z=2.5737, phase=-1.4241 --> alinear=11.4431 cm^2/s
+>>> alinear=11.443117503719836
+
+num. epochs: 100000
+simulated annealing fit: a0=7.1560, a1=12.0411, period=99.0812, phase=-1.4096 --> rmse=0.0335 cm^2
+	attraction coefficient: a0=7.1560, a1=12.0411, z=2.5584, phase=-1.4096 --> alinear=11.4420 cm^2/s
+>>> alinear=11.441970505560361
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/350x350/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 94 termination events
+df.shape=(2944453, 9)
+ - o - mean lifetime: 40.1835 +/- 0.3493 ms (N=71496, p_normal: 0.6987) from 94 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.7831 +/- 0.0037 ms (N=71496, p_normal: 0.1700) from 94 termination events
+tdeath ranges from 0.0 to 757.0 ms
+R^2 ranges from 6.249999999995737e-06 to 37.845450000000014 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/350x350/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=100.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/350x350/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=7.4625, a1=11.2703, period=101.3644, phase=-1.3759 --> rmse=0.0327 cm^2
+	attraction coefficient: a0=7.4625, a1=11.2703, z=2.4908, phase=-1.3759 --> alinear=11.5883 cm^2/s
+>>> alinear=11.588301993614628
+
+num. epochs: 100000
+simulated annealing fit: a0=7.4584, a1=11.2594, period=101.5111, phase=-1.3727 --> rmse=0.0327 cm^2
+	attraction coefficient: a0=7.4584, a1=11.2594, z=2.4872, phase=-1.3727 --> alinear=11.5875 cm^2/s
+>>> alinear=11.587486454869957
+
+*************** end data set ********************
+
+range_data_dir='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/400x400/tippos_per_c_001_annihilation_range_timeseries.pkl'
+loaded range timeseries from 94 termination events
+df.shape=(11109391, 9)
+ - o - mean lifetime: 40.6915 +/- 0.1870 ms (N=266467, p_normal: 0.7527) from 94 termination events
+averages for spiral tip pairs:
+ - x - particle average first (not this one!): mean range: 0.7861 +/- 0.0021 ms (N=266467, p_normal: 0.6788) from 94 termination events
+tdeath ranges from 0.0 to 904.0 ms
+R^2 ranges from 6.249999999995737e-06 to 49.551025 cm^2
+boostrapping mean (estimated run time ~30 seconds)...
+msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/400x400/tippos_per_c_001_annihilation_msr.csv'
+max_tdeath=100.0 ms
+src: msr_dir_bootstrap='/home/timothytyree/Documents/GitHub/care/notebooks/Data/from_wjr/positions_lr/400x400/tippos_per_c_001_annihilation_msr.csv'
+num. epochs: 10000
+simulated annealing fit: a0=7.6619, a1=10.8419, period=101.4924, phase=-1.3604 --> rmse=0.0344 cm^2
+	attraction coefficient: a0=7.6619, a1=10.8419, z=2.5191, phase=-1.3604 --> alinear=11.6060 cm^2/s
+>>> alinear=11.606026821161977
+
+num. epochs: 100000
+simulated annealing fit: a0=7.6583, a1=10.8486, period=101.5016, phase=-1.3599 --> rmse=0.0344 cm^2
+	attraction coefficient: a0=7.6583, a1=10.8486, z=2.5189, phase=-1.3599 --> alinear=11.6056 cm^2/s
+>>> alinear=11.605580786020413
+
+*************** end data set ********************
