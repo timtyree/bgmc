@@ -13,6 +13,7 @@ def plot_death_rates_loglog_full(fk,lr,ax=None,
                                 x1lim = [8e-3, 11],  #[8e-2, 1.1],  #[1e-1, 1] # [5,10]
                                 x2lim = [1e-2, 250],  #[1e-2, 25], #[50,350]
                                 legend_alpha=1.,
+                                minx=0.1,
                                 alpha=0.2,
                                 s=40,
                                 fontsize=18,
@@ -28,10 +29,15 @@ ax = plot_death_rates_loglog_full(fk,lr,ax)
     if ax is None:
         ax = plt.gca()
     #plot the full models
+    minx
     if show_fk:
-        ax.scatter(fk['q'].values,fk['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
+        boo=fk['q']>=minx
+        ax.scatter(fk[boo]['q'].values,fk[boo]['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
+        # ax.scatter(fk['q'].values,fk['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)
     if show_lr:
-        ax.scatter(lr['q'].values,lr['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
+        boo=lr['q']>=minx
+        ax.scatter(lr[boo]['q'].values,lr[boo]['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
+        # ax.scatter(lr['q'].values,lr['w'].values,c='C1',alpha=alpha,s=s,label='Luo-Rudy',zorder=zorder)
     #format
     FormatAxes(
         ax=ax,

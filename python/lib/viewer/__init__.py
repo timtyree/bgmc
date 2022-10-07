@@ -7,3 +7,4 @@ from .PlotBootstrap import *
 from .PlotFits import *
 from .MarkSlope import mark_slope
 from .PlotGridValues import *
+from .PlotAngles import *

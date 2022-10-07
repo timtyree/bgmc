@@ -31,6 +31,23 @@ PlotLegend(label_lst=label_lst,color_lst=color_lst,figsize=(1,1),**kwargs_legend
     return True
 
 
+def AddLegend(ax=None,xy = (1.04,1.04),fontsize=15,loc='upper left',frameon=False,**kwargs):
+    """AddLegend adds a legend to a matplotlib plot.
+
+    Example Usage:
+ax = AddLegend()#ax=None,xy = (1.04,1.04),fontsize=15,loc='upper left',frameon=False,**kwargs)
+
+    Example Usage:
+#format_plot
+format_plot(xlabel='n',ylabel='Probability')
+ax = AddLegend(ax,fontsize=fontsize-3,xy = (0.96,0.96), loc='upper right',frameon=False)#,**kwargs)
+    """
+    if ax is None:
+        ax = plt.gca()
+    return ax.legend(fontsize=fontsize,loc=loc, bbox_to_anchor = xy, frameon=frameon, **kwargs)
+
+
+
 def PlotLegend_lines(label_lst=["Random Guess", "5X Random Guess"],color_lst=['r', 'k'],
                      linestyle='dashed',
                      lw=2,
