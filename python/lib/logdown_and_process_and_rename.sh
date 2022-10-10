@@ -1,5 +1,5 @@
 #!/bin/bash
-run_number=31
+run_number=32
 
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
