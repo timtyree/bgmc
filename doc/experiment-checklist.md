@@ -17,29 +17,13 @@ TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 
 1. update github repo
 
-1. ssh-osg and delete old  bgmc.  
-rm -r ~/bgmc
-
-1. then pull bgmc
+1. ssh-osg and delete old  bgmc.  then pull bgmc
 1. use ./gen_run_next.sh to generate run_next.dat
 git clone https://github.com/timtyree/bgmc.git
 cd bgmc/c/attractive/src
 chmod +x gen_run_28.sh
 ./gen_run_28.sh
 
-1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
-nano ../runs/run_test.dat
-
-### Job Submission
-1. cd current simulation folder
-<!-- cd ~/bgmc/c/attractive -->
-cd ~/bgmc/c/attractive
-./gcc.sh
-
-1. if not done locally, gener run arguments remotely
-cd src
-chmod +x gen_run_27.sh
-./gen_run_27.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
 
@@ -66,9 +50,24 @@ cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
 
 
+######################################################################################
+
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
 rm -r ~/bgmc
 #^this removes the whole repository folder on the open science grid.  
 TODO(later): can I make the 'y' input automatic?
 1. git clone fresh repo on the open science grid.
 git clone http://github.com/timtyree/bgmc.git
+
+### Job Submission
+1. cd current simulation folder
+<!-- cd ~/bgmc/c/attractive -->
+cd ~/bgmc/c/attractive
+./gcc.sh
+
+1. if not done locally, gener run arguments remotely
+cd src
+chmod +x gen_run_27.sh
+./gen_run_27.sh
+1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
+nano ../runs/run_test.dat
