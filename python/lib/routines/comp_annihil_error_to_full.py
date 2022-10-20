@@ -39,6 +39,8 @@ dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full)
     num_obs = w_values.shape[0]
     #compute rmse
     rmse = np.sqrt(np.mean((e_values)**2))
+    #compute mean percent error (mpe)
+    mpe = 100.*np.mean(np.abs(e_values)/what_values)
     #evaluate boundary and compute log-likelihood
     le_values = np.log(w_values/what_values)
     lemin = float(e_values[q_values==qmin])
@@ -50,6 +52,7 @@ dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full)
         ll = np.nan
     dict_defects = dict(num_obs=num_obs,qmin=qmin,qmax=qmax,
                         rmse=rmse,log_likelihood=ll,
+                        mpe=mpe,
                        emin=emin,emax=emax,lemin=lemin,lemax=lemax)
     return dict_defects
 

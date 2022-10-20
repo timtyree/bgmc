@@ -3,6 +3,18 @@ scrum 10.19.2022
 DONE: searched for trials with a=1.781,10.147, D=observed from MSR for L=5 in recent runs
 DONE: identify trials with a=1.781,10.147, D=observed from MSR for L=10 in run #33
 
+---> kappa = 167.02 Hz provided the MLE fit for L=5 AND L=10 for FK model
+Q: how did i compute this value?  is it from P_qs from FK model?
+A: wrong model...
+DONE: drop any D values less than 0.1 and refit
+min_D = 0.1 #cm^2/s
+
+# DONE: compute mean percent error (MPE) for table 1 instead of RMSE
+#TODO: update table 1 with MPE for annihilation rates
+#TODO: update table 1 with MPE for msr fit
+
+Q: what is the percent error from integrating the analytic MSR fits relative to computing the mean squared distance between annihilating particles from the time averaged traces directly?
+
 D_fk = 0.1145
 amax_fk=1.781 #works
 amax_fk=1.9252

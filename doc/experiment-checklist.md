@@ -24,25 +24,13 @@ rm -r ~/bgmc
 1. use ./gen_run_next.sh to generate run_next.dat
 git clone https://github.com/timtyree/bgmc.git
 cd bgmc/c/attractive/src
-chmod +x gen_run_33.sh
-./gen_run_33.sh
+chmod +x gen_run_34.sh
+./gen_run_34.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
 
 ### Job Submission
-1. cd current simulation folder
-<!-- cd ~/bgmc/c/attractive -->
-cd ~/bgmc/c/attractive
-./gcc.sh
-
-1. if not done locally, gener run arguments remotely
-cd src
-chmod +x gen_run_27.sh
-./gen_run_27.sh
-1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
-nano ../runs/run_test.dat
-
 1. submit the unit test cloud
 cd ~/bgmc/c/attractive
 condor_submit return-CollTimes-test.submit
