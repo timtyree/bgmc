@@ -1,4 +1,5 @@
 #PlotAngles.py
+from matplotlib.patches import Arc
 import math
 
 def get_angle_plot(line1, line2, offset = 1, color = None, origin = [0,0], len_x_axis = 1, len_y_axis = 1):
