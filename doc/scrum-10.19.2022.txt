@@ -1,0 +1,37 @@
+scrum 10.19.2022
+
+DONE: searched for trials with a=1.781,10.147, D=observed from MSR for L=5 in recent runs
+DONE: identify trials with a=1.781,10.147, D=observed from MSR for L=10 in run #33
+
+D_fk = 0.1145
+amax_fk=1.781 #works
+amax_fk=1.9252
+#LR
+D_lr = 0.4158
+amax_lr= 10.147  #works
+amax_lr= 11.2437
+
+#TODO(failing ^this): dev run 34 with ^this, rxn>3, and L=5.
+#TODO: set rxn<12
+
+
+DONE: plot annihilation rates fit to FK when rxn=kappa*r^2 = a + 2 D
+Q: does ibid look like a reasonable way to estimate the reaction coefficient?
+
+Q: what r values were used?
+TODO: dev run 34 with a,D,rxn fixed to observed
+TODO: test a fine neighborhood of previous r_best values
+
+DONE: decided ensemble then time averaging is the correct way to estimate amax
+TODO(if amax_fk>1.781): remeasure a vs. A with the zero subtracted
+
+TODO: update Letter with linear particle model fits with D fixed to observed.
+- ***Option 1: if 1.78,10.147 are used, then a vs. A need not be remeasured
+   - PRO: less to do
+   - CON: i think i remember fixing D to observed not working.
+        ---> looks like it works well enough for general rxn coefficient.
+- DONT: Option 2: if 1.93,11.24 are used, then a vs. A must show the same key result that a is insensitive to A.
+  - PRO: fixing D to observed works
+  - CON: i don't know whether a is insensitive to A when not subtracting MSR(t=0)
+
+Q: which Option to do?

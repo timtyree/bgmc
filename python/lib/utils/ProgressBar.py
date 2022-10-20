@@ -33,3 +33,28 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 #     time.sleep(0.1)
 #     # Update Progress Bar
 #     printProgressBar(i + 1, l, prefix = 'Progress:', suffix = 'Complete', length = 50)
+
+
+import sys
+def progressbar(it, prefix="", size=60,
+        char=u"█",#"#",
+        out=sys.stdout):
+    """
+    for python 3.3+,
+
+
+    Example Usage:
+import time
+for i in progressbar(range(15), "Computing: ", 40):
+    time.sleep(0.1) # any code you need
+    """
+    count = len(it)
+    def show(j):
+        x = int(size*j/count)
+        print("{}[{}{}] {}/{}".format(prefix, char*x, "."*(size-x), j, count),
+                end='\r', file=out, flush=True)
+    show(0)
+    for i, item in enumerate(it):
+        yield item
+        show(i+1)
+    print("\n", flush=True, file=out)

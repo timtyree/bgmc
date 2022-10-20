@@ -54,7 +54,8 @@ dict_defects = comp_defect_mean_annihil_rate( df, qlim_full, fit_full)
     return dict_defects
 
 
-def routine_measure_annihilation_defect(input_fn,min_num_particles=8,
+def routine_measure_annihilation_defect(input_fn,
+        min_num_particles=10,
         model_lst=['fk','lr'],
         rmse_lst=[None,None], #Hz/cm^2 # <-- uses rmse from linear particle model
         #rmse_lst=[0.0530, 0.0684], #Hz/cm^2 # <-- uses rmse from the full models

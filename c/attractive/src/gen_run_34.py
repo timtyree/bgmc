@@ -7,10 +7,16 @@ num_trials_per_setting=1
 # niter=150 #trials per worker
 # num_trials_per_setting=10
 
-L=10 #cm per domain
-# L=5 #cm per domain
+# L=10 #cm per domain
+L=5 #cm per domain
 force_code=2 #2 :: QED2, 4 :: QED2 + constant repulsion
 x0_values=np.array([0])#1.5,3.,5.,10.,100.,10000.]) #10 #doesn't matter for force_code=2
+
+
+
+#TODO(failing ^this): dev run 34 with ^this, rxn>3, and L=5.
+#TODO: set rxn<12
+
 
 dt=1e-5
 Dt=1e-5
@@ -18,32 +24,29 @@ Nmax=100  #Warning: not be actually connected to anything. goto return_Coltimes.
 
 #measured values for FK
 #amax
-amax_lst_fk=[1.84020234,
-    0.657625095,
-    1.932490123,
-    2.735488034,
+amax_lst_fk=[
     1.781,
+    1.9252,
     ]
 #D
-D_lst_fk=[0.0372,
-        0.1145,#* <--good one
+D_lst_fk=[#0.0372,
+        0.1145,#* <--the good one
         #0.05,#from table 1
-        #37.2
             ]
 #measured values for LR
 #amax
-amax_lst_lr=[8.585030313,
-    3.29811395,
-    8.630303341,
-    12.01694823,
+amax_lst_lr=[#8.585030313,
+    #3.29811395,
+    #8.630303341,
+    #12.01694823,
     10.147,
+    11.2437
     ]
 #D
-D_lst_lr=[0.0014,#<--> i think this one was slow...
-    1.4,#ibid times 1e3
+D_lst_lr=[#0.0014,#<--> i think this one was slow...
     0.4158,]#from table 1
 
-min_alinear=0.2 #cm^2/s <-- had some straggler w/  >20hours run time...
+min_alinear=0.2 #cm^2/s <-- can produce stragglers w/  >20hours run time...
 #define attractive and diffusive force parameters
 alinear_lst=[]
 D_lst=[]
@@ -79,7 +82,8 @@ kappa_values = np.concatenate([kappa_values,kappa_values_addendum])
 #kappa_values.shape
 
 #min_reaction=0.1 #cm^2/s# <--- had some stragglers past 20 hours of run time...
-min_reaction=0.2 #cm^2/s #same value as alinear threshold.
+min_reaction=3 #cm^2/s <--- had some stragglers past 20 hours of run time...
+max_reaction=12
 # r from 0.02 to 0.2
 r_values = np.arange(0.005,0.1,0.005)   #cm
 r_values = np.concatenate((r_values,np.arange(0.1,0.2,0.005))) #cm
@@ -107,7 +111,9 @@ for set_second in set_second_values:
                     for varkappa,D in zip(alinear_lst,D_lst):
                         for r in r_values:
                             for kappa in kappa_values:
-                                if min_reaction<=kappa*r**2:
+                                rxn=kappa*r**2
+                                #if min_reaction<=rxn:
+                                if (min_reaction<=rxn) and (max_reaction>=rxn):
                                     for x0 in x0_values:
                                         num_trials=0
                                         while num_trials<num_trials_per_setting:
@@ -119,4 +125,4 @@ np.random.seed(42)
 np.random.shuffle(task_str_lst)
 for task_str in task_str_lst:
     print(task_str)
-# print(count)#37850
+# print(count)#2296

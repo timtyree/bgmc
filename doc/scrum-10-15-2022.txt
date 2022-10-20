@@ -1,0 +1,6 @@
+#TODO: search for cuxfilter usage in notebooks using atom
+#TODO: cp ^that gpu accelerated dashboard into current .ipynb
+#TODO: modify it to do what i want... step by step...
+#TODO: test it / debug it / deconstruct it as needed.
+#TODO: fine tune it enough to be reasonably easy for me to use.
+#TODO: use it to identify the linear particle model parameters that I'm going to put in Table 1.
