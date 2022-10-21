@@ -131,18 +131,15 @@ Q: does ibid look like a reasonable way to estimate the reaction coefficient?
 Q: what r values were used?
 DONE: dev run 34 with a,D,rxn fixed to observed
 DONE: test a fine neighborhood of previous r_best values
-
 DONE: decided ensemble then time averaging is the correct way to estimate amax
 DONT(if amax_fk>1.781 (it isn't)): remeasure a vs. A with the zero subtracted
-
-TODO: update Letter with linear particle model fits with D fixed to observed.
+NEXT: update Letter with linear particle model fits with D fixed to observed.
 - ***Option 1: if 1.78,10.147 are used, then a vs. A need not be remeasured
    - PRO: less to do
-   - CON: i think i remember fixing D to observed not working.
+   - CON: i think i remember fixing D to observed not working... nvmd. this worked great!
         ---> looks like it works well enough for general rxn coefficient.
 - DONT: Option 2: if 1.93,11.24 are used, then a vs. A must show the same key result that a is insensitive to A.
   - PRO: fixing D to observed works
   - CON: i don't know whether a is insensitive to A when not subtracting MSR(t=0)
-
 Q: which Option to do?
 A: 1.
