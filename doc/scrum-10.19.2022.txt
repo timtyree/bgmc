@@ -1,14 +1,14 @@
-scrum 10.19.2022
-
+#########################
+# from 10.20.2022:
+#########################
+GOAL: update Letter with linear particle model fits with D fixed to observed.
 DONE: searched for trials with a=1.781,10.147, D=observed from MSR for L=5 in recent runs
 DONE: identify trials with a=1.781,10.147, D=observed from MSR for L=10 in run #33
-
----> kappa = 167.02 Hz provided the MLE fit for L=5 AND L=10 for FK model
-Q: how did i compute this value?  is it from P_qs from FK model?
-A: wrong model...
+  ---> kappa = 167.02 Hz provided the MLE fit for L=5 AND L=10 for FK model
+  Q: how did i compute this value?  is it from P_qs from FK model?
+  A: wrong model...
 DONE: drop any D values less than 0.1 and refit
 min_D = 0.1 #cm^2/s
-
 # DONE: compute mean percent error (MPE) for table 1 instead of RMSE
 #TODO: update table 1 with MPE for annihilation rates
 #TODO: update table 1 with MPE for msr fit
@@ -47,9 +47,23 @@ rmse   &      0.028434 &   0.064166 \\
 \bottomrule
 \end{tabular}
 
+- DONE: estimate $R_\text{rms}$ linear particle model versus full
+  - $R_\text{rms} = \mathbb{E}_\Gamma [MSR(t')],\quad MSR(t')=\mathbb{E}_i [R_{i}^2(t')]. $
 
-Q: what is the percent error from integrating the analytic MSR fits relative to computing the mean squared distance between annihilating particles from the time averaged traces directly?
+- DONE: estimate $R_\text{rms}$ for the linear model's fit to the full models
+  -  R_rms=0.9569 cm (Fenton-Karma)
+  -  R_rms=1.3852 cm (Luo-Rudy)
+- DONE: estimate $R_\text{rms}$ for both of the full models
+     Fenton-Karma (L=5.0 cm):		R_rms=0.7503 +/- 0.0051 cm
+     Fenton-Karma (L=10.0 cm):		R_rms=0.7503 +/- 0.0051 cm
+     Luo-Rudy (L=5.0 cm):		R_rms=1.3543 +/- 0.0679 cm
+     Luo-Rudy (L=10.0 cm):		R_rms=1.3543 +/- 0.0679 cm
+#Q: do any of my back of envelope estimates of R_rms match ^these?
+#A:
 
+DONE: computed the percent error from integrating the analytic MSR fits relative to computing the mean squared distance between annihilating particles from the time averaged traces directly?
+
+bottom line up front:
 D_fk = 0.1145
 amax_fk=1.781 #works
 #amax_fk=1.9252 #w/o msr-offset correction
@@ -104,22 +118,22 @@ LR model (L=10):
 m = 1.617477 +/- 0.014232
 M = 15.415717 +/- 0.576912 Hz/cm^2; B=5.425689 +/- 0.042303
 RMSE=0.2546 Hz/cm^2; R^2=0.9982; MPE=4.3113%; N=91
+
 #########################
-
-
+# from 10.19.2022:
+#########################
 #DONE: dev run 34 with ^this, rxn>3, and L=5.
 #DONE: set rxn<12
-
 
 DONE: plot annihilation rates fit to FK when rxn=kappa*r^2 = a + 2 D
 Q: does ibid look like a reasonable way to estimate the reaction coefficient?
 
 Q: what r values were used?
-TODO: dev run 34 with a,D,rxn fixed to observed
-TODO: test a fine neighborhood of previous r_best values
+DONE: dev run 34 with a,D,rxn fixed to observed
+DONE: test a fine neighborhood of previous r_best values
 
 DONE: decided ensemble then time averaging is the correct way to estimate amax
-TODO(if amax_fk>1.781): remeasure a vs. A with the zero subtracted
+DONT(if amax_fk>1.781 (it isn't)): remeasure a vs. A with the zero subtracted
 
 TODO: update Letter with linear particle model fits with D fixed to observed.
 - ***Option 1: if 1.78,10.147 are used, then a vs. A need not be remeasured
@@ -131,3 +145,4 @@ TODO: update Letter with linear particle model fits with D fixed to observed.
   - CON: i don't know whether a is insensitive to A when not subtracting MSR(t=0)
 
 Q: which Option to do?
+A: 1.
