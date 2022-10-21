@@ -29,7 +29,6 @@ ax = plot_death_rates_loglog_full(fk,lr,ax)
     if ax is None:
         ax = plt.gca()
     #plot the full models
-    minx
     if show_fk:
         boo=fk['q']>=minx
         ax.scatter(fk[boo]['q'].values,fk[boo]['w'].values,c='C0',alpha=alpha,s=s,label='Fenton-Karma',zorder=zorder)

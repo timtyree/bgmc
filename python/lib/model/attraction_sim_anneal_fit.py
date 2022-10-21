@@ -126,10 +126,12 @@ def fit_msr_oscillatory(x_values,y_values,max_tdeath,
                         seed=42,
                         no_local_search=True,
                         printing=True,
+                        enforce_collision=True,
                         **kwargs):
     """inputed xy values correspond to tdeath,msd, respectively.
     bounds is the bounding box in the linear basis of (a0,a1,period,phase), respectively.
     kwargs are passed to anneal_msr_fit directly.
+    enforce_collision=True corrects for aliasing by subtracting the first MSR-value.
 
     Example Usage: print fit of oscillatory particle model to full
 a0,a1,period,phase,rmse = fit_msr_oscillatory(x_values,y_values,max_tdeath,
@@ -140,7 +142,8 @@ print_dict(dict_fit)
     boo=x_values<max_tdeath
     t_values=x_values[boo].copy()*tscale
     msr_values=y_values[boo].copy()
-    msr_values-= np.min(msr_values) #corrects for aliasing
+    if enforce_collision:
+        msr_values-= np.min(msr_values) #corrects for aliasing
     if printing:
         print(f"performing simulated annealing with {D=:.0f} fixed (num. epochs: {maxiter})...")
     res = anneal_msr_fit(t_values,msr_values,D,

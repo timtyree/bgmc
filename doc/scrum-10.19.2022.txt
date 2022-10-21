@@ -13,18 +13,102 @@ min_D = 0.1 #cm^2/s
 #TODO: update table 1 with MPE for annihilation rates
 #TODO: update table 1 with MPE for msr fit
 
+##################################################
+# analytic msr fits
+##################################################
+
+Table of maximum likelihood fits of linear particle model to full models.
+              model    amax     L       mpe
+1947   Fenton-Karma   1.781   5.0  3.559282
+7961   Fenton-Karma   1.781  10.0  3.981870
+320        Luo-Rudy  10.147   5.0  1.141787
+33471      Luo-Rudy  10.147  10.0  3.145721
+
+mpe_fk=3.5016% for osc. fit to MSR of FK
+mpe_lr=3.7018% for osc. fit to MSR of LR
+
+mean percent uncertainty in MSR for the full models:
+mpu_fk=0.9402%
+mpu_lr=1.4485%
+
+%simulated annealing fits:
+\begin{tabular}{lll}
+\toprule
+{} &             0 &          0 \\
+\midrule
+model  &  Fenton-Karma &   Luo-Rudy \\
+amax   &      1.781128 &  10.149577 \\
+a0     &      1.636168 &   5.018924 \\
+a1     &      1.282335 &  12.187821 \\
+period &    115.953473 &  97.344347 \\
+phase  &     -0.540675 &   -1.16528 \\
+z      &      5.706964 &   2.153637 \\
+rmse   &      0.028434 &   0.064166 \\
+\bottomrule
+\end{tabular}
+
+
 Q: what is the percent error from integrating the analytic MSR fits relative to computing the mean squared distance between annihilating particles from the time averaged traces directly?
 
 D_fk = 0.1145
 amax_fk=1.781 #works
-amax_fk=1.9252
+#amax_fk=1.9252 #w/o msr-offset correction
 #LR
 D_lr = 0.4158
 amax_lr= 10.147  #works
-amax_lr= 11.2437
+#amax_lr= 11.2437 #w/o msr-offset correction
 
-#TODO(failing ^this): dev run 34 with ^this, rxn>3, and L=5.
-#TODO: set rxn<12
+##################################################
+# birth/death rates powerlaw fits
+##################################################
+
+annihilation rate density powerlaw fits:
+m = 1.877234 +/- 0.024488
+M = 5.572316 +/- 0.299027 Hz/cm^2; B=2.496963 +/- 0.039522
+RMSE=0.1386 Hz/cm^2; R^2=0.9969; MPE=6.9910%; N=73
+m = 1.637556 +/- 0.016847
+M = 16.735599 +/- 0.829136 Hz/cm^2; B=5.587740 +/- 0.065801
+RMSE=0.1340 Hz/cm^2; R^2=0.9973; MPE=7.2488%; N=100
+
+creation rate density powerlaw fits:
+m = 0.229594 +/- 0.010098
+M = 0.864210 +/- 0.002349 Hz/cm^2; B=0.529597 +/- 0.020570
+RMSE=0.0215 Hz/cm^2; R^2=0.9655; MPE=3.0209%; N=73
+m = 0.714755 +/- 0.009768
+M = 3.277073 +/- 0.102643 Hz/cm^2; B=5.262676 +/- 0.107278
+RMSE=0.0417 Hz/cm^2; R^2=0.9971; MPE=4.2323%; N=62
+
+#########################
+# linear annihilation
+#########################
+fitting annihilation rate density of linear to powerlaws:
+use_filterby_minN=True, minN=10
+use_filterby_maxq=False, qmax=1.0 per cm^2
+
+FK model (L=5):
+m = 1.885151 +/- 0.009534
+M = 5.524906 +/- 0.109406 Hz/cm^2; B=2.476137 +/- 0.014370
+RMSE=0.8230 Hz/cm^2; R^2=0.9994; MPE=2.3090%; N=91
+
+LR model (L=5):
+m = 1.661909 +/- 0.008920
+M = 18.943426 +/- 0.546434 Hz/cm^2; B=5.870423 +/- 0.044610
+RMSE=2.6148 Hz/cm^2; R^2=0.9993; MPE=2.1603%; N=91
+
+FK model (L=10):
+m = 1.891692 +/- 0.019329
+M = 5.362795 +/- 0.177817 Hz/cm^2; B=2.429831 +/- 0.019736
+RMSE=0.1121 Hz/cm^2; R^2=0.9976; MPE=6.7992%; N=91
+
+LR model (L=10):
+m = 1.617477 +/- 0.014232
+M = 15.415717 +/- 0.576912 Hz/cm^2; B=5.425689 +/- 0.042303
+RMSE=0.2546 Hz/cm^2; R^2=0.9982; MPE=4.3113%; N=91
+#########################
+
+
+#DONE: dev run 34 with ^this, rxn>3, and L=5.
+#DONE: set rxn<12
 
 
 DONE: plot annihilation rates fit to FK when rxn=kappa*r^2 = a + 2 D
