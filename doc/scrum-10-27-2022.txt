@@ -1,0 +1,8 @@
+TODO: update x-axes of Figure S2 from n to N
+TODO(later): add this to the .odg file with the universal (a-a0)/a1 vs. omega*Gamma trace
+%src: main text of Letter before being sent to SI.
+% \textbf{e} Plot of Equation~\ref{eqn:mslim} resulting from consistent mean-squared distance between annihilating particles from the linear and oscillatory particle models.
+The inset angles correspond to $\phi_f$.
+Shaded regions indicate 95\% confidence intervals of the mean value, determined via bootstrap.
+% with angles increasing in the clockwise direction.
+% Indicated are apparent mean lifetimes, $\Gamma$, rescaled by angular frequency, $\omega$, for the (blue) FK and (orange) LR models.

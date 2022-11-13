@@ -1,0 +1,89 @@
+DONE: estimate % increase in MTT from master equation from L=5 to L=10
+$\mathbb{E}[\tau]$ (s)&  27.8 $\pm$ 6.5         &      25.9           & 1.7$\times 10^9$      &  0.74 $\pm$ 0.06      &       0.51       & 82.13         \\
+$\mathbb{E}[N]$       &  8.1 $\pm$ 0.7          &       8.1           & 17.1                  &  5.0 $\pm$ 2.4        &      4.3         & 32.3           \\
+DONE: add the factor increase in predicted taubarp
+DONE: add the factor increase in predicted Nbarp
+DONE: format as table
+DONE: polish tables
+DONE: determine the order i reference values in Figure panels
+DONE: outline tables to result from breaking up {tab:properties_big}
+DONE: update references to tables where needed
+DONE: integrate tables 1-3 with text
+DONE: put $a=R_{rms}^2 / 4\Gamma$ in text after intro of Linear model
+DONT: write out explicitely R_{rms, Osc.}
+DONE: update figure 3A
+DONE: summarize todo's from physical notebook as %
+***from meeting with WJ 10.4.2022:
+DONE: instances in the Letter.
+DONE: change "equal and opposite"
+DONE: introduce osc. particle model after phi(t') and before Eqn. 4
+DONE: summarize force discussion
+- We have an attractive force
+- with an oscillatory component,
+- and it has a diffusing component.
+DONE: show Eqn. 6 after Eqn. 7
+DONE: check figure reference 4E is not actually 2D
+DONE: check figure references are correct
+DONE: check figure 3A is mentioned in text
+DONE: check each figure panel is mentioned in text
+GOAL: repurpose narrative around central thesis
+- make it clearer
+- set up the reader
+- take them by the hand
+- and tell them at the start
+- that $a$ ≠ A in terms of effect on $w_-$
+- and that modest increases in $a$ predicts/describes a general cure to atrial fibrillation.
+***from scrum 10.5.2022:
+DONE: do all of the above.
+% DONE(SI; add to methods): use_filterby_minN=True, minN=10
+
+Q: does the LR model really have a 95% CI of 0.6?
+- Q: what is the % uncertainty in FK versus LR for ^this measure?
+LR: 0.06/0.76 = 7.9% uncert.
+FK: 6.5/27.8 = 23% uncert.
+not LR: 0.6/0.76 = 79% uncert.
+- A: maybe i am. uncert in MTT from FK is ~3X larger than that of LR.
+
+DONE: check where I estimated uncertainty in MTT_LR directly in .ipynb for LR
+Q: is the correct uncertainty in \bar\tau(LR) = 0.06 or 0.6 seconds?
+A: 0.06 seconds.
+
+####################
+taubar                & 27.8 $\pm$ 6.5          &      0.74 $\pm$ 0.06  \\
+Nbar                  & 8.1 $\pm$ 0.7           &      5.0 $\pm$ 2.4    \\
+taubarp_A             & 25.9                    &      0.51             \\
+Nbarp_A               & 8.1                     &      4.3              \\
+taubarp(4A)/taubarp(A)& 6.5$\times$10^7         &      1.6$\times$10^2      \\
+Nbarp(4A)/Nbarp(A)    & 2.1                     &       7.5         \\
+
+6.56371*10^9% & 16103.9%  \\
+
+Linear fit to FK:
+L=5  --> L=10
+$\mathbb{E}[\tau]$ (s)&
+25.9 --> 1.7$\times 10^9$
+
+- for increasing area, A, by a factor of 4X,
+  the predictions of master equation changes according to:
+
+Linear fit to FK:
+L=5  --> L=10
+$\mathbb{E}[\tau]$ (s)&
+25.9 --> 1.7$\times 10^9$
+1.7*10^9/25.9*100
+- taubarp_FK: 6.56371*10^9% --> increase in tau by at least factor of ~6.6*10^7
+
+$\mathbb{E}[N]$
+8.1 --> 17.1
+==> 2.11111
+- Nbarp_FK: 2.11111 --> increase in N by 211%
+
+Linear fit to FK:
+L=5  --> L=10
+$\mathbb{E}[\tau]$ (s)&
+0.51 --> 82.13
+- taubarp_LR: 161.039 --> increase in tau by 16103.9% ~ 1.6*10^4%
+
+$\mathbb{E}[N]$
+4.3 --> 32.3
+- Nbarp_LR:  751% --> increase in N by 751%

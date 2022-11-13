@@ -10,8 +10,8 @@ DONE: identify trials with a=1.781,10.147, D=observed from MSR for L=10 in run #
 DONE: drop any D values less than 0.1 and refit
 min_D = 0.1 #cm^2/s
 # DONE: compute mean percent error (MPE) for table 1 instead of RMSE
-#TODO: update table 1 with MPE for annihilation rates
-#TODO: update table 1 with MPE for msr fit
+#DONE: update table 1 with MPE for annihilation rates
+#DONE: update table 1 with MPE for msr fit
 
 ##################################################
 # analytic msr fits
@@ -23,6 +23,7 @@ Table of maximum likelihood fits of linear particle model to full models.
 7961   Fenton-Karma   1.781  10.0  3.981870
 320        Luo-Rudy  10.147   5.0  1.141787
 33471      Luo-Rudy  10.147  10.0  3.145721
+3.559282 3.981870 1.141787 3.145721
 
 mpe_fk=3.5016% for osc. fit to MSR of FK
 mpe_lr=3.7018% for osc. fit to MSR of LR
@@ -30,6 +31,8 @@ mpe_lr=3.7018% for osc. fit to MSR of LR
 mean percent uncertainty in MSR for the full models:
 mpu_fk=0.9402%
 mpu_lr=1.4485%
+
+
 
 %simulated annealing fits:
 \begin{tabular}{lll}
@@ -47,6 +50,8 @@ rmse   &      0.028434 &   0.064166 \\
 \bottomrule
 \end{tabular}
 
+#DONE: compute the mean percent error of ibid and put in table(s).
+#HINT:  rmse   &      0.028434 &   0.064166 \\
 - DONE: estimate $R_\text{rms}$ linear particle model versus full
   - $R_\text{rms} = \mathbb{E}_\Gamma [MSR(t')],\quad MSR(t')=\mathbb{E}_i [R_{i}^2(t')]. $
 
@@ -59,10 +64,9 @@ rmse   &      0.028434 &   0.064166 \\
      Luo-Rudy (L=5.0 cm):		R_rms=1.3543 +/- 0.0679 cm
      Luo-Rudy (L=10.0 cm):		R_rms=1.3543 +/- 0.0679 cm
 #Q: do any of my back of envelope estimates of R_rms match ^these?
-#A:
-
+#A: lr does, yeah.
 DONE: computed the percent error from integrating the analytic MSR fits relative to computing the mean squared distance between annihilating particles from the time averaged traces directly?
-
+DONE: plug these particle properties in L=5,10
 bottom line up front:
 D_fk = 0.1145
 amax_fk=1.781 #works
@@ -76,6 +80,7 @@ amax_lr= 10.147  #works
 # birth/death rates powerlaw fits
 ##################################################
 
+#DONE: plug annihilation rates into table 1
 annihilation rate density powerlaw fits:
 m = 1.877234 +/- 0.024488
 M = 5.572316 +/- 0.299027 Hz/cm^2; B=2.496963 +/- 0.039522
@@ -84,6 +89,7 @@ m = 1.637556 +/- 0.016847
 M = 16.735599 +/- 0.829136 Hz/cm^2; B=5.587740 +/- 0.065801
 RMSE=0.1340 Hz/cm^2; R^2=0.9973; MPE=7.2488%; N=100
 
+#DONE: plug creation rates into table 1
 creation rate density powerlaw fits:
 m = 0.229594 +/- 0.010098
 M = 0.864210 +/- 0.002349 Hz/cm^2; B=0.529597 +/- 0.020570
@@ -118,6 +124,24 @@ LR model (L=10):
 m = 1.617477 +/- 0.014232
 M = 15.415717 +/- 0.576912 Hz/cm^2; B=5.425689 +/- 0.042303
 RMSE=0.2546 Hz/cm^2; R^2=0.9982; MPE=4.3113%; N=91
+
+###########################
+# fitted parameters
+###########################
+Table of maximum likelihood fits of linear particle model to full models.
+model     Fenton-Karma  Fenton-Karma  Luo-Rudy  Luo-Rudy
+amax             1.781         1.781    10.147    10.147
+mpe           3.559282       3.98187  9.821461  3.145721
+heretim
+L                  5.0          10.0       5.0      10.0
+D               0.1145        0.1145    0.4158    0.4158
+varkappa         1.552         1.552    9.3154    9.3154
+r                0.135         0.135     0.155     0.155
+kappa           167.02        167.02     300.0     300.0
+neighbor           1.0           1.0       1.0       1.0
+
+
+####################
 
 #########################
 # from 10.19.2022:
