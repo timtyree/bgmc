@@ -25,7 +25,7 @@ rm -r ~/bgmc
 git clone https://github.com/timtyree/bgmc.git
 cd bgmc/c/attractive/src
 chmod +x gen_run_34.sh
-./gen_run_34.sh
+./gen_run_35.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
