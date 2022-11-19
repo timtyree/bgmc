@@ -11,6 +11,8 @@ cd ~/Documents/GitHub/bgmc/python/lib
 HINT:
 cd c/attractive/src
 
+chmod +x gen_run_36.sh
+
 1. update return-CollTimes.submit to take run_next.dat...
 nano ../return-CollTimes.submit
 TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
@@ -23,9 +25,11 @@ rm -r ~/bgmc
 1. then pull bgmc
 1. use ./gen_run_next.sh to generate run_next.dat
 git clone https://github.com/timtyree/bgmc.git
-cd bgmc/c/attractive/src
-chmod +x gen_run_34.sh
-./gen_run_35.sh
+cd bgmc/c/attractive
+./gcc.sh
+cd src
+chmod +x gen_run_36.sh
+./gen_run_36.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
