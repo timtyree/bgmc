@@ -8,33 +8,6 @@ import numpy as np
 ######################
 # Nota Bene(but really this numerical method should also work in N+M dimensional data,
 # so long as the first axis indexes the observations)
-def divided_differences_eval(x,a_values,x_values):
-    '''returns the evaluate of the polynomial fit by fit_divided_differences
-    Example Usage:
-a_values=divided_differences_fit(x_values,y_values)
-yhat_values=divided_differences_eval(x=x_values,a_values=a_values,x_values=x_values)
-assert yhat_values==y_values
-    '''
-    out=a_values[0]#a0
-    if a_values.shape[0]==1:
-        return out
-    for i,xi,ai in enumerate(zip(x_values[1:],a_values[1:])):
-        #compute term
-        term=ai
-        for xj in x_values[:i]:
-            term*=(x-xj)
-        out+=term
-    return out
-
-def divided_differences_fit(x_values,y_values):
-    '''returns the fit of the polynomial fit by fit_divided_differences
-        Example Usage:
-    a_values=divided_differences_fit(x_values,y_values)
-    yhat_values=divided_differences_eval(x=x_values,a_values=a_values,x_values=x_values)
-    assert yhat_values==y_values
-        '''
-    return divided_difference(x_values,y_values)
-
 def divided_difference(x_values,y_values):
     """Let $$
     f[x_i]=f(x_i)
@@ -48,6 +21,43 @@ def divided_difference(x_values,y_values):
     a_values/=x_values[-1]-x_values[0]
     return a_values
 
+def divided_differences_fit(x_values,y_values):
+    '''returns the fit of the polynomial fit by fit_divided_differences
+    Example Usage:
+a_values=divided_differences_fit(x_values,y_values)
+yhat_values=divided_differences_eval(x=x_values,a_values=a_values,x_values=x_values)
+assert yhat_values==y_values
+    '''
+    a_lst=[]
+    num_points = x_values.shape[0]
+    assert y_values.shape[0]==num_points
+    for i in range(num_points):
+        a = divided_difference(x_values[:1+i],y_values[:1+i])
+        a_lst.append(a)
+    a_values = np.array(a_lst)
+    return a_values
+
+def divided_differences_eval(x,a_values,x_values):
+    '''returns the evaluate of the polynomial fit by fit_divided_differences
+    Example Usage:
+a_values=divided_differences_fit(x_values,y_values)
+yhat_values=divided_differences_eval(x=x_values,a_values=a_values,x_values=x_values)
+assert yhat_values==y_values
+    '''
+    out=a_values[0]#a0
+    if a_values.shape[0]==1:
+        return out
+#     for i,(xi,ai) in enumerate(zip(x_values[1:],a_values[1:])):
+#     for i,(xi,ai) in enumerate(zip(x_values[1:],a_values[1:])):
+    for i,ai in enumerate(a_values[1:]):
+        #compute term
+        term=ai
+        for xj in x_values[:i+1]:
+            term*=(x-xj)
+        out+=term
+    return out
+
+    
 #DONE: dev arbitrary N channel to M channel interpolation
 #DONT: add support for memoization using either
 #(i) a class
