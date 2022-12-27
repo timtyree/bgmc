@@ -1,0 +1,38 @@
+1) Can you make sure all the labels are large enough if we shrink the figures to single colum ones?
+TODO: check numbering is still big enough at single column width
+
+2) I think some of the y labels still say W instead of w
+- I checked again. They do not say W instead of w.  This can be checked by comparing to "H" in "Hz/cm^2".
+3) Can you indicate in 4C the value corresponding to the fitted a value for the two models (i.e., a=1.55 and 9.3).
+Maybe use a large square instead of a circle?
+TODO: change 2 circles to squares in Fig. 4C
+
+4) I am a bit uncomfortable claiming the 4/3 value unless it turns out to be a universal number. So, can you determine the
+asymptotic behavior for different parameter combinations?
+TODO: plot various LPM annihilation rates versus a and see if I still get 4/3.
+
+5) I still don't agree that 1A and S1 are the best way of showing annihilation events in the simulations.
+We want to show that "This attractive motion stems from the fact that annihilation occurs
+when the activation front connecting the tip pair is blocked by a nearby polarized region,
+resulting in a rapid shrinking of the activation front and the removal of the pair (see also
+Movie S1)."
+So, we need to show snapshots that display the nearby polarized region. This is not really shown in Fig. 1A (and S1).
+Also, we want to show that the annihilating pair is connected by an activation front. This is also not shown in 1A.
+I think you need to pick times that are closer to annihilation to clear show that 1. the pair is connected by an activation front and 2. there is a nearby repolarization zone that block further propagation of the pair-front.
+TODO: make new snapshots of the full models that show activation fronts shrinking after connecting
+
+6) I wrote a concluding paragraph. Let me know what you think. I think we have to say something about creation but it does
+set us up for rejection...
+TODO: read/comment on concluding paragraph in the Letter
+
+Regarding the SI (which I have not read in detail yet)
+A) Let's get rid of your Supplementary Figure 2 since we don't refer to it in the main text and I don't think it is necessary to show this.
+B) Supplemental Fig. 3B should be your Supplemental Fig. 2C. By the way, why are the FK results only for A up to 40 cm^2?
+Supplemental Fig. 3A should show the equivalent of Fig. 2A for a different domain size.
+C) Your Supplemental Fig. 2B is never referred to in the main text. So, I think we can remove it.
+TODO: get rid of Supplementary Figure 2 and replace with a modified version of Supplementary Figure 3
+D) Supplemental Fig. 4 should show the exponential dependence of \tau on A.
+Suplementary Figure 2 2E) Your Supplemental Fig. 4 may or may not be necessary. I haven't had a chance to digest that one....
+TODO: modify current Supplementary Figure 4 or remove...
+
+W-J
