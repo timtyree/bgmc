@@ -1,3 +1,38 @@
+Hi Wouter,
+
+I reran the a vs. A analysis— this time with D measured independently for each A.
+I didn't do this before because I got D<0 for the FK model on the 150x150 domain.
+The result of allowing D=D(A) resulted in a decreasing with A, which better supports the key claim of our paper.
+
+Do you still think I should show a plot similar to 2A for different values of A in Figure S3?
+
+Best,
+Tim
+
+P.S.
+link to 'strongly-attracting-limits.pdf':
+https://drive.google.com/file/d/1zq_ky1cCJRn6hjjkdUsN_mYRc88KQMHw/view?usp=share_link
+link to 'fig-sm-a-is-insensitive-to-A.pdf':
+https://drive.google.com/file/d/1f9Omz2VTa_d-X-dblMh-1bItp0CkTmKL/view?usp=share_link
+
+***
+
+DONE: plot various LPM annihilation rates versus a and see if I still get 4/3.
+DONE: compute D versus A as I did in at A=25 cm^2.
+- HINT: just compute the slope at long time scales. do the values vary much?
+- HINT: don't compute D from TA(MSD) bc that's not what is in Table 1.
+
+***
+
+\textcolor{red}{Just to make sure: you computed MSR for different values of A in the full models, after which you fitted the OPM results and then computed $a$ using Eq. 9, correct? What about D, is that the same for different values of $A$? Also, we need to show this more explicitly.
+So, Fig. S3 should show a plot similar to Fig. 2A for a different value of A and
+we should show the plot of $a$ vs. $A$ (which you already have).}
+DONE: compute D versus A as I did in at A=25 cm^2.
+DONE: update supplementary figure with new a = amax-2D.
+DONE: update text in paper with new a = amax-2D.
+
+***
+
 1) Can you make sure all the labels are large enough if we shrink the figures to single colum ones?
 TODO: check numbering is still big enough at single column width
 
@@ -5,11 +40,11 @@ TODO: check numbering is still big enough at single column width
 - I checked again. They do not say W instead of w.  This can be checked by comparing to "H" in "Hz/cm^2".
 3) Can you indicate in 4C the value corresponding to the fitted a value for the two models (i.e., a=1.55 and 9.3).
 Maybe use a large square instead of a circle?
-TODO: change 2 circles to squares in Fig. 4C
+DONE: add 2 black dots at observed alinear values Fig. 3-4
 
 4) I am a bit uncomfortable claiming the 4/3 value unless it turns out to be a universal number. So, can you determine the
 asymptotic behavior for different parameter combinations?
-TODO: plot various LPM annihilation rates versus a and see if I still get 4/3.
+DONE: plot various LPM annihilation rates versus a and see if I still get 4/3.
 
 5) I still don't agree that 1A and S1 are the best way of showing annihilation events in the simulations.
 We want to show that "This attractive motion stems from the fact that annihilation occurs
@@ -19,7 +54,7 @@ Movie S1)."
 So, we need to show snapshots that display the nearby polarized region. This is not really shown in Fig. 1A (and S1).
 Also, we want to show that the annihilating pair is connected by an activation front. This is also not shown in 1A.
 I think you need to pick times that are closer to annihilation to clear show that 1. the pair is connected by an activation front and 2. there is a nearby repolarization zone that block further propagation of the pair-front.
-TODO: make new snapshots of the full models that show activation fronts shrinking after connecting
+DONE: make new snapshots of the full models that show activation fronts shrinking after connecting
 
 6) I wrote a concluding paragraph. Let me know what you think. I think we have to say something about creation but it does
 set us up for rejection...
