@@ -21,11 +21,11 @@ def compute_exponential_rmse(x_values,y_values,m,B):
 
     Example Usage:
 B,Delta_B,m,Delta_m,Rsq=fit_exponential(x,y)
-yvhat=-B*np.exp(xv*m)
+yvhat=np.exp(xv*m+B)
 rmse=np.sqrt(np.mean((yvhat-yv)**2))
-compute_exponential_rmse(x_values,y_values,m,-B)
+compute_exponential_rmse(x_values,y_values,m,B)
     """
-    yv=B*np.exp(x_values*m)
+    yv=np.exp(x_values*m+B)
     rmse=np.sqrt(np.mean((y_values-yv)**2))
     return rmse
 
