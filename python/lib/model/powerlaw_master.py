@@ -114,8 +114,8 @@ tau = eval_tau(n_qs, prob_qs, phi, comp_Wm, comp_Wp, printing=True,**kwargs)
         #evaluate tau_qs
         num_vals=n_qs.shape[0]
         tau_qs=np.zeros(num_vals)
-#         maxinf_num_inner_sum = n_qs[-1]
-        maxinf_num_inner_sum = int(n_qs[-1]/2)
+        maxinf_num_inner_sum = n_qs[-1]
+        # maxinf_num_inner_sum = int(n_qs[-1]/2)  #5 second run time
         for i,n in enumerate(n_qs):
             n_over_2 = int(n/2)
             assert n_over_2<=maxinf_num_inner_sum#
@@ -124,7 +124,7 @@ tau = eval_tau(n_qs, prob_qs, phi, comp_Wm, comp_Wp, printing=True,**kwargs)
                                           printing=printing)
         #average tau_qs over n_qs,prob_qs
         tau = np.sum(tau_qs*prob_qs)
-        #does nothing for properly normalized qs
+        #does nothing for properly normalized qs. comfirmed to 5 sig. figs.
         tau/= np.sum(prob_qs)
         return tau
     return eval_tau
@@ -141,17 +141,22 @@ tau = eval_tau_expression(n_over_2,phi, comp_Wm, comp_Wp, maxinf_num_inner_sum=2
     assert n_over_2<=maxinf_num_inner_sum#
     outer_sum=0.
     for k in range(n_over_2):
+        kk = k+1 #correct for 1 indexing
         inner_sum=0.
-        for j in range(k,maxinf_num_inner_sum):
-            jj = j+1 #correct for 1 indexing
+        # for j in range(k,maxinf_num_inner_sum):
+        for j in range(kk,maxinf_num_inner_sum):
+            #jj = j+1 #correct for 1 indexing
             summand = 1.
-            summand/= phi(2*jj)*comp_Wp(2*jj)  #1
-            #summand/= phi(2*jj)*comp_Wm(2*(jj-1))  #2
+            summand/= phi(2*j)*comp_Wp(2*j)  #1b
+            # summand/= phi(2*jj)*comp_Wp(2*jj)  #1
+            # #summand/= phi(2*jj)*comp_Wm(2*(jj-1))  #2
             #print(f"{k=}: {j=}: {summand=}\r")
             inner_sum += summand
-        inner_sum *= phi(2*(k-1))
+        # inner_sum *= phi(2*(kk-1))
+        inner_sum *= phi(2*k)
+        #inner_sum *= phi(2*(k-1))
         outer_sum += inner_sum
         if printing:
-            print(f"{k=}: {j=}: {outer_sum=:.4f} from {inner_sum=:.4f}")
+            print(f"{k=}: {j=}: {outer_sum=:.4f}, {inner_sum=:.4f}")
             #print(f"{k=}: {j=}: {outer_sum=:.4f} from {inner_sum=:.4f}\r")
     return outer_sum
