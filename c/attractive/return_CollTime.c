@@ -94,9 +94,11 @@ int main(int argc, char* argv[])
   double T_net=0.;int count_net=0;
   double T_value; double Rad; double Theta;
   srand(seed); // randomize seed.
+  // double tmax=5000.;
   double tmax=500.; // UNCOMMENT_HERE
-  // double tmax=.1; // COMMENT_HERE
-  double dist_cutoff=1e-2;
+  // // double tmax=.1; // COMMENT_HERE
+  // double dist_cutoff=1e-6;
+  double dist_cutoff=1e-2; // UNCOMMENT_HERE
   int iter_per_movestep = round(Dt/dt);
   int i_neighbor[Nmax];
   double impulse_prefactor= varkappa * Dt;
