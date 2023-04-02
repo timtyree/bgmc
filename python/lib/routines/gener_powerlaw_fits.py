@@ -52,7 +52,10 @@ def gener_powerlaw_fit(input_fn,q_min=None,q_max=None,printing=False,testing=Fal
         df.replace([np.inf, -np.inf], np.nan, inplace=True)
         df.dropna(subset=['CollRate'], how="all",inplace=True)
     df['A']=df['L']**2
-    df['q']=df['N']/df['A'] #number of tips per square centimeter
+    # df['q']=df['N']/df['A'] #number of tips per square centimeter
+    # df['q']=df['N']/(df['L']**2)
+    # df['q']=(df['N']+2)/(df['L']**2)  #to cancel out the perl error
+    df['q']=(df['N']-2)/(df['L']**2)  #to cancel out the perl error
     df['w']=df['CollRate']/df['A'] #[mHz?]/cm^2
 
     if q_min is None:
