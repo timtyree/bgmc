@@ -12,11 +12,8 @@ L=5 #cm per domain
 force_code=2 #2 :: QED2, 4 :: QED2 + constant repulsion
 x0_values=np.array([0])#1.5,3.,5.,10.,100.,10000.]) #10 #doesn't matter for force_code=2
 
-
-
 #TODO(failing ^this): dev run 34 with ^this, rxn>3, and L=5.
 #TODO: set rxn<12
-
 
 dt=1e-5
 Dt=1e-5
@@ -30,9 +27,8 @@ amax_lst_fk=[
     ]
 #D
 D_lst_fk=[#0.0372,
-        0.1145,#* <--the good one
-        #0.05,#from table 1
-            ]
+    0.1145,#* <--the good one
+    ]
 #measured values for LR
 #amax
 amax_lst_lr=[#8.585030313,

@@ -1,10 +1,9 @@
 #!/bin/bash
-run_number=34
-# run_number=37
+run_number=39
 
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
-echo "notabene: the results are looked for in two places, both in :~/bgmc/c/oscillatory, or the folder indicated in logdown.sh"
+# echo "notabene: the results are looked for in two places, both in :~/bgmc/c/oscillatory, or the folder indicated in logdown.sh"
 
 case ${answer:0:1} in
     y|Y )
