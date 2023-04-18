@@ -72,3 +72,28 @@ double subtract_pbc_1d(double x1,double x2, double L){
 //   diff[1]=ysq;
 //   return diff;
 // }
+
+double find_min(double dmin[3],double xl){
+  double fac;
+  int imin;
+  int i;
+  double xmin=2.*xl;
+  for (i=0; i<3; i++) {
+    if (dmin[i]<xmin){
+      xmin=dmin[i];
+      imin=i;
+    }
+  }
+  if (imin==0){
+    fac=0.;
+  }
+  else {
+    if (imin==1) {
+      fac=xl;
+    }
+    else {
+      fac=-xl;
+    }
+  }
+  return fac;
+}

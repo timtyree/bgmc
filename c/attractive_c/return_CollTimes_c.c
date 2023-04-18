@@ -1,24 +1,6 @@
 /* Program that returns collision times using a Monte Carlo method */
-// the variable number of diffusing particles is handled by
-
-//Scrum 6.22.2021: implementing (I) starting outside a particular distance and (II) additional choices of force_code
-// I (Option A)
-// alter set_second to choose each particle to be outside of each previous particle.
-// if a certain number of attempts doesn't work, then give up and rename Nmax... that's complicated...
-//TODO: I (Option B)
-// write python function that saves M*MM locations to /public/TimtheTyrant/ic-2d/
-// load a set of example initial positions from /public/TimtheTyrant/ic-2d/ using Process mod some value
-// set N (or Nmax) to the number of particles
-
-//TODO: II (Option A) just code the new forces inline and copy to the second locations
-// II (Option B) move the force computation to a separate file and call it.
-
-//Ye Olde Scrum
-//TODO(later): consider whether I might see any new behaviour returned/effect on collision times, if I
-// - consider exponential solution in computing motion... with dt=1e-6... probably not...
-// - consider other SDE discretizations to solve the motion
 #include "CommonDefines.h"
-// // using namespace std;
+// using namespace std;
 int main(int argc, char* argv[])
 {
   /* parse exteral inputs */
@@ -70,8 +52,6 @@ int main(int argc, char* argv[])
   //DONE: printf( all input parameters such that I can redirect ^this to a text file )
   printf("the repeatable inputs are:\n");
   printf("%lg %lg %lg %lg %lg %lg %lg %lg %d %d %d %d %d %d %d %d %d\n",r,D,L,kappa,varkappa,x0,Dt,dt,N,niter,seed,reflect,set_second,no_repulsion,no_attraction,neighbor,force_code);
-  //TODO: generalize to a set of forces of interest
-
   int i,j,k,q,s;
   int Nmax=N;
   int nparticles=Nmax;
@@ -98,8 +78,6 @@ int main(int argc, char* argv[])
   double probreact=kappa*dt; //double sig;
   double min_dist_old[Nmax];
   double dist; double dist2; bool in_range; bool reacts;int ineigh;
-  // double T_net=0.;
-  // int count_net=0;
   double Tavg;
   double T_value; double Rad; double Theta;
   srand(seed); // randomize seed.
@@ -174,18 +152,8 @@ int main(int argc, char* argv[])
     /*                                   |
     |   run simulation for given trial   |
     |                                   */
-    // GOAL: modify algorithm to go from Nmax all the way down to N0_end
-    // DONE: make still_running only turn off when N≤N0_end
-    // DONE: print the N values that will be sweeped over, as before
-    // e.g. 100,99,98,... etc.
-    // DONE: every time two particles are removed, compute the time since last reaction
-    // HINT:
-    // T = t - t_rxn_prev;
-    // t_rxn_prev = t;
-    // print(T)
-
     while(dont_terminate_trial){
-      // determine whether all particles have reacted
+      // // determine whether all particles have reacted
       // nparticles=0;
       // for (i = 0; i < Nmax; i++ ){
       //   if (still_running[i]){
@@ -195,6 +163,7 @@ int main(int argc, char* argv[])
       // if (nparticles <= N0_end){
       //   dont_terminate_trial=false;
       // }
+
       // DONT: move ^this solution to the end of this while statement.
       // DONE: dev record-keeping system in a 1D float array of length Nmax
 
@@ -262,9 +231,11 @@ int main(int argc, char* argv[])
             dy = y_old[ineigh]-y_old[j];
           }
           dist2=dx*dx+dy*dy;
-          if (dist2<1.e-8){
-            dist2=1.e-8;
-          }
+          // if (dist2<1.e-8){
+          //   dist2=1.e-8;
+          // }
+          // Q: is ^this causing the discrep.?
+          // A: nope.
           dist = sqrt(dist2);
 
           //FORCES_HERE
@@ -340,9 +311,9 @@ int main(int argc, char* argv[])
                 dy = y_old[j]-y_old[i];
               }
               dist2=dx*dx+dy*dy;
-              if (dist2<1.e-8){
-                dist2=1.e-8;
-              }
+              // if (dist2<1.e-8){
+              //   dist2=1.e-8;
+              // }
               dist = sqrt(dist2);
 
               //FORCES_HERE
@@ -424,6 +395,8 @@ int main(int argc, char* argv[])
             // linear interpolation
             X[i]=frac*X_old[i]+cfrac*X_new[i];
             Y[i]=frac*Y_old[i]+cfrac*Y_new[i];
+            // X[i]=cfrac*X_old[i]+frac*X_new[i];  //<<< looks wrong at large n
+            // Y[i]=cfrac*Y_old[i]+frac*Y_new[i];  //<<< looks wrong at large n
             // impose boundary conditions
             if (reflect==0){
               //enforce PBC
@@ -453,7 +426,7 @@ int main(int argc, char* argv[])
               // in_range=true;//uncomment for smeared method
               // if two particles are in range
               if(in_range){
-                // determine whether those two particles react via the simple method
+                // determine whether those two particles react
                 reacts=probreact>uniformRandom();
                 // determine whether those two particles react via the smeared method
                 // sig=sigmoid(dist, r, beta);
@@ -462,7 +435,8 @@ int main(int argc, char* argv[])
                   // compute time since last reaction
                   T_prev=T;
                   // T=t;
-                  T=Time; // <<<< root cause? no...
+                  T=Time;
+                  // Q: ^the root cause?
                   // exit_code=1;
                   // // count number of remaining particles
                   // nparticles=0;
@@ -471,10 +445,7 @@ int main(int argc, char* argv[])
                   //     nparticles = nparticles + 1;
                   //   }
                   // }
-
                   // record
-                  // Tsum_array[nparticles-1] = Tsum_array[nparticles-1] + T - T_prev;
-                  // Tcount_array[nparticles-1] = Tcount_array[nparticles-1] + 1;
                   Tsum_array[nparticles] = Tsum_array[nparticles] + T - T_prev;
                   Tcount_array[nparticles] = Tcount_array[nparticles] + 1;
                   nparticles=nparticles-2;
@@ -497,16 +468,9 @@ int main(int argc, char* argv[])
         dont_terminate_trial=false;
       }
     }//end while running
-    //record this trial
-    // if (exit_code>0){
-    //   if (T>0.){
-    //     T_net=T_net+T;
-    //     count_net=count_net+1;
-    //   }
-    // }
+
   }//end for each trial
   printf("simulation complete!\n");
-
   // Print results
   printf("\nPrinting Inputs...\n");
   printf("r=%g\n",r);
@@ -526,6 +490,7 @@ int main(int argc, char* argv[])
   printf("no_attraction=%d\n",no_attraction);
   printf("neighbor=%d\n",neighbor);
   printf("force_code=%d\n",force_code);
+  printf("iter_per_movestep=%d\n",iter_per_movestep);
 
   /*                              |
   |  Record Mean Collision Times  |
@@ -576,7 +541,7 @@ int main(int argc, char* argv[])
   //     // printf ("%f,",Tavg);
   //     // printf ("%d,",i+1);
   //   }
-  //   boo=!boo;
+  //   // boo=!boo;
   // }
   // printf ("\n");
   // printf ("\n");
@@ -590,7 +555,7 @@ int main(int argc, char* argv[])
   //     // printf ("%f,",Tavg);
   //     // printf ("%d,",i+1);
   //   }
-  //   boo=!boo;
+  //   // boo=!boo;
   // }
 
   //GOAL: consistency checks for output
