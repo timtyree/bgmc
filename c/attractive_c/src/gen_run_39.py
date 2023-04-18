@@ -15,7 +15,8 @@ x0_values=np.array([0])#1.5,3.,5.,10.,100.,10000.]) #10 #doesn't matter for forc
 
 dt=1e-5
 Dt=1e-5
-Nmax=100  #Warning: not be actually connected to anything. goto return_Coltimes.sh to modify Nmin,Nmax.
+Nmax=150
+#Warning: not be actually connected to anything. goto return_Coltimes.sh to modify Nmin,Nmax.
 
 # amax_lst=[
 #     1.781, #fk from osc fit to msr
