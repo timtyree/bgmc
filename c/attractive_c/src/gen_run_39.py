@@ -69,7 +69,8 @@ set_second_values=np.array([0])
 reflect_values=np.array([0])
 no_repulsion_values=np.array([0])#1 means no repulsion is true
 no_attraction_values=np.array([0])
-neighbor_values=np.array([0,1])
+neighbor_values=np.array([0])
+# neighbor_values=np.array([0,1])
 
 #iterate over settings, scheduling the longest jobs first
 count=0
