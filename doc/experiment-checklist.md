@@ -11,7 +11,7 @@ cd ~/Documents/GitHub/bgmc/python/lib
 HINT:
 cd c/attractive/src
 
-chmod +x gen_run_36.sh
+chmod +x gen_run_40.sh
 
 1. update return-CollTimes.submit to take run_next.dat...
 nano ../return-CollTimes.submit
