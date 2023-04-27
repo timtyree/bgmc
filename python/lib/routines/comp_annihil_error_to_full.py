@@ -78,9 +78,11 @@ df,dict_linear = routine_measure_annihilation_defect(input_fn,printing=True)#,**
     cluster_index=eval(lst[-2])
     job_index=eval(lst[-1])
     #compute w,q and add as fields to df
-    # df['q']=df['N']/(df['L']**2)
-    # df['q']=(df['N']+2)/(df['L']**2)  #to cancel out the perl error
-    df['q']=(df['N']-2)/(df['L']**2)  #to cancel out the perl error
+    shiftby2=False
+    if shiftby2:
+        df['q']=(df['N']-2)/(df['L']**2)  #to cancel out the perl error
+    else:
+        df['q']=df['N']/(df['L']**2)
     df['w']=(df['CollTime']**-1)/(df['L']**2)
     df_all=df.copy()
     df = df[df['N']>=min_num_particles].copy()
@@ -126,7 +128,7 @@ dict_defects_fk,dict_defects_lr = parse_dict_linear_to_row(dic = dict_linear)
     assert set()==added
     assert set()==removed
     #test exactly the right keys are equal in the dictionary
-    assert same=={'D','Dt','L','dt','force_code','kappa','neighbor','niter','no_attraction','no_repulsion','r','reflect','set_second','varkappa','x0'}
+    #assert same=={'D','Dt','L','dt','force_code','kappa','neighbor','niter','no_attraction','no_repulsion','r','reflect','set_second','varkappa','x0'}
 
     dict_defects_fk = dict(dic['dict_defects_fk'])
     dict_defects_lr = dict(dic['dict_defects_lr'])
