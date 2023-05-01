@@ -1,2 +1,2 @@
 
-TEXT=$'Brownian Monte Carlo Simulation'
+TEXT=$'Osc. Particle Model'
