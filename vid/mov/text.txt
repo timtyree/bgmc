@@ -1,2 +1,2 @@
 
-TEXT=$'Osc. Particle Model'
+TEXT=$'Particle Model'

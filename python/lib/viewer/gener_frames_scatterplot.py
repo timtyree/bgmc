@@ -45,7 +45,7 @@ def SaveScatterPlotSnapshot(x_values,y_values,t,width,height,frameno,save_folder
     frameno+=1
     '''
     fig=ScatterPlotSnapshot(x_values,y_values,t,width,height,
-                        annotating=annotating,message=message)
+                        annotating=annotating,message=message,**kwargs)
     if not saving:
         plt.show()
     else:
