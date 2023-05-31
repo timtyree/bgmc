@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
   scanf("%lg",&kappa);printf("kappa=%g",kappa);
   printf("\nEnter the spring rate (Hz): ");
   scanf("%lg",&varkappa);printf("varkappa=%g",varkappa);
-  printf("\nEnter the unpreferred distance (cm): ");
+  printf("\nEnter the levy exponent, alpha: ");
   scanf("%lg",&x0);printf("x0=%g",x0);
   printf("\nEnter the timestep of motion: ");
   scanf("%lg",&Dt);printf("Dt=%g",Dt);
@@ -69,15 +69,20 @@ int main(int argc, char* argv[])
   double T;
   double T_prev;
   double dx,dy,dxt,dyt,dxW,dyW;
+  double deltat;
   bool still_running[Nmax];
-  bool caught[Nmax];
+  int caught[Nmax];
   double Tsum_array[Nmax+1];
   int Tcount_array[Nmax+1];
   bool dont_terminate_trial;
   bool all_valid;
   bool boo;
   double step;
+  double xavg; double yavg;
   double dmin[3];
+  int uncatch_set[4];
+  double epsilon=0.05; //cm, the distance removals happen at
+  double dist_epsilon=epsilon*epsilon;
   double sum_att_x; double sum_att_y;
   double stepscale=sqrt(2*D*Dt);
   double probreact=kappa*dt; //double sig;
@@ -100,9 +105,17 @@ int main(int argc, char* argv[])
   int i_neighbor[Nmax];
   double impulse_prefactor= varkappa * Dt;
   double impulse_constant = -1. * impulse_prefactor / x0;
+  double catch_prefactor=1./(4*(varkappa+2*D));
+  //heretim
+  //Q: which catch_prefactor supports reasonable death rates?
+
+  // double min(double a, double b);
+
   double impulse_factor;
   double xn; double yn;
   double ul; double th;
+  double ti; double tf;
+  double xl; double yl;
   int N0_end=0;
   // int N0_end=2;
   // int N0_end=10;
@@ -121,9 +134,13 @@ int main(int argc, char* argv[])
   printf("\nrunning simulation...\n");
   /* for each trial... */
   for (q = 0; q < niter; q++) {
-    t=0.;T=0.;
+    // t=0.;
+    T=0.;
     Time=0.;
     dont_terminate_trial=true;
+    for (i=0; i<Nmax; i++) {
+      caught[i]=-9999;
+    }
     // still_running=true;
     // exit_code=-1;
     //T = -9999.; //initialize stopping times to -9999
@@ -220,27 +237,64 @@ int main(int argc, char* argv[])
     step=0;  // <<< matches what wj did
     // step=-1; // <<< looks wrong at N=Nmax
     while(dont_terminate_trial){
+      //heretim
+      //TODO: every print_every steps, print the number of particles that are/aren't caught.
+      double print_every=10000;
+      if (fmod(step,print_every)==0){
+        int num_caught=0;
+        int num_uncaught=0;
+        for (i = 0; i < Nmax; i++ ) {
+          if ((still_running[i])&(caught[i]>0)) {
+            num_caught=num_caught+1;
+          }
+          if ((still_running[i])&(caught[i]<=0)) {
+            num_uncaught=num_uncaught+1;
+          }
+        }
+        printf("num_caught=%d ",num_caught);
+        printf("num_uncaught= %d\n",num_uncaught);
+      }}
       step=step+1;
       // one step of motion
       for (i = 0; i < Nmax; i++ ) {
         if (still_running[i]) {
-          // compute force sum
-          sum_att_x=0.;
-          sum_att_y=0.;
-          for (j = 0; j < Nmax; j++ ) {
-            if (still_running[j] && i!=j) {
-              sum_att_x=sum_att_x-impulse_prefactor*displacements_x[i][j]/distances[i][j];
-              sum_att_y=sum_att_y-impulse_prefactor*displacements_y[i][j]/distances[i][j];
+          if (caught[i]<0) {
+            // compute force sum
+            sum_att_x=0.;
+            sum_att_y=0.;
+            for (j = 0; j < Nmax; j++ ) {
+              if (still_running[j] && i!=j) {
+                sum_att_x=sum_att_x-impulse_prefactor*displacements_x[i][j]/distances[i][j];
+                sum_att_y=sum_att_y-impulse_prefactor*displacements_y[i][j]/distances[i][j];
+              }
             }
+            // dxW=stepscale*normalRandom();
+            // dyW=stepscale*normalRandom();
+            ul=stepscale*pow(uniformRandom(),powerscale);
+            th=angleRandom();
+            dxW=ul*cos(th);
+            dyW=ul*sin(th);
+            X_new[i]=x[i]+dxW+sum_att_x;
+            Y_new[i]=y[i]+dyW+sum_att_y;
           }
-          // dxW=stepscale*normalRandom();
-          // dyW=stepscale*normalRandom();
-          ul=stepscale*pow(uniformRandom(),powerscale);
-          th=angleRandom();
-          dxW=ul*cos(th);
-          dyW=ul*sin(th);
-          X_new[i]=x[i]+dxW+sum_att_x;
-          Y_new[i]=y[i]+dyW+sum_att_y;
+          else {
+            // implement one step of the caught mode
+            j = caught[i];
+            ti=tiarray[i];
+            tf=tfarray[i];
+            // compute average location
+            xavg= x[i] + 0.5*displacements_x[i][j];
+            yavg= y[i] + 0.5*displacements_y[i][j];
+            // compute frac to interpolate by
+            frac = (t-ti)/(tf-ti);
+            frac = min(1,frac);
+            xl = facarray_x[i][j];
+            yl = facarray_y[i][j];
+            X_new[i]=x[i]*(1-frac)+(xavg+xl)*frac;
+            Y_new[i]=y[i]*(1-frac)+(yavg+yl)*frac;
+            // heretim
+            // Q: is it +xl or -xl?
+          }
           //enforce boundary conditions
           // if (reflect==0){
           //   //enforce PBC
@@ -359,8 +413,57 @@ int main(int argc, char* argv[])
                 Tcount_array[nparticles] = Tcount_array[nparticles] + 1;
                 nparticles=nparticles-2;
                 // remove the two reacting particles from the simulation
-                still_running[i]=false;
-                still_running[j]=false;
+                // still_running[i]=false;
+                // still_running[j]=false;
+                // uncatch any previous catches
+                if (caught[i]>=0) {
+                  caught[caught[i]]=-9999;
+                }
+                if (caught[j]>=0) {
+                  caught[caught[j]]=-9999;
+                }
+                // catch these two
+                caught[j]=i;
+                caught[i]=j;
+                // determine deltat, recalling dist**2 = distances[i][j]
+                deltat = distances[i][j]*catch_prefactor;
+                // determine ti,tf
+                tiarray[i]=T;
+                tfarray[i]=T+deltat;
+                tiarray[j]=T;
+                tfarray[j]=T+deltat;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // particle_removal_kernel
+    for (i = 0; i < Nmax; i++ ) {
+      if (still_running[i]) {
+        for (j = 0; j < Nmax; j++ ) {
+          if (still_running[j]) {
+            // TODO: write minimal particle_removal_kernel
+            // determine if they are closer than epsilon
+            if (distances[i][j]<=dist_epsilon) {
+              //remove if they are
+              still_running[i]=false;
+              still_running[j]=false;
+              uncatch_set[0]=caught[i];
+              uncatch_set[1]=caught[j];
+              uncatch_set[2]=-9999;
+              uncatch_set[3]=-9999;
+              if (uncatch_set[0]>=0) {
+                uncatch_set[2]=caught[uncatch_set[0]];
+              }
+              if (uncatch_set[1]>=0) {
+                uncatch_set[3]=caught[uncatch_set[1]];
+              }
+              for (k=0; k<4; k++) {
+                if (uncatch_set[k]>=0) {
+                  caught[uncatch_set[k]]=-9999;
+                }
               }
             }
           }
