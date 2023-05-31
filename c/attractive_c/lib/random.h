@@ -9,6 +9,21 @@ double normalRandom() {
    return cos(2.*3.141592653589793*v2)*sqrt(-2.*log(v1));
 }
 
+// double levyRandom(alpha) {
+//     return pow(uniformRandom(),-1./alpha);
+// }
+
+double angleRandom() {
+  return 2*3.141592653589793*uniformRandom();
+}
+
+// double alpha=x0;
+// double ul; double th;
+// ul=levyRandom(alpha);
+// th=angleRandom();
+// dWx = ul*cos(th);
+// dWy = ul*sin(th);
+
 // double * randu(int N){
 //   /* generate a vector of N uniform random variables on the unit interval */
 //   double n[N];
