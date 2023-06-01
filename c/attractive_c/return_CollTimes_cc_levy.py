@@ -10,7 +10,8 @@ N=150
 Nfinal=8
 # Nfinal=2
 # niter=200
-niter=500
+# niter=500
+niter=1500
 #HERETIM
 
 # L=5
@@ -21,18 +22,17 @@ np.random.seed(seed)
 t=0
 #define model parameters
 # #FK
-# r=0.7 #cm
-# varkappa=1.552 #cm^2/s
-# D=0.115 #cm^2/s
+r=0.7 #cm
+varkappa=1.552 #cm^2/s
+D=0.115 #cm^2/s
 # # save_every=25
 # save_every=5
 # # save_every=1 #45 min
 
-#LR
-# r=0.5 #cm
-varkappa=9.3 #cm^2/s
-D=0.42 #cm^2/s
-
+# #LR
+# # r=0.5 #cm
+# varkappa=9.3 #cm^2/s
+# D=0.42 #cm^2/s
 
 # save_every=5
 # # save_every=1
@@ -42,7 +42,8 @@ D=0.42 #cm^2/s
 # kappa=1e5 #Hz
 # kappa=1e3 #Hz
 # kappa=50
-r=0.135; kappa=60
+# r=0.135;
+kappa=60
 
 # r=0.5;
 kappa=20
@@ -111,8 +112,8 @@ for q in range(niter):
     exit_code=-1;
     # T=-9999.
 
-    x=x_values.copy()
-    y=y_values.copy()
+    # x=x_values.copy()
+    # y=y_values.copy()
     x_old=x_values.copy()
     y_old=y_values.copy()
     x_new=x_values.copy()
@@ -290,7 +291,7 @@ for q in range(niter):
                 exit_code=-99;
 
         step+=1
-        #end while running
+    #end while running
 
 #record this trial
 if (exit_code>0):
