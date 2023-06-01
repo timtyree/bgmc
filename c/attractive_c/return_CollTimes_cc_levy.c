@@ -239,7 +239,8 @@ int main(int argc, char* argv[])
     while(dont_terminate_trial){
       //heretim
       //TODO: every print_every steps, print the number of particles that are/aren't caught.
-      double print_every=10000;
+      int print_every=1000000;
+      // printf("Remainder of %f / %d is %.0lf\n", step, print_every, fmod(step,print_every));
       if (fmod(step,print_every)==0){
         int num_caught=0;
         int num_uncaught=0;
@@ -253,7 +254,7 @@ int main(int argc, char* argv[])
         }
         printf("num_caught=%d ",num_caught);
         printf("num_uncaught= %d\n",num_uncaught);
-      }}
+      }
       step=step+1;
       // one step of motion
       for (i = 0; i < Nmax; i++ ) {
@@ -405,13 +406,6 @@ int main(int argc, char* argv[])
               // sig=sigmoid(dist, r, beta);
               // reacts=probreact*sig>uniformRandom();
               if(reacts){
-                // compute time since last reaction
-                T_prev=T;
-                T=step*dt;
-                // record
-                Tsum_array[nparticles] = Tsum_array[nparticles] + T - T_prev;
-                Tcount_array[nparticles] = Tcount_array[nparticles] + 1;
-                nparticles=nparticles-2;
                 // remove the two reacting particles from the simulation
                 // still_running[i]=false;
                 // still_running[j]=false;
@@ -428,6 +422,7 @@ int main(int argc, char* argv[])
                 // determine deltat, recalling dist**2 = distances[i][j]
                 deltat = distances[i][j]*catch_prefactor;
                 // determine ti,tf
+                T=step*dt;
                 tiarray[i]=T;
                 tfarray[i]=T+deltat;
                 tiarray[j]=T;
@@ -447,6 +442,13 @@ int main(int argc, char* argv[])
             // TODO: write minimal particle_removal_kernel
             // determine if they are closer than epsilon
             if (distances[i][j]<=dist_epsilon) {
+              // compute time since last reaction
+              T_prev=T;
+              T=step*dt;
+              // record
+              Tsum_array[nparticles] = Tsum_array[nparticles] + T - T_prev;
+              Tcount_array[nparticles] = Tcount_array[nparticles] + 1;
+              nparticles=nparticles-2;
               //remove if they are
               still_running[i]=false;
               still_running[j]=false;
@@ -460,6 +462,7 @@ int main(int argc, char* argv[])
               if (uncatch_set[1]>=0) {
                 uncatch_set[3]=caught[uncatch_set[1]];
               }
+              // Potential Root Cause: not using set operations in c...
               for (k=0; k<4; k++) {
                 if (uncatch_set[k]>=0) {
                   caught[uncatch_set[k]]=-9999;
@@ -475,7 +478,6 @@ int main(int argc, char* argv[])
       dont_terminate_trial=false;
     }
     }//end while running
-
   }//end for each trial
   printf("simulation complete!\n");
   // Print results

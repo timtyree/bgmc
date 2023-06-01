@@ -1,0 +1,4 @@
+TODO: transcribe the annihilation loop/rate code to return_CollTimes_cc_levy.py
+TODO: add output from return_CollTimes_cc_levy.py to output.txt
+TODO: verify it looks reasonable (i.e. a slight modification of before)
+TODO: add input interface to return_CollTimes_cc_levy.py
