@@ -5,52 +5,52 @@ import numpy as np
 
 force_code=2
 N=150
-# Nfinal=0
 # N=16
-Nfinal=8
+# Nfinal=8
+Nfinal=0
 # Nfinal=2
 # niter=200
 # niter=500
-niter=1500
+niter=15000
 #HERETIM
 
-# L=5
-L=10
+L=5
+# L=10
 seed=42
 np.random.seed(seed)
 # rs = RandomState(MT19937(SeedSequence(seed)))
 t=0
 #define model parameters
-# #FK
-r=0.7 #cm
-varkappa=1.552 #cm^2/s
-D=0.115 #cm^2/s
+# # #FK
+# r=0.7 #cm
+# varkappa=1.552 #cm^2/s
+# D=0.115 #cm^2/s
 # # save_every=25
 # save_every=5
 # # save_every=1 #45 min
 
-# #LR
-# # r=0.5 #cm
-# varkappa=9.3 #cm^2/s
-# D=0.42 #cm^2/s
+#LR
+# r=0.5 #cm
+varkappa=9.3 #cm^2/s
+D=0.42 #cm^2/s
 
 # save_every=5
 # # save_every=1
-# # save_every=1000000000
+# save_every=1000000000
 # # varkappa=0 #no attraction
 
 # kappa=1e5 #Hz
 # kappa=1e3 #Hz
 # kappa=50
-# r=0.135;
-kappa=60
-
-# r=0.5;
-kappa=20
+# r=0.135;kappa=60
+# r=0.5;kappa=20
+r=0.3;kappa=20
+# kappa=100;
+# kappa=100; r=0.125 #<<< WJ says this worked well for LR
 
 Dt=1e-5;dt=1e-5
 # tmax=500
-tmax=1 #s
+tmax=10000 #s
 
 #for forces
 x0=5
