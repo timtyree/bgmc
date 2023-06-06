@@ -89,7 +89,8 @@ if __name__=='__main__':
     qfoo=eval(input('Please enter a query function of the form "lambda dict_inputs:dict_inputs["reflect"]==0": \n'))
     # prompt user for save_fn
     save_fn = str(input("Please enter save folder name: \n"))
-    nb_dir='/home/timothytyree/Documents/GitHub/bgmc/python'
+    nb_dir='/Users/timothytyree/Documents/GitHub/bgmc/python'
+    # nb_dir='/home/timothytyree/Documents/GitHub/bgmc/python'
     data_dir=f"{nb_dir}/data/osg_output/Log"
     save_folder=f"{nb_dir}/data/osg_output/{save_fn}"
     try:

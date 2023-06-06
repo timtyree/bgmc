@@ -7,6 +7,16 @@ import warnings #intentionally redundant import
 warnings.simplefilter("ignore", UserWarning)
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+import multiprocess
+def eval_routine_multiprocess(routine, task_lst, ncores):
+    """
+    Example Usage:
+retval_lst = eval_routine_multiprocess(routine, task_lst, ncores)
+    """
+    p = multiprocess.Pool(ncores)
+    return p.map(routine, task_lst)
+
+
 def eval_routine_daskbag(routine,task_lst,npartitions,printing=True,**kwargs):
     """eval_routine_daskbag returns a list of the values returned by routine, which takes a single argument, task, which is an element of the list, task_lst.
     the integer number of cores requested is npartitions.  it must be no more than os.cpu_count().
