@@ -14,7 +14,8 @@ perl deprecate_inputs.pl < $FN_IN > $TMP_IN
 # Nmax=100 # 100
 
 #search parameters for L=5
-Nmin=5 #6
+Nmin=2 #6
+# Nmin=5 #6
 Nmax=100
 
 echo "Nmin is $Nmin and Nmax is $Nmax"
