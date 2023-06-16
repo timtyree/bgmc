@@ -39,6 +39,28 @@ def bootstrap_95CI_Delta_mean(x,num_samples=1000):
     Delta_mean=1.96*sig
     return Delta_mean,p
 
+# bootstrap_values?
+# bootstrap_95CI_Delta_mean
+def bootstrap_quantile(x,q=0.25,num_samples=1000):
+    quantile_values=np.zeros(num_samples)
+    sizex=x.shape[0]
+    for i in range(num_samples):
+        randint_values=np.random.randint(low=0, high=sizex, size=sizex, dtype=int)
+        x_bootstrap=x[randint_values]
+        quantile_values[i]=np.quantile(x_bootstrap,q)
+    return quantile_values
+
+def bootstrap_95CI_Delta_quantile(x,q=0.25,num_samples=1000):
+    """
+    Example Usage:
+Delta_quantile,p = bootstrap_95CI_Delta_quantile(x,q=0.25,num_samples=1000)
+    """
+    quantile_values=bootstrap_quantile(x,q=q,num_samples=num_samples)
+    sig=np.std(quantile_values)
+    _, p = normaltest(quantile_values)
+    Delta_quantile=1.96*sig
+    return Delta_quantile,p
+
 def bin_and_bootstrap_xy_values(x,y,xlabel,ylabel,bins='auto',min_numobs=None,num_bootstrap_samples=1000,npartitions=1,**kwargs):
     '''see docstring for bin_and_bootstrap_xy_values_parallel'''
     type_in=type(np.ndarray([]))
