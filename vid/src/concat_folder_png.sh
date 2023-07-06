@@ -35,11 +35,11 @@ source text.txt
 ffmpeg -f lavfi -y -i color=black:1280x720 -f lavfi -i anullsrc  \
 	-q 0 -vf drawtext="
 	arial.ttf:fontcolor=FFFFFF:fontsize=50:text=$TEXT:x=(main_w-text_w)/2:y=(main_h-text_h)/2,
-	fade=t=in:st=0:d=0.1,
-	fade=t=out:st=0.3:d=0.1,fps=fps=60
+	fade=t=in:st=0:d=0.2,
+	fade=t=out:st=1.4:d=0.1,fps=fps=60
 	" -c:v libx264 -b:v 1000k -s hd720 \
 	-video_track_timescale 400 -y -c:a aac -ar 0 \
-	-ac 0 -sample_fmt fltp -t 0.4 tmp/intro.mp4
+	-ac 0 -sample_fmt fltp -t 1.5 tmp/intro.mp4
 	# -video_track_timescale 0 -y -c:a aac -ar 0 \
 	# -ac 0 -sample_fmt fltp -t 0 tmp/intro.mp4
 	#

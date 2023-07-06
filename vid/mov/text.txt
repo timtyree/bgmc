@@ -1,2 +1,3 @@
 
-TEXT=$'Particle Model'
+TEXT=$'Uniform Creation
+Fit to Luo-Rudy'

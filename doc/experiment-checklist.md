@@ -25,11 +25,11 @@ rm -r ~/bgmc
 1. then pull bgmc
 1. use ./gen_run_next.sh to generate run_next.dat
 git clone https://github.com/timtyree/bgmc.git
-cd bgmc/c/attractive_c
+cd bgmc/c/attractive
 ./gcc.sh
 cd src
-chmod +x gen_run_39.sh
-./gen_run_39.sh
+chmod +x gen_run_41.sh
+./gen_run_41.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
