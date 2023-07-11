@@ -4,7 +4,7 @@
 import numpy as np, matplotlib.pyplot as plt,os
 
 def ScatterPlotSnapshot(x_values,y_values,t,width,height,marker='*',c='gray',s=200,alpha=0.8,
-               fontsize=18,inch=6,textcolor='k',message='',annotating=True):
+               fontsize=18,inch=6,textcolor='k',message='',annotating=True,t_in_ms=True,**kwargs):
     '''performs a simple scatter plot and returns a figure that may be saved as png.
     Example Usage:
     annotating=True
@@ -21,6 +21,8 @@ def ScatterPlotSnapshot(x_values,y_values,t,width,height,marker='*',c='gray',s=2
     ax.set_ylim([0,height])
     if annotating:
         time_step_string=f"  t = {t:.2f} s"
+        if t_in_ms:
+            time_step_string=f"  t = {t*1e3:.0f} ms"
         message_string=f"  num. = {x_values.shape[0]}"
         ax.text(.5,.95,message,
                 horizontalalignment='center',color=textcolor,fontsize=fontsize,

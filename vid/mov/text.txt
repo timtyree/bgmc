@@ -1,3 +1,2 @@
 
-TEXT=$'Uniform Creation
-Fit to Luo-Rudy'
+TEXT=$'Termination Without Creation'
