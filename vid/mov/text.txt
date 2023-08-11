@@ -1,2 +1,2 @@
 
-TEXT=$'Termination Without Creation'
+TEXT=$'Linear Particle Model With Creation'
