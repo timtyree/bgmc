@@ -15,20 +15,6 @@ def pbc(x, L):
     return x
 
 @njit
-def sqdiff(x1, x2):
-    return pow((x1-x2),2)
-
-@njit
-def min3(num1, num2, num3):
-    if (num1 > num2 ):
-        mn=num2
-    else:
-        mn=num1
-    if (mn>num3):
-        mn=num3
-    return mn
-
-@njit
 def min2(num1, num2):
     if (num1 > num2):
         mn=num2
@@ -42,6 +28,20 @@ def max2(num1, num2):
         mn=num2
     else:
         mn=num1
+    return mn
+
+@njit
+def sqdiff(x1, x2):
+    return pow((x1-x2),2)
+
+@njit
+def min3(num1, num2, num3):
+    if (num1 > num2 ):
+        mn=num2
+    else:
+        mn=num1
+    if (mn>num3):
+        mn=num3
     return mn
 
 @njit
