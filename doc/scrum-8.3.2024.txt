@@ -1,0 +1,24 @@
+GOAL: dev cloud survey for heatmap panel
+DONE: review c/creation/run.py and verify it matches what I have in bgmc/python to generate the results.
+DONE: recall b~chi relation
+% \textcolor{red}{$b=a(\chi -1)$}
+% b=10.0399 +/- 0.4766 cm^2/s (LR)
+% 	- chi=2.0796 +/- 0.0542
+% b=3.0122 +/- 0.0773 cm^2/s (FK)
+% 	- chi=2.9408 +/- 0.0508
+DONE: recall (a,b) position of full models
+TODO: design a regular grid of (a,b) values that cover the full models at a visually nice scale
+TODO: map (a,b) values to (a,chi) values
+Q: does the map involve D? Than I would need one heatmap for each full model / D value of significance...
+A: nope. pure a and chi bilinear functional ftw.
+TODO: use ^that to dev run 42
+
+
+
+
+TODO: move on to analyzing those smaller predictive time bins this time without Not Clear plotted.
+
+DONE: eat some fried eggs on yesterday's salad.
+DONE: eat some fried eggs on some all day breakfast.
+DONE: cancel fmp subscription.  I downloaded enough, and I haven't been using it
+...too slow. I still have it until May 23, 2025...

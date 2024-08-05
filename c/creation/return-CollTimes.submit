@@ -2,7 +2,7 @@ Universe = vanilla
 Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
 
 executable = run_py.sh
-arguments = $(seed) $() $(L) $(kappa) $(varkappa) $(x0) $(Dt) $(dt) $(Nmax) $(niter) $(Process) $(reflect) $(set_second) $(no_repulsion) $(no_attraction) $(neighbor) $(force_code)
+arguments = $(seed) $(Ninitial) $(Nfinal) $(R_c_bar) $(Mp) $(nup) $(chi) $(kappa) $(r) $(varkappa) $(D) $(r0) $(L) $(creation_duration) $(dt)
 
 transfer_input_files = run.py
 
@@ -16,4 +16,4 @@ request_memory = 75 MB
 request_disk = 30 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue r D L kappa varkappa x0 Dt dt Nmax niter reflect set_second no_repulsion no_attraction neighbor force_code from runs/run_41.dat
+queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_42.dat

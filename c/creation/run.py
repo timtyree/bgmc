@@ -108,6 +108,8 @@ def  gener_termination_time(seed,Ninitial=2,Nfinal=0,
                             printing=False,
                           **kwargs):
     """
+    src: http://localhost:8889/notebooks/implementing%20creation%20events.ipynb
+    
     Example Usage:
 t = gener_termination_time(seed,Ninitial=2,Nfinal=0,
                             chi=chi,kappa=kappa, #Hz
