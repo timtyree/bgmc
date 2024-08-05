@@ -1,4 +1,8 @@
 #!/bin/bash
+
+tar -xzf my_env.tar.gz
+export PYTHONPATH=$PWD/my_env
+
 date
 rm -f params.input
 touch params.input

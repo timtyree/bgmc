@@ -7,12 +7,12 @@ DONE: recall b~chi relation
 % b=3.0122 +/- 0.0773 cm^2/s (FK)
 % 	- chi=2.9408 +/- 0.0508
 DONE: recall (a,b) position of full models
-TODO: design a regular grid of (a,b) values that cover the full models at a visually nice scale
-TODO: map (a,b) values to (a,chi) values
+DONE: design a regular grid of (a,b) values that cover the full models at a visually nice scale
+DONE: map (a,b) values to (a,chi) values
 Q: does the map involve D? Than I would need one heatmap for each full model / D value of significance...
 A: nope. pure a and chi bilinear functional ftw.
-TODO: use ^that to dev run 42
-
+DONE: use ^that to dev run 42
+TODO: fix problem with python environment not being used on osg.
 
 
 

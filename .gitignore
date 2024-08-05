@@ -9,6 +9,7 @@ python/lib/lib_care/measure/build/
 python/.ipynb_checkpoints/
 *.png
 *.npz
+*.dat
 .DS_Store
 fig/*.png
 python/fig/

@@ -1,6 +1,7 @@
 import numpy as np
 Ninitial=2
-niter=1500
+# niter=1500  #<<<--- run time is ominously long... just to generate the inputs... best avoid...
+niter=150
 # niter=1
 dt=1e-5
 Nmax=150
