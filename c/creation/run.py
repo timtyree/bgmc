@@ -1,11 +1,11 @@
 import numpy as np, pandas as pd, os, sys
-from numba import njit
+# from numba import njit
 
-@njit
+# @njit
 def sqdiff(x1, x2):
     return pow((x1-x2),2)
 
-@njit
+# @njit
 def min3(num1, num2, num3):
     if (num1 > num2 ):
         mn=num2
@@ -15,7 +15,7 @@ def min3(num1, num2, num3):
         mn=num3
     return mn
 
-@njit
+# @njit
 def dist_pbc(x1, y1, x2, y2, L):
     # returns the smallest dist of each possible pbc combination
     xsq1 = sqdiff(x1,x2)
@@ -28,7 +28,7 @@ def dist_pbc(x1, y1, x2, y2, L):
     ysq  = min3(ysq1,ysq2,ysq3)
     return np.sqrt(xsq+ysq)
 
-@njit
+# @njit
 def subtract_pbc_1d(x1, x2, L):
     # returns the smallest dist of each possible pbc combination
     dx = x1-x2
@@ -41,10 +41,10 @@ def subtract_pbc_1d(x1, x2, L):
             dx=dx2
     return dx
 
-@njit
+# @njit
 def reflection(X, L):
   return L-abs(L-abs(X % 2.*L))
-@njit
+# @njit
 def periodic(X, L):
   x=X % L
   if (x<0.):
@@ -109,7 +109,7 @@ def  gener_termination_time(seed,Ninitial=2,Nfinal=0,
                           **kwargs):
     """
     src: http://localhost:8889/notebooks/implementing%20creation%20events.ipynb
-    
+
     Example Usage:
 t = gener_termination_time(seed,Ninitial=2,Nfinal=0,
                             chi=chi,kappa=kappa, #Hz

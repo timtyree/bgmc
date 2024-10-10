@@ -16,7 +16,7 @@ log = Log/job.log.$(Cluster).$(Process)
 max_idle = 3000
 request_cpus = 1
 request_memory = 150 MB
-request_disk = 30 MB
+request_disk = 150 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
 queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_test.dat

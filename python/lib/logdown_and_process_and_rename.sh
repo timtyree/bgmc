@@ -1,10 +1,10 @@
 #!/bin/bash
-run_number=41
+run_number=42
 
 read -p "Is the current run_number=${run_number}? (y/n)" answer
 
 # echo "notabene: the results are looked for in two places, both in :~/bgmc/c/oscillatory, or the folder indicated in logdown.sh"
-
+ 
 case ${answer:0:1} in
     y|Y )
         echo "answer was Yes\nnow downloading results from the osg..."

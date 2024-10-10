@@ -5,7 +5,7 @@ niter=150
 # niter=1
 dt=1e-5
 Nmax=150
-creation_duration=0.1
+creation_duration=0.1 #seconds for both full models
 L=5
 
 # a (cm2/s) 1.552 ± 0.016 9.3 ±0.3
@@ -22,8 +22,8 @@ def map_b_to_chi(b,a):
     return chi
 
 # DONE: design a regular grid of (a,b) values that cover the full models at a visually nice scale
-a_values = np.arange(1,10.05,0.05)
-b_values = np.arange(1,15.05,0.05)
+a_values = np.arange(1,10.05,0.1)
+b_values = np.arange(1,15.05,0.1)
 # a_values = np.concatenate([a_values,[1.552,9.3]]) #for FK,LR
 a_values = np.concatenate([a_values,[1.552]]) #for FK,LR
 b_values = np.concatenate([b_values,[3.01]]) #for FK, 10.0 for LR, already included
@@ -38,11 +38,11 @@ for b in b_values:
         #for each a,b compute chi
         chi = map_b_to_chi(b,a)
         for seed in range(niter):
-            #LR
-            #.                      R_c_bar Mp nup                                r0
-            args=seed, Ninitial, 0, 1.25, 3.28, 0.715, chi, 75, 0.314, a, 0.42, 0.202, L, creation_duration, dt
-#             print(f"{*args}")
-            print(*args)
+#             #LR  #<-- takes too long
+#             #.                      R_c_bar Mp nup                                r0
+#             args=seed, Ninitial, 0, 1.25, 3.28, 0.715, chi, 75, 0.314, a, 0.42, 0.202, L, creation_duration, dt
+# #             print(f"{*args}")
+#             print(*args)
             #FK
             #.                      R_c_bar Mp nup                                r0
             args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
