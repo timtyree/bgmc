@@ -1,5 +1,6 @@
 Universe = vanilla
-Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
+Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) 
+
 
 executable = xrun.sh
 arguments = $(r) $(D) $(L) $(kappa) $(varkappa) $(x0) $(Dt) $(dt) $(Nmax) $(niter) $(Process) $(reflect) $(set_second) $(no_repulsion) $(no_attraction) $(neighbor) $(force_code)

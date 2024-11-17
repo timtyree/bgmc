@@ -2,7 +2,7 @@ Universe = vanilla
 
 +SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-ubuntu-20.04:latest"
 
-Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) && (OSGVO_OS_STRING == "RHEL 7")
+Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True)
 
 executable = run_py.sh
 arguments = $(seed) $(Ninitial) $(Nfinal) $(R_c_bar) $(Mp) $(nup) $(chi) $(kappa) $(r) $(varkappa) $(D) $(r0) $(L) $(creation_duration) $(dt)

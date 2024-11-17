@@ -1,0 +1,10 @@
+potential differences in WJ's and my code:
+- WJ's line #84 iterates over trials strangly:
+  - do iter=1,niter
+  - ^this means WJ needed to recompute distances, which is fine.
+
+- WJ computes the vector sum for each particle once
+  - I previously iterated over all remaining pairs and added forces for either particle.
+
+- WJ uses a different random number generator than me.
+  - Q: does gasdev generate normal random variables?
