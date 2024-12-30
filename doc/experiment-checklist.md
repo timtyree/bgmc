@@ -20,7 +20,7 @@ TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
 1. update github repo
 
 1. ssh-osg and delete old  bgmc.  
-rm -r ~/bgmc
+rm -rf ~/bgmc
 
 1. then pull bgmc
 1. use ./gen_run_next.sh to generate run_next.dat
@@ -33,6 +33,19 @@ chmod +x gen_run_41.sh
 
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
+
+### Generating python environment tar bell
+https://portal.osg-htc.org/documentation/software_examples/python/manage-python-packages/
+1. load apptainer
+cd ~/bgmc/c/creation
+singularity shell /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-ubuntu-20.04:latest
+1. install packages
+mkdir my_env
+export PYTHONPATH=$PWD/my_env
+pip3 install --target=$PWD/my_env pandas numpy
+exit
+1. zip python environment
+tar -czf my_env.tar.gz my_env
 
 ### Job Submission
 1. submit the unit test cloud
@@ -57,9 +70,12 @@ condor_submit return-CollTimes.submit
 cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
 
+### Downloading a single file
+scp TimtheTyrant@ap21.uc.osg-htc.org:bgmc/c/creation/my_env.tar.gz my_env.tar.gz
+
 
 ### Cleaning (TODO: implement clean-project.sh in bash, see logdown.sh)
-rm -r ~/bgmc
+rm -rf ~/bgmc
 #^this removes the whole repository folder on the open science grid.  
 TODO(later): can I make the 'y' input automatic?
 1. git clone fresh repo on the open science grid.
