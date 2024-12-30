@@ -2,7 +2,7 @@ Universe = vanilla
 
 +SingularityImage = "/cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-ubuntu-20.04:latest"
 
-Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True) 
+# Requirements = (TARGET.Arch == "X86_64") && (HAS_MODULES =?= True)
 
 executable = run_py.sh
 arguments = $(seed) $(Ninitial) $(Nfinal) $(R_c_bar) $(Mp) $(nup) $(chi) $(kappa) $(r) $(varkappa) $(D) $(r0) $(L) $(creation_duration) $(dt)
@@ -19,4 +19,4 @@ request_memory = 150 MB
 request_disk = 150 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_42.dat
+queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_43.dat
