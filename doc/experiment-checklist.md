@@ -66,9 +66,14 @@ condor_submit return-CollTimes.submit
 1. source bash_aliases
 1. release
 
-### Downloading and Processing any data
+### Downloading and Processing any data the old way
 cd ~/Documents/GitHub/bgmc/python/lib
 ./logdown_and_process_and_rename.sh
+
+### downloading log files recursively without compression
+rsync -avP TimtheTyrant@ap21.uc.osg-htc.org:bgmc/c/creation/Log .
+
+scp -r TimtheTyrant@ap21.uc.osg-htc.org:bgmc/c/creation/Log Log
 
 ### Downloading a single file
 scp TimtheTyrant@ap21.uc.osg-htc.org:bgmc/c/creation/my_env.tar.gz my_env.tar.gz
