@@ -34,7 +34,7 @@ chmod +x gen_run_41.sh
 1. manually make run_test.dat fast (perhaps set niter to 10 or smaller...)
 nano ../runs/run_test.dat
 
-### Generating python environment tar bell
+### Generating python environment tar bell (if my_env.tar.gz does not exist)
 https://portal.osg-htc.org/documentation/software_examples/python/manage-python-packages/
 1. load apptainer
 cd ~/bgmc/c/creation
