@@ -135,24 +135,24 @@ def parse_output_log(input_fn,include_inputs=True, printing=False):
             df[name]=value
     return df
 
-    if __name__=='__main__':
-        input_folder=f"../data"
-        input_fn='example.log'
-        os.chdir(input_folder)
-        assert (os.path.exists(input_fn))
-        df=parse_output_log(input_fn, include_inputs=False, printing=True)
-        print(f"is this a pandas.Dataframe? {type(df)}")
+if __name__=='__main__':
+    input_folder=f"../data"
+    input_fn='example.log'
+    os.chdir(input_folder)
+    assert (os.path.exists(input_fn))
+    df=parse_output_log(input_fn, include_inputs=False, printing=True)
+    print(f"is this a pandas.Dataframe? {type(df)}")
 
-        # Test compute_runtime_for_folder
-        nb_dir='/home/timothytyree/Documents/GitHub/bgmc/python/'
-        data_dir=f"{nb_dir}/data/osg_output/Log"
-        runtime=compute_runtime_for_folder(folder=data_dir)
-        print(f"the total recorded runtime was {runtime:.3f} years.")
+    # Test compute_runtime_for_folder
+    nb_dir='/home/timothytyree/Documents/GitHub/bgmc/python/'
+    data_dir=f"{nb_dir}/data/osg_output/Log"
+    runtime=compute_runtime_for_folder(folder=data_dir)
+    print(f"the total recorded runtime was {runtime:.3f} years.")
 
-        # Test parse_iolines
-        data_dir=f"{nb_dir}/data/osg_output/Log"
-        os.chdir(data_dir)
-        input_fn_lst=os.listdir()
-        input_fn=input_fn_lst[0]
-        n_input,n_output=parse_iolines(input_fn, printing=False)
-        print (f"parse_iolines returned (n_input,n_output)={(n_input,n_output)}")
+    # Test parse_iolines
+    data_dir=f"{nb_dir}/data/osg_output/Log"
+    os.chdir(data_dir)
+    input_fn_lst=os.listdir()
+    input_fn=input_fn_lst[0]
+    n_input,n_output=parse_iolines(input_fn, printing=False)
+    print (f"parse_iolines returned (n_input,n_output)={(n_input,n_output)}")
