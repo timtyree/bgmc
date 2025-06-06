@@ -1,0 +1,50 @@
+Q: for Eqn. (4), should we have k \neq i,j or just k\neq i.
+A: Bottom Line Up Front: Eqn. (4) is correct.  
+A(extended): What I did in my code was to have just k\neq i, and to have a stronger creation force proportional to this variable, chi, which is dimensionless.  You thought it would be better for us to use b instead of chi, so you derived the conversion that I have been using the following python code to do the conversion from b to chi:
+# a (cm2/s) 1.552 ± 0.016 9.3 ±0.3
+# % \textcolor{red}{$b=a(\chi -1)$}
+# % b=10.0 +/- 0.5 cm^2/s (LR)
+# % b=10.0399 +/- 0.4766 cm^2/s (LR)
+# % 	- chi=2.0796 +/- 0.0542
+# % b=3.01 +/- 0.08 cm^2/s (FK)
+# % b=3.0122 +/- 0.0773 cm^2/s (FK)
+# % 	- chi=2.9408 +/- 0.0508
+def map_b_to_chi(b,a):
+    x = b/a
+    chi = x+1
+    return chi
+
+The outward creation force is implemented in python as proportional to $\chi a \Delta t / R_{pair}$.
+
+The effect this has is the attractive force is canceled by a stronger creation force, resulting in outward drift.  Canceling the creation force and working in terms of b is equivalent to Eqn. (4).
+
+
+Q: for Eqn. (4), should we have k \neq i,j or just k\neq i.
+DONE: look in my code and figure out which one ^it is.
+
+DONE: check Fig. 4 is up-to-date
+DONE: make sure they Nmax=10 (FK) and Nmax=16 (LR)
+DONE: change N_initial to N in Fig. 4
+
+DONE: LaTeX up my Appendix A, essentially.
+TODO(later, after WJ updates with his local copy...): update doc with my new Appendix A and make it flow as a single section.
+
+DONE: add 2 color bars to Fig. 1
+
+
+***heretim***
+TODO: come up with a distribution of the number of spiral tips over time and show that it is similar to the particle model's distribution of particle numbers
+
+TODO: vary system size and look for the same scaling between particle model and full models
+
+TODO: pick a domain size and show the percent speedup for 10s of the cardiac model compared to 10s the particle model.
+
+TODO(important): verify whether we include or exclude <100 ms creation pairs.
+
+TODO: revisit Fig. 2B and verify whether tips pairs with <100ms are discarded.
+TODO: change Fig. 2C to 1/cm on the x-axis
+TODO: change Fig. 2B x-axis to a linear scale. and see if it looks any good.
+
+TODO: recall how Creation Range is defined and tell WJ (in Fig. 4). is it indeed the distance between two newly created tips?
+
+TODO: separate Fig. 5B into two plots.
