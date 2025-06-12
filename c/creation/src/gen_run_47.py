@@ -38,12 +38,12 @@ a_values = np.array([1.552]) #for FK
 b_values = np.array([3.01]) #for FK
 # a_values = np.concatenate([a_values,[1.552,9.3]]) #for FK,LR
 # b_values = np.concatenate([b_values,[3.01,10.0]]) #for FK, 10.0 for LR
-L_values_fk = np.array([4.5  , 4.75 , 5.   , 5.25 , 5.625, 6.25 ]) #for comparing WJ's tau estimates
-L_values_lr = np.array([5.  , 6.25, 7.5 , 8.75])  #for comparing WJ's tau estimates
-# L_values_fk=np.array([3.75 , 5.   , 6.25 , 7.075, 8.75 ]) #for comparing WJ's tau(N0=2) estimates
-# L_values_lr=np.array([ 5.  ,  6.25,  7.5 ,  8.75, 10.  ]) #for comparing WJ's tau(N0=2) estimates
+# L_values_fk = np.array([4.5  , 4.75 , 5.   , 5.25 , 5.625, 6.25 ]) #for comparing WJ's tau estimates
+# L_values_lr = np.array([5.  , 6.25, 7.5 , 8.75])  #for comparing WJ's tau estimates
+L_values_fk=np.array([3.75 , 5.   , 6.25 , 7.075, 8.75 ]) #for comparing WJ's tau(N0=2) estimates
+L_values_lr=np.array([ 5.  ,  6.25,  7.5 ,  8.75, 10.  ]) #for comparing WJ's tau(N0=2) estimates
 L_values = L_values_fk
-
+ 
 # queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt
 count = 0
 args_lst  = []

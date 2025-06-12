@@ -15,7 +15,7 @@ chmod +x gen_run_36.sh
 
 1. update return-CollTimes.submit to take run_next.dat...
 nano ../return-CollTimes.submit
-TODO(later): implement ^that in perl/bash and append to gen_run_next.sh
+TODO(later): implement ^that in perl/bash and append to gen_run_next.sh where next is the latest trial number
 
 1. update github repo
 
