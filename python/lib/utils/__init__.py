@@ -12,3 +12,4 @@ from .boundary_conditions import *
 from .dict_func import *
 from .utils_traj import *
 from .yamlio import *
+from .parse_tip_pos import *
