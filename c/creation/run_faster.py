@@ -868,9 +868,9 @@ if __name__=='__main__':
     varkappa = float(input('please input varkappa (e.g. 9.2 cm^2/s): '))
     D = float(input('please input D (e.g. 2 cm^2/s): '))
     r0 = float(input('please input r0 (e.g. 2 cm): '))
-    L = float(input('please input L (e.g. 42): ')))
-    creation_duration = float(input('please input creation_duration (e.g. 2): ')))
-    dt = float(input('please input dt (e.g. 0): ')))
+    L = float(input('please input L (e.g. 42): '))
+    creation_duration = float(input('please input creation_duration (e.g. 2): '))
+    dt = float(input('please input dt (e.g. 0): '))
 
     # #set params to floats
     # L = float(L)
