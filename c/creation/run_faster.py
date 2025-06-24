@@ -398,6 +398,7 @@ print(f"termination time: {t}")
     y_values=np.random.uniform(0,1,size=N)*L
     pid_array = np.arange(N)
     t=0
+
 #     if use_uniform_ic:
 #         Nrow=4
 #     #     Nrow=10
@@ -855,21 +856,29 @@ if __name__=='__main__':
     # args = sys.argv[1:]
     # seed,Ninitial,Nfinal,R_c_bar,Mp,nup,chi,kappa,r,varkappa,D,r0,L,creation_duration,dt = args
     # print(args)
-    seed = input('please input seed (e.g. 42): ')
-    Ninitial = input('please input Ninitial (e.g. 2): ')
-    Nfinal = input('please input Nfinal (e.g. 0): ')
-    R_c_bar = input('please input R_c_bar (e.g. 0.7 cm): ')
-    Mp = input('please input Mp (e.g. 42 Hz/cm^2): ')
-    nup = input('please input nup (e.g. 0.5): ')
-    chi = input('please input chi (e.g. 2.08): ')
-    kappa = input('please input kappa (e.g. 200 Hz): ')
-    r = input('please input r (e.g. 0.1 cm): ')
-    varkappa = input('please input varkappa (e.g. 9.2 cm^2/s): ')
-    D = input('please input D (e.g. 2 cm^2/s): ')
-    r0 = input('please input r0 (e.g. 2 cm): ')
-    L = input('please input L (e.g. 42): ')
-    creation_duration = input('please input creation_duration (e.g. 2): ')
-    dt = input('please input dt (e.g. 0): ')
+    seed = int(input('please input seed (e.g. 42): '))
+    Ninitial = int(input('please input Ninitial (e.g. 2): '))
+    Nfinal = int(input('please input Nfinal (e.g. 0): '))
+    R_c_bar = float(input('please input R_c_bar (e.g. 0.7 cm): '))
+    Mp = float(input('please input Mp (e.g. 42 Hz/cm^2): '))
+    nup = float(input('please input nup (e.g. 0.5): '))
+    chi = float(input('please input chi (e.g. 2.08): '))
+    kappa = float(input('please input kappa (e.g. 200 Hz): '))
+    r = float(input('please input r (e.g. 0.1 cm): '))
+    varkappa = float(input('please input varkappa (e.g. 9.2 cm^2/s): '))
+    D = float(input('please input D (e.g. 2 cm^2/s): '))
+    r0 = float(input('please input r0 (e.g. 2 cm): '))
+    L = float(input('please input L (e.g. 42): ')))
+    creation_duration = float(input('please input creation_duration (e.g. 2): ')))
+    dt = float(input('please input dt (e.g. 0): ')))
+
+    # #set params to floats
+    # L = float(L)
+    # dt = float(dt)
+    # Dt = float(Dt)
+    # Mp = float(Mp)
+    # nup = float(nup)
+
     t,exit_code,num_running = gener_termination_time_log_fast(int(seed),Ninitial=int(Ninitial),#4,#
                                     Nfinal=int(Nfinal),
                                     chi=float(chi),kappa=float(kappa), #Hz
