@@ -1,4 +1,3 @@
-python3 gen_run_47.py > ../runs/run_47.dat
+python3 gen_run_48.py > ../runs/run_48.dat
 cd ../runs
-tail -4 run_47.dat > run_test.dat
- 
+tail -4 run_48.dat > run_test.dat
