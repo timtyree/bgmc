@@ -47,6 +47,9 @@ exit
 1. zip python environment
 tar -czf my_env.tar.gz my_env
 
+### copy python environment from root
+1. cp ~/my_env.tar.gz ~/bgmc/c/creation/my_env.tar.gz
+
 ### Job Submission
 1. submit the unit test cloud
 cd ~/bgmc/c/attractive

@@ -7,6 +7,7 @@ def one_step_particle_fast(N,still_running,x_old,y_old,x_new,y_new,
                        Fx_net,Fy_net,epsilon,caught,anticaught,stepscale,A,
                            use_creation,zeros,use_pair_create,probreact,x0,
                            tiarray,tfarray,varkappa,D,t,exit_code,R_c_bar,
+                           r,
                      ):
     """
     Example Usage:
@@ -15,6 +16,7 @@ retval = one_step_particle_fast(N,still_running,x_old,y_old,x_new,y_new,
                        Fx_net,Fy_net,epsilon,caught,anticaught,stepscale,A,
                            use_creation,zeros,use_pair_create,probreact,x0,
                            tiarray,tfarray,varkappa,D,t,exit_code,R_c_bar,
+                           r,
                      )
 still_running,x_old,y_old,x_new,y_new,Fx_net,Fy_net,caught,anticaught,tiarray,tfarray,exit_code = retval
     """
@@ -525,6 +527,7 @@ print(f"termination time: {t}")
                                Fx_net,Fy_net,epsilon,caught,anticaught,stepscale,A,
                                    use_creation,zeros,use_pair_create,probreact,x0,
                                    tiarray,tfarray,varkappa,D,t,exit_code,R_c_bar,
+                                   r,
                              )
         still_running,x_old,y_old,x_new,y_new,Fx_net,Fy_net,caught,anticaught,tiarray,tfarray,exit_code = retval
 
