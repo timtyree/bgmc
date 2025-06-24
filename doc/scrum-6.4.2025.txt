@@ -33,27 +33,29 @@ DONE: add 2 color bars to Fig. 1
 
 
 ***heretim***
-TODO: come up with a distribution of the number of spiral tips over time and show that it is similar to the particle model's distribution of particle numbers
+DONE: come up with a distribution of the number of spiral tips over time and show that it is similar to the particle model's distribution of particle numbers
 
 GOAL: vary system size and look for the same scaling between particle model and full models
-TODO: recall plot that made tau vs. A from the previous paper
-TODO: compute which L's were used
-TODO: dev new creation run 100-200 samples at each L value that was used by the full models.
-TODO: launch ^that new run
-TODO: wait for it to finish
-TODO: download results and parse for tau vs. A
-TODO: plot tau vs. A
+DONE: recall plot that made tau vs. A from the previous paper
+DONE: compute which L's were used
+DONE: dev new creation run 100-200 samples at each L value that was used by the full models.
+DONE: launch ^that new run
+DONE: wait for it to finish
+DONE: download results and parse for tau vs. A
+DONE: plot tau vs. A for full and particle model at same A values conditioned on N0=2.
 
-TODO: pick a domain size (A=25 cm^2) and show the percent speedup for 10s of the cardiac model compared to 10s the particle model.
+DONE: pick a domain size (A=25 cm^2) and show the percent speedup for 0.1s of the cardiac model compared to 0.1s the particle model.
 
-TODO(important): verify whether we include or exclude <100 ms creation pairs.
+DONE(important): verify whether we include or exclude <100 ms creation pairs.
 NOTE: As memory serves, we excluded them.
+DONE: remake the plot with <100ms creation pairs considered.  Show it next to the original plot and argue the reviewer is apparently wrong.
 
-TODO: revisit Fig. 2B and verify whether tips pairs with <100ms are discarded.
-TODO: change Fig. 2C to 1/cm on the x-axis
-TODO: change Fig. 2B x-axis to a linear scale. and see if it looks any good.
+DONE: revisit Fig. 2B and verify whether tips pairs with <100ms are discarded.  
+NOTE: ^They were, but now they aren't
+DONE: change Fig. 2C to 1/cm on the x-axis
+DONE: change Fig. 2B x-axis to a linear scale. and see if it looks any good.
 
 DONE: recall how Creation Range is defined and tell WJ (in Fig. 4). is it indeed the distance between two newly created tips?
 A: I'm pretty sure, yes.  What else could it be?
 
-TODO: separate Fig. 5B into two plots.
+DONE: separate Fig. 5B into two plots.
