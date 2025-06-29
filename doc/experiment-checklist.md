@@ -42,7 +42,7 @@ singularity shell /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-u
 1. install packages
 mkdir my_env
 export PYTHONPATH=$PWD/my_env
-pip3 install --target=$PWD/my_env pandas numpy
+pip3 install --target=$PWD/my_env pandas numpy numba scipy
 exit
 1. zip python environment
 tar -czf my_env.tar.gz my_env

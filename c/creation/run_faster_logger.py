@@ -943,8 +943,10 @@ if __name__=='__main__':
     #output: dataframe of transition times
     save_every=int(1e-3/1e-5)
     save_every_s = float(dt)*save_every
-    save_every_s #0.00999
+    # save_every_s #0.000999
     save_every_s = np.around (save_every_s, 4)
-    save_every_s #0.01
+    # save_every_s #0.001
     dfn = compute_paired_births_and_deaths(N_list,save_every_s)
-    print(dfn.to_csv(None,index=False))
+    # print(dfn.to_csv(None,index=False))
+    #only look at the last 1 million transitions
+    print(dfn.tail(1000000).to_csv(None,index=False))

@@ -67,8 +67,8 @@ for L in L_values:
     #             count+=1
                 #FK
                 #.                      R_c_bar Mp nup                                r0
-                args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.048, 0.131, L, creation_duration, dt
-    #             args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
+                # args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.048, 0.131, L, creation_duration, dt
+                args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
     #             print(*args)
                 count+=1
                 #record
