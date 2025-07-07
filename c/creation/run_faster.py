@@ -1,5 +1,8 @@
 import numpy as np, pandas as pd, os, sys
 from numba import njit
+# import numpy as np, pandas as pd, os, sys
+# from numba import njit
+
 
 @njit
 def one_step_particle_fast(N,still_running,x_old,y_old,x_new,y_new,
@@ -250,8 +253,6 @@ def format_particles(frameno,t,x_values,y_values,pid_values,round_t_to_n_decimal
         'pid_explicit':pid_values}
     return dict_out
 
-import numpy as np, pandas as pd, os, sys
-# from numba import njit
 
 @njit
 def sqdiff(x1, x2):
