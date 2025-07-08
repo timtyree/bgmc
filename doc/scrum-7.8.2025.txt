@@ -1,0 +1,3 @@
+TODO: compute bdrates at L=5cm
+TODO: compute LPM parameters at a larger domain size
+TODO: refit R_c_bar

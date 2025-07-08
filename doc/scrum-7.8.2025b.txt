@@ -1,0 +1,9 @@
+TODO: find better parameters for the FK model fit to the LPM.
+- r0=same, R_c_bar=not same, delta=0.1, b=same
+--> find new value for R_c_bar for FK
+
+
+TODO: rerun all the results for the paper.
+
+TODO: check that the bdrates are consistent.
+
