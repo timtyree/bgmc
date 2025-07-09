@@ -8,8 +8,8 @@ executable = run_py.sh
 arguments = $(seed) $(Ninitial) $(Nfinal) $(R_c_bar) $(Mp) $(nup) $(chi) $(kappa) $(r) $(varkappa) $(D) $(r0) $(L) $(creation_duration) $(dt)
 
 # transfer_input_files = run.py, my_env.tar.gz
-transfer_input_files = run_faster.py, my_env.tar.gz
-# transfer_input_files = run_faster_logger.py, my_env.tar.gz
+# transfer_input_files = run_faster.py, my_env.tar.gz
+transfer_input_files = run_faster_logger.py, my_env.tar.gz
 
 output = Log/job.out.$(Cluster).$(Process)
 error = Log/job.error.$(Cluster).$(Process)
@@ -22,4 +22,4 @@ request_disk = 1500 MB
 # request_disk = 500 MB
 
 # PeriodicRelease = ( (CurrentTime - EnteredCurrentStatus) > $RANDOM_INTEGER(3000, 3300, 100) ) && ((NumJobStarts < 4))
-queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_50.dat
+queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt from runs/run_49.dat
