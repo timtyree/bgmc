@@ -45,8 +45,10 @@ b_values = np.array([3.01]) #for FK
 # L_values_lr=np.array([ 5.  ,  6.25,  7.5 ,  8.75, 10.  ]) #for comparing WJ's tau(N0=2) estimates
 # L_values_fk=np.array([3.75 , 4.5, 4.75, 5., 5.25, 5.625   , 6.25 , 7.075, 8.75 ])
 # L_values_lr=np.array([ 5.  ,  6.25,  7.5 ,  8.75, 10.  ])
-L_values_fk=np.array([6.25 ])
-L_values_lr=np.array([ 7.5 ])
+# L_values_fk=np.array([6.25 ])
+# L_values_lr=np.array([ 7.5 ])
+L_values_fk=np.array([ 5. ])
+L_values_lr=np.array([ 5. ])
 L_values = L_values_fk
 
 # queue seed Ninitial Nfinal R_c_bar Mp nup chi kappa r varkappa D r0 L creation_duration dt
@@ -68,8 +70,8 @@ for L in L_values:
                 #FK
                 #.                      R_c_bar Mp nup                                r0
                 # args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.048, 0.131, L, creation_duration, dt
-                # args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
-                args=seed, Ninitial, 0, 0.59, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
+                args=seed, Ninitial, 0, 0.85, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
+                # args=seed, Ninitial, 0, 0.59, 0.864, 0.230, chi, 15, 0.457, a, 0.115, 0.131, L, creation_duration, dt
     #             print(*args)
                 count+=1
                 #record
