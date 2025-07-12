@@ -1,3 +1,4 @@
 DONE: plot <tau> vs. A of FK only from 1e-x to 50 on a log scale
-TODO(*): compute bdrates of L=5cm,Rc_fk=0.85cm
-TODO: measure bdrates of the powerlaw bd process. at L=5cm.  My analysis of the num particles vs. time should work here.
+DONE(*): compute bdrates of L=5cm,Rc_fk=0.85cm
+DONE: measure bdrates of the powerlaw bd process. at L=5cm.  My analysis of the num particles vs. time should work here.
+--> discovered the correct way to measure reaction rates from particle number time series.
