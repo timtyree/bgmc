@@ -1,0 +1,7 @@
+For due diligence, we compared the particle number distribution of the particle model to that of the full cardiac models.  
+
+The LR model exhibited a median number of tips of 6 (IQR: 4-8), while the corresponding particle model fit took a median number of particles of 4 (IQR: 2-6), with a Kolmagorov-Smirnov test comparing the two number distributions as P<0.001, with $N_{samples}>5065$, suggesting a difference in distribution.
+The FK model exhibited a median number of tips of 8 (IQR: 6-10), while the corresponding particle model fit took a median number of particles of 6 (IQR: 4-10), with a Kolmagorov-Smirnov test comparing the two number distributions as P<0.001, with $N_{samples}>22552$, suggesting a difference in distribution.  
+Samples were equally-spaced by 100ms for the cardiac model and 10ms for the particle model, because it was not cached.  
+
+The run time for the particle model was 1:21 + 0:24 = 1 hour and 45 minutes run time on one commodity computer.  The best approximate runtime for WJ's dataset for both full models was x=?? and y=??.  The resulting speedup was, at least, approximately (x+y)/(1.75 hours)*(0.1)=??.
